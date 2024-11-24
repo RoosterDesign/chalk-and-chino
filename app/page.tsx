@@ -1,95 +1,27 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div>
+      <h1>This is a heading 1</h1>
+      <h2>This is a heading 2</h2>
+      <h3>This is a heading 3</h3>
+      <h4>This is a heading 4</h4>
+      <h5>This is a heading 5</h5>
+      <h6>This is a heading 6</h6>
+      <p>Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit</a>. Donec vitae nunc eu risus suscipit varius quis nec ipsum. Donec vitae ante id arcu fermentum auctor. Mauris fermentum purus est, nec fringilla dolor pretium sed. Sed pretium pulvinar varius. Praesent in dignissim dolor. Nulla facilisi. Maecenas lobortis sapien id enim tempor varius. Nunc at augue leo. Nam dapibus aliquet tincidunt. Cras venenatis nisi nisi, eu efficitur dui consectetur volutpat. Nunc elit metus, rhoncus vitae posuere in, lacinia id dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+      <p>Aliquam placerat tincidunt turpis, et congue nibh tincidunt eget. Fusce scelerisque turpis id tristique molestie. Nullam elementum, lacus eget feugiat commodo, lorem massa laoreet lorem, quis imperdiet nulla nisi semper leo. Cras posuere lorem vitae massa viverra rhoncus. In quis sodales urna. Donec libero leo, interdum et interdum at, commodo nec eros. Ut molestie dictum arcu at placerat. Vivamus quis eros orci. Pellentesque ullamcorper eleifend nisl nec dapibus.</p>
+      <ul>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+      </ul>
+      <ol>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+      </ol>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <a href="#" className="btn btn-primary">Click me</a>
     </div>
   );
 }
