@@ -1,0 +1,119 @@
+@import '@/app/mixins.scss';
+
+.header {
+    // @include pattern(0.2);
+    position: fixed;
+    height: var(--header-height);
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    .topHeader {
+        background-color: var(--header-bg);
+        display: flex;
+        height: 100%;
+
+        @include breakpoint(md) {
+            height: rem(100);
+        }
+
+    }
+
+    .container {
+        align-items: center;
+        display: flex;
+    }
+
+    &__logo {
+        color: var(--white);
+        font-family: var(--heading-font);
+        font-size: rem(26);
+        line-height: 1;
+        margin-right: auto;
+    }
+
+}
+
+.nav {
+
+    @include breakpoint(md, max) {
+        background-color: var(--nav-bg);
+        height: calc(100vh - var(--header-height));
+        height: calc(100dvh - var(--header-height));
+        padding: rem(20) 0;
+        position: fixed;
+        right: rem(-300);
+        top: var(--header-height);
+        transition: right .5s cubic-bezier(0.860, 0.000, 0.070, 1.000);
+        width: rem(300);
+    }
+
+    @include breakpoint(md) {
+        display: flex;
+    }
+
+}
+
+.navOpen {
+    right: 0;
+}
+
+
+.burgerMenu {
+    justify-content: space-between;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    height: rem(24);
+    flex-direction: column;
+    width: rem(35);
+
+    @include breakpoint(md) {
+        display: none;
+    }
+
+    span {
+        background: #fff;
+        border-radius: rem(2);
+        height: rem(3);
+        transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+        &:nth-of-type(1) {
+            width: 85%;
+        }
+
+        &:nth-of-type(2) {
+            width: 100%;
+        }
+
+
+        &:nth-of-type(3) {
+            width: 50%;
+        }
+
+    }
+
+}
+
+.burgerMenuOpen span {
+
+    &:nth-of-type(1) {
+        transform: rotatez(45deg) translate(rem(4), rem(1));
+        transform-origin: bottom;
+        width: 50%;
+    }
+
+
+    &:nth-of-type(2) {
+        transform: rotatez(-45deg);
+        transform-origin: top;
+    }
+
+
+    &:nth-of-type(3) {
+        transform: translate(rem(15), rem(-4)) rotatez(45deg);
+        transform-origin: bottom;
+        width: 50%;
+    }
+
+}

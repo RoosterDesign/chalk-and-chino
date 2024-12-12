@@ -3,17 +3,26 @@
 
 @import '@/app/mixins.scss';
 
+
+
 :root {
     --body-font: var(--font-sen);
     --heading-font: var(--font-baskervville);
 
     --white: #fff;
     --black: #000;
+    --brown: #635146;
+    --green: #222720;
+    --light-green: #3B3B30;
 
     --primary-colour: #FDF8EC;
     --secondary-colour: #F5E9DA;
     --accent-colour: #C0767F;
     --type-colour: #3F382C;
+
+    --header-bg: var(--green);
+    --nav-bg: var(--light-green);
+    --product-nav-bg: var(--light-green);
 
     --border-radius: 2px;
 
@@ -29,6 +38,17 @@
     --button-bg--hover: var(--black);
     --button-colour--hover: var(--primary-colour);
 
+    --header-height: 80px;
+
+}
+
+
+@include breakpoint(md) {
+
+    :root {
+        --header-height: 150px;
+    }
+
 }
 
 html,
@@ -38,25 +58,14 @@ body {
 }
 
 body {
+    @include pattern;
     background-color: var(--primary-colour);
     color: var(--type-colour);
     font-family: var(--body-font);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
-    position: relative;
-
-    &::after {
-        background: url('/pattern.png') 0 0 repeat;
-        bottom: 0;
-        content: '';
-        left: 0;
-        opacity: 0.5;
-        position: absolute;
-        right: 0;
-        top: 0;
-        z-index: -1;
-    }
+    padding-top: var(--header-height);
 }
 
 * {
@@ -70,14 +79,20 @@ a {
     text-decoration: none;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: var(--heading-font);
     font-weight: var(--font-weight--regular);
     line-height: 1.2;
     margin: 0;
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
     line-height: 1.5;
 }
 
@@ -106,21 +121,18 @@ h6 {
     margin-bottom: rem(20);
 }
 
-ul, ol {
+ul,
+ol {
     margin-bottom: rem(28);
     margin-left: rem(28);
-
-    li {
-
-    }
-
 }
 
 ul {
     list-style: inside;
 }
 
-li, p {
+li,
+p {
     font-size: rem(18);
     line-height: rem(28);
 
@@ -148,6 +160,13 @@ p {
     }
 
 }
+
+// .container {
+//     margin-left: auto;
+//     margin-right: auto;
+//     max-width: 1440px;
+// }
+
 
 .btn {
     @include button;

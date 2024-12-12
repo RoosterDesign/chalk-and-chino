@@ -1,3 +1,4 @@
+@use "sass:map";
 @use 'sass:math';
 
 @function rem($pixel) {
@@ -11,8 +12,7 @@
 }
 
 
-$breakpoints: (
-    xs: (min: rem(414),
+$breakpoints: (xs: (min: rem(414),
         max: rem(413.98)),
     sm: (min: rem(576),
         max: rem(575.98)),
@@ -29,16 +29,15 @@ $breakpoints: (
         min: rem(2560),
         max: rem(2559.98)),
     xxxl: (min: rem(2860),
-        max: rem(2759.98))
-);
+        max: rem(2759.98)));
 
 @mixin breakpoint($breakpoint, $direction: min) {
 
     //check if the supplied breakpoint exists in our breakpoits map
-    @if map-has-key($breakpoints, $breakpoint) {
-        $breakpoint-values: map-get($breakpoints, $breakpoint);
-        $breakpoint-min: map-get($breakpoint-values, min);
-        $breakpoint-max: map-get($breakpoint-values, max);
+    @if map.has-key($breakpoints, $breakpoint) {
+        $breakpoint-values: map.get($breakpoints, $breakpoint);
+        $breakpoint-min: map.get($breakpoint-values, min);
+        $breakpoint-max: map.get($breakpoint-values, max);
 
         //check if we are writing styles for larger or smaller screens
         @if $direction==min {
@@ -114,6 +113,25 @@ $breakpoints: (
 
     @include breakpoint(lg) {
         font-size: rem(18);
+    }
+
+}
+
+
+@mixin pattern($opacity: 0.5) {
+    isolation: isolate;
+    position: relative;
+
+    &::after {
+        background: url('/pattern.png') 0 0 repeat;
+        bottom: 0;
+        content: '';
+        left: 0;
+        opacity: $opacity;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
     }
 
 }
