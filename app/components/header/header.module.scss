@@ -1,7 +1,6 @@
 @import '@/app/mixins.scss';
 
 .header {
-    // @include pattern(0.2);
     position: fixed;
     height: var(--header-height);
     left: 0;

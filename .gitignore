@@ -1,3 +1,4 @@
-node_modules
-
-certificates
+node_modules/
+.next/
+.swc/
+.*.env

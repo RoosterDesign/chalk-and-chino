@@ -53,7 +53,7 @@ const productNavItems: NavItem[] = [
 
 const Header: React.FC = () => {
 
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
 
     const isMobile = useIsMobile(992);
 
