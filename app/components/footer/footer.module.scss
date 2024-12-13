@@ -11,11 +11,12 @@
 
     h3 {
         font-family: var(--body-font);
-        font-size: rem(20);
+        font-size: rem(18);
         font-weight: var(--font-weight--bold);
         margin-bottom: rem(15);
 
         @include breakpoint(md) {
+            font-size: rem(20);
             margin-bottom: rem(25);
         }
 
@@ -27,8 +28,6 @@
         }
     }
 
-    p,
-    .copyright li,
     .footerLinks li {
 
         a {
@@ -36,7 +35,6 @@
             opacity: .8;
 
             &:hover {
-                color: var(--white);
                 opacity: 1;
             }
 
@@ -64,6 +62,10 @@
 
     &:nth-child(1) {
 
+        p {
+            opacity: var(--text-opacity);
+        }
+
         @include breakpoint(lg) {
             padding-right: rem(50);
         }
@@ -83,6 +85,10 @@
         grid-column: 1 / 5;
         justify-content: space-between;
         margin-top: rem(40);
+    }
+
+    a {
+        @include textLink(true);
     }
 
 }
@@ -156,6 +162,10 @@
                 display: none;
             }
 
+        }
+
+        a {
+            @include textLink(true);
         }
 
     }

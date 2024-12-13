@@ -150,3 +150,31 @@ $breakpoints: (xs: (min: rem(414),
     }
 
 }
+
+
+@mixin textLink($white: false) {
+    font-weight: var(--font-weight--bold);
+    text-decoration: underline;
+    text-decoration-thickness: rem(2);
+    text-underline-offset: rem(8);
+    transition: text-decoration-color .1s ease-in-out;
+
+    @if $white {
+        color: var(--white);
+
+        &:hover {
+            color: var(--accent);
+        }
+
+    }
+
+    @else {
+        color: var(--accent);
+
+        &:hover {
+            color: var(--text-link-colour--hover);
+        }
+
+    }
+
+}

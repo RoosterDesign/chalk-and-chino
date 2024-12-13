@@ -49,15 +49,20 @@ h6 {
 }
 
 h1 {
-    font-size: rem(80);
+    font-size: rem(36);
+
+    @include breakpoint(md) {
+        font-size: rem(50);
+    }
+
 }
 
 h2 {
-    font-size: rem(60);
+    font-size: rem(40);
 }
 
 h3 {
-    font-size: rem(40);
+    font-size: rem(36);
 }
 
 h4 {
@@ -85,28 +90,22 @@ ul {
 
 li,
 p {
-    font-size: rem(18);
-    line-height: rem(28);
+    font-size: rem(16);
+    line-height: rem(24);
 
-    a {
-        color: var(--text-link-colour);
-        text-decoration: underline;
-        text-underline-offset: rem(5);
-        text-decoration-thickness: rem(2);
-        // border-bottom: 2px solid var(--accent-colour);
-        font-weight: var(--font-weight--bold);
-
-        &:hover {
-            color: var(--text-link-colour--hover);
-        }
-
+    @include breakpoint(md) {
+        font-size: rem(18);
+        line-height: rem(30);
     }
 
 }
 
 p {
-    opacity: .8;
-    margin-bottom: rem(28);
+    margin-bottom: rem(24);
+
+    @include breakpoint(md) {
+        margin-bottom: rem(30);
+    }
 
     &:last-child {
         margin-bottom: 0;
@@ -123,4 +122,13 @@ p {
 
 .btn {
     @include button;
+}
+
+.img-full {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    width: 100%;
 }
