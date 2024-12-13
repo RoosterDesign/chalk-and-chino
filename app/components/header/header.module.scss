@@ -6,31 +6,25 @@
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 100;
 
-    .topHeader {
-        background-color: var(--header-bg);
-        display: flex;
-        height: 100%;
+    overflow: hidden;
+}
 
-        @include breakpoint(md) {
-            height: rem(100);
-        }
+.topHeader {
+    background-color: var(--header-bg);
+    display: flex;
+    height: 100%;
 
+    @include breakpoint(md) {
+        height: rem(100);
     }
 
-    .container {
-        align-items: center;
-        display: flex;
-    }
+}
 
-    &__logo {
-        color: var(--white);
-        font-family: var(--heading-font);
-        font-size: rem(26);
-        line-height: 1;
-        margin-right: auto;
-    }
-
+.container {
+    align-items: center;
+    display: flex;
 }
 
 .nav {

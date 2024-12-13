@@ -1,0 +1,47 @@
+:root {
+    --body-font: var(--font-sen);
+    --heading-font: var(--font-baskervville);
+
+    --white: #fff;
+    --black: #000;
+    --brown: #635146;
+    --green: #222720;
+    --light-green: #3B3B30;
+
+    --primary-colour: #FDF8EC;
+    --secondary-colour: #F5E9DA;
+    --accent-colour: #C0767F;
+    --type-colour: #3F382C;
+
+    --header-bg: var(--green);
+    --nav-bg: var(--light-green);
+    --product-nav-bg: var(--light-green);
+    --footer-bg: var(--green);
+
+    --border-radius: 2px;
+
+    --font-weight--regular: 400;
+    --font-weight--medium: 500;
+    --font-weight--bold: 700;
+
+    --text-link-colour: var(--accent-colour);
+    --text-link-colour--hover: var(--black);
+
+    --link-hover-colour: var(--accent-colour);
+
+    --button-bg: var(--accent-colour);
+    --button-colour: var(--primary-colour);
+    --button-bg--hover: var(--black);
+    --button-colour--hover: var(--primary-colour);
+
+    --header-height: 80px;
+
+}
+
+@include breakpoint(md) {
+
+    :root {
+        --header-height: 150px;
+    }
+
+}

@@ -1,0 +1,16 @@
+@import '@/app/mixins.scss';
+
+.logo {
+    color: var(--white);
+    display: inline-flex;
+    font-family: var(--heading-font);
+    font-size: rem(26);
+    line-height: 1;
+    opacity: 1;
+    margin-right: auto;
+
+    @include breakpoint(md) {
+        font-size: rem(34);
+    }
+
+}

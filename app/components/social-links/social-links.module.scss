@@ -8,10 +8,12 @@
 
 .socialLinks {
     @include basicList;
-    display: grid;
-    gap: rem(15);
-    grid-auto-flow: column;
+    @include horizontalList(15);
     margin-right: rem(15);
+
+    @include breakpoint(md) {
+        @include horizontalList(20);
+    }
 
     li {
 

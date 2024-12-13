@@ -135,3 +135,18 @@ $breakpoints: (xs: (min: rem(414),
     }
 
 }
+
+@mixin horizontalList($gap: 0) {
+    display: flex;
+    flex-wrap: wrap;
+
+    >* {
+        margin-right: rem($gap);
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+    }
+
+}

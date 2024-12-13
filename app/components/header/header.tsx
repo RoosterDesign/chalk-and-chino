@@ -2,55 +2,16 @@
 
 import { useState } from 'react';
 import { useIsMobile } from '@/app/hooks/isMobile'
-import Link from 'next/link';
 import Container from '@/app/components/container/container';
-import Nav from '@/app/components/nav/nav';
+import NavLinks from '@/app/components/nav-links/nav-links';
 import ProductsNav from '@/app/components/products-nav/products-nav';
 import SocialLinks from '@/app/components/social-links/social-links';
-import { NavItem } from '@/app/types/types'
+import Logo from '@/app/components/logo/logo';
+
+import mainNavItems from '@/app/data/nav.json';
+import productNavItems from '@/app/data/productNav.json';
+
 import styles from './header.module.scss';
-
-const mainNavItems: NavItem[] = [
-    {
-        url: '/',
-        label: 'Home',
-        title: ""
-    },
-    {
-        url: '/about',
-        label: 'About',
-        title: ""
-    },
-    {
-        url: '/contact',
-        label: 'Contact',
-        title: ""
-    }
-];
-
-const productNavItems: NavItem[] = [
-    {
-        url: '#',
-        label: 'All products',
-        title: ""
-    },
-    {
-        url: '#',
-        label: 'Furniture',
-        title: ""
-    },
-    {
-        url: '#',
-        label: 'Faux florals & upcycled pots',
-        title: ""
-    },
-    {
-        url: '#',
-        label: 'Home decor accessories',
-        title: ""
-    }
-];
-
 const Header: React.FC = () => {
 
     const [isOpen, setIsOpen] = useState(false);
@@ -66,13 +27,11 @@ const Header: React.FC = () => {
 
             <div className={styles.topHeader}>
                 <Container className={styles.container}>
-                    <Link href="/" className={styles.header__logo}>Chalk &amp; Chino</Link>
-
+                    <Logo />
                     <nav className={`${styles.nav} ${isOpen ? styles.navOpen : ''}`}>
-                        <Nav navItems={mainNavItems} />
+                        <NavLinks navItems={mainNavItems} isPrimary />
                         {isMobile && <ProductsNav productNavItems={productNavItems} />}
                     </nav>
-
                     <SocialLinks />
                     <button className={`${styles.burgerMenu} ${isOpen ? styles.burgerMenuOpen : ''}`} onClick={toggleBurgerMenu}>
                         <span></span>

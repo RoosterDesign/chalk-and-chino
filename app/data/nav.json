@@ -1,0 +1,17 @@
+[
+    {
+        "url": "/",
+        "label": "Home",
+        "title": ""
+    },
+    {
+        "url": "/about",
+        "label": "About",
+        "title": ""
+    },
+    {
+        "url": "/contact",
+        "label": "Contact",
+        "title": ""
+    }
+]

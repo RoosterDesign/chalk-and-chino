@@ -1,0 +1,86 @@
+@import '@/app/mixins.scss';
+
+.navLinks {
+    @include basicList;
+
+    @include breakpoint(md) {
+        @include horizontalList(30);
+    }
+
+    li {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        @include breakpoint(md, max) {
+            margin-right: 0;
+            width: 100%;
+        }
+
+        a {
+            color: var(--white);
+            display: flex;
+            flex: 1;
+            font-size: rem(16);
+            font-weight: var(--font-weight--normal);
+            padding: rem(15) rem(20) rem(15) rem(30);
+            position: relative;
+            text-decoration: none;
+
+            @include breakpoint(md) {
+                align-items: center;
+                opacity: .8;
+                padding: 0;
+            }
+
+            &:hover {
+                color: var(--white);
+                opacity: 1;
+            }
+
+            &.isActive {
+                font-weight: var(--font-weight--bold);
+                opacity: 1;
+            }
+
+        }
+
+    }
+
+    &.isPrimary {
+        @include breakpoint(md) {
+            @include horizontalList(40);
+            margin-right: rem(50);
+        }
+
+        li {
+
+            a {
+                @include breakpoint(md) {
+                    font-size: rem(18);
+                }
+
+                &.isActive {
+
+                    &::after {
+                        @include breakpoint(md) {
+                            background: var(--white);
+                            bottom: rem(-5);
+                            border-radius: 1px;
+                            content: '';
+                            height: rem(2);
+                            left: 0;
+                            position: absolute;
+                            width: 100%;
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+}

@@ -4,6 +4,7 @@ import { sen, baskervville } from '@/app/fonts'
 import "./globals.scss";
 
 import Header from '@/app/components/header/header';
+import Footer from '@/app/components/footer/footer';
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -20,6 +21,7 @@ export default function RootLayout({
             <body>
                 <Header />
                 {children}
+                <Footer />
             </body>
         </html>
     );
