@@ -58,15 +58,28 @@ h1 {
 }
 
 h2 {
-    font-size: rem(40);
+    font-size: rem(28);
+
+    @include breakpoint(md) {
+        font-size: rem(40);
+    }
+
 }
 
 h3 {
-    font-size: rem(36);
+    font-size: rem(24);
 }
 
 h4 {
-    font-size: rem(32);
+    font-family: var(--body-font);
+    font-size: rem(18);
+    font-weight: var(--font-weight--bold);
+
+    @include breakpoint(md) {
+        font-size: rem(20);
+        margin-bottom: rem(25);
+    }
+
 }
 
 h5 {
@@ -89,7 +102,8 @@ ul {
 }
 
 li,
-p {
+p,
+dd {
     font-size: rem(16);
     line-height: rem(24);
 
@@ -124,6 +138,10 @@ p {
     @include button;
 }
 
+.faux-link {
+    @include textLink;
+}
+
 .img-full {
     height: 100%;
     left: 0;
@@ -131,4 +149,9 @@ p {
     object-fit: cover;
     top: 0;
     width: 100%;
+}
+
+
+.dark {
+    @include pattern(1);
 }

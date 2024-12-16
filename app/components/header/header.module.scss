@@ -1,23 +1,25 @@
 @import '@/app/mixins.scss';
 
 .header {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     height: var(--header-height);
     left: 0;
+    overflow: hidden;
     top: 0;
     width: 100%;
     z-index: 100;
-
-    overflow: hidden;
 }
 
 .topHeader {
     background-color: var(--header-bg);
     display: flex;
-    height: 100%;
+    flex: 1;
+    // height: 100%;
 
     @include breakpoint(md) {
-        height: rem(100);
+        // height: rem(100);
     }
 
 }
@@ -50,7 +52,6 @@
 .navOpen {
     right: 0;
 }
-
 
 .burgerMenu {
     justify-content: space-between;

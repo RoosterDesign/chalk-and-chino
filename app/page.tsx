@@ -1,11 +1,16 @@
 import Hero from '@/app/components/hero/hero';
 import Container from '@/app/components/container/container';
+import SellingPoints from '@/app/components/selling-points/selling-points';
+import FeaturedProducts from '@/app/components/featured-products/featured-products';
 export default function Home() {
     return (
 
         <>
 
             <Hero />
+            <SellingPoints />
+            <FeaturedProducts title="New Arrivals" linkLabel="View all products" linkUrl="#" />
+
             <Container>
 
                 <h1>This is a heading 1</h1>

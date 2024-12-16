@@ -10,8 +10,13 @@
     isolation: isolate;
 
     @include breakpoint(md) {
-        min-height: rem(750);
+        max-height: 90vh;
         padding-bottom: rem(60);
+    }
+
+    @include breakpoint(lg) {
+        max-height: none;
+        min-height: rem(750);
     }
 
     &::after {

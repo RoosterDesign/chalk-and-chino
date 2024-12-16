@@ -14,14 +14,14 @@
 
 $breakpoints: (xs: (min: rem(414),
         max: rem(413.98)),
-    sm: (min: rem(576),
-        max: rem(575.98)),
+    sm: (min: rem(768),
+        max: rem(767.98)),
     md: ( // min: rem(768),
         // max: rem(767.98)
         min: rem(992),
         max: rem(991.98)),
-    lg: (min: rem(1200),
-        max: rem(1199.98)),
+    lg: (min: rem(1280),
+        max: rem(1279.98)),
     xl: (min: rem(1400),
         max: rem(1399.98)),
     xxl: ( //   min: rem(1920),
@@ -92,7 +92,6 @@ $breakpoints: (xs: (min: rem(414),
     line-height: 1;
     padding: 0 rem(20);
     text-decoration: none;
-    // transition: var(--hover-transition);
 
     &::after {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='13' fill='none'%3E%3Cpath stroke='%23FDF8EC' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.059 1.5 15 6.5m0 0-4.941 5M15 6.5H1'/%3E%3C/svg%3E");
@@ -157,7 +156,7 @@ $breakpoints: (xs: (min: rem(414),
     text-decoration: underline;
     text-decoration-thickness: rem(2);
     text-underline-offset: rem(8);
-    transition: text-decoration-color .1s ease-in-out;
+    transition: all .2s ease-in-out;
 
     @if $white {
         color: var(--white);

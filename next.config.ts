@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    images: {
+        domains: ['picsum.photos']
+    },
     sassOptions: {
         silenceDeprecations: ["legacy-js-api"],
     },

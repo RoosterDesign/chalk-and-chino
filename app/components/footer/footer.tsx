@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className={styles.footerCol}>
-                    <h3>Navigation</h3>
+                    <h4>Navigation</h4>
                     <ul className={styles.footerLinks}>
                         {mainNavItems.map((item, i) =>
                             <li key={i}>
@@ -35,7 +35,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className={styles.footerCol}>
-                    <h3>Product Categories</h3>
+                    <h4>Product Categories</h4>
                     <ul className={styles.footerLinks}>
                         {productNavItems.map((item, i) =>
                             <li key={i}>
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 <div className={styles.footerCol}>
-                    <h3>Follow Chalk & Chino</h3>
+                    <h4>Follow Chalk & Chino</h4>
                     <SocialLinks />
                 </div>
 

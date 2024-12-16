@@ -1,0 +1,74 @@
+@import '@/app/mixins.scss';
+
+.sellingPoints {
+    padding: rem(30) 0;
+
+    @include breakpoint(sm) {
+        padding: rem(40) 0;
+    }
+
+    @include breakpoint(md) {
+        padding: rem(60) 0;
+    }
+
+    // :global(.splide.is-initialized:not(.is-active) .splide__list) {
+    //     @include breakpoint(lg) {
+    //         display: grid;
+    //         gap: rem(40);
+    //         grid-template-columns: repeat(4, 1fr);
+    //     }
+    // }
+
+    :global(.splide__slide:last-child) dl::after {
+        display: none;
+    }
+
+    dl {
+        position: relative;
+        text-align: center;
+
+        &::after {
+            @include breakpoint(sm) {
+                background-image: url("data:image/svg+xml,%3Csvg width='6' height='95' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.731.195a.947.947 0 0 0-.13.382c-.118.643-.178.832-.344 2.05-.014-.203-.02-.386-.137-.578a.42.42 0 0 0-.227-.183.3.3 0 0 0-.255.044c-.12.056-.187.224-.268.357-.408.739-.554 2.541-.734 3.888-.252 1.907-.51 3.815-.657 5.748-.513 1.566-.633 5.404-.681 6.985a205.074 205.074 0 0 0-.166 6.979C-.15 34.016.109 42.189.095 50.346c.697 18.31.316 7.523 1.232 23.85.096 3.116.214 6.23.391 9.339.05.834.106 2.139.167 2.335.05.223.191.372.343.405.345 8.314.318 8.156.372 8.312.07.309.315.478.521.39a.497.497 0 0 0 .233-.243.933.933 0 0 0 .092-.406c0-3.157.123-2.262-.153-6.94l.083.737c.033.134.073.275.158.35.209.282.618.144.697-.38.117-.227.089-.432.094-.951.03-.307.059-.615.08-.924.236 2.332.355 3.13.544 3.77.049.163.117.311.176.467.31.973 1.104.225.811-.55-.063-.183-.143-.35-.204-.535-.184-.742-.251-1.537-.347-2.314-.276-2.458-.419-4.39-.586-7.087-.152-2.692-.317-5.383-.402-8.08-.294-7.601-.474-15.21-.616-22.82-.19-9.386-.121-4.866-.17-16.073 0-10.242-.037-7.084.14-14.092.039-1.672.084-2.24.204-4.43.08-1.157.312-2.914.41-4.508.007-.284.061-.585-.017-.851a.675.675 0 0 0-.135-.276.35.35 0 0 0-.21-.126l-.011-.002c.356-4.616.384-5.856.494-8.042a.74.74 0 0 0-.038-.26.674.674 0 0 0-.135-.275.349.349 0 0 0-.21-.126c-.136-.04-.272.043-.372.185Z' fill='%23F5E9DA'/%3E%3C/svg%3E%0A");
+                background-size: cover;
+                content: '';
+                display: inline-block;
+                height: rem(95);
+                position: absolute;
+                right: rem(-3);
+                top: 0;
+                width: rem(6);
+
+                @include breakpoint(md) {
+                    right: rem(-20);
+                }
+
+                @include breakpoint(lg) {
+                    right: rem(-25);
+                }
+
+            }
+
+        }
+
+    }
+
+    dt {
+        font-family: var(--heading-font);
+        font-size: rem(24);
+        margin-bottom: rem(10);
+    }
+
+    dd {
+
+        opacity: var(--text-opacity);
+
+        @include breakpoint(md, max) {
+            max-width: rem(325);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    }
+
+}
