@@ -51,8 +51,12 @@
 
     dt {
         font-family: var(--heading-font);
-        font-size: rem(24);
+        font-size: rem(18);
         margin-bottom: rem(10);
+
+        @include breakpoint(lg) {
+            font-size: rem(24);
+        }
 
         &::after {
             background: var(--accent);

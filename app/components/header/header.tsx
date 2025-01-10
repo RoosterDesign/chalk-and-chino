@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useIsMobile } from '@/app/lib/hooks'
+import { usePathname } from 'next/navigation';
 import Container from '@/app/components/container/container';
 import NavLinks from '@/app/components/nav-links/nav-links';
 import ProductsNav from '@/app/components/products-nav/products-nav';
@@ -13,10 +14,15 @@ import productNavItems from '@/app/data/productNav.json';
 
 import styles from './header.module.scss';
 const Header: React.FC = () => {
+    const pathname = usePathname();
 
     const [isOpen, setIsOpen] = useState(false);
 
     const isMobile = useIsMobile(992);
+
+    useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
 
     const toggleBurgerMenu = () => {
         setIsOpen(!isOpen)

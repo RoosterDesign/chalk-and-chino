@@ -5,9 +5,14 @@
 
     .image {
         border-radius: var(--border-radius);
+        height: rem(350);
         margin-bottom: rem(20);
         overflow: hidden;
         position: relative;
+
+        @include breakpoint(xl) {
+            height: rem(500);
+        }
 
         img {
             height: 100%;

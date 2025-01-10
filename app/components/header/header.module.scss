@@ -35,10 +35,35 @@
         top: var(--header-height);
         transition: right .5s cubic-bezier(0.860, 0.000, 0.070, 1.000);
         width: var(--mobile-nav-width);
+        z-index: 1;
     }
 
     @include breakpoint(md) {
         display: flex;
+    }
+
+}
+
+
+.header {
+
+    &::before {
+        content: '';
+        opacity: 0;
+        transition: opacity .2s ease-in-out;
+    }
+}
+
+.header:has(.navOpen) {
+
+    &::before {
+        background: var(--black);
+        height: 100%;
+        left: 0;
+        opacity: .8;
+        position: fixed;
+        top: 0;
+        width: 100%;
     }
 
 }

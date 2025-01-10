@@ -20,11 +20,12 @@
         align-items: center;
         flex-direction: column;
 
-        &:has(p) h2 {
-            margin-bottom: rem(10);
+        &:has(p) {
+            margin-bottom: rem(100);
         }
 
         p {
+            margin: 0;
             max-width: rem(500);
             text-align: center;
         }

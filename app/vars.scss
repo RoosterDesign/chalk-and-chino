@@ -12,6 +12,7 @@
     --primary-colour: #FDF8EC;
     --secondary-colour: #F5E9DA;
     --accent: #C0767F;
+    --accent-light: #cc848d;
     --type-colour: #3F382C;
 
     --header-bg: var(--green);
@@ -34,15 +35,20 @@
 
     --button-bg: var(--accent);
     --button-colour: var(--primary-colour);
-    --button-bg--hover: var(--black);
-    --button-colour--hover: var(--primary-colour);
-
-    --button-bg--alt-hover: var(--white);
-    --button-colour--alt-hover: var(--black);
+    --button-bg--hover: var(--accent-light);
+    // --button-colour--hover: var(--primary-colour);
 
     --header-height: 70px;
 
     --mobile-nav-width: 100vw;
+
+}
+
+@include breakpoint(sm) {
+
+    :root {
+        --mobile-nav-width: 400px;
+    }
 
 }
 

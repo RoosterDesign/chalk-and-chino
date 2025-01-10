@@ -6,6 +6,7 @@ import CategoryGrid from '@/app/components/category-grid/category-grid';
 import SectionHeader from '@/app/components/section-header/section-header';
 import Testimonials from '@/app/components/testimonials/testimonials';
 import Banner from '@/app/components/banner/banner';
+import GalleryTextBlock from '@/app/components/gallery-text-block/gallery-text-block';
 export default function Home() {
     return (
 
@@ -26,6 +27,13 @@ export default function Home() {
             </Testimonials>
 
             <Banner />
+
+            <GalleryTextBlock title="Pellentesque sagittis accumsan tellus." buttonLink="#" buttonLabel="Browse Products">
+                <>
+                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less.</p>
+                    <p>A domain name is one of the first steps to establishing your brand. Secure a consistent brand image with a domain name that matches your business.</p>
+                </>
+            </GalleryTextBlock>
 
             {/* <Container>
 
