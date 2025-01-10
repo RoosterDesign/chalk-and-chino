@@ -2,6 +2,10 @@ import Hero from '@/app/components/hero/hero';
 import Container from '@/app/components/container/container';
 import SellingPoints from '@/app/components/selling-points/selling-points';
 import FeaturedProducts from '@/app/components/featured-products/featured-products';
+import CategoryGrid from '@/app/components/category-grid/category-grid';
+import SectionHeader from '@/app/components/section-header/section-header';
+import Testimonials from '@/app/components/testimonials/testimonials';
+import Banner from '@/app/components/banner/banner';
 export default function Home() {
     return (
 
@@ -9,9 +13,23 @@ export default function Home() {
 
             <Hero />
             <SellingPoints />
-            <FeaturedProducts title="New Arrivals" linkLabel="View all products" linkUrl="#" />
+            <FeaturedProducts>
+                <SectionHeader title="New Arrivals" linkLabel="View all products" linkUrl="#" />
+            </FeaturedProducts>
 
-            <Container>
+            <CategoryGrid>
+                <SectionHeader title="Browse by Category" />
+            </CategoryGrid>
+
+            <Testimonials>
+                <SectionHeader title="Testimonials" intro="See what our happy customers have to say about our upcycled furniture and personalised service." centered />
+            </Testimonials>
+
+            <Banner />
+
+            {/* <Container>
+
+                <br /><br /><br /><br />
 
                 <h1>This is a heading 1</h1>
                 <h2>This is a heading 2</h2>
@@ -35,9 +53,9 @@ export default function Home() {
                     <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
                 </ol>
 
-                <a href="#" className="btn btn-primary">Click me</a>
+                <a href="#" className="btn">Click me</a>
 
-            </Container>
+            </Container> */}
 
         </>
     );

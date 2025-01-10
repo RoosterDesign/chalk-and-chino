@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useIsMobile } from '@/app/hooks/isMobile'
+import { useIsMobile } from '@/app/lib/hooks'
 import Container from '@/app/components/container/container';
 import NavLinks from '@/app/components/nav-links/nav-links';
 import ProductsNav from '@/app/components/products-nav/products-nav';

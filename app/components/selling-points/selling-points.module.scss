@@ -1,11 +1,7 @@
 @import '@/app/mixins.scss';
 
 .sellingPoints {
-    padding: rem(30) 0;
-
-    @include breakpoint(sm) {
-        padding: rem(40) 0;
-    }
+    padding: rem(40) 0;
 
     @include breakpoint(md) {
         padding: rem(60) 0;
@@ -57,6 +53,16 @@
         font-family: var(--heading-font);
         font-size: rem(24);
         margin-bottom: rem(10);
+
+        &::after {
+            background: var(--accent);
+            border-radius: rem(2);
+            content: '';
+            display: block;
+            height: rem(4);
+            margin: rem(20) auto;
+            width: rem(30);
+        }
     }
 
     dd {

@@ -16,12 +16,6 @@
     background-color: var(--header-bg);
     display: flex;
     flex: 1;
-    // height: 100%;
-
-    @include breakpoint(md) {
-        // height: rem(100);
-    }
-
 }
 
 .container {
@@ -37,10 +31,10 @@
         height: calc(100dvh - var(--header-height));
         padding: rem(20) 0;
         position: fixed;
-        right: rem(-300);
+        right: calc(-1 * var(--mobile-nav-width));
         top: var(--header-height);
         transition: right .5s cubic-bezier(0.860, 0.000, 0.070, 1.000);
-        width: rem(300);
+        width: var(--mobile-nav-width);
     }
 
     @include breakpoint(md) {
@@ -58,9 +52,9 @@
     background-color: transparent;
     border: none;
     display: flex;
-    height: rem(24);
+    height: rem(19);
     flex-direction: column;
-    width: rem(35);
+    width: rem(25);
 
     @include breakpoint(md) {
         display: none;
@@ -105,7 +99,7 @@
 
 
     &:nth-of-type(3) {
-        transform: translate(rem(15), rem(-4)) rotatez(45deg);
+        transform: translate(rem(10), rem(-4)) rotatez(45deg);
         transform-origin: bottom;
         width: 50%;
     }

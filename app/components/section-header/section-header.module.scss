@@ -8,8 +8,27 @@
     justify-content: space-between;
     margin-bottom: rem(30);
 
+    @include breakpoint(lg) {
+        margin-bottom: rem(40);
+    }
+
     a {
         @include textLink;
+    }
+
+    &.centered {
+        align-items: center;
+        flex-direction: column;
+
+        &:has(p) h2 {
+            margin-bottom: rem(10);
+        }
+
+        p {
+            max-width: rem(500);
+            text-align: center;
+        }
+
     }
 
 }

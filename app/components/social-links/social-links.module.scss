@@ -12,15 +12,15 @@
     margin-right: rem(15);
 
     @include breakpoint(md) {
-        @include horizontalList(20);
+        @include horizontalList(16);
     }
 
     li {
 
         img {
             display: block;
-            height: rem(24);
-            width: rem(24);
+            height: rem(18);
+            width: rem(18);
         }
 
     }

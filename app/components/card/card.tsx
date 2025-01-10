@@ -2,7 +2,7 @@ import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import styles from './card.module.scss';
 
-type Props = {
+type CardProps = {
     // image: StaticImageData;
     image: string;
     price: string;
@@ -10,16 +10,16 @@ type Props = {
     url: string;
 }
 
-const Card: React.FC<Props> = ({ image, price, title, url }) => {
+const Card: React.FC<CardProps> = ({ image, price, title, url }) => {
     return (
         <Link href={url} className={styles.card}>
             <div className={styles.image}>
                 <span className={styles.price}>£{price}</span>
                 <Image src={image} alt={title} height={400} width={400} />
             </div>
-            <h3>
+            <p>
                 {title}
-            </h3>
+            </p>
             <span className="faux-link">View more</span>
         </Link>
     )

@@ -31,8 +31,10 @@
         z-index: 1;
     }
 
-    h3 {
+    p {
         margin-bottom: rem(20);
+        font-size: rem(20);
+        font-weight: bold;
     }
 
     &:hover {
@@ -43,11 +45,6 @@
 
         :global(.faux-link) {
             color: var(--text-link-colour--hover);
-            // color: var(--accent);
-            // text-decoration: underline;
-            // text-decoration-thickness: rem(2);
-            // text-underline-offset: rem(8);
-
         }
 
     }

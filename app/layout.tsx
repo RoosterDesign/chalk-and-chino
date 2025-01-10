@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { sen, baskervville } from '@/app/fonts'
+import { sen, libreBaskerville } from '@/app/fonts'
 
 import "./globals.scss";
 
@@ -17,7 +17,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" className={`${sen.variable} ${baskervville.variable}`}>
+        <html lang="en" className={`${sen.variable} ${libreBaskerville.variable}`}>
             <body>
                 <Header />
                 {children}

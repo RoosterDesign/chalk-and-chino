@@ -1,6 +1,7 @@
 :root {
     --body-font: var(--font-sen);
-    --heading-font: var(--font-baskervville);
+    --heading-font: var(--font-libreBaskerville);
+
 
     --white: #fff;
     --black: #000;
@@ -36,7 +37,12 @@
     --button-bg--hover: var(--black);
     --button-colour--hover: var(--primary-colour);
 
-    --header-height: 80px;
+    --button-bg--alt-hover: var(--white);
+    --button-colour--alt-hover: var(--black);
+
+    --header-height: 70px;
+
+    --mobile-nav-width: 100vw;
 
 }
 

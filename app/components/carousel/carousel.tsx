@@ -5,7 +5,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import './carousel.scss';
 
-type Props = {
+type CarouselProps = {
     children: React.ReactNode;
     mobileGap?: string;
     tabletGap?: string;
@@ -17,7 +17,7 @@ type Props = {
     arrows?: boolean;
 }
 
-const Carousel: React.FC<Props> = ({ children,
+const Carousel: React.FC<CarouselProps> = ({ children,
     mobilePerPage = 1,
     tabletPerPage = 2,
     desktopPerPage = 3,

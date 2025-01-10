@@ -8,23 +8,28 @@ type SocialLinks = {
     alt: string;
 }
 
+const socialLinks: SocialLinks[] = [
+    {
+        url: '#',
+        image: '/instagram.svg',
+        title: 'Follow me on Instagram',
+        alt: 'Instagram',
+    },
+    {
+        url: '#',
+        image: '/facebook.svg',
+        title: 'View my Facebook page',
+        alt: 'Facebook',
+    },
+    {
+        url: '#',
+        image: '/envelope.svg',
+        title: 'Email Me',
+        alt: 'Email Me',
+    }
+];
+
 const SocialLinks: React.FC = () => {
-
-    const socialLinks: SocialLinks[] = [
-        {
-            url: '#',
-            image: '/instagram.svg',
-            title: 'Follow me on Instagram',
-            alt: 'Instagram',
-        },
-        {
-            url: '#',
-            image: '/facebook.svg',
-            title: 'View my Facebook page',
-            alt: 'Facebook',
-        }
-    ];
-
     return (
         <ul className={styles.socialLinks}>
             {socialLinks.map((socialLink, i) =>

@@ -77,7 +77,7 @@ $breakpoints: (xs: (min: rem(414),
     padding: 0;
 }
 
-@mixin button() {
+@mixin button($alt: false) {
     align-items: center;
     background: var(--button-bg);
     border-radius: var(--border-radius);
@@ -85,13 +85,18 @@ $breakpoints: (xs: (min: rem(414),
     color: var(--button-colour);
     cursor: pointer;
     display: inline-flex;
-    min-height: rem(55);
+    min-height: rem(50);
     justify-content: center;
-    font-size: rem(18);
+    font-size: rem(16);
     font-weight: var(--font-weight--bold);
     line-height: 1;
     padding: 0 rem(20);
     text-decoration: none;
+
+    @include breakpoint(lg) {
+        font-size: rem(18);
+        min-height: rem(55);
+    }
 
     &::after {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='13' fill='none'%3E%3Cpath stroke='%23FDF8EC' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.059 1.5 15 6.5m0 0-4.941 5M15 6.5H1'/%3E%3C/svg%3E");
@@ -107,7 +112,19 @@ $breakpoints: (xs: (min: rem(414),
         &:hover {
             background: var(--button-bg--hover);
             color: var(--button-colour--hover);
+
+            @if $alt {
+                background: var(--button-bg--alt-hover);
+                color: var(--button-colour--alt-hover);
+
+                &::after {
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='13' fill='none'%3E%3Cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M10.059 1.5 15 6.5m0 0-4.941 5M15 6.5H1'/%3E%3C/svg%3E");
+                }
+
+            }
+
         }
+
     }
 
     @include breakpoint(lg) {
@@ -117,7 +134,7 @@ $breakpoints: (xs: (min: rem(414),
 }
 
 
-@mixin pattern($opacity: 0.5) {
+@mixin pattern($opacity: 0.4) {
     isolation: isolate;
     position: relative;
 

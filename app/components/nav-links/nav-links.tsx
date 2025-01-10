@@ -1,14 +1,14 @@
 import { usePathname } from 'next/navigation'
 import Link from 'next/link';
-import { NavItem } from '@/app/types/types'
+import { NavItem } from '@/app/lib/types'
 import styles from './nav-links.module.scss';
 
-type Props = {
+type NavLinksProps = {
     navItems: NavItem[];
     isPrimary?: boolean;
 }
 
-const NavLinks: React.FC<Props> = ({ navItems, isPrimary }) => {
+const NavLinks: React.FC<NavLinksProps> = ({ navItems, isPrimary }) => {
     const currentPath = usePathname();
 
     return (
