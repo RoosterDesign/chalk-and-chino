@@ -5,7 +5,19 @@ import SectionHeader from '@/app/components/section-header/section-header';
 import Testimonials from '@/app/components/testimonials/testimonials';
 import GalleryCarousel from '@/app/components/gallery-carousel/gallery-carousel';
 
+const images = [
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 1', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 2', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 3', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 4', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 5', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 6', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 7', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+    { src: 'https://picsum.photos/1400/1400', alt: 'Image 8', thumbWidth: 520, thumbHeight: 520, width: 1400, height: 1400 },
+];
+
 const About: React.FC = () => {
+
     return (
         <>
             <Masthead title="About" />
@@ -17,7 +29,7 @@ const About: React.FC = () => {
                 </>
             </GalleryTextBlock>
 
-            <GalleryCarousel>
+            <GalleryCarousel images={images}>
                 <SectionHeader title="My Work" intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." linkUrl="#" linkLabel="View items for sale" centered />
             </GalleryCarousel>
 

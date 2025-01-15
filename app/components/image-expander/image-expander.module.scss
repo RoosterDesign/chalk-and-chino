@@ -1,0 +1,5 @@
+@import '@/app/mixins.scss';
+
+.expandButton {
+    @include iconButton;
+}

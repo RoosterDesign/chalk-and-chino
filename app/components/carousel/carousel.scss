@@ -1,6 +1,8 @@
 @import '@/app/mixins.scss';
 
 .splide {
+    display: flex;
+    flex-direction: column;
     padding: 0;
 
     @include breakpoint(lg, max) {
@@ -23,6 +25,22 @@
     }
 }
 
+.splide__slide {
+
+    // opacity: .5;
+    // transition: opacity 0.2s ease-in-out;
+    &.is-visible {
+        // opacity: 1;
+    }
+
+    img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+
+}
+
 .splide__pagination {
     display: flex;
     justify-content: center;
@@ -39,6 +57,42 @@
 
         &.is-active {
             opacity: 1;
+        }
+
+    }
+
+}
+
+.splide__arrows {
+    display: flex;
+    justify-content: center;
+    margin-top: rem(40);
+    order: 2;
+
+    .splide__arrow {
+        background: var(--accent);
+        border-radius: var(--border-radius);
+        border: none;
+        cursor: pointer;
+        height: rem(50);
+        margin: 0 rem(10);
+        width: rem(50);
+
+        &--prev {
+
+            svg {
+                transform: rotate(180deg);
+            }
+
+        }
+
+        &:not(:disabled):hover {
+            background: var(--button-bg--hover);
+        }
+
+        &:disabled {
+            cursor: default;
+            opacity: .4;
         }
 
     }

@@ -1,1 +1,16 @@
 @import '@/app/mixins.scss';
+
+.galleryCarousel {
+
+    :global(.splide) {
+        @include breakpoint(lg, max) {
+            padding-left: rem(20);
+            padding-right: rem(20);
+        }
+    }
+
+    img {
+        cursor: pointer;
+    }
+
+}

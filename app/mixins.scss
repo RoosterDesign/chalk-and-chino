@@ -111,13 +111,39 @@ $breakpoints: (xs: (min: rem(414),
     @media not all and (hover: none) {
         &:hover {
             background: var(--button-bg--hover);
-            // color: var(--button-colour--hover);
         }
 
     }
 
     @include breakpoint(lg) {
         font-size: rem(18);
+    }
+
+}
+
+@mixin iconButton($height: 75, $width: 75, $iconSize: 32) {
+    align-items: center;
+    background: var(--button-bg);
+    border-radius: var(--border-radius);
+    border: none;
+    color: var(--button-colour);
+    cursor: pointer;
+    display: inline-flex;
+    height: rem($height);
+    justify-content: center;
+    padding: 0 rem(20);
+    width: rem($width);
+
+    @media not all and (hover: none) {
+        &:hover {
+            background: var(--button-bg--hover);
+        }
+    }
+
+    svg {
+        fill: var(--primary-colour);
+        height: rem($iconSize);
+        width: rem($iconSize);
     }
 
 }
