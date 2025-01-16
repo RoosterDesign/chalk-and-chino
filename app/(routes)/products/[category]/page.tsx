@@ -7,12 +7,12 @@ import { ProductListItemType } from '@/app/lib/types';
 import productsData from '@/app/data/products.json';
 import { slugToCategoryMap } from "@/app/lib/categoryMap"; 0
 
-interface Params {
+type Params = {
     category: string;
 }
 
 type CategoryPageProps = {
-    params: Params;
+    params: Promise<Params>;
 }
 
 const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
@@ -48,11 +48,3 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
 }
 
 export default CategoryPage;
-
-
-// export async function generateStaticParams() {
-//     const categories = await fetchCategoriesFromCMS(); // Replace with actual API call
-//     return categories.map((category) => ({
-//       category: category.slug, // Ensure slugs match your dynamic route
-//     }));
-//   }

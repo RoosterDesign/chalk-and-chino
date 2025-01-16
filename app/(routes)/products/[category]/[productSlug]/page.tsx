@@ -1,16 +1,16 @@
 import productsData from "@/app/data/products.json";
 
-interface Params {
+type Params = {
     category: string;
     productSlug: string;
 }
 
-interface ProductDetailsPageProps {
-    params: Params;
+type ProductDetailsPageProps = {
+    params: Promise<Params>;
 }
 
-export default function ProductDetailsPage({ params }: ProductDetailsPageProps) {
-    const { productSlug, category } = params;
+const ProductDetailsPage: React.FC<ProductDetailsPageProps> = async ({ params }) => {
+    const { productSlug, category } = await params;
 
     // Find the product based on its slug and category
     const product = productsData.find((p) => p.slug === productSlug && p.category === category);
@@ -27,3 +27,5 @@ export default function ProductDetailsPage({ params }: ProductDetailsPageProps) 
         </div>
     );
 }
+
+export default ProductDetailsPage;
