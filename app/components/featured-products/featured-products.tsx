@@ -1,6 +1,8 @@
 import Container from '@/app/components/container/container';
 import Carousel from '@/app/components/carousel/carousel';
-import Card from '@/app/components/card/card';
+import ProductCard from '@/app/components/product-card/product-card';
+import { ProductListItemType } from '@/app/lib/types';
+import productsData from '@/app/data/products.json';
 import styles from './featured-products.module.scss';
 
 type FeaturedProductsProps = {
@@ -8,31 +10,17 @@ type FeaturedProductsProps = {
 }
 
 const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ children }) => {
+
+    const featuredProducts: ProductListItemType[] = productsData
+        .filter((product) => product.featured)
+        .slice(0, 4);
+
     return (
         <section className={styles.featuredProducts}>
             <Container>
                 {children}
                 <Carousel>
-                    <Card
-                        image="https://picsum.photos/400/500"
-                        price="20.00"
-                        title="Lovely lamp"
-                        url="#" />
-                    <Card
-                        image="https://picsum.photos/400/500"
-                        price="20.00"
-                        title="Lovely lamp"
-                        url="#" />
-                    <Card
-                        image="https://picsum.photos/400/500"
-                        price="20.00"
-                        title="Lovely lamp"
-                        url="#" />
-                    <Card
-                        image="https://picsum.photos/400/500"
-                        price="20.00"
-                        title="Lovely lamp"
-                        url="#" />
+                    {featuredProducts.map((product, index) => <ProductCard key={index} product={product} />)}
                 </Carousel>
 
             </Container>

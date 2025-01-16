@@ -82,9 +82,9 @@
                     &::after {
                         @include breakpoint(md) {
                             background: var(--white);
-                            bottom: rem(-2);
+                            bottom: rem(-1);
                             content: '';
-                            height: rem(1);
+                            height: rem(2);
                             left: 0;
                             position: absolute;
                             width: 100%;

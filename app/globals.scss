@@ -52,14 +52,21 @@ a {
         margin-bottom: rem(150);
     }
 
-    @include breakpoint(lg) {
-        margin-top: rem(150);
-        margin-bottom: rem(150);
-    }
-
     @include breakpoint(xl) {
         margin-top: rem(200);
         margin-bottom: rem(200);
+    }
+
+    &--top {
+        margin-top: rem(50);
+
+        @include breakpoint(md) {
+            margin-top: rem(75);
+        }
+
+        @include breakpoint(xl) {
+            margin-top: rem(100);
+        }
     }
 
 }
@@ -138,11 +145,6 @@ ol {
 ul {
     list-style: inside;
 }
-
-li,
-p,
-dd,
-.faux-link {}
 
 p {
     margin-bottom: rem(24);

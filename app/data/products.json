@@ -1,0 +1,56 @@
+[
+    {
+        "slug": "sofa",
+        "image": "https://picsum.photos/400/500",
+        "price": "20.00",
+        "name": "Sofa",
+        "category": "furniture",
+        "url": "#",
+        "featured": true
+    },
+    {
+        "slug": "chair",
+        "image": "https://picsum.photos/400/500",
+        "price": "20.00",
+        "name": "Chair",
+        "category": "furniture",
+        "url": "#",
+        "featured": true
+    },
+    {
+        "slug": "faux-floral-arrangement",
+        "image": "https://picsum.photos/400/500",
+        "price": "20.00",
+        "name": "Faux Floral Arrangement",
+        "category": "faux-florals-pots",
+        "url": "#",
+        "featured": true
+    },
+    {
+        "slug": "decorative-pot",
+        "image": "https://picsum.photos/400/500",
+        "price": "20.00",
+        "name": "Decorative Pot",
+        "category": "faux-florals-pots",
+        "url": "#",
+        "featured": true
+    },
+    {
+        "slug": "wall-art",
+        "image": "https://picsum.photos/400/500",
+        "price": "20.00",
+        "name": "Wall Art",
+        "category": "home-decor-accessories",
+        "url": "#",
+        "featured": false
+    },
+    {
+        "slug": "table-lamp",
+        "image": "https://picsum.photos/400/500",
+        "price": "20.00",
+        "name": "Table Lamp",
+        "category": "home-decor-accessories",
+        "url": "#",
+        "featured": false
+    }
+]

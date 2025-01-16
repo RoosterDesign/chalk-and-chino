@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from "react";
 import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import Image from 'next/image';
 import '@splidejs/react-splide/css/core';
@@ -37,32 +37,36 @@ const Carousel: React.FC<CarouselProps> = ({ children,
     const padding = hasPadding ? "150px " : "0";
 
     return (
-        <Splide hasTrack={false} aria-label="My Favorite Images" options={{
-            perPage: mobilePerPage,
-            arrows,
-            pagination,
-            gap: mobileGap,
-            perMove: 1,
-            mediaQuery: 'min',
-            breakpoints: {
-                768: {
-                    perPage: tabletPerPage,
-                    gap: tabletGap,
+        <Splide
+            hasTrack={false}
+            options={{
+                perPage: mobilePerPage,
+                arrows,
+                pagination,
+                gap: mobileGap,
+                perMove: 1,
+                mediaQuery: 'min',
+                breakpoints: {
+                    768: {
+                        perPage: tabletPerPage,
+                        gap: tabletGap,
+                    },
+                    992: {
+                        perPage: desktopPerPage,
+                        gap: desktopGap,
+                        padding
+                    },
+                    1280: {
+                        destroy: mobileOnly,
+                    },
                 },
-                992: {
-                    perPage: desktopPerPage,
-                    gap: desktopGap,
-                    padding
-                },
-                1280: {
-                    destroy: mobileOnly,
-                },
-            },
-        }}>
+            }}>
 
             <SplideTrack>
                 {React.Children.map(children, (child, index) => (
-                    <SplideSlide key={index}>{child}</SplideSlide>
+                    <SplideSlide key={index}>
+                        {child}
+                    </SplideSlide>
                 ))}
             </SplideTrack>
 

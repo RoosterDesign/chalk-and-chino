@@ -20,15 +20,14 @@ const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ images, children }) =
 
             <Carousel mobileOnly={false} arrows={true} pagination={false} hasPadding>
                 {images.map((image, index) => (
-                    <div key={index} className="cursor-pointer">
-                        <ImageExpander src={image.src}
-                            alt={image.alt}
-                            width={image.width}
-                            height={image.height}
-                            thumbWidth={image.thumbWidth}
-                            thumbHeight={image.thumbHeight}
-                        />
-                    </div>
+                    <ImageExpander src={image.src}
+                        alt={image.alt}
+                        width={image.width}
+                        height={image.height}
+                        thumbWidth={image.thumbWidth}
+                        thumbHeight={image.thumbHeight}
+                        key={index}
+                    />
                 ))}
 
             </Carousel>

@@ -12,3 +12,13 @@ export type ImageExpanderType = {
     thumbWidth: number;
     thumbHeight: number;
 }
+
+export type ProductListItemType = {
+    slug: string;
+    image: string;
+    price: string;
+    name: string;
+    category: string;
+    url: string;
+    featured: boolean;
+}

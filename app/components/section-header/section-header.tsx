@@ -14,8 +14,11 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ title, intro, linkLabel, 
     return (
         <hgroup className={`${styles.sectionHeader} ${centered ? styles.centered : ''}`}>
             <h2>{title}</h2>
-            {intro && <p>{intro}</p>}
-            {linkLabel && linkUrl && <Link href={linkUrl} title={linkLabel} className="text-link">{linkLabel}</Link>}
+            {intro && <p>
+                {intro}
+                {linkLabel && linkUrl && <> <Link href={linkUrl} title={linkLabel} className="text-link">{linkLabel}</Link></>}
+            </p>}
+
         </hgroup>
     )
 }
