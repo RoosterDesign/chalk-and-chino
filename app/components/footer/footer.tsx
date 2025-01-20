@@ -1,14 +1,14 @@
 'use client';
 
-import { usePathname } from 'next/navigation'
-import Link from 'next/link';
 import Container from '@/app/components/container/container';
-import SocialLinks from '@/app/components/social-links/social-links';
 import Logo from '@/app/components/logo/logo';
-import styles from './footer.module.scss';
-
+import SocialLinks from '@/app/components/social-links/social-links';
 import mainNavItems from '@/app/data/nav.json';
-import productNavItems from '@/app/data/productNav.json';
+import { productNavItems } from '@/app/data/productNav';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation'
+
+import styles from './footer.module.scss';
 
 const Footer: React.FC = () => {
     const currentPath = usePathname();
@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
                     <ul className={styles.footerLinks}>
                         {mainNavItems.map((item, i) =>
                             <li key={i}>
-                                <Link href={item.url} title={item.title} className={currentPath === item.url ? styles.isActive : ''}>{item.label}
+                                <Link className={currentPath === item.url ? styles.isActive : ''} href={item.url} title={item.label}>{item.label}
                                 </Link>
                             </li>
                         )}
@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                     <ul className={styles.footerLinks}>
                         {productNavItems.map((item, i) =>
                             <li key={i}>
-                                <Link href={item.url} title={item.title} className={currentPath === item.url ? styles.isActive : ''}>{item.label}
+                                <Link className={currentPath === item.url ? styles.isActive : ''} href={`/products/${item.url}`} title={item.label}>{item.label}
                                 </Link>
                             </li>
                         )}
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
                         <li><Link href="/">Cookie Policy</Link></li>
                     </ul>
                     <p>
-                        Website by <a href="#" title="Front-End Developer and UI/UX Designer based in Leamington Spa, Warwickshire" target="_">Rooster Design</a>
+                        Website by <a href="#" target="_" title="Front-End Developer and UI/UX Designer based in Leamington Spa, Warwickshire">Rooster Design</a>
                     </p>
                 </div>
 

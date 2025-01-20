@@ -1,10 +1,10 @@
 import {
-    Sen, DM_Serif_Text, Libre_Baskerville, DM_Serif_Display
+    DM_Serif_Display, DM_Serif_Text, Libre_Baskerville, Sen
 } from 'next/font/google'
 
 export const sen = Sen({
-    subsets: ['latin'],
     display: 'swap',
+    subsets: ['latin'],
     variable: '--font-sen',
 })
 
@@ -16,15 +16,15 @@ export const sen = Sen({
 // })
 
 export const libreBaskerville = Libre_Baskerville({
-    weight: '400',
-    subsets: ['latin'],
     display: 'swap',
-    variable: '--font-libreBaskerville'
+    subsets: ['latin'],
+    variable: '--font-libreBaskerville',
+    weight: '400'
 })
 
 export const dmSerifText = DM_Serif_Text({
-    weight: '400',
-    subsets: ['latin'],
     display: 'swap',
-    variable: '--font-dmSerifText'
+    subsets: ['latin'],
+    variable: '--font-dmSerifText',
+    weight: '400'
 })

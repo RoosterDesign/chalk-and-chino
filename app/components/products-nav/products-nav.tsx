@@ -1,6 +1,7 @@
-import NavLinks from '@/app/components/nav-links/nav-links';
 import Container from '@/app/components/container/container';
+import NavLinks from '@/app/components/nav-links/nav-links';
 import { NavItem } from '@/app/lib/types'
+
 import styles from './products-nav.module.scss';
 
 type ProductsNavProps = {

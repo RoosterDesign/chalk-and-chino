@@ -1,7 +1,8 @@
-import styles from './products-list.module.scss';
-import { ProductListItemType } from '@/app/lib/types';
 import Container from '@/app/components/container/container';
 import ProductCard from '@/app/components/product-card/product-card';
+import { ProductListItemType } from '@/app/lib/types';
+
+import styles from './products-list.module.scss';
 
 type ProdcutsListType = {
     products: ProductListItemType[];

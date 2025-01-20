@@ -1,15 +1,13 @@
-import Container from '@/app/components/container/container';
 import Carousel from '@/app/components/carousel/carousel';
+import Container from '@/app/components/container/container';
 import ProductCard from '@/app/components/product-card/product-card';
-import { ProductListItemType } from '@/app/lib/types';
+import SectionHeader from '@/app/components/section-header/section-header';
 import productsData from '@/app/data/products.json';
+import { ProductListItemType } from '@/app/lib/types';
+
 import styles from './featured-products.module.scss';
 
-type FeaturedProductsProps = {
-    children: React.ReactNode;
-}
-
-const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ children }) => {
+const FeaturedProducts: React.FC = () => {
 
     const featuredProducts: ProductListItemType[] = productsData
         .filter((product) => product.featured)
@@ -18,7 +16,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ children }) => {
     return (
         <section className={styles.featuredProducts}>
             <Container>
-                {children}
+                <SectionHeader linkLabel="View all products" linkUrl="#" title="New Arrivals" />
                 <Carousel>
                     {featuredProducts.map((product, index) => <ProductCard key={index} product={product} />)}
                 </Carousel>

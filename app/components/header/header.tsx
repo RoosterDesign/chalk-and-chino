@@ -1,16 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useIsMobile } from '@/app/lib/hooks'
-import { usePathname } from 'next/navigation';
 import Container from '@/app/components/container/container';
+import Logo from '@/app/components/logo/logo';
 import NavLinks from '@/app/components/nav-links/nav-links';
 import ProductsNav from '@/app/components/products-nav/products-nav';
 import SocialLinks from '@/app/components/social-links/social-links';
-import Logo from '@/app/components/logo/logo';
-
 import mainNavItems from '@/app/data/nav.json';
-import productNavItems from '@/app/data/productNav.json';
+import { productNavItems } from '@/app/data/productNav';
+import { useIsMobile } from '@/app/lib/hooks'
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import styles from './header.module.scss';
 const Header: React.FC = () => {
@@ -35,7 +34,7 @@ const Header: React.FC = () => {
                 <Container className={styles.container}>
                     <Logo />
                     <nav className={`${styles.nav} ${isOpen ? styles.navOpen : ''}`}>
-                        <NavLinks navItems={mainNavItems} isPrimary />
+                        <NavLinks isPrimary navItems={mainNavItems} />
                         {isMobile && <ProductsNav productNavItems={productNavItems} />}
                     </nav>
                     <SocialLinks />

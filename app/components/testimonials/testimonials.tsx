@@ -1,19 +1,15 @@
 import Container from '@/app/components/container/container';
+import SectionHeader from '@/app/components/section-header/section-header';
+import testimonials from '@/app/data/testimonials.json';
+
 import TestimonialCard from './testimonialCard/testimonialCard';
 import styles from './testimonials.module.scss';
 
-import testimonials from '@/app/data/testimonials.json';
-
-type TestimonialsProps = {
-    children: React.ReactNode;
-}
-
-const Testimonials: React.FC<TestimonialsProps> = ({ children }) => {
+const Testimonials: React.FC = () => {
     return (
         <section className="section-spacing">
             <Container>
-                {children}
-
+                <SectionHeader centered intro="See what our happy customers have to say about our upcycled furniture and personalised service." title="Testimonials" />
                 <div className={styles.testimonials}>
                     {testimonials.map((testimonial, i) =>
                         <TestimonialCard key={i} testimonial={testimonial} />

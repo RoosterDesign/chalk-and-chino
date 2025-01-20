@@ -1,38 +1,39 @@
 'use client';
 
-import React, { useState } from "react";
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
+import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import Image from 'next/image';
+import React, { useState } from "react";
 import '@splidejs/react-splide/css/core';
+
 import './carousel.scss';
 
-const arrowIcon = <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="none"><path stroke="#FDF8EC" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.059 1.5 15 6.5m0 0-4.941 5M15 6.5H1" /></svg>
+const arrowIcon = <svg fill="none" height="13" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M10.059 1.5 15 6.5m0 0-4.941 5M15 6.5H1" stroke="#FDF8EC" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" /></svg>
 
 type CarouselProps = {
+    arrows?: boolean;
     children: React.ReactNode;
-    mobileGap?: string;
-    tabletGap?: string;
     desktopGap?: string;
+    desktopPerPage?: number;
     hasPadding?: boolean;
+    mobileGap?: string;
     mobileOnly?: boolean;
     mobilePerPage?: number;
-    tabletPerPage?: number;
-    desktopPerPage?: number;
     pagination?: boolean;
-    arrows?: boolean;
+    tabletGap?: string;
+    tabletPerPage?: number;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ children,
-    mobilePerPage = 1,
-    tabletPerPage = 2,
+const Carousel: React.FC<CarouselProps> = ({ arrows = false,
+    children,
+    desktopGap = "30px",
     desktopPerPage = 3,
-    arrows = false,
-    pagination = true,
     hasPadding = false,
     mobileGap = "20px",
+    mobileOnly = true,
+    mobilePerPage = 1,
+    pagination = true,
     tabletGap = "30px",
-    desktopGap = "30px",
-    mobileOnly = true }) => {
+    tabletPerPage = 2 }) => {
 
     const padding = hasPadding ? "150px " : "0";
 
@@ -40,26 +41,26 @@ const Carousel: React.FC<CarouselProps> = ({ children,
         <Splide
             hasTrack={false}
             options={{
-                perPage: mobilePerPage,
                 arrows,
-                pagination,
-                gap: mobileGap,
-                perMove: 1,
-                mediaQuery: 'min',
                 breakpoints: {
-                    768: {
-                        perPage: tabletPerPage,
-                        gap: tabletGap,
-                    },
-                    992: {
-                        perPage: desktopPerPage,
-                        gap: desktopGap,
-                        padding
-                    },
                     1280: {
                         destroy: mobileOnly,
                     },
+                    768: {
+                        gap: tabletGap,
+                        perPage: tabletPerPage,
+                    },
+                    992: {
+                        gap: desktopGap,
+                        padding,
+                        perPage: desktopPerPage
+                    },
                 },
+                gap: mobileGap,
+                mediaQuery: 'min',
+                pagination,
+                perMove: 1,
+                perPage: mobilePerPage,
             }}>
 
             <SplideTrack>

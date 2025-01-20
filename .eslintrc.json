@@ -1,5 +1,19 @@
 {
     "extends": ["next", "next/core-web-vitals", "prettier"],
-    "plugins": [],
-    "rules": {}
+    "plugins": ["perfectionist"],
+    "rules": {
+        "perfectionist/sort-imports": "error",
+        "perfectionist/sort-named-imports": "error",
+        "perfectionist/sort-named-exports": "error",
+        "perfectionist/sort-object-types": "error",
+        "perfectionist/sort-array-includes": "error",
+        "perfectionist/sort-exports": "error",
+        "perfectionist/sort-jsx-props": "error",
+        "perfectionist/sort-modules": "error",
+        "perfectionist/sort-objects": "error",
+        "perfectionist/sort-switch-case": "error",
+        "perfectionist/sort-union-types": "error",
+        "perfectionist/sort-variable-declarations": "error",
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }]
+      }
   }

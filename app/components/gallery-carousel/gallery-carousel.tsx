@@ -1,32 +1,33 @@
 'use client';
-import { ImageExpanderType } from '@/app/lib/types';
 import Carousel from '@/app/components/carousel/carousel';
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
+import SectionHeader from '@/app/components/section-header/section-header';
+import { ImageExpanderType } from '@/app/lib/types';
+
 import styles from './gallery-carousel.module.scss';
 
 type GalleryCarouselProps = {
     images: ImageExpanderType[];
-    children: React.ReactNode;
 }
 
-const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ images, children }) => {
+const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ images }) => {
 
     return (
         <section className={`${styles.galleryCarousel} section-spacing`}>
             <Container>
-                {children}
+                <SectionHeader centered intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." linkLabel="View items for sale" linkUrl="/products" title="My Work" />
             </Container>
 
-            <Carousel mobileOnly={false} arrows={true} pagination={false} hasPadding>
+            <Carousel arrows={true} hasPadding mobileOnly={false} pagination={false}>
                 {images.map((image, index) => (
-                    <ImageExpander src={image.src}
-                        alt={image.alt}
-                        width={image.width}
+                    <ImageExpander alt={image.alt}
                         height={image.height}
-                        thumbWidth={image.thumbWidth}
-                        thumbHeight={image.thumbHeight}
                         key={index}
+                        src={image.src}
+                        thumbHeight={image.thumbHeight}
+                        thumbWidth={image.thumbWidth}
+                        width={image.width}
                     />
                 ))}
 

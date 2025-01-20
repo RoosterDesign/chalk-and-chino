@@ -1,7 +1,8 @@
-export const CATEGORY_SLUGS = {
-    FURNITURE: "furniture",
-    FAUX_FLORALS_POTS: "faux-florals-pots",
-    HOME_DECOR_ACCESSORIES: "home-decor-accessories",
+export const CATEGORY_DETAILS = {
+    fauxFloralsPots: { name: "Faux Florals & Upcycled Pots", slug: "faux-florals-pots" },
+    furniture: { name: "Furniture", slug: "furniture" },
+    homeDecorAccessories: { name: "Home Decor Accessories", slug: "home-decor-accessories" },
 } as const;
 
-export type CategorySlug = typeof CATEGORY_SLUGS[keyof typeof CATEGORY_SLUGS];
+export type CategoryKey = keyof typeof CATEGORY_DETAILS;
+export type CategorySlug = typeof CATEGORY_DETAILS[CategoryKey]["slug"];

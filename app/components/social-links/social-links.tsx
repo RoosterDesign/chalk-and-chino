@@ -2,30 +2,30 @@
 import styles from './social-links.module.scss';
 
 type SocialLinks = {
-    url: string;
+    alt: string;
     image: string;
     title: string;
-    alt: string;
+    url: string;
 }
 
 const socialLinks: SocialLinks[] = [
     {
-        url: '#',
+        alt: 'Instagram',
         image: '/instagram.svg',
         title: 'Follow me on Instagram',
-        alt: 'Instagram',
+        url: '#',
     },
     {
-        url: '#',
+        alt: 'Facebook',
         image: '/facebook.svg',
         title: 'View my Facebook page',
-        alt: 'Facebook',
+        url: '#',
     },
     {
-        url: '#',
+        alt: 'Email Me',
         image: '/envelope.svg',
         title: 'Email Me',
-        alt: 'Email Me',
+        url: '#',
     }
 ];
 
@@ -35,7 +35,7 @@ const SocialLinks: React.FC = () => {
             {socialLinks.map((socialLink, i) =>
                 <li key={i}>
                     <a href={socialLink.url} title={socialLink.title}>
-                        <img src={socialLink.image} alt={socialLink.alt} width={32} height={32} />
+                        <img alt={socialLink.alt} height={32} src={socialLink.image} width={32} />
                     </a>
                 </li>
             )}

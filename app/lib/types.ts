@@ -1,24 +1,25 @@
-export type NavItem = {
-    url: string;
-    label: string;
-    title: string;
-};
-
 export type ImageExpanderType = {
-    src: string;
     alt: string;
-    width: number;
+    className?: null | string;
     height: number;
-    thumbWidth: number;
-    thumbHeight: number;
+    src: string;
+    thumbHeight?: number;
+    thumbSize?: string;
+    thumbWidth?: number;
+    width: number;
 }
 
-export type ProductListItemType = {
-    slug: string;
-    image: string;
-    price: string;
-    name: string;
-    category: string;
+export type NavItem = {
+    label: string;
     url: string;
+};
+
+export type ProductListItemType = {
+    category: string;
     featured: boolean;
+    image: string;
+    name: string;
+    price: string;
+    slug: string;
+    url: string;
 }

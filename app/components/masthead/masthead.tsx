@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Container from '@/app/components/container/container';
+import Image from 'next/image';
 
 import styles from './masthead.module.scss';
 
@@ -13,7 +13,7 @@ const Masthead: React.FC<MastheadProps> = ({ title }) => {
             <Container className={styles.container}>
                 <h1>{title}</h1>
             </Container>
-            <Image src="https://picsum.photos/1920/300" alt="" height={300} width={1920} />
+            <Image alt="" height={300} src="https://picsum.photos/1920/300" width={1920} />
         </section>
     )
 }

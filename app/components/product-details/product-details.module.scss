@@ -1,0 +1,13 @@
+@import '@/app/mixins.scss';
+
+.productDetails {
+    padding: rem(100) 0;
+}
+
+.container {
+    display: grid;
+    gap: rem(85);
+    grid-template-columns: 1fr 1fr;
+}
+
+.details {}

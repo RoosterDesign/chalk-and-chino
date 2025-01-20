@@ -1,7 +1,7 @@
-import styles from './selling-points.module.scss';
-
-import Container from '@/app/components/container/container';
 import Carousel from '@/app/components/carousel/carousel';
+import Container from '@/app/components/container/container';
+
+import styles from './selling-points.module.scss';
 
 const SellingPoints: React.FC = () => {
     return (

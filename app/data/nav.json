@@ -1,22 +1,18 @@
 [
     {
         "url": "/",
-        "label": "Home",
-        "title": ""
+        "label": "Home"
     },
     {
         "url": "/about",
-        "label": "About",
-        "title": ""
+        "label": "About"
     },
     {
         "url": "/products",
-        "label": "Products",
-        "title": ""
+        "label": "Products"
     },
     {
         "url": "/contact",
-        "label": "Contact",
-        "title": ""
+        "label": "Contact"
     }
 ]

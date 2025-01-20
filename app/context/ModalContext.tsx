@@ -1,12 +1,12 @@
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import Modal from '@/app/components/modal/modal';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 // Define the shape of the modal context using `type`
 type ModalContextType = {
-    openModal: (content: ReactNode) => void;
     closeModal: () => void;
+    openModal: (content: ReactNode) => void;
 };
 
 // Create the context
@@ -15,7 +15,7 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 // Provider component
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [modalContent, setModalContent] = useState<ReactNode | null>(null);
+    const [modalContent, setModalContent] = useState<null | ReactNode>(null);
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -47,7 +47,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     if (!isClient) return null;
 
     return (
-        <ModalContext.Provider value={{ openModal, closeModal }}>
+        <ModalContext.Provider value={{ closeModal, openModal }}>
             {children}
             <Modal isOpen={isModalOpen} onClose={closeModal}>
                 {modalContent}
