@@ -167,6 +167,10 @@ p {
     @include button(alt);
 }
 
+.btn-full-width {
+    width: 100%;
+}
+
 .faux-link {
     @include textLink;
 }

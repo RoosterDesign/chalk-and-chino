@@ -13,9 +13,9 @@ type GalleryProps = {
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
     return (
-        <section className={`${styles.galleryCarousel} section-spacing`}>
+        <section className="section-spacing">
             <Container>
-                <SectionHeader centered intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." linkLabel="View items for sale" linkUrl="/products" title="My Work" />
+                {/* <SectionHeader centered intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." linkLabel="View items for sale" linkUrl="/products" title="My Work" /> */}
 
                 <div className={styles.galleryGrid}>
                     {images.map((image, index) => {

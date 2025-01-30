@@ -16,7 +16,15 @@ const NavLinks: React.FC<NavLinksProps> = ({ isPrimary, navItems }) => {
         <ul className={`${styles.navLinks} ${isPrimary ? styles.isPrimary : ''} `}>
             {navItems.map((item, i) =>
                 <li key={i}>
-                    <Link className={currentPath === item.url ? styles.isActive : ''} href={item.url} title={item.label}>{item.label}
+                    <Link className={
+                        item.url === "/products" || item.url === "/"
+                            ? currentPath === item.url
+                                ? styles.isActive
+                                : ""
+                            : currentPath.startsWith(item.url)
+                                ? styles.isActive
+                                : ""
+                    } href={item.url} title={item.label}>{item.label}
                     </Link>
                 </li>
             )}

@@ -1,5 +1,5 @@
 import {
-    DM_Serif_Display, DM_Serif_Text, Libre_Baskerville, Sen
+    Baskervville, DM_Serif_Display, DM_Serif_Text, Libre_Baskerville, Sen
 } from 'next/font/google'
 
 export const sen = Sen({
@@ -8,12 +8,12 @@ export const sen = Sen({
     variable: '--font-sen',
 })
 
-// export const baskervville = Baskervville({
-//     weight: '400',
-//     subsets: ['latin'],
-//     display: 'swap',
-//     variable: '--font-baskervville'
-// })
+export const baskervville = Baskervville({
+    display: 'swap',
+    subsets: ['latin'],
+    variable: '--font-baskervville',
+    weight: '400'
+})
 
 export const libreBaskerville = Libre_Baskerville({
     display: 'swap',

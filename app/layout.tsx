@@ -6,7 +6,7 @@ import Header from '@/app/components/header/header';
 import "./globals.scss";
 
 import { ModalProvider } from '@/app/context/ModalContext';
-import { libreBaskerville, sen } from '@/app/fonts'
+import { baskervville, libreBaskerville, sen } from '@/app/fonts'
 
 type RootLayoutProps = {
     children: React.ReactNode;
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
     return (
-        <html className={`${sen.variable} ${libreBaskerville.variable}`} lang="en">
+        <html className={`${sen.variable} ${libreBaskerville.variable} ${baskervville.variable}`} lang="en">
             <body>
                 <ModalProvider>
                     <Header />

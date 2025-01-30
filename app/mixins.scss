@@ -197,7 +197,8 @@ $breakpoints: (xs: (min: rem(414),
     font-weight: var(--font-weight--bold);
     text-decoration: underline;
     text-decoration-thickness: rem(2);
-    text-underline-offset: rem(6);
+    text-underline-offset: rem(8);
+    // text-underline-offset: rem(6);
     // transition: all .2s ease-in-out;
 
     @if $white {

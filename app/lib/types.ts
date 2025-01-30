@@ -14,12 +14,19 @@ export type NavItem = {
     url: string;
 };
 
-export type ProductListItemType = {
+export type ProductSpecification = {
+    key: string;
+    value: string;
+}
+
+export type ProductType = {
     category: string;
+    description: string;
     featured: boolean;
     image: string;
     name: string;
     price: string;
     slug: string;
-    url: string;
+    specification: ProductSpecification[];
+    synopsis: string;
 }

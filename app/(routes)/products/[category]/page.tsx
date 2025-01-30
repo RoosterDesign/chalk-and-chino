@@ -7,7 +7,7 @@ import SectionHeader from '@/app/components/section-header/section-header';
 import Testimonials from '@/app/components/testimonials/testimonials';
 import productsData from '@/app/data/products.json';
 import { categoryMap } from "@/app/lib/categoryMap";
-import { ProductListItemType } from '@/app/lib/types';
+import { ProductType } from '@/app/lib/types';
 
 type CategoryPageProps = {
     params: Promise<Params>;
@@ -26,7 +26,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
         return <NoResults content="No category found" />;
     }
 
-    const filteredProducts: ProductListItemType[] = productsData.filter(
+    const filteredProducts: ProductType[] = productsData.filter(
         (product) => product.category === category
     );
 

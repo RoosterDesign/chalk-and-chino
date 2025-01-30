@@ -1,11 +1,11 @@
-import { ProductListItemType } from '@/app/lib/types';
+import { ProductType } from '@/app/lib/types';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 
 import styles from './product-card.module.scss';
 
 type ProductCardProps = {
-    product: ProductListItemType;
+    product: ProductType;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {

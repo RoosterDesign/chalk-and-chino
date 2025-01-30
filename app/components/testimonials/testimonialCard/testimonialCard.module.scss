@@ -14,7 +14,7 @@
     .stars {
         display: grid;
         gap: rem(3);
-        grid-auto-columns: min-content;
+        grid-auto-columns: max-content;
         grid-auto-flow: column;
         margin-bottom: rem(20);
 

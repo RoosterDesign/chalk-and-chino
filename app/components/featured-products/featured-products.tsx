@@ -3,13 +3,13 @@ import Container from '@/app/components/container/container';
 import ProductCard from '@/app/components/product-card/product-card';
 import SectionHeader from '@/app/components/section-header/section-header';
 import productsData from '@/app/data/products.json';
-import { ProductListItemType } from '@/app/lib/types';
+import { ProductType } from '@/app/lib/types';
 
 import styles from './featured-products.module.scss';
 
 const FeaturedProducts: React.FC = () => {
 
-    const featuredProducts: ProductListItemType[] = productsData
+    const featuredProducts: ProductType[] = productsData
         .filter((product) => product.featured)
         .slice(0, 4);
 
