@@ -1,7 +1,6 @@
 'use client';
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
-import SectionHeader from '@/app/components/section-header/section-header';
 import { ImageExpanderType } from '@/app/lib/types';
 
 import styles from './gallery.module.scss';
@@ -15,8 +14,6 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
     return (
         <section className="section-spacing">
             <Container>
-                {/* <SectionHeader centered intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." linkLabel="View items for sale" linkUrl="/products" title="My Work" /> */}
-
                 <div className={styles.galleryGrid}>
                     {images.map((image, index) => {
                         const thumbDimensions = image.thumbSize === 'small' ? { height: 640, width: 850 } : { height: 640, width: 1720 };

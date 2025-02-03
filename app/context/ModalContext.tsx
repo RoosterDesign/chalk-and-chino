@@ -6,7 +6,7 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 // Define the shape of the modal context using `type`
 type ModalContextType = {
     closeModal: () => void;
-    openModal: (content: ReactNode) => void;
+    openModal: (content: ReactNode, isImageOnly?: boolean) => void;
 };
 
 // Create the context
@@ -17,6 +17,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState<null | ReactNode>(null);
     const [isClient, setIsClient] = useState(false);
+    const [isImageOnly, setIsImageOnly] = useState(false);
 
     useEffect(() => {
         setIsClient(true); // Enable client-side rendering after mount
@@ -34,14 +35,16 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
         };
     }, [isModalOpen]);
 
-    const openModal = (content: ReactNode) => {
+    const openModal = (content: ReactNode, imageOnly: boolean = false) => {
         setModalContent(content);
         setIsModalOpen(true);
+        setIsImageOnly(imageOnly);
     };
 
     const closeModal = () => {
         setModalContent(null);
         setIsModalOpen(false);
+        setIsImageOnly(false);
     };
 
     if (!isClient) return null;
@@ -49,7 +52,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return (
         <ModalContext.Provider value={{ closeModal, openModal }}>
             {children}
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
+            <Modal isImageOnly={isImageOnly} isOpen={isModalOpen} onClose={closeModal}>
                 {modalContent}
             </Modal>
         </ModalContext.Provider>

@@ -1,17 +1,35 @@
 @import '@/app/mixins.scss';
 
-.modal {
-    align-items: center;
+.modalMask {
     background: rgba(0, 0, 0, 0.9);
-    display: flex;
     height: 100%;
-    justify-content: center;
     left: 0;
-    top: 0;
-    padding: rem(20);
     position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 998;
+}
+
+.modal {
+    @include pattern(0.5);
+    background: var(--secondary-colour);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    left: 50%;
+    max-height: 90vh;
+    max-width: 90vw;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 100%;
     z-index: 999;
+
+    @include breakpoint(lg) {
+        max-width: rem(1440);
+    }
+
 }
 
 .modalClose {
@@ -23,16 +41,15 @@
 }
 
 .modalContent {
-    @include pattern(0.5);
-    background: var(--secondary-colour);
-    border-radius: var(--border-radius);
-    max-height: 90vh;
-    max-width: 90vw;
-    overflow: hidden;
-    width: 100%;
+    overflow: auto;
+    padding: rem(40) rem(30);
+
+    @include breakpoint(sm) {
+        padding: rem(50);
+    }
 
     @include breakpoint(lg) {
-        max-width: rem(1440);
+        padding: rem(100) rem(150);
     }
 
     img {
@@ -42,4 +59,27 @@
         width: 100%;
     }
 
+    hgroup {
+        @include breakpoint(lg) {
+            margin-bottom: rem(60);
+        }
+    }
+
+    h2 {
+        @include breakpoint(lg) {
+            font-size: rem(58);
+        }
+    }
+
+    :global(.btn) {
+        @include breakpoint(sm, max) {
+            width: 100%;
+        }
+    }
+
+}
+
+.imageOnly {
+    overflow: hidden;
+    padding: 0;
 }

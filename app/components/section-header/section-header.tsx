@@ -7,12 +7,14 @@ type SectionHeaderProps = {
     intro?: string;
     linkLabel?: string;
     linkUrl?: string;
+    subtitle?: string;
     title: string;
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ centered, intro, linkLabel, linkUrl, title }) => {
+const SectionHeader: React.FC<SectionHeaderProps> = ({ centered, intro, linkLabel, linkUrl, subtitle, title }) => {
     return (
         <hgroup className={`${styles.sectionHeader} ${centered ? styles.centered : ''}`}>
+            {subtitle && subtitle}
             <h2>{title}</h2>
             {intro && <p>
                 {intro}

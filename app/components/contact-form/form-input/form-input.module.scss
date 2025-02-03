@@ -1,0 +1,65 @@
+@import '@/app/mixins.scss';
+
+.formInput {
+
+    label {
+        display: block;
+        font-weight: var(--font-weight--bold);
+        margin-bottom: rem(5);
+
+        @include breakpoint(sm) {
+            margin-bottom: rem(10);
+        }
+    }
+
+    input,
+    textarea {
+        background: var(--primary-colour);
+        border: none;
+        padding: rem(15);
+        width: 100%;
+
+        @include breakpoint(lg) {
+            padding: rem(20);
+        }
+
+        &:focus {
+            box-shadow: inset 0 0 0 rem(2) var(--secondary-colour);
+            outline: rem(4) solid var(--accent);
+        }
+
+        &::placeholder {
+            opacity: .5;
+        }
+
+    }
+
+    input {
+        height: rem(50);
+
+        @include breakpoint(lg) {
+            height: rem(70);
+        }
+    }
+
+    textarea {
+        height: rem(125);
+        resize: none;
+
+        @include breakpoint(sm) {
+            height: rem(150);
+        }
+
+        @include breakpoint(lg) {
+            height: rem(325);
+        }
+
+    }
+
+    .required {
+        color: var(--negative-colour);
+        display: inline-block;
+        margin-left: rem(3);
+    }
+
+}

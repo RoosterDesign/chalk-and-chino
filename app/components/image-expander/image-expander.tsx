@@ -9,12 +9,8 @@ const ImageExpander: React.FC<ImageExpanderType> = ({ alt, className, height, sr
 
     const handleOpenModal = () => {
         openModal(
-            <Image
-                alt={alt}
-                height={height}
-                src={src}
-                width={width}
-            />
+            <Image alt={alt} height={height} src={src} width={width} />,
+            true
         )
     };
 
