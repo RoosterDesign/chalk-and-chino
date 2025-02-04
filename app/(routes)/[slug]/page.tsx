@@ -1,6 +1,6 @@
 import Container from '@/app/components/container/container';
 
-const Privacy: React.FC = () => {
+const Page: React.FC = () => {
     return (
         <Container className="content">
             <h1>Privacy &amp; Legal</h1>
@@ -15,4 +15,4 @@ const Privacy: React.FC = () => {
     )
 }
 
-export default Privacy;
+export default Page;

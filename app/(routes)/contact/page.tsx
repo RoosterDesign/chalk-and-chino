@@ -1,7 +1,6 @@
 import ContactForm from '@/app/components/contact-form/contact-form';
 import Container from '@/app/components/container/container';
 import Map from '@/app/components/map/map';
-import SectionHeader from '@/app/components/section-header/section-header';
 import Testimonials from '@/app/components/testimonials/testimonials';
 
 import styles from './styles.module.scss';
