@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
                     <ul className={styles.footerLinks}>
                         {productNavItems.map((item, i) =>
                             <li key={i}>
-                                <Link className={currentPath === item.url ? styles.isActive : ''} href={`/products/${item.url}`} title={item.label}>{item.label}
+                                <Link className={currentPath === item.url ? styles.isActive : ''} href={item.url} title={item.label}>{item.label}
                                 </Link>
                             </li>
                         )}
@@ -54,8 +54,8 @@ const Footer: React.FC = () => {
                 <div className={styles.footerBottom}>
                     <ul className={styles.copyright}>
                         <li>&copy; 2024 Chalk & Chino</li>
-                        <li><Link href="/">Privacy Policy</Link></li>
-                        <li><Link href="/">Cookie Policy</Link></li>
+                        <li><Link href="/privacy" title="Privacy Policy">Privacy Policy</Link></li>
+                        <li><Link href="/cookie-policy" title="Cookie Policy">Cookie Policy</Link></li>
                     </ul>
                     <p>
                         Website by <a href="#" target="_" title="Front-End Developer and UI/UX Designer based in Leamington Spa, Warwickshire">Rooster Design</a>

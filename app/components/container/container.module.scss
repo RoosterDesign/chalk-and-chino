@@ -13,3 +13,32 @@
     }
 
 }
+
+:global(.content).container {
+
+    margin-top: rem(50);
+    margin-bottom: rem(50);
+
+    @include breakpoint(md) {
+        margin-top: rem(75);
+        margin-bottom: rem(75);
+    }
+
+    @include breakpoint(xl) {
+        margin-top: rem(100);
+        margin-bottom: rem(100);
+    }
+
+    @include breakpoint(lg) {
+        max-width: rem(1140);
+    }
+
+    h1 {
+        margin-bottom: rem(30);
+
+        @include breakpoint(lg) {
+            margin-bottom: rem(40);
+        }
+    }
+
+}

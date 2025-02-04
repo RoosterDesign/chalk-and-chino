@@ -18,7 +18,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: rem(24);
-    min-height: 100vh;
+    // min-height: 100vh;
     padding-top: var(--header-height);
 
     @include breakpoint(lg) {

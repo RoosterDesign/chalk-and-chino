@@ -27,7 +27,8 @@
     z-index: 999;
 
     @include breakpoint(lg) {
-        max-width: rem(1440);
+        // max-width: rem(1440);
+        max-width: rem(1140);
     }
 
 }
@@ -49,7 +50,7 @@
     }
 
     @include breakpoint(lg) {
-        padding: rem(100) rem(150);
+        padding: rem(80) rem(150);
     }
 
     img {
@@ -68,12 +69,6 @@
     h2 {
         @include breakpoint(lg) {
             font-size: rem(58);
-        }
-    }
-
-    :global(.btn) {
-        @include breakpoint(sm, max) {
-            width: 100%;
         }
     }
 

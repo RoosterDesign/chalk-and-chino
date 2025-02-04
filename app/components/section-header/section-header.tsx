@@ -8,7 +8,7 @@ type SectionHeaderProps = {
     linkLabel?: string;
     linkUrl?: string;
     subtitle?: string;
-    title: string;
+    title?: string;
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ centered, intro, linkLabel, linkUrl, subtitle, title }) => {

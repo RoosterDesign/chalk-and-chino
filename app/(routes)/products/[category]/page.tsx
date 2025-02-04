@@ -37,11 +37,8 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params }) => {
     return (
         <>
             <Masthead title={categoryName || `Products`} />
-
             <ProductsList products={filteredProducts} />
-
             <CategoryGrid />
-
             <Testimonials />
         </>
     )

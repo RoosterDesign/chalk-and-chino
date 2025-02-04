@@ -48,22 +48,27 @@
 .header {
 
     &::before {
-        content: '';
-        opacity: 0;
-        transition: opacity .2s ease-in-out;
+        @include breakpoint(md, max) {
+            content: '';
+            opacity: 0;
+            transition: opacity .2s ease-in-out;
+        }
     }
+
 }
 
 .header:has(.navOpen) {
 
     &::before {
-        background: var(--black);
-        height: 100%;
-        left: 0;
-        opacity: .8;
-        position: fixed;
-        top: 0;
-        width: 100%;
+        @include breakpoint(md, max) {
+            background: var(--black);
+            height: 100%;
+            left: 0;
+            opacity: .8;
+            position: fixed;
+            top: var(--header-height);
+            width: 100%;
+        }
     }
 
 }

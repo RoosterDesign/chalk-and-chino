@@ -2,12 +2,11 @@
 import ContactForm from '@/app/components/contact-form/contact-form';
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
-import SectionHeader from '@/app/components/section-header/section-header';
 import { useModal } from '@/app/context/ModalContext';
 import { categoryMap } from "@/app/lib/categoryMap";
 import { ProductType } from '@/app/lib/types';
 import Link from 'next/link';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import styles from './product-details.module.scss';
 
@@ -41,16 +40,9 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
 
     const { openModal } = useModal();
 
-    useEffect(() => {
-        handleOpenModal();
-    }, []);
-
     const handleOpenModal = () => {
         openModal(
-            <>
-                <SectionHeader centered subtitle="You are enquiring about" title={`${product.name} - £${product.price}`} />
-                <ContactForm product={product} />
-            </>
+            <ContactForm hasHeader product={product} subtitle="You are enquiring about" title={`${product.name} - £${product.price}`} />
         )
     };
 

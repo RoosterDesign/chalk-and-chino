@@ -19,6 +19,7 @@
     &.centered {
         align-items: center;
         flex-direction: column;
+        text-align: center;
 
         &:has(p) {
             margin-bottom: rem(40);
