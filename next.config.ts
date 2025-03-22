@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
         ]
     },
     sassOptions: {
+        includePaths: [path.resolve(__dirname, 'src')],
         additionalData: `@import "@/app/(frontend)/_mixins.scss";`,
         silenceDeprecations: ["legacy-js-api"],
     },
@@ -24,7 +25,8 @@ const nextConfig: NextConfig = {
         });
         config.resolve.alias = {
             ...(config.resolve.alias || {}),
-            '@': path.resolve(__dirname), // '@' now maps to the root of your project
+            '@': path.resolve(__dirname, 'src'),
+            '@/payload.config.js': path.resolve(__dirname, 'src/payload.config.ts'),
         };
         return config;
     },

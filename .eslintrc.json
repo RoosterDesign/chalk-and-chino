@@ -10,10 +10,10 @@
         "perfectionist/sort-exports": "error",
         "perfectionist/sort-jsx-props": "error",
         "perfectionist/sort-modules": "error",
-        "perfectionist/sort-objects": "error",
+        // "perfectionist/sort-objects": "error",
         "perfectionist/sort-switch-case": "error",
         "perfectionist/sort-union-types": "error",
         "perfectionist/sort-variable-declarations": "error",
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }]
-      }
-  }
+    }
+}
