@@ -1,0 +1,23 @@
+
+
+.logo {
+    color: var(--white);
+    display: inline-flex;
+    font-family: var(--heading-font);
+    font-size: rem(16);
+    letter-spacing: rem(2);
+    line-height: 1;
+    opacity: 1;
+    margin-right: auto;
+    text-transform: uppercase;
+
+    @include breakpoint(md) {
+        font-size: rem(20);
+        letter-spacing: rem(3);
+    }
+
+    @include breakpoint(lg) {
+        font-size: rem(24);
+    }
+
+}

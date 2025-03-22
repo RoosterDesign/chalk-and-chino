@@ -1,0 +1,72 @@
+
+
+.banner {
+    align-items: flex-start;
+    color: var(--white);
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    isolation: isolate;
+    max-width: rem(1920);
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: rem(200) 0 rem(30);
+    position: relative;
+
+    @include breakpoint(sm) {
+        min-height: rem(600);
+        padding-bottom: rem(50);
+    }
+
+    @include breakpoint(lg) {
+        min-height: rem(700);
+        padding-bottom: rem(75);
+    }
+
+    @media (min-width: 1920px) {
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+
+    @include breakpoint(xl) {
+        min-height: rem(900);
+        padding-bottom: rem(100);
+    }
+
+    &::after {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 60%);
+        content: '';
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+
+        @include breakpoint(md) {
+            background: linear-gradient(265deg, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0.80) 95%);
+        }
+
+    }
+
+    img {
+        height: 100%;
+        left: 0;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -2;
+    }
+
+    h2 {
+        margin-bottom: rem(15);
+    }
+
+    p {
+        max-width: rem(500);
+        margin-bottom: rem(30);
+    }
+
+}

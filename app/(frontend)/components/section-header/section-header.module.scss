@@ -1,0 +1,44 @@
+
+
+.sectionHeader {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(10);
+    justify-content: space-between;
+    margin-bottom: rem(30);
+
+    @include breakpoint(lg) {
+        margin-bottom: rem(40);
+    }
+
+    a {
+        @include textLink;
+    }
+
+    &.centered {
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+
+        &:has(p) {
+            margin-bottom: rem(40);
+
+            @include breakpoint(md) {
+                margin-bottom: rem(60);
+            }
+
+            @include breakpoint(lg) {
+                margin-bottom: rem(100);
+            }
+        }
+
+        p {
+            margin: 0;
+            max-width: rem(500);
+            text-align: center;
+        }
+
+    }
+
+}

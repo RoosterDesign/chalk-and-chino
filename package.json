@@ -1,4 +1,5 @@
 {
+    "type": "module",
     "name": "chalk-and-chino",
     "version": "0.1.0",
     "private": true,
@@ -9,16 +10,24 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@payloadcms/db-postgres": "^3.29.0",
+        "@payloadcms/next": "^3.29.0",
+        "@payloadcms/payload-cloud": "^3.29.0",
+        "@payloadcms/richtext-lexical": "^3.29.0",
         "@splidejs/react-splide": "^0.7.12",
-        "next": "^15.0.3",
+        "graphql": "^16.8.1",
+        "next": "15.2.2",
         "normalize.css": "^8.0.1",
-        "react": "19.0.0-rc-66855b96-20241106",
-        "react-dom": "19.0.0-rc-66855b96-20241106",
+        "payload": "^3.29.0",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "sass": "^1.81.0",
+        "sharp": "^0.33.5",
         "swiper": "^11.1.15"
     },
     "devDependencies": {
         "@eslint/js": "^9.18.0",
+        "@svgr/webpack": "^8.1.0",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",

@@ -1,0 +1,25 @@
+
+
+.productsList {
+
+    .container {
+        display: grid;
+        gap: rem(20);
+        // gap: rem(45) rem(40);
+
+        @include breakpoint(sm) {
+            gap: rem(45) rem(40);
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include breakpoint(md) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @include breakpoint(lg) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+    }
+
+}
