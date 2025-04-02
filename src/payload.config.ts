@@ -21,9 +21,6 @@ export default buildConfig({
         },
         user: Users.slug,
         livePreview: {
-            url: 'http://localhost:3000',
-            collections: ['pages'],
-            disableLivePreviewAccessControl: true,
             breakpoints: [
                 {
                     label: 'Mobile',

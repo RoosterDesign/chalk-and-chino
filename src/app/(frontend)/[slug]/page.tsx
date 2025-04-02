@@ -35,7 +35,7 @@ export async function generateStaticParams() {
     const payload = await getPayload({ config: configPromise })
     const pages = await payload.find({
         collection: 'pages',
-        draft: false,
+        draft: true,
         limit: 1000,
         overrideAccess: false,
         pagination: false,
@@ -59,6 +59,8 @@ export async function generateStaticParams() {
 export default async function Page({ params: paramsPromise }: Args) {
 
     const { isEnabled: draft } = await draftMode()
+    console.log('[Preview] draftMode is:', draft)
+
     const { slug = 'home' } = await paramsPromise
     const url = '/' + slug
 
@@ -103,6 +105,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 }
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
+
     const { isEnabled: draft } = await draftMode()
 
     const payload = await getPayload({ config: configPromise })
@@ -119,6 +122,8 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
             },
         },
     })
+
+    console.log('[Preview] Page data returned:', result.docs?.[0])
 
     return result.docs?.[0] || null
 })
