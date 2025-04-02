@@ -1,7 +1,7 @@
 import Carousel from '@/components/carousel/carousel';
 import Container from '@/components/container/container';
 import SectionHeader from '@/components/section-header/section-header';
-import { CATEGORY_DETAILS } from "@/app/lib/constants";
+import { CATEGORY_DETAILS } from "@/lib/constants";
 import Image from 'next/image';
 import Link from 'next/link';
 
