@@ -1,6 +1,5 @@
 import configPromise from '@/payload.config';
 import { draftMode } from 'next/headers'
-import { headers as getHeaders } from 'next/headers.js'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import React, { cache } from 'react'
 

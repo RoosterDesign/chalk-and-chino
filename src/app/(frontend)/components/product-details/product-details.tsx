@@ -1,10 +1,10 @@
 'use client';
-import ContactForm from '@/components/contact-form/contact-form';
-import Container from '@/components/container/container';
-import ImageExpander from '@/components/image-expander/image-expander';
-import { useModal } from '@/context/ModalContext';
+import ContactForm from '@/app/components/contact-form/contact-form';
+import Container from '@/app/components/container/container';
+import ImageExpander from '@/app/components/image-expander/image-expander';
+import { useModal } from '@/app/context/ModalContext';
 import { categoryMap } from "@/app/lib/categoryMap";
-import { ProductType } from '@/lib/types';
+import { ProductType } from '@/app/lib/types';
 import Link from 'next/link';
 import { useState } from "react";
 

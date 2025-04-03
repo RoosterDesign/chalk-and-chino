@@ -1,5 +1,5 @@
-import { useModal } from '@/context/ModalContext';
-import { ImageExpanderType } from '@/lib/types';
+import { useModal } from '@/app/context/ModalContext';
+import { ImageExpanderType } from '@/app/lib/types';
 import Image from 'next/image';
 
 import styles from './image-expander.module.scss';

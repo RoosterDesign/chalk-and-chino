@@ -1,5 +1,5 @@
 
-import Container from '@/components/container/container';
+import Container from '@/app/components/container/container';
 
 import styles from './hero.module.scss';
 

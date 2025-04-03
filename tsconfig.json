@@ -22,11 +22,12 @@
         "paths": {
             "@/payload.config": ["payload.config.ts"],
             "@/payload.config.js": ["payload.config.ts"],
-            "@/*": ["app/(frontend)/*"],
+            // "@/*": ["app/(frontend)/*"],
+            "@/app/*": ["app/(frontend)/*"],
             "@/payload-types": ["./payload-types.ts"],
-            "@payload-config": ["./payload.config.ts"]
-            // "@/components/*": ["app/(frontend)/components/*"],
-            // "@/*": ["*"]
+            "@payload-config": ["./payload.config.ts"],
+            "@/fields/*": ["src/fields/*"],
+            "@/*": ["src/*"]
         }
     },
     "include": [

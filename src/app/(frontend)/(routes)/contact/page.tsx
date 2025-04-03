@@ -1,7 +1,7 @@
-import ContactForm from '@/components/contact-form/contact-form';
-import Container from '@/components/container/container';
-import Map from '@/components/map/map';
-import Testimonials from '@/components/testimonials/testimonials';
+import ContactForm from '@/app/components/contact-form/contact-form';
+import Container from '@/app/components/container/container';
+import Map from '@/app/components/map/map';
+import Testimonials from '@/app/components/testimonials/testimonials';
 
 import styles from './styles.module.scss';
 

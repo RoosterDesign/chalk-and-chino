@@ -1,6 +1,6 @@
-import Container from '@/components/container/container';
-import SectionHeader from '@/components/section-header/section-header';
-import testimonials from '@/data/testimonials.json';
+import Container from '@/app/components/container/container';
+import SectionHeader from '@/app/components/section-header/section-header';
+import testimonials from '@/app/data/testimonials.json';
 
 import TestimonialCard from './testimonialCard/testimonialCard';
 import styles from './testimonials.module.scss';

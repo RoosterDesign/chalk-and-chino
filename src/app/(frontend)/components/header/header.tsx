@@ -1,18 +1,24 @@
 'use client';
 
-import Container from '@/components/container/container';
-import Logo from '@/components/logo/logo';
-import NavLinks from '@/components/nav-links/nav-links';
-import ProductsNav from '@/components/products-nav/products-nav';
-import SocialLinks from '@/components/social-links/social-links';
-import mainNavItems from '@/data/nav.json';
-import { productNavItems } from '@/data/productNav';
-import { useIsMobile } from '@/lib/hooks'
+import Container from '@/app/components/container/container';
+import Logo from '@/app/components/logo/logo';
+import NavLinks from '@/app/components/nav-links/nav-links';
+import ProductsNav from '@/app/components/products-nav/products-nav';
+import SocialLinks from '@/app/components/social-links/social-links';
+import { productNavItems } from '@/app/data/productNav';
+import { useIsMobile } from '@/app/lib/hooks'
+import { NavItem } from '@/app/lib/types'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import styles from './header.module.scss';
-const Header: React.FC = () => {
+
+type HeaderProps = {
+    mainNavItems: NavItem[]
+    productCategories: NavItem[]
+}
+
+const Header: React.FC<HeaderProps> = ({ mainNavItems, productCategories }) => {
     const pathname = usePathname();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +41,7 @@ const Header: React.FC = () => {
                     <Logo />
                     <nav className={`${styles.nav} ${isOpen ? styles.navOpen : ''}`}>
                         <NavLinks isPrimary navItems={mainNavItems} />
-                        {isMobile && <ProductsNav productNavItems={productNavItems} />}
+                        {isMobile && <ProductsNav productCategories={productCategories} />}
                     </nav>
                     <SocialLinks />
                     <button className={`${styles.burgerMenu} ${isOpen ? styles.burgerMenuOpen : ''}`} onClick={toggleBurgerMenu}>
@@ -46,7 +52,7 @@ const Header: React.FC = () => {
                 </Container>
             </div>
 
-            {!isMobile && <ProductsNav productNavItems={productNavItems} />}
+            {!isMobile && <ProductsNav productCategories={productCategories} />}
 
         </header>
     )

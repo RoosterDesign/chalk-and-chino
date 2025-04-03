@@ -1,6 +1,6 @@
 'use client';
 
-import Modal from '@/components/modal/modal';
+import Modal from '@/app/components/modal/modal';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 // Define the shape of the modal context using `type`

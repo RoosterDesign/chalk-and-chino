@@ -9,7 +9,10 @@ import { fileURLToPath } from "url";
 
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
+import { ProductCategories } from "./collections/ProductCategories";
 import { Users } from "./collections/Users";
+import { Footer } from './globals/footer'
+import { Header } from './globals/header'
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -18,6 +21,7 @@ export default buildConfig({
     admin: {
         importMap: {
             baseDir: path.resolve(dirname),
+            // baseDir: path.resolve(__dirname, './src'),
         },
         user: Users.slug,
         livePreview: {
@@ -43,7 +47,8 @@ export default buildConfig({
             ],
         },
     },
-    collections: [Users, Media, Pages],
+    collections: [Users, Media, Pages, ProductCategories],
+    globals: [Header, Footer],
     db: postgresAdapter({
         pool: {
             connectionString: process.env.PAYLOAD_DATABASE_URL || "",

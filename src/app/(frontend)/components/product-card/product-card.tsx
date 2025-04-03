@@ -1,4 +1,4 @@
-import { ProductType } from '@/lib/types';
+import { ProductType } from '@/app/lib/types';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 

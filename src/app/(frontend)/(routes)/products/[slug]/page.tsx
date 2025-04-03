@@ -1,13 +1,13 @@
 
-import CategoryGrid from '@/components/category-grid/category-grid';
-import Masthead from '@/components/masthead/masthead';
-import NoResults from '@/components/no-results/no-results';
-import ProductsList from '@/components/products-list/products-list';
-import SectionHeader from '@/components/section-header/section-header';
-import Testimonials from '@/components/testimonials/testimonials';
-import productsData from '@/data/products.json';
-import { categoryMap } from "@/lib/categoryMap";
-import { ProductType } from '@/lib/types';
+import CategoryGrid from '@/app/components/category-grid/category-grid';
+import Masthead from '@/app/components/masthead/masthead';
+import NoResults from '@/app/components/no-results/no-results';
+import ProductsList from '@/app/components/products-list/products-list';
+import SectionHeader from '@/app/components/section-header/section-header';
+import Testimonials from '@/app/components/testimonials/testimonials';
+import productsData from '@/app/data/products.json';
+import { categoryMap } from "@/app/lib/categoryMap";
+import { ProductType } from '@/app/lib/types';
 
 type CategoryPageProps = {
     params: Promise<Params>;

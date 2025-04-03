@@ -1,28 +1,35 @@
 import type { CollectionConfig } from 'payload'
 
-import {
-    MetaDescriptionField,
-    MetaImageField,
-    MetaTitleField,
-    OverviewField,
-    PreviewField,
-} from '@payloadcms/plugin-seo/fields'
-
+import { authenticated } from '../../access/authenticated'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+// import {
+//     MetaDescriptionField,
+//     MetaImageField,
+//     MetaTitleField,
+//     OverviewField,
+//     PreviewField,
+// } from '@payloadcms/plugin-seo/fields'
 import { HeroBlock } from '../../blocks/Hero/config';
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 export const Pages: CollectionConfig = {
     slug: 'pages',
     access: {
-        read: ({ req }) => {
-            if (req.user) return true // Admin can read all
-            return {
-                _status: {
-                    equals: 'published',
-                },
-            }
-        }
+        create: authenticated,
+        delete: authenticated,
+        read: authenticatedOrPublished,
+        update: authenticated,
     },
+    // access: {
+    //     read: ({ req }) => {
+    //         if (req.user) return true // Admin can read all
+    //         return {
+    //             _status: {
+    //                 equals: 'published',
+    //             },
+    //         }
+    //     }
+    // },
     defaultPopulate: {
         title: true,
         slug: true,
@@ -69,6 +76,10 @@ export const Pages: CollectionConfig = {
         }
 
     ],
+    hooks: {
+        afterChange: [revalidatePage],
+        afterDelete: [revalidateDelete],
+    },
     versions: {
         drafts: {
             autosave: {

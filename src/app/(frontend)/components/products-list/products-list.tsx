@@ -1,6 +1,6 @@
-import Container from '@/components/container/container';
-import ProductCard from '@/components/product-card/product-card';
-import { ProductType } from '@/lib/types';
+import Container from '@/app/components/container/container';
+import ProductCard from '@/app/components/product-card/product-card';
+import { ProductType } from '@/app/lib/types';
 
 import styles from './products-list.module.scss';
 

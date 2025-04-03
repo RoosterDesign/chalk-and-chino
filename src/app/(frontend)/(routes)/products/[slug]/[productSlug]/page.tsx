@@ -1,7 +1,7 @@
-import Gallery from '@/components/gallery/gallery';
-import Map from '@/components/map/map';
-import ProductDetails from '@/components/product-details/product-details';
-import Testimonials from '@/components/testimonials/testimonials';
+import Gallery from '@/app/components/gallery/gallery';
+import Map from '@/app/components/map/map';
+import ProductDetails from '@/app/components/product-details/product-details';
+import Testimonials from '@/app/components/testimonials/testimonials';
 import productsData from "@/app/data/products.json";
 
 type Params = {

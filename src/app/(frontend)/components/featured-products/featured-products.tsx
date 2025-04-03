@@ -1,9 +1,9 @@
-import Carousel from '@/components/carousel/carousel';
-import Container from '@/components/container/container';
-import ProductCard from '@/components/product-card/product-card';
-import SectionHeader from '@/components/section-header/section-header';
-import productsData from '@/data/products.json';
-import { ProductType } from '@/lib/types';
+import Carousel from '@/app/components/carousel/carousel';
+import Container from '@/app/components/container/container';
+import ProductCard from '@/app/components/product-card/product-card';
+import SectionHeader from '@/app/components/section-header/section-header';
+import productsData from '@/app/data/products.json';
+import { ProductType } from '@/app/lib/types';
 
 import styles from './featured-products.module.scss';
 

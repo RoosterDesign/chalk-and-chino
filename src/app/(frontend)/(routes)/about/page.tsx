@@ -1,9 +1,9 @@
-import FeaturedProducts from '@/components/featured-products/featured-products';
-import GalleryCarousel from '@/components/gallery-carousel/gallery-carousel';
-import GalleryTextBlock from '@/components/gallery-text-block/gallery-text-block';
-import Map from '@/components/map/map';
-import Masthead from '@/components/masthead/masthead';
-import Testimonials from '@/components/testimonials/testimonials';
+import FeaturedProducts from '@/app/components/featured-products/featured-products';
+import GalleryCarousel from '@/app/components/gallery-carousel/gallery-carousel';
+import GalleryTextBlock from '@/app/components/gallery-text-block/gallery-text-block';
+import Map from '@/app/components/map/map';
+import Masthead from '@/app/components/masthead/masthead';
+import Testimonials from '@/app/components/testimonials/testimonials';
 
 const images = [
     { alt: 'Image 1', height: 1400, src: 'https://picsum.photos/1400/1400', thumbHeight: 520, thumbWidth: 520, width: 1400 },

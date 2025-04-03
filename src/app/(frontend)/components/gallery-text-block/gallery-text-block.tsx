@@ -1,4 +1,4 @@
-import Container from '@/components/container/container';
+import Container from '@/app/components/container/container';
 import Image from 'next/image';
 import Link from 'next/link';
 

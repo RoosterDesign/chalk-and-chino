@@ -1,5 +1,5 @@
-import SectionHeader from '@/components/section-header/section-header';
-import { ProductType } from '@/lib/types';
+import SectionHeader from '@/app/components/section-header/section-header';
+import { ProductType } from '@/app/lib/types';
 import Link from 'next/link';
 
 import styles from './contact-form.module.scss';

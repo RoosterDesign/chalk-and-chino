@@ -1,18 +1,18 @@
-import Container from '@/components/container/container';
-import NavLinks from '@/components/nav-links/nav-links';
-import { NavItem } from '@/lib/types'
+import Container from '@/app/components/container/container';
+import NavLinks from '@/app/components/nav-links/nav-links';
+import { NavItem } from '@/app/lib/types'
 
 import styles from './products-nav.module.scss';
 
 type ProductsNavProps = {
-    productNavItems: NavItem[];
+    productCategories: NavItem[];
 }
 
-const ProductsNav: React.FC<ProductsNavProps> = ({ productNavItems }) => {
+const ProductsNav: React.FC<ProductsNavProps> = ({ productCategories }) => {
     return (
         <div className={`${styles.productNav}`}>
             <Container className={styles.container}>
-                <NavLinks navItems={productNavItems} />
+                <NavLinks navItems={productCategories} />
             </Container>
         </div >
     )

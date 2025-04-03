@@ -1,4 +1,4 @@
-import { CATEGORY_DETAILS } from "@/lib/constants";
+import { CATEGORY_DETAILS } from "@/app/lib/constants";
 
 export const productNavItems = [
     {

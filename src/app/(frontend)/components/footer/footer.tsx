@@ -1,16 +1,21 @@
 'use client';
 
-import Container from '@/components/container/container';
-import Logo from '@/components/logo/logo';
-import SocialLinks from '@/components/social-links/social-links';
-import mainNavItems from '@/data/nav.json';
-import { productNavItems } from '@/data/productNav';
+import Container from '@/app/components/container/container';
+import Logo from '@/app/components/logo/logo';
+import SocialLinks from '@/app/components/social-links/social-links';
+import { productNavItems } from '@/app/data/productNav';
+import { NavItem } from '@/app/lib/types'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 
 import styles from './footer.module.scss';
 
-const Footer: React.FC = () => {
+type FooterProps = {
+    footerNavItems: NavItem[]
+    mainNavItems: NavItem[]
+}
+
+const Footer: React.FC<FooterProps> = ({ mainNavItems, footerNavItems }) => {
     const currentPath = usePathname();
 
     return (
@@ -54,8 +59,12 @@ const Footer: React.FC = () => {
                 <div className={styles.footerBottom}>
                     <ul className={styles.copyright}>
                         <li>&copy; 2024 Chalk & Chino</li>
-                        <li><Link href="/privacy" title="Privacy Policy">Privacy Policy</Link></li>
-                        <li><Link href="/cookie-policy" title="Cookie Policy">Cookie Policy</Link></li>
+                        {footerNavItems.map((item, i) =>
+                            <li key={i}>
+                                <Link href={item.url} title={item.label}>{item.label}
+                                </Link>
+                            </li>
+                        )}
                     </ul>
                     <p>
                         Website by <a href="#" target="_" title="Front-End Developer and UI/UX Designer based in Leamington Spa, Warwickshire">Rooster Design</a>

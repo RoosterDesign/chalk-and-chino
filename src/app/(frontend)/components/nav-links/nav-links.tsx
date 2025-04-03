@@ -1,4 +1,6 @@
-import { NavItem } from '@/lib/types'
+'use client';
+
+import { NavItem } from '@/app/lib/types'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 

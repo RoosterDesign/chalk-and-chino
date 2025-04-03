@@ -1,4 +1,3 @@
-// src/lib/getPayloadPage.ts
 export async function getPayloadPage(slug: string) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/pages/${slug}?draft=true`, {
         headers: {
