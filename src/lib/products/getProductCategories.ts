@@ -1,11 +1,14 @@
+import type { CategoryType } from '@/lib/types';
+
 import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
+import { cache } from 'react'
 
-export const getProductCategories = async ({
+export const getProductCategories = cache(async ({
     withImages = false,
 }: {
     withImages?: boolean
-} = {}) => {
+} = {}): Promise<CategoryType[]> => {
     const payload = await getPayload({ config: configPromise })
 
     const { docs } = await payload.find({
@@ -20,6 +23,11 @@ export const getProductCategories = async ({
     return docs.map((category) => ({
         label: category.name,
         url: `/products/${category.slug}`,
-        image: withImages ? category.image : undefined,
+        image: withImages && typeof category.image === 'object' && category.image !== null
+            ? {
+                url: category.image.url || '',
+                alt: category.image.alt || category.name,
+            }
+            : undefined
     }))
-}
+})

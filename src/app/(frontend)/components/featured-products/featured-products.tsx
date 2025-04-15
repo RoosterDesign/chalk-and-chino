@@ -3,7 +3,7 @@ import Container from '@/app/components/container/container';
 import ProductCard from '@/app/components/product-card/product-card';
 import SectionHeader from '@/app/components/section-header/section-header';
 import productsData from '@/app/data/products.json';
-import { ProductType } from '@/app/lib/types';
+import { ProductType } from '@/lib/types';
 
 import styles from './featured-products.module.scss';
 

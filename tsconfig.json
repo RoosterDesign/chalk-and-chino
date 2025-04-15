@@ -18,16 +18,17 @@
                 "name": "next"
             }
         ],
-        "baseUrl": "src",
+        "baseUrl": ".",
         "paths": {
-            "@/payload.config": ["payload.config.ts"],
-            "@/payload.config.js": ["payload.config.ts"],
-            // "@/*": ["app/(frontend)/*"],
-            "@/app/*": ["app/(frontend)/*"],
-            "@/payload-types": ["./payload-types.ts"],
-            "@payload-config": ["./payload.config.ts"],
+            "@/*": ["src/*"],
+            "@/app/*": ["src/app/(frontend)/*"],
+            "@/lib/*": ["src/lib/*"],
             "@/fields/*": ["src/fields/*"],
-            "@/*": ["src/*"]
+            "@/components/*": ["src/app/(frontend)/components/*"],
+            "@/payload.config": ["src/payload.config.ts"],
+            "@/payload.config.js": ["src/payload.config.ts"],
+            "@/payload-types": ["src/payload-types.ts"],
+            "@payload-config": ["src/payload.config.ts"]
         }
     },
     "include": [

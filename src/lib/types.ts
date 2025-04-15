@@ -1,3 +1,12 @@
+export type CategoryType = {
+    image?: {
+        alt: string;
+        url: string;
+    }
+    label: string;
+    url: string;
+}
+
 export type ImageExpanderType = {
     alt: string;
     className?: null | string;

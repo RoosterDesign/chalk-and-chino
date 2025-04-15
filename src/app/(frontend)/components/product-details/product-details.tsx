@@ -3,30 +3,33 @@ import ContactForm from '@/app/components/contact-form/contact-form';
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
 import { useModal } from '@/app/context/ModalContext';
-import { categoryMap } from "@/app/lib/categoryMap";
-import { ProductType } from '@/app/lib/types';
+import { Product } from '@/payload-types'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link';
 import { useState } from "react";
+// import type { LexicalEditorState } from '@payloadcms/richtext-lexical'
 
 import styles from './product-details.module.scss';
 
 type ProductDetailsType = {
-    product: ProductType
+    product: Product
+    // product: Product & {
+    //     description?: LexicalEditorState | null
+    // }
 }
 
 type Tab = { id: string; label: string };
 
-const image = {
-    alt: 'Image 1', height: 1400, src: 'https://picsum.photos/1400/1400', thumbHeight: 790, thumbWidth: 940, width: 1400
-}
+// const image = {
+//     alt: 'Image 1', height: 1400, src: 'https://picsum.photos/1400/1400', thumbHeight: 790, thumbWidth: 940, width: 1400
+// }
 
 const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
-    const categoryName = categoryMap[product.category];
 
     // Define available tabs dynamically
     const availableTabs: (null | Tab)[] = [
         product.description ? { id: "description", label: "Description" } : null,
-        product.specification?.length
+        product.specifications?.length
             ? { id: "specification", label: "Specification" }
             : null,
         { id: "payment-delivery", label: "Payment & Delivery" },
@@ -40,18 +43,18 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
 
     const { openModal } = useModal();
 
-    const handleOpenModal = () => {
-        openModal(
-            <ContactForm hasHeader product={product} subtitle="You are enquiring about" title={`${product.name} - £${product.price}`} />
-        )
-    };
+    // const handleOpenModal = () => {
+    //     openModal(
+    //         <ContactForm hasHeader product={product} subtitle="You are enquiring about" title={`${product.name} - £${product.price}`} />
+    //     )
+    // };
 
     return (
         <>
 
             <Container className={styles.container}>
 
-                <div className={styles.leadImage}>
+                {/* <div className={styles.leadImage}>
                     <ImageExpander alt={image.alt}
                         height={image.height}
                         src={image.src}
@@ -59,16 +62,30 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
                         thumbWidth={image.thumbWidth}
                         width={image.width}
                     />
-                </div>
+                </div> */}
 
                 <div className={styles.intro}>
-                    <Link className={styles.categoryLink} href={`/products/${product.category}`} title="">{categoryName}</Link>
+                    {/* <Link className={styles.categoryLink} href={`/products/${product.category}`} title="">categoryName</Link> */}
+
+                    <ul>
+                        {product.categories.map((cat, i) => {
+                            if (typeof cat === 'object' && cat.slug && cat.name) {
+                                return (
+                                    <li key={cat.slug}>
+                                        <Link href={`/products/${cat.slug}`}>{cat.name}</Link>
+                                    </li>
+                                )
+                            }
+                            return null
+                        })}
+                    </ul>
+
                     <h1 className={styles.title}>{product.name}</h1>
                     <p className={styles.price}>&pound;{product.price}</p>
 
-                    <div className={styles.synopsis} dangerouslySetInnerHTML={{ __html: product.synopsis }} />
+                    <div className={styles.synopsis}>{product.summary}</div>
 
-                    <button className="btn" onClick={handleOpenModal} title="Enquire about this item">Enquire about this item</button>
+                    {/* <button className="btn" onClick={handleOpenModal} title="Enquire about this item">Enquire about this item</button> */}
                 </div>
 
                 {tabs.length > 0 && (
@@ -87,20 +104,23 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
                         </div>
 
                         <div className={styles.tabContent}>
-                            {activeTab === "description" && (
-                                <div dangerouslySetInnerHTML={{ __html: product.description }} />
+                            {activeTab === "description" && product.description && (
+                                <RichText data={product.description} />
                             )}
                             {activeTab === "specification" && (
-                                <table className={styles.specificationTable}>
-                                    <tbody>
-                                        {product.specification.map((spec, index) => (
-                                            <tr key={index}>
-                                                <td><strong>{spec.key}</strong></td>
-                                                <td>{spec.value}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                <>
+                                    specifications...
+                                </>
+                                // <table className={styles.specificationTable}>
+                                //     <tbody>
+                                //         {product.specifications.map((spec, index) => (
+                                //             <tr key={index}>
+                                //                 <td><strong>{spec.key}</strong></td>
+                                //                 <td>{spec.value}</td>
+                                //             </tr>
+                                //         ))}
+                                //     </tbody>
+                                // </table>
                             )}
                             {activeTab === "payment-delivery" && (
                                 <p>Payment & Delivery details go here...</p>

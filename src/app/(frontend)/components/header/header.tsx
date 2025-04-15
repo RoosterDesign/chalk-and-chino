@@ -5,9 +5,8 @@ import Logo from '@/app/components/logo/logo';
 import NavLinks from '@/app/components/nav-links/nav-links';
 import ProductsNav from '@/app/components/products-nav/products-nav';
 import SocialLinks from '@/app/components/social-links/social-links';
-import { productNavItems } from '@/app/data/productNav';
-import { useIsMobile } from '@/app/lib/hooks'
-import { NavItem } from '@/app/lib/types'
+import { useIsMobile } from '@/lib/hooks'
+import { NavItem } from '@/lib/types'
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 

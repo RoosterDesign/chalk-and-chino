@@ -5,11 +5,11 @@ import { baskervville, libreBaskerville, sen } from '@/app/fonts'
 
 import "./globals.scss";
 
+import { getProductCategories } from '@/lib/products/getProductCategories'
 import React from 'react'
 
 import { getFooterNav } from '../../lib/nav/getFooterNav'
 import { getHeaderNav } from '../../lib/nav/getHeaderNav'
-import { getProductCategories } from '../../lib/products/getProductCategories'
 
 export const metadata = {
     description: 'A blank template using Payload in a Next.js app.',
@@ -21,12 +21,12 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
 
     const mainNavItems = await getHeaderNav()
     const footerNavItems = await getFooterNav()
-    const productCategories = await getProductCategories()
+    const rawProductCategories = await getProductCategories()
 
-    // const productCategories = [
-    //     { label: 'All Products', url: '/products' },
-    //     ...rawProductCategories,
-    // ]
+    const productCategories = [
+        { label: 'All Products', url: '/products' },
+        ...rawProductCategories,
+    ]
 
     return (
         <html className={`${sen.variable} ${libreBaskerville.variable} ${baskervville.variable}`} lang="en">
@@ -34,7 +34,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                 <ModalProvider>
                     <Header mainNavItems={mainNavItems} productCategories={productCategories} />
                     {children}
-                    <Footer footerNavItems={footerNavItems} mainNavItems={mainNavItems} />
+                    <Footer footerNavItems={footerNavItems} mainNavItems={mainNavItems} productCategories={productCategories} />
                 </ModalProvider>
             </body>
         </html>

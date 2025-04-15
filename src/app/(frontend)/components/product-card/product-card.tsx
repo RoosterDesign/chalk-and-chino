@@ -1,25 +1,36 @@
-import { ProductType } from '@/app/lib/types';
-import Image, { StaticImageData } from 'next/image';
+import { getProductCategorySlug } from '@/lib/products/getProductCategorySlug'
+import { Product } from '@/payload-types'
+import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from './product-card.module.scss';
 
 type ProductCardProps = {
-    product: ProductType;
+    product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-    const { category, image, name, price, slug } = product;
+
+    const productUrl = `/products/${getProductCategorySlug(product)}/${product.slug}`
+
+    // const { category, image, name, price, slug } = product;
     return (
-        <Link className={styles.productCard} href={`/products/${category}/${slug}`}>
+        <Link className={styles.productCard} href={productUrl}>
             <div className={styles.image}>
-                <span className={styles.price}>£{price}</span>
-                <Image alt={name} height={400} src={image} width={400} />
+                <span className={styles.price}>£{product.price}</span>
+                {typeof product.heroImage === 'object' && product.heroImage?.url && (
+                    <Image
+                        alt={product.heroImage.alt || product.name}
+                        height={500}
+                        src={product.heroImage.url}
+                        width={390}
+                    />
+                )}
             </div>
             <p>
-                {name}
+                {product.name}
             </p>
-        </Link>
+        </Link >
     )
 };
 

@@ -3,7 +3,7 @@ import Carousel from '@/app/components/carousel/carousel';
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
 import SectionHeader from '@/app/components/section-header/section-header';
-import { ImageExpanderType } from '@/app/lib/types';
+import { ImageExpanderType } from '@/lib/types';
 
 import styles from './gallery-carousel.module.scss';
 

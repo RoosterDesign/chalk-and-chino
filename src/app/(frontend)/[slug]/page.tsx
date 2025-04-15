@@ -1,34 +1,18 @@
+import { LivePreviewListener } from '@/app/LivePreviewListener'
+import { RenderBlocks } from '@/blocks/RenderBlocks';
+import { getPageBySlug } from '@/lib/pages/getPageBySlug';
 import configPromise from '@/payload.config';
 import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation';
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
-import React, { cache } from 'react'
 
-import { RenderBlocks } from '../../../blocks/RenderBlocks';
-import { LivePreviewListener } from '../LivePreviewListener'
+type PageParams = {
+    slug?: string;
+};
 
-// export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-//     const { slug = 'home' } = await paramsPromise
-//     const page = await queryPageBySlug({
-//         slug,
-//     })
-
-//     return generateMeta({ doc: page })
-// }
-
-type Args = {
-    params: Promise<{
-        slug?: string
-    }>
+type Props = {
+    params: Promise<PageParams>
 }
-
-// export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-//     const { slug = 'home' } = await paramsPromise
-//     const page = await queryPageBySlug({
-//         slug,
-//     })
-
-//     return generateMeta({ doc: page })
-// }
 
 export async function generateStaticParams() {
     const payload = await getPayload({ config: configPromise })
@@ -44,56 +28,24 @@ export async function generateStaticParams() {
     })
 
     const params = pages.docs
-        ?.filter((doc) => {
-            return doc.slug !== 'home'
-        })
-        .map(({ slug }) => {
-            return { slug }
-        })
+        ?.filter((doc) => doc.slug !== 'home')
+        .map(({ slug }) => ({ slug }))
 
     return params
 }
 
-// export default async function Page() {
-export default async function Page({ params: paramsPromise }: Args) {
+export default async function Page({ params }: Props) {
 
+    const { slug = 'home' } = await params
     const { isEnabled: draft } = await draftMode()
-    console.log('[Preview] draftMode is:', draft)
 
-    const { slug = 'home' } = await paramsPromise
-    const url = '/' + slug
-
-    let page: null | RequiredDataFromCollectionSlug<'pages'>
-
-    page = await queryPageBySlug({
-        slug,
-    })
+    const page = await getPageBySlug(slug);
 
     if (!page) {
-        // return <PayloadRedirects url={url} />
-        return <div>page not found</div>
+        notFound();
     }
 
     const { layout } = page
-
-    /*const headers = await getHeaders()
-    const payloadConfig = await config
-    const payload = await getPayload({ config: payloadConfig })
-    const { user } = await payload.auth({ headers })
-
-    const {
-        docs: [page],
-    } = await payload.find({
-        collection: 'pages',
-        draft: true,
-        where: {
-            slug: { equals: '/' },
-        },
-    })
-
-    if (!page) {
-        return <div>page not found</div>
-    }*/
 
     return (
         <>
@@ -102,27 +54,3 @@ export default async function Page({ params: paramsPromise }: Args) {
         </>
     )
 }
-
-const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-
-    const { isEnabled: draft } = await draftMode()
-
-    const payload = await getPayload({ config: configPromise })
-
-    const result = await payload.find({
-        collection: 'pages',
-        draft,
-        limit: 1,
-        pagination: false,
-        overrideAccess: draft,
-        where: {
-            slug: {
-                equals: slug,
-            },
-        },
-    })
-
-    console.log('[Preview] Page data returned:', result.docs?.[0])
-
-    return result.docs?.[0] || null
-})

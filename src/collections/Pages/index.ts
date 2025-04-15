@@ -20,40 +20,46 @@ export const Pages: CollectionConfig = {
         read: authenticatedOrPublished,
         update: authenticated,
     },
-    // access: {
-    //     read: ({ req }) => {
-    //         if (req.user) return true // Admin can read all
-    //         return {
-    //             _status: {
-    //                 equals: 'published',
-    //             },
-    //         }
-    //     }
-    // },
     defaultPopulate: {
         title: true,
         slug: true,
     },
     admin: {
-        // defaultColumns: ['title', 'slug', 'updatedAt'],
-        livePreview: {
-            url: ({ data, req }) => {
-                const path = generatePreviewPath({
-                    slug: typeof data?.slug === 'string' ? data.slug : '',
-                    collection: 'pages',
-                    req,
-                })
-
-                return path
-            },
-        },
+        useAsTitle: 'title',
+        defaultColumns: ['title', 'slug', 'updatedAt'],
         preview: (data, { req }) =>
             generatePreviewPath({
                 slug: typeof data?.slug === 'string' ? data.slug : '',
                 collection: 'pages',
-                req,
+                data,
             }),
-        useAsTitle: 'title',
+
+        livePreview: {
+            url: ({ data, req }) => {
+                return generatePreviewPath({
+                    slug: typeof data?.slug === 'string' ? data.slug : '',
+                    collection: 'pages',
+                    data,
+                })
+            },
+        },
+        // livePreview: {
+        //     url: ({ data, req }) => {
+        //         const path = generatePreviewPath({
+        //             slug: typeof data?.slug === 'string' ? data.slug : '',
+        //             collection: 'pages',
+        //             req,
+        //         })
+
+        //         return path
+        //     },
+        // },
+        // preview: (data, { req }) =>
+        //     generatePreviewPath({
+        //         slug: typeof data?.slug === 'string' ? data.slug : '',
+        //         collection: 'pages',
+        //         req,
+        //     }),
     },
     fields: [
         {
@@ -83,7 +89,7 @@ export const Pages: CollectionConfig = {
     versions: {
         drafts: {
             autosave: {
-                interval: 100, // We set this interval for optimal live preview
+                interval: 100,
             },
             schedulePublish: true,
         },

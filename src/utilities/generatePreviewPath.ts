@@ -1,29 +1,33 @@
-// export const generatePreviewPath = ({ slug }: { slug: string }) => {
-//     const safeSlug = slug === 'home' ? '' : slug
-//     return `/api/preview?redirect=/${safeSlug}`
-// }
+import type { CollectionSlug } from 'payload'
 
-import { CollectionSlug, PayloadRequest } from 'payload'
-
-const collectionPrefixMap: Partial<Record<CollectionSlug, string>> = {
-    pages: '',
-}
-
-type Props = {
-    collection: keyof typeof collectionPrefixMap
-    req: PayloadRequest
+export const generatePreviewPath = ({ collection, data, slug }: {
+    collection: CollectionSlug
+    data: Record<string, any>
     slug: string
-}
+}) => {
+    let path = ''
 
-export const generatePreviewPath = ({ collection, slug }: Props) => {
+    if (collection === 'pages') {
+        const safeSlug = slug === 'home' ? '' : slug
+        path = `/${safeSlug}`
+    }
+
+    if (collection === 'products') {
+        const firstCategory = data?.categories?.[0]
+        const categorySlug =
+            typeof firstCategory === 'object' && firstCategory?.slug
+                ? firstCategory.slug
+                : 'uncategorised'
+
+        path = `/products/${categorySlug}/${slug}`
+    }
+
     const encodedParams = new URLSearchParams({
         slug,
         collection,
-        path: `${collectionPrefixMap[collection]}/${slug}`,
+        path,
         previewSecret: process.env.PREVIEW_SECRET || '',
     })
 
-    const url = `/next/preview?${encodedParams.toString()}`
-
-    return url
+    return `/next/preview?${encodedParams.toString()}`
 }

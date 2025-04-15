@@ -1,10 +1,11 @@
 'use client';
 
+import type { CategoryType } from '@/lib/types';
+
 import Container from '@/app/components/container/container';
 import Logo from '@/app/components/logo/logo';
 import SocialLinks from '@/app/components/social-links/social-links';
-import { productNavItems } from '@/app/data/productNav';
-import { NavItem } from '@/app/lib/types'
+import { NavItem } from '@/lib/types'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 
@@ -13,9 +14,10 @@ import styles from './footer.module.scss';
 type FooterProps = {
     footerNavItems: NavItem[]
     mainNavItems: NavItem[]
+    productCategories: CategoryType[]
 }
 
-const Footer: React.FC<FooterProps> = ({ mainNavItems, footerNavItems }) => {
+const Footer: React.FC<FooterProps> = ({ mainNavItems, footerNavItems, productCategories }) => {
     const currentPath = usePathname();
 
     return (
@@ -42,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ mainNavItems, footerNavItems }) => {
                 <div className={styles.footerCol}>
                     <h4>Product Categories</h4>
                     <ul className={styles.footerLinks}>
-                        {productNavItems.map((item, i) =>
+                        {productCategories.map((item, i) =>
                             <li key={i}>
                                 <Link className={currentPath === item.url ? styles.isActive : ''} href={item.url} title={item.label}>{item.label}
                                 </Link>

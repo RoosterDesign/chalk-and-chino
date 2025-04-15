@@ -1,7 +1,7 @@
 'use client';
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
-import { ImageExpanderType } from '@/app/lib/types';
+import { ImageExpanderType } from '@/lib/types';
 
 import styles from './gallery.module.scss';
 
