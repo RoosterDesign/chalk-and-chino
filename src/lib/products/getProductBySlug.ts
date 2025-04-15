@@ -1,6 +1,5 @@
 import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
-// import { cache } from 'react'
 
 export const getProductBySlug = async (slug: string, { draft = false } = {}) => {
     const payload = await getPayload({ config: configPromise })

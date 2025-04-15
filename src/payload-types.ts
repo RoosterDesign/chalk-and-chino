@@ -96,11 +96,13 @@ export interface Config {
     header: Header;
     footer: Footer;
     'all-products': AllProduct;
+    'payment-delivery-details': PaymentDeliveryDetail;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'all-products': AllProductsSelect<false> | AllProductsSelect<true>;
+    'payment-delivery-details': PaymentDeliveryDetailsSelect<false> | PaymentDeliveryDetailsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -177,7 +179,7 @@ export interface Media {
  */
 export interface Page {
   id: number;
-  title: string;
+  name: string;
   slug: string;
   layout: HeroBlock[];
   updatedAt: string;
@@ -207,7 +209,7 @@ export interface HeroBlock {
 export interface ProductCategory {
   id: number;
   name: string;
-  slug?: string | null;
+  slug: string;
   slugLock?: boolean | null;
   image: number | Media;
   updatedAt: string;
@@ -220,9 +222,9 @@ export interface ProductCategory {
 export interface Product {
   id: number;
   name: string;
-  slug?: string | null;
+  slug: string;
   slugLock?: boolean | null;
-  categories: (number | ProductCategory)[];
+  category: number | ProductCategory;
   price: number;
   summary?: string | null;
   description?: {
@@ -250,7 +252,21 @@ export interface Product {
   /**
    * Optional override. If left blank, the default site-wide text will be used.
    */
-  customPaymentAndDelivery?: string | null;
+  customPaymentDelivery?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   heroImage: number | Media;
   gallery?:
     | {
@@ -466,7 +482,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
-  title?: T;
+  name?: T;
   slug?: T;
   layout?:
     | T
@@ -514,7 +530,7 @@ export interface ProductsSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
   slugLock?: T;
-  categories?: T;
+  category?: T;
   price?: T;
   summary?: T;
   description?: T;
@@ -525,7 +541,7 @@ export interface ProductsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
-  customPaymentAndDelivery?: T;
+  customPaymentDelivery?: T;
   heroImage?: T;
   gallery?:
     | T
@@ -646,6 +662,33 @@ export interface AllProduct {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payment-delivery-details".
+ */
+export interface PaymentDeliveryDetail {
+  id: number;
+  /**
+   * This text will appear on the product details page.
+   */
+  customText?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -683,6 +726,16 @@ export interface FooterSelect<T extends boolean = true> {
 export interface AllProductsSelect<T extends boolean = true> {
   title?: T;
   image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payment-delivery-details_select".
+ */
+export interface PaymentDeliveryDetailsSelect<T extends boolean = true> {
+  customText?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

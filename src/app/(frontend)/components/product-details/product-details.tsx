@@ -8,14 +8,13 @@ import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link';
 import { useState } from "react";
 // import type { LexicalEditorState } from '@payloadcms/richtext-lexical'
-
+import { hasRichTextContent } from '@/lib/utils/hasRichTextContent'
 import styles from './product-details.module.scss';
 
 type ProductDetailsType = {
     product: Product
-    // product: Product & {
-    //     description?: LexicalEditorState | null
-    // }
+    // defaultDeliveryText?: LexicalEditorState | null;
+    defaultDeliveryText: any;
 }
 
 type Tab = { id: string; label: string };
@@ -24,7 +23,7 @@ type Tab = { id: string; label: string };
 //     alt: 'Image 1', height: 1400, src: 'https://picsum.photos/1400/1400', thumbHeight: 790, thumbWidth: 940, width: 1400
 // }
 
-const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
+const ProductDetails: React.FC<ProductDetailsType> = ({ product, defaultDeliveryText }) => {
 
     // Define available tabs dynamically
     const availableTabs: (null | Tab)[] = [
@@ -49,6 +48,8 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
     //     )
     // };
 
+    const deliveryDetails = hasRichTextContent(product.customPaymentDelivery) ? product.customPaymentDelivery : defaultDeliveryText
+
     return (
         <>
 
@@ -65,20 +66,9 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
                 </div> */}
 
                 <div className={styles.intro}>
-                    {/* <Link className={styles.categoryLink} href={`/products/${product.category}`} title="">categoryName</Link> */}
 
-                    <ul>
-                        {product.categories.map((cat, i) => {
-                            if (typeof cat === 'object' && cat.slug && cat.name) {
-                                return (
-                                    <li key={cat.slug}>
-                                        <Link href={`/products/${cat.slug}`}>{cat.name}</Link>
-                                    </li>
-                                )
-                            }
-                            return null
-                        })}
-                    </ul>
+                    {/* <Link className={styles.categoryLink} href={`/products/${product.category.slug}`} title="">product.category.name</Link> */}
+
 
                     <h1 className={styles.title}>{product.name}</h1>
                     <p className={styles.price}>&pound;{product.price}</p>
@@ -123,7 +113,7 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product }) => {
                                 // </table>
                             )}
                             {activeTab === "payment-delivery" && (
-                                <p>Payment & Delivery details go here...</p>
+                                <RichText data={deliveryDetails} />
                             )}
                         </div>
 

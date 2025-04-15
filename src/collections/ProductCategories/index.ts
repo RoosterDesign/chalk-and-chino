@@ -12,6 +12,7 @@ export const ProductCategories: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'name',
+        defaultColumns: ['name', 'updatedAt'],
     },
     access: {
         create: authenticated,

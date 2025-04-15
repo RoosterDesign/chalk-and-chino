@@ -28,7 +28,7 @@ export async function generateStaticParams() {
     })
 
     const params = pages.docs
-        ?.filter((doc) => doc.slug !== 'home')
+        ?.filter((doc) => doc.slug !== 'homepage')
         .map(({ slug }) => ({ slug }))
 
     return params
@@ -36,8 +36,8 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
 
-    const { slug = 'home' } = await params
-    const { isEnabled: draft } = await draftMode()
+    const { slug = 'homepage' } = await params
+    // const { isEnabled: draft } = await draftMode()
 
     const page = await getPageBySlug(slug);
 
@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
 
     return (
         <>
-            {draft && <LivePreviewListener />}
+            {/* {draft && <LivePreviewListener />} */}
             <RenderBlocks blocks={layout} />
         </>
     )

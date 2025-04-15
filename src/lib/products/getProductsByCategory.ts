@@ -1,11 +1,11 @@
 import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
-import { cache } from 'react'
+// import { cache } from 'react'
 
-export const getProductsByCategory = cache(async (categorySlug: string) => {
-
+export const getProductsByCategory = async (categorySlug: string) => {
     const payload = await getPayload({ config: configPromise })
 
+    // Get the category by its slug
     const categoryRes = await payload.find({
         collection: 'product-categories',
         where: {
@@ -18,11 +18,15 @@ export const getProductsByCategory = cache(async (categorySlug: string) => {
     const category = categoryRes.docs?.[0]
     if (!category) return { category: null, products: [] }
 
+    // Fetch products that belong to this category
     const productRes = await payload.find({
         collection: 'products',
         where: {
-            categories: {
+            category: {
                 equals: category.id,
+            },
+            _status: {
+                equals: 'published',
             },
         },
         depth: 1,
@@ -35,4 +39,4 @@ export const getProductsByCategory = cache(async (categorySlug: string) => {
         category,
         products: productRes.docs,
     }
-})
+}

@@ -2,9 +2,9 @@ import type { CategoryType } from '@/lib/types';
 
 import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
-import { cache } from 'react'
+// import { cache } from 'react'
 
-export const getProductCategories = cache(async ({
+export const getProductCategories = async ({
     withImages = false,
 }: {
     withImages?: boolean
@@ -30,4 +30,4 @@ export const getProductCategories = cache(async ({
             }
             : undefined
     }))
-})
+}

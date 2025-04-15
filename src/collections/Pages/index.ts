@@ -10,7 +10,7 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 //     PreviewField,
 // } from '@payloadcms/plugin-seo/fields'
 import { HeroBlock } from '../../blocks/Hero/config';
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+// import { generatePreviewPath } from '../../lib/utils/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 export const Pages: CollectionConfig = {
     slug: 'pages',
@@ -25,45 +25,29 @@ export const Pages: CollectionConfig = {
         slug: true,
     },
     admin: {
-        useAsTitle: 'title',
-        defaultColumns: ['title', 'slug', 'updatedAt'],
+        useAsTitle: 'name',
+        defaultColumns: ['name', 'slug', 'updatedAt'],
+        /*livePreview: {
+            url: ({ data, req }) => {
+                const path = generatePreviewPath({
+                    slug: typeof data?.slug === 'string' ? data.slug : '',
+                    collection: 'pages',
+                    req,
+                })
+
+                return path
+            },
+        },
         preview: (data, { req }) =>
             generatePreviewPath({
                 slug: typeof data?.slug === 'string' ? data.slug : '',
                 collection: 'pages',
-                data,
-            }),
-
-        livePreview: {
-            url: ({ data, req }) => {
-                return generatePreviewPath({
-                    slug: typeof data?.slug === 'string' ? data.slug : '',
-                    collection: 'pages',
-                    data,
-                })
-            },
-        },
-        // livePreview: {
-        //     url: ({ data, req }) => {
-        //         const path = generatePreviewPath({
-        //             slug: typeof data?.slug === 'string' ? data.slug : '',
-        //             collection: 'pages',
-        //             req,
-        //         })
-
-        //         return path
-        //     },
-        // },
-        // preview: (data, { req }) =>
-        //     generatePreviewPath({
-        //         slug: typeof data?.slug === 'string' ? data.slug : '',
-        //         collection: 'pages',
-        //         req,
-        //     }),
+                req,
+            }),*/
     },
     fields: [
         {
-            name: 'title',
+            name: 'name',
             type: 'text',
             required: true
         },

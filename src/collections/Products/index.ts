@@ -1,60 +1,26 @@
 import type { CollectionConfig } from 'payload'
 
-import { anyone } from '../../access/anyone'
-import { authenticated } from '../../access/authenticated'
-import { slugField } from '../../fields/slug'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { anyone } from '@/access/anyone'
+import { authenticated } from '@/access/authenticated'
+import { slugField } from '@/fields/slug'
+import { generatePreviewPath } from '@/lib/utils/generatePreviewPath'
+
 import { revalidateProduct, revalidateProductDelete } from './hooks/revalidateProduct'
 
 export const Products: CollectionConfig = {
     slug: 'products',
     admin: {
         useAsTitle: 'name',
-        defaultColumns: ['name', 'categories', 'price', 'updatedAt'],
-
-        preview: (data, { req }) =>
-            generatePreviewPath({
-                slug: typeof data?.slug === 'string' ? data.slug : '',
-                collection: 'products',
-                data,
-            }),
-
+        defaultColumns: ['name', 'category', 'price', '_status', 'updatedAt'],
         livePreview: {
-            url: ({ data, req }) => {
-                return generatePreviewPath({
-                    slug: typeof data?.slug === 'string' ? data.slug : '',
-                    collection: 'products',
-                    data,
-                })
-            },
+            url: ({ data }) => generatePreviewPath({ collection: 'products', data }),
         },
-
-        /*
-        preview: (doc: any, { req }) => {
-            const firstCategory = Array.isArray(doc.categories) ? doc.categories[0] : null
-
-            const categorySlug =
-                typeof firstCategory === 'object' && firstCategory?.slug
-                    ? firstCategory.slug
-                    : 'uncategorised'
-
-            return `${process.env.NEXT_PUBLIC_SITE_URL}/products/${categorySlug}/${doc.slug}`
-        },
-        livePreview: {
-            url: ({ data }: { data: any; req: any }) => {
-                const firstCategory = Array.isArray(data?.categories) ? data.categories[0] : null
-
-                const categorySlug =
-                    typeof firstCategory === 'object' && firstCategory?.slug
-                        ? firstCategory.slug
-                        : 'uncategorised'
-
-                return `/products/${categorySlug}/${data?.slug}`
-            },
-        }
-        */
-
+        preview: ({ data }) => generatePreviewPath({
+            collection: 'products',
+            data: data as { id?: string; slug?: string },
+        }),
     },
+
     access: {
         create: authenticated,
         delete: authenticated,
@@ -69,10 +35,9 @@ export const Products: CollectionConfig = {
         },
         ...slugField('name'),
         {
-            name: 'categories',
+            name: 'category',
             type: 'relationship',
             relationTo: 'product-categories',
-            hasMany: true,
             required: true,
         },
         {
@@ -110,14 +75,13 @@ export const Products: CollectionConfig = {
             ],
         },
         {
-            name: 'customPaymentAndDelivery',
+            name: 'customPaymentDelivery',
             label: 'Custom Payment & Delivery Text',
-            type: 'textarea',
+            type: 'richText',
             admin: {
                 description: 'Optional override. If left blank, the default site-wide text will be used.',
             },
         },
-
         {
             name: 'heroImage',
             label: 'Main Hero Image',
@@ -143,7 +107,7 @@ export const Products: CollectionConfig = {
                     required: false,
                 },
             ],
-        },
+        }
     ],
     hooks: {
         afterChange: [revalidateProduct],

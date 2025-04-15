@@ -1,4 +1,3 @@
-// globals/footer.ts
 import type { GlobalConfig } from 'payload'
 
 export const Footer: GlobalConfig = {

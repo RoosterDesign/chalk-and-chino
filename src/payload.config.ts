@@ -15,6 +15,7 @@ import { Users } from "./collections/Users";
 import { AllProducts } from './globals/all-products'
 import { Footer } from './globals/footer'
 import { Header } from './globals/header'
+import { PaymentDeliveryDetails } from './globals/payment-delivery-details'
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -49,7 +50,7 @@ export default buildConfig({
         },
     },
     collections: [Users, Media, Pages, ProductCategories, Products],
-    globals: [Header, Footer, AllProducts],
+    globals: [Header, Footer, AllProducts, PaymentDeliveryDetails],
     db: postgresAdapter({
         pool: {
             connectionString: process.env.PAYLOAD_DATABASE_URL || "",
