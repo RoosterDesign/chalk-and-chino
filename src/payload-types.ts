@@ -186,7 +186,7 @@ export interface Page {
    */
   slug?: string | null;
   slugLock?: boolean | null;
-  layout: HeroBlock[];
+  layout: (HeroBlock | FeaturedProductsBlock)[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -209,19 +209,18 @@ export interface HeroBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "product-categories".
+ * via the `definition` "FeaturedProductsBlock".
  */
-export interface ProductCategory {
-  id: number;
-  name: string;
-  /**
-   * Leave locked to auto-generate from page name. Unlock to edit manually.
-   */
-  slug: string;
-  slugLock?: boolean | null;
-  image: number | Media;
-  updatedAt: string;
-  createdAt: string;
+export interface FeaturedProductsBlock {
+  title?: string | null;
+  products: (number | Product)[];
+  link: {
+    label: string;
+    url: string;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredProducts';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -261,6 +260,22 @@ export interface Product {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "product-categories".
+ */
+export interface ProductCategory {
+  id: number;
+  name: string;
+  /**
+   * Leave locked to auto-generate from page name. Unlock to edit manually.
+   */
+  slug: string;
+  slugLock?: boolean | null;
+  image: number | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -473,6 +488,7 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         hero?: T | HeroBlockSelect<T>;
+        featuredProducts?: T | FeaturedProductsBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -487,6 +503,22 @@ export interface HeroBlockSelect<T extends boolean = true> {
   title?: T;
   intro?: T;
   cta_button?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedProductsBlock_select".
+ */
+export interface FeaturedProductsBlockSelect<T extends boolean = true> {
+  title?: T;
+  products?: T;
+  link?:
     | T
     | {
         label?: T;

@@ -11,6 +11,8 @@ type ProductCardProps = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
+    console.log('product:', product);
+
     const productUrl = `/products/${getProductCategorySlug(product)}/${product.slug}`
 
     // const { category, image, name, price, slug } = product;

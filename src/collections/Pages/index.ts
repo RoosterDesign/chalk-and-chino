@@ -13,6 +13,7 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 //     PreviewField,
 // } from '@payloadcms/plugin-seo/fields'
 import { HeroBlock } from '../../blocks/Hero/config';
+import { FeaturedProductsBlock } from '../../blocks/FeaturedProducts/config';
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 export const Pages: CollectionConfig = {
     slug: 'pages',
@@ -28,7 +29,7 @@ export const Pages: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'name',
-        defaultColumns: ['name', 'slug', 'updatedAt'],
+        defaultColumns: ['name', 'slug', '_status', 'updatedAt'],
         livePreview: {
             url: ({ data }) => generatePreviewPath({ collection: 'pages', data }),
         },
@@ -57,7 +58,8 @@ export const Pages: CollectionConfig = {
             type: 'blocks',
             required: true,
             blocks: [
-                HeroBlock
+                HeroBlock,
+                FeaturedProductsBlock
             ]
         }
 

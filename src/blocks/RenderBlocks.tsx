@@ -2,10 +2,12 @@ import type { Page } from '@/payload-types'
 
 import React, { Fragment } from 'react'
 
-import { HeroBlock } from './Hero/Component';
+import { HeroBlock } from './Hero/Component'
+import { FeaturedProductsBlock } from './FeaturedProducts/Component'
 
 const blockComponents = {
-    hero: HeroBlock
+    hero: HeroBlock,
+    featuredProducts: FeaturedProductsBlock
 }
 export const RenderBlocks: React.FC<{
     blocks: Page['layout'][0][]
