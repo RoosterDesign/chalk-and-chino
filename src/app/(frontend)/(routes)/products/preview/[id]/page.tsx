@@ -1,12 +1,11 @@
-import { draftMode } from 'next/headers'
-import { notFound } from 'next/navigation'
-import { getProductById } from '@/lib/products/getProductById'
-import { getPayload } from 'payload'
-import configPromise from '@/payload.config'
-
 import ProductDetails from '@/app/components/product-details/product-details'
 import Testimonials from '@/app/components/testimonials/testimonials'
 import { LivePreviewListener } from '@/app/LivePreviewListener'
+import { getProductById } from '@/lib/products/getProductById'
+import configPromise from '@/payload.config'
+import { draftMode } from 'next/headers'
+import { notFound } from 'next/navigation'
+import { getPayload } from 'payload'
 
 type Props = {
     params: { id: string }
@@ -31,8 +30,8 @@ export default async function ProductPreviewPage({ params }: Props) {
         <>
             {draft && <LivePreviewListener />}
             <ProductDetails
-                product={product}
                 defaultDeliveryText={global?.customText}
+                product={product}
             />
             <Testimonials />
         </>

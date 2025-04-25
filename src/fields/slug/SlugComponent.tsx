@@ -1,15 +1,15 @@
 'use client'
-import React, { useCallback, useEffect } from 'react'
-import { TextFieldClientProps } from 'payload'
-import { useField, Button, TextInput, FieldLabel, useFormFields, useForm } from '@payloadcms/ui'
+import { Button, FieldDescription, FieldLabel, TextInput, useField, useForm, useFormFields } from '@payloadcms/ui'
 import { Lock, Unlock } from 'lucide-react';
+import { TextFieldClientProps } from 'payload'
+import React, { useCallback, useEffect } from 'react'
 
 import { formatSlug } from './formatSlug'
 import './index.scss'
 
 type SlugComponentProps = {
-    fieldToUse: string
     checkboxFieldPath: string
+    fieldToUse: string
 } & TextFieldClientProps
 
 export const SlugComponent: React.FC<SlugComponentProps> = ({
@@ -70,20 +70,25 @@ export const SlugComponent: React.FC<SlugComponentProps> = ({
                 <FieldLabel htmlFor={`field-${path}`} label={label} />
 
                 <Button
-                    className="lock-button"
-                    buttonStyle="none"
-                    onClick={handleLock}
                     aria-label={checkboxValue ? 'Unlock slug to edit manually' : 'Lock slug to auto-generate'}
+                    buttonStyle="none"
+                    className="lock-button"
+                    onClick={handleLock}
                 >
                     {checkboxValue ? <Lock size={16} /> : <Unlock size={16} />}
                 </Button>
             </div>
 
             <TextInput
-                value={value}
                 onChange={setValue}
                 path={path || field.name}
                 readOnly={Boolean(readOnly)}
+                value={value || ''}
+            />
+
+            <FieldDescription
+                description={field.admin?.description}
+                path={path || field.name}
             />
         </div>
     )

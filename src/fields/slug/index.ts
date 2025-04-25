@@ -37,6 +37,7 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) => {
         },
         admin: {
             position: 'sidebar',
+            description: 'Leave locked to auto-generate from page name. Unlock to edit manually.',
             ...(slugOverrides?.admin || {}),
             components: {
                 Field: {

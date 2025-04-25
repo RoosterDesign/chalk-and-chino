@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
+import { slugField } from '@/fields/slug'
+import { generatePreviewPath } from '@/lib/utils/generatePreviewPath'
+
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 // import {
@@ -10,7 +13,6 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 //     PreviewField,
 // } from '@payloadcms/plugin-seo/fields'
 import { HeroBlock } from '../../blocks/Hero/config';
-// import { generatePreviewPath } from '../../lib/utils/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 export const Pages: CollectionConfig = {
     slug: 'pages',
@@ -27,23 +29,10 @@ export const Pages: CollectionConfig = {
     admin: {
         useAsTitle: 'name',
         defaultColumns: ['name', 'slug', 'updatedAt'],
-        /*livePreview: {
-            url: ({ data, req }) => {
-                const path = generatePreviewPath({
-                    slug: typeof data?.slug === 'string' ? data.slug : '',
-                    collection: 'pages',
-                    req,
-                })
-
-                return path
-            },
+        livePreview: {
+            url: ({ data }) => generatePreviewPath({ collection: 'pages', data }),
         },
-        preview: (data, { req }) =>
-            generatePreviewPath({
-                slug: typeof data?.slug === 'string' ? data.slug : '',
-                collection: 'pages',
-                req,
-            }),*/
+        preview: ({ data }) => generatePreviewPath({ collection: 'pages', data: data as { id?: string; slug?: string }, }),
     },
     fields: [
         {
@@ -51,11 +40,18 @@ export const Pages: CollectionConfig = {
             type: 'text',
             required: true
         },
-        {
-            name: 'slug',
-            type: 'text',
-            required: true
-        },
+        ...slugField('name', {
+            slugOverrides: {
+                admin: {
+                    condition: (data, siblingData, { user }) => {
+                        const slug = siblingData?.slug ?? data?.slug;
+                        const isHomepage = slug === 'homepage';
+                        const isAdmin = user?.role === 'admin';
+                        return !isHomepage || isAdmin;
+                    },
+                },
+            },
+        }),
         {
             name: 'layout',
             type: 'blocks',

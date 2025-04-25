@@ -51,7 +51,10 @@ export const Products: CollectionConfig = {
         },
         {
             name: 'description',
-            type: 'richText',
+            type: 'textarea',
+            admin: {
+                rows: 6,
+            },
         },
         {
             name: 'specifications',
@@ -75,21 +78,12 @@ export const Products: CollectionConfig = {
             ],
         },
         {
-            name: 'customPaymentDelivery',
-            label: 'Custom Payment & Delivery Text',
-            type: 'richText',
-            admin: {
-                description: 'Optional override. If left blank, the default site-wide text will be used.',
-            },
-        },
-        {
             name: 'heroImage',
             label: 'Main Hero Image',
             type: 'upload',
             relationTo: 'media',
             required: true,
         },
-
         {
             name: 'gallery',
             type: 'array',
@@ -102,12 +96,31 @@ export const Products: CollectionConfig = {
                     required: true,
                 },
                 {
-                    name: 'alt',
-                    type: 'text',
-                    required: false,
+                    name: 'thumbnailSize',
+                    type: 'select',
+                    required: true,
+                    defaultValue: 'half',
+                    options: [
+                        {
+                            label: 'Half Width',
+                            value: 'half',
+                        },
+                        {
+                            label: 'Full Width',
+                            value: 'full',
+                        }
+                    ],
                 },
             ],
-        }
+        },
+        {
+            name: 'customPaymentDelivery',
+            label: 'Custom Payment & Delivery Text',
+            type: 'textarea',
+            admin: {
+                description: 'Optional override. If left blank, the default site-wide text will be used.',
+            },
+        },
     ],
     hooks: {
         afterChange: [revalidateProduct],

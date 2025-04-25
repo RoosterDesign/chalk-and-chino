@@ -10,18 +10,24 @@ export const formatSlugHook =
     (fallback: string): FieldHook =>
         ({ data, operation, value, originalDoc }) => {
             const isLocked = data?.slugLock ?? originalDoc?.slugLock
-            if (isLocked) return value
+            const fallbackValue = data?.[fallback] || originalDoc?.[fallback]
 
-            if (typeof value === 'string') {
+            // If slug is locked, always generate from fallback field
+            if (isLocked) {
+                if (typeof fallbackValue === 'string' && fallbackValue.trim()) {
+                    return formatSlug(fallbackValue)
+                }
+                return value // fallback field is blank
+            }
+
+            // If unlocked and user typed something, format it
+            if (typeof value === 'string' && value.trim()) {
                 return formatSlug(value)
             }
 
-            if (operation === 'create' || !data?.slug) {
-                const fallbackData = data?.[fallback] || originalDoc?.[fallback]
-
-                if (fallbackData && typeof fallbackData === 'string') {
-                    return formatSlug(fallbackData)
-                }
+            // If unlocked and slug is blank, fallback to field value
+            if (!value && typeof fallbackValue === 'string') {
+                return formatSlug(fallbackValue)
             }
 
             return value

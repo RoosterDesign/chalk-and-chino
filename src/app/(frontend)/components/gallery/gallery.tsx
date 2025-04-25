@@ -1,13 +1,20 @@
 'use client';
+import type { Media } from '@/payload-types'
+
 import Container from '@/app/components/container/container';
 import ImageExpander from '@/app/components/image-expander/image-expander';
-import { ImageExpanderType } from '@/lib/types';
 
 import styles from './gallery.module.scss';
 
+type GalleryImage = {
+    id?: null | string
+    image: Media | number;
+    thumbnailSize: 'full' | 'half'
+};
+
 type GalleryProps = {
-    images: ImageExpanderType[];
-}
+    images: GalleryImage[];
+};
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
@@ -15,19 +22,24 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
         <section className="section-spacing">
             <Container>
                 <div className={styles.galleryGrid}>
-                    {images.map((image, index) => {
-                        const thumbDimensions = image.thumbSize === 'small' ? { height: 640, width: 850 } : { height: 640, width: 1720 };
-                        return (
-                            <ImageExpander alt={image.alt}
-                                className={image.thumbSize === 'full' ? "gallery-item-fw" : null}
-                                height={image.height}
-                                key={index}
-                                src={image.src}
-                                thumbHeight={thumbDimensions.height}
-                                thumbWidth={thumbDimensions.width}
-                                width={image.width}
-                            />
-                        )
+                    {images.map(item => {
+                        if (typeof item.image === 'object' && item.image?.url) {
+
+                            const thumbDimensions = item.thumbnailSize === 'half' ? { height: 640, width: 850 } : { height: 640, width: 1720 };
+
+                            return (
+                                <ImageExpander
+                                    alt={item.image.alt || ''}
+                                    className={item.thumbnailSize === 'full' ? 'gallery-item-fw' : undefined}
+                                    height={item.image.height!}
+                                    key={item.id}
+                                    src={item.image.url}
+                                    thumbHeight={thumbDimensions.height}
+                                    thumbWidth={thumbDimensions.width}
+                                    width={item.image.width!}
+                                />
+                            );
+                        }
                     })}
                 </div>
             </Container>

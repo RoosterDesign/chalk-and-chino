@@ -1,5 +1,5 @@
 import SectionHeader from '@/app/components/section-header/section-header';
-import { ProductType } from '@/lib/types';
+import { Product } from '@/payload-types'
 import Link from 'next/link';
 
 import styles from './contact-form.module.scss';
@@ -8,7 +8,7 @@ import FormInput from './form-input/form-input';
 type ContactFormProps = {
     hasHeader?: boolean;
     hasThanksLinks?: boolean;
-    product?: ProductType;
+    product?: Product;
     subtitle?: string;
     title?: string;
 };
@@ -40,11 +40,17 @@ const ContactForm: React.FC<ContactFormProps> = ({ hasHeader, hasThanksLinks, pr
                                 <FormInput label="Your email address" name="email" placeholder="Please enter email address" required type="text" />
                             </div>
                             <FormInput label="Your enquiry" name="enquiry" placeholder="Please enter your name" required type="textarea" />
-                            {product && <>
-                                <input name="product-url" type="hidden" value={product.name} />
-                                <input name="product-name" type="hidden" value={`/products/${product.category}/${product.slug}`} />
-                                <input name="product-price" type="hidden" value={product.price} />
-                            </>}
+
+                            {product?.name && <input name="product-url" type="hidden" value={product.name} />}
+
+                            {typeof product?.category === 'object' && 'slug' in product.category && product?.slug && (
+                                <input name="product-name" type="hidden" value={`/ products / ${product.category.slug} / ${product.slug}`} />
+                            )}
+
+                            {product?.price &&
+                                <input name="product-price" type="hidden" value={`${product.price}`} />
+                            }
+
                         </div>
                         <button className="btn" type="submit">Send your enquiry</button>
                     </form>

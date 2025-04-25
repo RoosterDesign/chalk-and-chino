@@ -1,4 +1,6 @@
 import CategoryGrid from '@/app/components/category-grid/category-grid'
+import Gallery from '@/app/components/gallery/gallery';
+import Map from '@/app/components/map/map';
 import Masthead from '@/app/components/masthead/masthead'
 import NoResults from '@/app/components/no-results/no-results'
 import ProductDetails from '@/app/components/product-details/product-details'
@@ -9,10 +11,9 @@ import { LivePreviewListener } from '@/app/LivePreviewListener'
 import { getProductBySlug } from '@/lib/products/getProductBySlug'
 import { getProducts } from '@/lib/products/getProducts'
 import { getProductsByCategory } from '@/lib/products/getProductsByCategory'
+import configPromise from '@/payload.config';
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload';
-import configPromise from '@/payload.config';
-
 type Props = {
     params: {
         slug?: string[]
@@ -32,8 +33,6 @@ export default async function ProductsPage({ params }: Props) {
     if (!slug) {
         const allProducts = await getProducts();
         // const hero = await getAllProductsHero()
-
-        console.log('allProducts:', allProducts);
 
         return (
             <>
@@ -87,6 +86,7 @@ export default async function ProductsPage({ params }: Props) {
 
     // 3. Full Product Details
     if (slug.length === 2) {
+
         const [categorySlug, productSlug] = slug;
 
         const product = await getProductBySlug(productSlug)
@@ -101,8 +101,10 @@ export default async function ProductsPage({ params }: Props) {
 
         return (
             <>
-                <ProductDetails product={product} defaultDeliveryText={defaultDeliveryText} />
+                <ProductDetails defaultDeliveryText={defaultDeliveryText} product={product} />
+                {product.gallery && <Gallery images={product.gallery} />}
                 <Testimonials />
+                <Map />
             </>
         )
 

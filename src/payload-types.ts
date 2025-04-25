@@ -143,6 +143,7 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  role?: ('editor' | 'admin') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -160,7 +161,7 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -180,7 +181,11 @@ export interface Media {
 export interface Page {
   id: number;
   name: string;
-  slug: string;
+  /**
+   * Leave locked to auto-generate from page name. Unlock to edit manually.
+   */
+  slug?: string | null;
+  slugLock?: boolean | null;
   layout: HeroBlock[];
   updatedAt: string;
   createdAt: string;
@@ -209,6 +214,9 @@ export interface HeroBlock {
 export interface ProductCategory {
   id: number;
   name: string;
+  /**
+   * Leave locked to auto-generate from page name. Unlock to edit manually.
+   */
   slug: string;
   slugLock?: boolean | null;
   image: number | Media;
@@ -222,26 +230,15 @@ export interface ProductCategory {
 export interface Product {
   id: number;
   name: string;
+  /**
+   * Leave locked to auto-generate from page name. Unlock to edit manually.
+   */
   slug: string;
   slugLock?: boolean | null;
   category: number | ProductCategory;
   price: number;
   summary?: string | null;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  description?: string | null;
   specifications?:
     | {
         label: string;
@@ -249,32 +246,18 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
-  /**
-   * Optional override. If left blank, the default site-wide text will be used.
-   */
-  customPaymentDelivery?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   heroImage: number | Media;
   gallery?:
     | {
         image: number | Media;
-        alt?: string | null;
+        thumbnailSize: 'half' | 'full';
         id?: string | null;
       }[]
     | null;
+  /**
+   * Optional override. If left blank, the default site-wide text will be used.
+   */
+  customPaymentDelivery?: string | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -449,6 +432,7 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -484,6 +468,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PagesSelect<T extends boolean = true> {
   name?: T;
   slug?: T;
+  slugLock?: T;
   layout?:
     | T
     | {
@@ -541,15 +526,15 @@ export interface ProductsSelect<T extends boolean = true> {
         value?: T;
         id?: T;
       };
-  customPaymentDelivery?: T;
   heroImage?: T;
   gallery?:
     | T
     | {
         image?: T;
-        alt?: T;
+        thumbnailSize?: T;
         id?: T;
       };
+  customPaymentDelivery?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

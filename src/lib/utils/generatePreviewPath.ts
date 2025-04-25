@@ -12,20 +12,19 @@ type Args = {
 
 export const generatePreviewPath = ({ collection, data }: Args): string => {
     const previewSecret = process.env.PREVIEW_SECRET || ''
-    const id = data?.id
-
-    if (!id) {
-        throw new Error('Missing ID for preview path')
-    }
-
     let path = ''
 
     if (collection === 'products') {
+        const id = data?.id
+        if (!id) {
+            throw new Error('Missing ID for preview path')
+        }
         path = `/products/preview/${id}`
     }
 
     if (collection === 'pages') {
-        const safeSlug = data.slug === 'homepage' ? '' : data.slug || ''
+        const slug = data?.slug
+        const safeSlug = slug === 'homepage' ? '' : slug || ''
         path = `/${safeSlug}`
     }
 
@@ -36,7 +35,6 @@ export const generatePreviewPath = ({ collection, data }: Args): string => {
 
     return `/api/preview?${query}`
 }
-
 
 /*import type { CollectionSlug } from 'payload'
 

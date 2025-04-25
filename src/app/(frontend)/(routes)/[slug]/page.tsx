@@ -37,7 +37,7 @@ export async function generateStaticParams() {
 export default async function Page({ params }: Props) {
 
     const { slug = 'homepage' } = await params
-    // const { isEnabled: draft } = await draftMode()
+    const { isEnabled: draft } = await draftMode()
 
     const page = await getPageBySlug(slug);
 
@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
 
     return (
         <>
-            {/* {draft && <LivePreviewListener />} */}
+            {draft && <LivePreviewListener />}
             <RenderBlocks blocks={layout} />
         </>
     )
