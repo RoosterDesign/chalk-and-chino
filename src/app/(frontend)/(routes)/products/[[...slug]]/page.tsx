@@ -7,7 +7,7 @@ import ProductDetails from '@/app/components/product-details/product-details'
 import ProductsList from '@/app/components/products-list/products-list'
 import Testimonials from '@/app/components/testimonials/testimonials'
 import { LivePreviewListener } from '@/app/LivePreviewListener'
-// import { getAllProductsHero } from '@/lib/globals/getAllProductsHero'
+import { getAllProductsCategory } from '@/lib/products/getAllProductsCategory'
 import { getProductBySlug } from '@/lib/products/getProductBySlug'
 import { getProducts } from '@/lib/products/getProducts'
 import { getProductsByCategory } from '@/lib/products/getProductsByCategory'
@@ -32,18 +32,20 @@ export default async function ProductsPage({ params }: Props) {
     // 1. All Products
     if (!slug) {
         const allProducts = await getProducts();
-        // const hero = await getAllProductsHero()
+        const allProductsCategory = await getAllProductsCategory()
+
+        console.log('allProductsCategory: ', allProductsCategory)
 
         return (
             <>
-                {/* <Masthead image={
-                    typeof allProducts.image === 'object' && allProducts.image?.url
+                <Masthead image={
+                    typeof allProductsCategory.image === 'object' && allProductsCategory.image?.url
                         ? {
-                            url: allProducts.image.url,
-                            alt: allProducts.image.alt || allProducts.title,
+                            url: allProductsCategory.image.url,
+                            alt: allProductsCategory.image.alt || allProductsCategory.title,
                         }
                         : undefined
-                } title={allProducts.title || 'All Products'} /> */}
+                } title={allProductsCategory.title || 'All Products'} />
                 <ProductsList products={allProducts} />
                 <CategoryGrid />
                 <Testimonials />

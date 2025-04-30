@@ -29,7 +29,7 @@ const CategoryGrid: React.FC = async () => {
 
     const [categories, allProducts] = await Promise.all([
         getProductCategories({ withImages: true }),
-        payload.findGlobal({ slug: 'all-products', depth: 1 }),
+        payload.findGlobal({ slug: 'all-products-category', depth: 1 }),
     ])
 
     const allItem: CategoryNavItem = {

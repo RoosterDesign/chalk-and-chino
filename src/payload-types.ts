@@ -95,13 +95,13 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
-    'all-products': AllProduct;
+    'all-products-category': AllProductsCategory;
     'payment-delivery-details': PaymentDeliveryDetail;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    'all-products': AllProductsSelect<false> | AllProductsSelect<true>;
+    'all-products-category': AllProductsCategorySelect<false> | AllProductsCategorySelect<true>;
     'payment-delivery-details': PaymentDeliveryDetailsSelect<false> | PaymentDeliveryDetailsSelect<true>;
   };
   locale: null;
@@ -668,11 +668,11 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "all-products".
+ * via the `definition` "all-products-category".
  */
-export interface AllProduct {
+export interface AllProductsCategory {
   id: number;
-  title: string;
+  title?: string | null;
   image?: (number | null) | Media;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -738,9 +738,9 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "all-products_select".
+ * via the `definition` "all-products-category_select".
  */
-export interface AllProductsSelect<T extends boolean = true> {
+export interface AllProductsCategorySelect<T extends boolean = true> {
   title?: T;
   image?: T;
   updatedAt?: T;

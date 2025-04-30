@@ -1,8 +1,8 @@
 import type { GlobalConfig } from 'payload'
 
-export const AllProducts: GlobalConfig = {
-    slug: 'all-products',
-    label: 'All Products Page/Banner',
+export const AllProductsCategory: GlobalConfig = {
+    slug: 'all-products-category',
+    label: 'All Products Category',
     access: {
         read: () => true,
     },
@@ -11,7 +11,7 @@ export const AllProducts: GlobalConfig = {
             name: 'title',
             label: 'Page Title',
             type: 'text',
-            required: true,
+            required: false,
         },
         {
             name: 'image',

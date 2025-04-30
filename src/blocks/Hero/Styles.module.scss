@@ -2,21 +2,21 @@
     color: var(--white);
     display: flex;
     align-items: flex-end;
-    min-height: rem(500);
+    // min-height: rem(500);
     padding-bottom: rem(30);
     position: relative;
     isolation: isolate;
 
-    @include breakpoint(sm, max) {
+    // @include breakpoint(sm, max) {
         height: calc(100dvh - var(--header-height));
-    }
+    // }
 
     @include breakpoint(md) {
-        max-height: 90vh;
+        // max-height: 90vh;
         padding-bottom: rem(60);
     }
 
-    @include breakpoint(lg) {
+    @include breakpoint(xxl) {
         max-height: none;
         min-height: rem(750);
     }

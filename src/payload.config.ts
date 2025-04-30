@@ -12,7 +12,7 @@ import { Pages } from "./collections/Pages";
 import { ProductCategories } from "./collections/ProductCategories";
 import { Products } from "./collections/Products";
 import { Users } from "./collections/Users";
-import { AllProducts } from './globals/all-products'
+import { AllProductsCategory } from './globals/all-products-category'
 import { Footer } from './globals/footer'
 import { Header } from './globals/header'
 import { PaymentDeliveryDetails } from './globals/payment-delivery-details'
@@ -50,7 +50,7 @@ export default buildConfig({
         },
     },
     collections: [Users, Media, Pages, ProductCategories, Products],
-    globals: [Header, Footer, AllProducts, PaymentDeliveryDetails],
+    globals: [Header, Footer, AllProductsCategory, PaymentDeliveryDetails],
     db: postgresAdapter({
         pool: {
             connectionString: process.env.PAYLOAD_DATABASE_URL || "",
