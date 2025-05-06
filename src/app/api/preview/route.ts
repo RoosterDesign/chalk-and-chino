@@ -18,8 +18,6 @@ export async function GET(req: Request) {
         const dm = await draftMode();
         dm.enable();
 
-        console.log('[Preview Route] Redirecting to:', path)
-
         return NextResponse.redirect(new URL(path, req.url))
     } catch (err) {
         console.error('[Preview Route Error]', err)

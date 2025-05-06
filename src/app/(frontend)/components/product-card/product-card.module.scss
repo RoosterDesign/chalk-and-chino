@@ -8,7 +8,7 @@
         overflow: hidden;
         position: relative;
 
-        @include breakpoint(xxl) {
+        @include breakpoint(xl) {
             height: rem(500);
         }
 

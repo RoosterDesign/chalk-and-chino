@@ -1,4 +1,4 @@
-import CategoryGrid from '@/app/components/category-grid/category-grid'
+import CategoryGridBlock from '@/app/components/category-grid/category-grid'
 import Gallery from '@/app/components/gallery/gallery';
 import Map from '@/app/components/map/map';
 import Masthead from '@/app/components/masthead/masthead'
@@ -6,11 +6,12 @@ import NoResults from '@/app/components/no-results/no-results'
 import ProductDetails from '@/app/components/product-details/product-details'
 import ProductsList from '@/app/components/products-list/products-list'
 import Testimonials from '@/app/components/testimonials/testimonials'
-import { LivePreviewListener } from '@/app/LivePreviewListener'
+import CategoryGridLoader from '@/blocks/CategoryGrid/Loader';
 import { getAllProductsCategory } from '@/lib/products/getAllProductsCategory'
 import { getProductBySlug } from '@/lib/products/getProductBySlug'
 import { getProducts } from '@/lib/products/getProducts'
 import { getProductsByCategory } from '@/lib/products/getProductsByCategory'
+import { getImageData } from '@/lib/utils/getImageData'
 import configPromise from '@/payload.config';
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload';
@@ -34,20 +35,14 @@ export default async function ProductsPage({ params }: Props) {
         const allProducts = await getProducts();
         const allProductsCategory = await getAllProductsCategory()
 
-        console.log('allProductsCategory: ', allProductsCategory)
-
         return (
             <>
-                <Masthead image={
-                    typeof allProductsCategory.image === 'object' && allProductsCategory.image?.url
-                        ? {
-                            url: allProductsCategory.image.url,
-                            alt: allProductsCategory.image.alt || allProductsCategory.title,
-                        }
-                        : undefined
-                } title={allProductsCategory.title || 'All Products'} />
+                <Masthead
+                    image={getImageData(allProductsCategory.image, allProductsCategory.title ?? undefined)}
+                    title={allProductsCategory.title ?? 'All Products'}
+                />
                 <ProductsList products={allProducts} />
-                <CategoryGrid />
+                <CategoryGridLoader />
                 <Testimonials />
             </>
         )
@@ -63,23 +58,15 @@ export default async function ProductsPage({ params }: Props) {
         return (
             <>
                 <Masthead
-                    image={
-                        typeof category.image === 'object' && category.image?.url
-                            ? {
-                                url: category.image.url,
-                                alt: category.image.alt || category.name,
-                            }
-                            : undefined
-                    }
+                    image={getImageData(category.image, category.name)}
                     title={category.name}
                 />
-
                 {products.length > 0 ? (
                     <ProductsList products={products} />
                 ) : (
                     <NoResults content={`No products in ${category.name}`} />
                 )}
-                <CategoryGrid />
+                <CategoryGridLoader />
                 <Testimonials />
             </>
         )

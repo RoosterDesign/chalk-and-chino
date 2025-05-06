@@ -72,6 +72,7 @@ export interface Config {
     pages: Page;
     'product-categories': ProductCategory;
     products: Product;
+    testimonials: Testimonial;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'product-categories': ProductCategoriesSelect<false> | ProductCategoriesSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -186,7 +188,18 @@ export interface Page {
    */
   slug?: string | null;
   slugLock?: boolean | null;
-  layout: (HeroBlock | FeaturedProductsBlock)[];
+  layout: (
+    | HeroBlock
+    | FeaturedProductsBlock
+    | {
+        title: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'categoryGrid';
+      }
+    | KeySellingPointsBlock
+    | TestimonialsBlock
+  )[];
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -212,12 +225,16 @@ export interface HeroBlock {
  * via the `definition` "FeaturedProductsBlock".
  */
 export interface FeaturedProductsBlock {
-  title?: string | null;
-  products: (number | Product)[];
-  link: {
-    label: string;
-    url: string;
+  sectionHeader: {
+    centered?: boolean | null;
+    title: string;
+    synopsis?: string | null;
+    link?: {
+      label?: string | null;
+      url?: string | null;
+    };
   };
+  products: (number | Product)[];
   id?: string | null;
   blockName?: string | null;
   blockType: 'featuredProducts';
@@ -274,6 +291,51 @@ export interface ProductCategory {
   slug: string;
   slugLock?: boolean | null;
   image: number | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KeySellingPointsBlock".
+ */
+export interface KeySellingPointsBlock {
+  points: {
+    title: string;
+    body: string;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'keySellingPoints';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock".
+ */
+export interface TestimonialsBlock {
+  sectionHeader: {
+    centered?: boolean | null;
+    title: string;
+    synopsis?: string | null;
+    link?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  testimonials: (number | Testimonial)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonials';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  stars: '1' | '2' | '3' | '4' | '5';
+  author?: string | null;
+  quote: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -397,6 +459,10 @@ export interface PayloadLockedDocument {
         value: number | Product;
       } | null)
     | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
         relationTo: 'payload-jobs';
         value: number | PayloadJob;
       } | null);
@@ -489,6 +555,15 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         hero?: T | HeroBlockSelect<T>;
         featuredProducts?: T | FeaturedProductsBlockSelect<T>;
+        categoryGrid?:
+          | T
+          | {
+              title?: T;
+              id?: T;
+              blockName?: T;
+            };
+        keySellingPoints?: T | KeySellingPointsBlockSelect<T>;
+        testimonials?: T | TestimonialsBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -516,14 +591,57 @@ export interface HeroBlockSelect<T extends boolean = true> {
  * via the `definition` "FeaturedProductsBlock_select".
  */
 export interface FeaturedProductsBlockSelect<T extends boolean = true> {
-  title?: T;
-  products?: T;
-  link?:
+  sectionHeader?:
     | T
     | {
-        label?: T;
-        url?: T;
+        centered?: T;
+        title?: T;
+        synopsis?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
       };
+  products?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "KeySellingPointsBlock_select".
+ */
+export interface KeySellingPointsBlockSelect<T extends boolean = true> {
+  points?:
+    | T
+    | {
+        title?: T;
+        body?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock_select".
+ */
+export interface TestimonialsBlockSelect<T extends boolean = true> {
+  sectionHeader?:
+    | T
+    | {
+        centered?: T;
+        title?: T;
+        synopsis?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  testimonials?: T;
   id?: T;
   blockName?: T;
 }
@@ -570,6 +688,17 @@ export interface ProductsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  stars?: T;
+  author?: T;
+  quote?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

@@ -13,7 +13,6 @@ type Props = {
 
 export default async function ProductPreviewPage({ params }: Props) {
     const { isEnabled: draft } = await draftMode()
-    console.log('[Preview] Draft mode is:', draft)
 
     const { id } = await params;
 

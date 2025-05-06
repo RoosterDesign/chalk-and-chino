@@ -11,6 +11,7 @@ import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { ProductCategories } from "./collections/ProductCategories";
 import { Products } from "./collections/Products";
+import { Testimonials } from "./collections/Testimonials";
 import { Users } from "./collections/Users";
 import { AllProductsCategory } from './globals/all-products-category'
 import { Footer } from './globals/footer'
@@ -49,7 +50,7 @@ export default buildConfig({
             ],
         },
     },
-    collections: [Users, Media, Pages, ProductCategories, Products],
+    collections: [Users, Media, Pages, ProductCategories, Products, Testimonials],
     globals: [Header, Footer, AllProductsCategory, PaymentDeliveryDetails],
     db: postgresAdapter({
         pool: {

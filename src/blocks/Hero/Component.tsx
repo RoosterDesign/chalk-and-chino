@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import styles from './styles.module.scss';
 
-export const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_button }) => {
+const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_button }) => {
 
     const imageUrl =
         typeof image === 'object' && image !== null && 'url' in image
@@ -19,8 +19,6 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_b
                 <h1>{title}</h1>
                 <p>{intro}</p>
 
-                {/* <p><a className="" href={cta_button.url} title="">{cta_button.label}</a></p> */}
-
                 {cta_button?.url && (
                     <Link className={styles.button} href={cta_button.url}>
                         {cta_button.label}
@@ -29,10 +27,14 @@ export const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_b
 
             </Container>
 
-            <picture>
-                {/* <img alt="" className="img-full" src={imageUrl} /> */}
-            </picture>
+            {imageUrl &&
+                <picture>
+                    <img alt="" className="img-full" src={imageUrl} />
+                </picture>
+            }
 
         </section>
     );
-};
+}
+
+export default HeroBlock

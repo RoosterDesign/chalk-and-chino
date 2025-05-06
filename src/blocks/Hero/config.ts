@@ -1,6 +1,6 @@
 import { Block } from "payload";
 
-export const HeroBlock: Block = {
+const HeroBlock: Block = {
     slug: 'hero',
     interfaceName: 'HeroBlock',
     fields: [
@@ -40,3 +40,5 @@ export const HeroBlock: Block = {
         }
     ]
 }
+
+export default HeroBlock;

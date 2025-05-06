@@ -2,28 +2,35 @@ import Link from 'next/link';
 
 import styles from './section-header.module.scss';
 
-type SectionHeaderProps = {
-    centered?: boolean
-    intro?: string;
+export type SectionHeaderProps = {
+    centered?: boolean;
     linkLabel?: string;
     linkUrl?: string;
-    subtitle?: string;
+    synopsis?: string;
     title?: string;
-}
+};
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ centered, intro, linkLabel, linkUrl, subtitle, title }) => {
-    console.log('linkLabel:', linkLabel);
+const SectionHeader: React.FC<SectionHeaderProps> = ({ centered,
+    synopsis,
+    linkLabel,
+    linkUrl,
+    title, }) => {
+
     return (
-        <hgroup className={`${styles.sectionHeader} ${centered ? styles.centered : ''}`}>
-            {subtitle && subtitle}
-            <h2>{title}</h2>
-            {intro || linkLabel && linkUrl &&
-                <p>
-                    {intro && intro}
-                    {linkLabel && linkUrl && <> <Link className="text-link" href={linkUrl} title={linkLabel}>{linkLabel}</Link></>}
-                </p>
+        <div className={`${styles.sectionHeader} ${centered ? styles.centered : ''}`}>
+            <hgroup>
+                <h2>{title}</h2>
+                {!centered && linkUrl && <Link className="text-link" href={linkUrl} title={linkLabel}>{linkLabel}</Link>}
+            </hgroup>
+            {
+                centered ?
+                    <p>
+                        {synopsis && synopsis} {linkUrl && <Link className="text-link" href={linkUrl} title={linkLabel}>{linkLabel}</Link>}
+                    </p>
+                    :
+                    synopsis && <p>{synopsis}</p>
             }
-        </hgroup>
+        </div>
     )
 }
 

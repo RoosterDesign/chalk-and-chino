@@ -2,16 +2,21 @@ import type { Page } from '@/payload-types'
 
 import React, { Fragment } from 'react'
 
-import { HeroBlock } from './Hero/Component'
-import { FeaturedProductsBlock } from './FeaturedProducts/Component'
+import CategoryGridBlockLoader from './CategoryGrid/Loader'
+import FeaturedProductsBlock from './FeaturedProducts/Component'
+import HeroBlock from './Hero/Component'
+import KeySellingPointsBlock from './KeySellingPoints/Component'
+import TestimonialsBlock from './Testimonials/Component'
 
 const blockComponents = {
     hero: HeroBlock,
-    featuredProducts: FeaturedProductsBlock
+    featuredProducts: FeaturedProductsBlock,
+    categoryGrid: CategoryGridBlockLoader,
+    keySellingPoints: KeySellingPointsBlock,
+    testimonials: TestimonialsBlock
 }
 export const RenderBlocks: React.FC<{
     blocks: Page['layout'][0][]
-    // blocks: Page['layout']
 }> = (props) => {
     const { blocks } = props
 
@@ -25,14 +30,18 @@ export const RenderBlocks: React.FC<{
 
                     if (blockType && blockType in blockComponents) {
                         const Block = blockComponents[blockType]
-
                         if (Block) {
-                            return (
-                                <div key={index}>
-                                    {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                                    <Block {...block} disableInnerContainer />
-                                </div>
-                            )
+                            try {
+                                return (
+                                    <div key={index}>
+                                        {/* @ts-expect-error there may be some mismatch between the expected types here */}
+                                        <Block {...block} disableInnerContainer />
+                                    </div>
+                                )
+                            } catch (err) {
+                                console.error(`💥 Error rendering block "${blockType}" at index ${index}`, err, block);
+                                return null;
+                            }
                         }
                     }
                     return null

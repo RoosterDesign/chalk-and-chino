@@ -4,10 +4,7 @@ import Image from 'next/image';
 import styles from './masthead.module.scss';
 
 type MastheadProps = {
-    image?: {
-        alt?: string
-        url?: string
-    } | string
+    image?: { alt?: string; url: string; } | string;
     title: string;
 }
 

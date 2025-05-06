@@ -5,6 +5,8 @@ import { generatePreviewPath } from '@/lib/utils/generatePreviewPath'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import CategoryGridBlock from '../../blocks/CategoryGrid/config';
+import FeaturedProductsBlock from '../../blocks/FeaturedProducts/config';
 // import {
 //     MetaDescriptionField,
 //     MetaImageField,
@@ -12,8 +14,9 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 //     OverviewField,
 //     PreviewField,
 // } from '@payloadcms/plugin-seo/fields'
-import { HeroBlock } from '../../blocks/Hero/config';
-import { FeaturedProductsBlock } from '../../blocks/FeaturedProducts/config';
+import HeroBlock from '../../blocks/Hero/config';
+import KeySellingPointsBlock from '../../blocks/KeySellingPoints/config';
+import TestimonialsBlock from '../../blocks/Testimonials/config';
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 export const Pages: CollectionConfig = {
     slug: 'pages',
@@ -59,7 +62,10 @@ export const Pages: CollectionConfig = {
             required: true,
             blocks: [
                 HeroBlock,
-                FeaturedProductsBlock
+                FeaturedProductsBlock,
+                CategoryGridBlock,
+                KeySellingPointsBlock,
+                TestimonialsBlock
             ]
         }
 

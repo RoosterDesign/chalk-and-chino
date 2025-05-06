@@ -1,42 +1,55 @@
-
-
 .sectionHeader {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    gap: rem(10);
-    justify-content: space-between;
     margin-bottom: rem(30);
 
     @include breakpoint(lg) {
         margin-bottom: rem(40);
     }
 
+    hgroup {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: rem(10);
+        justify-content: space-between;
+    }
+
     a {
         @include textLink;
     }
 
+    &:has(p) hgroup {
+        margin-bottom: rem(20);
+
+        @include breakpoint(sm) {
+            margin-bottom: rem(10);
+        }
+    }
+
     &.centered {
-        align-items: center;
-        flex-direction: column;
         text-align: center;
 
-        &:has(p) {
-            margin-bottom: rem(40);
-
-            @include breakpoint(md) {
-                margin-bottom: rem(60);
-            }
-
-            @include breakpoint(lg) {
-                margin-bottom: rem(100);
-            }
+        hgroup {
+            align-items: center;
+            flex-direction: column;
         }
 
+        // &:has(p) {
+        //     margin-bottom: rem(40);
+
+        //     @include breakpoint(md) {
+        //         margin-bottom: rem(60);
+        //     }
+
+        //     @include breakpoint(lg) {
+        //         margin-bottom: rem(100);
+        //     }
+        // }
+
         p {
-            margin: 0;
+            margin-left: auto;
+            margin-right: auto;
             max-width: rem(500);
-            text-align: center;
+            // text-align: center;
         }
 
     }
