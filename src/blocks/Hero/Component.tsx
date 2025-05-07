@@ -1,9 +1,9 @@
 import type { HeroBlock as HeroBlockProps } from '@/payload-types'
 
-import Container from '@/app/components/container/container';
+import Container from '@/app/components/container/container'
 import Link from 'next/link';
 
-import styles from './styles.module.scss';
+import styles from './styles.module.scss'
 
 const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_button }) => {
 
