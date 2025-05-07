@@ -12,7 +12,6 @@ export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
 }) => {
     const productSlug = doc.slug
 
-
     if (typeof productSlug === 'string' && productSlug.trim() !== '') {
         const productPath = `/products/${productSlug}`
         revalidatePath(productPath)

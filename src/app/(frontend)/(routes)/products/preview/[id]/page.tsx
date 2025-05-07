@@ -1,14 +1,18 @@
 import ProductDetails from '@/app/components/product-details/product-details'
-import Testimonials from '@/app/components/testimonials/testimonials'
 import { LivePreviewListener } from '@/app/LivePreviewListener'
+import Testimonials from '@/blocks/Testimonials/Component';
 import { getProductById } from '@/lib/products/getProductById'
 import configPromise from '@/payload.config'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
+type PageParams = {
+    id: string;
+};
+
 type Props = {
-    params: { id: string }
+    params: Promise<PageParams>
 }
 
 export default async function ProductPreviewPage({ params }: Props) {

@@ -14,10 +14,18 @@ import { getImageData } from '@/lib/utils/getImageData'
 import configPromise from '@/payload.config';
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload';
+// type Props = {
+//     params: {
+//         slug?: string[]
+//     }
+// }
+
+type PageParams = {
+    slug?: string;
+};
+
 type Props = {
-    params: {
-        slug?: string[]
-    }
+    params: Promise<PageParams>
 }
 
 export default async function ProductsPage({ params }: Props) {

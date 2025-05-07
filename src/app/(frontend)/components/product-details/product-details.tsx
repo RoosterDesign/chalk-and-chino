@@ -1,20 +1,16 @@
 'use client';
-import ContactForm from '@/app/components/contact-form/contact-form';
-import Container from '@/app/components/container/container';
-import ImageExpander from '@/app/components/image-expander/image-expander';
-import TruncatedText from '@/app/components/truncated-text/truncated-text';
 import { useModal } from '@/app/context/ModalContext';
-// import type { LexicalEditorState } from '@payloadcms/richtext-lexical'
-import { hasRichTextContent } from '@/lib/utils/hasRichTextContent'
+import ContactForm from '@/components/contact-form/contact-form';
+import Container from '@/components/container/container';
+import ImageExpander from '@/components/image-expander/image-expander';
+import TruncatedText from '@/components/truncated-text/truncated-text';
 import { Product } from '@/payload-types'
-import { RichText } from '@payloadcms/richtext-lexical/react'
 import Link from 'next/link';
 import { useState } from "react";
 
 import styles from './product-details.module.scss';
 
 type ProductDetailsType = {
-    // defaultDeliveryText?: LexicalEditorState | null;
     defaultDeliveryText: any;
     product: Product
 }
@@ -46,9 +42,7 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product, defaultDelivery
         )
     };
 
-    // const { text: truncated, isTruncated } = getTruncatedText(product.description)
-
-    const deliveryDetails = hasRichTextContent(product.customPaymentDelivery) ? product.customPaymentDelivery : defaultDeliveryText
+    const deliveryDetails = product.customPaymentDelivery ? product.customPaymentDelivery : defaultDeliveryText
 
     return (
         <>
@@ -104,7 +98,6 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product, defaultDelivery
 
                         <div className={styles.tabContent}>
                             {activeTab === "description" && product.description && (
-                                // <RichText data={product.description} />
                                 <TruncatedText text={product.description} />
                             )}
                             {activeTab === "specification" && product.specifications && (
@@ -120,7 +113,7 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product, defaultDelivery
                                 </table>
                             )}
                             {activeTab === "payment-delivery" && (
-                                <RichText data={deliveryDetails} />
+                                <p>{deliveryDetails}</p>
                             )}
                         </div>
 

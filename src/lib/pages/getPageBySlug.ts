@@ -21,8 +21,6 @@ export const getPageBySlug = cache(
             },
         })
 
-        console.dir(result.docs?.[0]?.layout, { depth: null });
-
         return result.docs?.[0] || null
 
     }

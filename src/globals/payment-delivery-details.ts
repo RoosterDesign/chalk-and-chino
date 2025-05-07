@@ -7,7 +7,7 @@ export const PaymentDeliveryDetails: GlobalConfig = {
         {
             name: 'customText',
             label: 'Custom Payment & Delivery Details',
-            type: 'richText',
+            type: 'textarea',
             required: false,
             admin: {
                 description: 'This text will appear on the product details page.',

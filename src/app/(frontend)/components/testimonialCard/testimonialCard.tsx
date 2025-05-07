@@ -1,5 +1,6 @@
-import styles from './testimonialCard.module.scss';
 import type { Testimonial } from '@/payload-types';
+
+import styles from './testimonialCard.module.scss';
 
 const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => {
     const { author, quote, stars } = testimonial;

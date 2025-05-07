@@ -16,7 +16,7 @@ const GalleryCarousel: React.FC<GalleryCarouselProps> = ({ images }) => {
     return (
         <section className={`${styles.galleryCarousel} section-spacing`}>
             <Container>
-                <SectionHeader centered intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." linkLabel="View items for sale" linkUrl="/products" title="My Work" />
+                <SectionHeader centered linkLabel="View items for sale" linkUrl="/products" synopsis="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus." title="My Work" />
             </Container>
 
             <Carousel arrows={true} hasPadding mobileOnly={false} pagination={false}>

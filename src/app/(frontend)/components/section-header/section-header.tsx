@@ -6,11 +6,13 @@ export type SectionHeaderProps = {
     centered?: boolean;
     linkLabel?: string;
     linkUrl?: string;
+    subtitle?: string;
     synopsis?: string;
     title?: string;
 };
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ centered,
+    subtitle,
     synopsis,
     linkLabel,
     linkUrl,
@@ -19,6 +21,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({ centered,
     return (
         <div className={`${styles.sectionHeader} ${centered ? styles.centered : ''}`}>
             <hgroup>
+                {subtitle && subtitle}
                 <h2>{title}</h2>
                 {!centered && linkUrl && <Link className="text-link" href={linkUrl} title={linkLabel}>{linkLabel}</Link>}
             </hgroup>

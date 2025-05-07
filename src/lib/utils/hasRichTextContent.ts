@@ -1,7 +1,7 @@
 type RichTextNode = {
-    type: string
     children?: RichTextNode[]
     text?: string
+    type: string
 }
 
 type RichTextRoot = {
@@ -10,7 +10,7 @@ type RichTextRoot = {
     }
 }
 
-export function hasRichTextContent(richText?: RichTextRoot | null): boolean {
+export function hasRichTextContent(richText?: null | RichTextRoot): boolean {
     if (!richText?.root?.children) return false
 
     const walkNodes = (nodes: RichTextNode[]): boolean => {

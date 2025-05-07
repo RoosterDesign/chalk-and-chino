@@ -7,7 +7,7 @@ const Map: React.FC = () => {
     return (
         <>
             <Container>
-                <SectionHeader centered intro="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus a Nunc aliquet." linkLabel="Get in touch" linkUrl="/contact" title="Where I'm Based" />
+                <SectionHeader centered linkLabel="Get in touch" linkUrl="/contact" synopsis="Nunc aliquet fermentum sem vitae vulputate. Nullam nec libero tempus, porttitor tellus a Nunc aliquet." title="Where I'm Based" />
             </Container>
             <div className={styles.mapContainer}>
                 <iframe src="https://snazzymaps.com/embed/657451"></iframe>
