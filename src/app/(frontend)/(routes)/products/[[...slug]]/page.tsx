@@ -1,12 +1,11 @@
-import CategoryGridBlock from '@/app/components/category-grid/category-grid'
 import Gallery from '@/app/components/gallery/gallery';
 import Map from '@/app/components/map/map';
 import Masthead from '@/app/components/masthead/masthead'
 import NoResults from '@/app/components/no-results/no-results'
 import ProductDetails from '@/app/components/product-details/product-details'
 import ProductsList from '@/app/components/products-list/products-list'
-import Testimonials from '@/app/components/testimonials/testimonials'
 import CategoryGridLoader from '@/blocks/CategoryGrid/Loader';
+import Testimonials from '@/blocks/Testimonials/Component'
 import { getAllProductsCategory } from '@/lib/products/getAllProductsCategory'
 import { getProductBySlug } from '@/lib/products/getProductBySlug'
 import { getProducts } from '@/lib/products/getProducts'

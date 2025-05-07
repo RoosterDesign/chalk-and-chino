@@ -1,8 +1,8 @@
 import { Block } from 'payload'
 
-const HeroBlock: Block = {
-    slug: 'hero',
-    interfaceName: 'HeroBlock',
+const BannerBlock: Block = {
+    slug: 'banner',
+    interfaceName: 'bannerBlock',
     fields: [
         {
             name: 'image',
@@ -17,7 +17,7 @@ const HeroBlock: Block = {
             required: true
         },
         {
-            name: 'intro',
+            name: 'body',
             type: 'textarea',
             required: true
         },
@@ -29,16 +29,17 @@ const HeroBlock: Block = {
                 {
                     name: 'label',
                     type: 'text',
-                    required: true
+                    required: false,
+                    defaultValue: 'Find out more'
                 },
                 {
                     name: 'url',
                     type: 'text',
-                    required: true
+                    required: false
                 },
             ]
         }
     ]
 }
 
-export default HeroBlock
+export default BannerBlock

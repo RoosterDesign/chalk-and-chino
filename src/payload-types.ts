@@ -199,6 +199,7 @@ export interface Page {
       }
     | KeySellingPointsBlock
     | TestimonialsBlock
+    | BannerBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -338,6 +339,22 @@ export interface Testimonial {
   quote: string;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bannerBlock".
+ */
+export interface BannerBlock {
+  image: number | Media;
+  title: string;
+  body: string;
+  cta_button?: {
+    label?: string | null;
+    url?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'banner';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -564,6 +581,7 @@ export interface PagesSelect<T extends boolean = true> {
             };
         keySellingPoints?: T | KeySellingPointsBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
+        banner?: T | BannerBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -642,6 +660,23 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
             };
       };
   testimonials?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "bannerBlock_select".
+ */
+export interface BannerBlockSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
+  body?: T;
+  cta_button?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
   id?: T;
   blockName?: T;
 }

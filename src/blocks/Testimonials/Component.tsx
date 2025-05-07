@@ -1,10 +1,12 @@
 import type { TestimonialsBlock as TestimonialsBlockProps } from '@/payload-types'
+
 import Container from '@/app/components/container/container';
 import SectionHeader from '@/app/components/section-header/section-header';
-import { mapSectionHeader } from '@/lib/mappers/mapSectionHeader';
 import TestimonialCard from '@/components/testimonialCard/testimonialCard';
-import styles from './styles.module.scss';
+import { mapSectionHeader } from '@/lib/mappers/mapSectionHeader';
 import { isFullTestimonial } from '@/lib/utils/typeGuards';
+
+import styles from './styles.module.scss';
 
 const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({ sectionHeader, testimonials }) => {
 

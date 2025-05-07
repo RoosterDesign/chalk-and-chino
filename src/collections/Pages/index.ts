@@ -5,6 +5,7 @@ import { generatePreviewPath } from '@/lib/utils/generatePreviewPath'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import BannerBlock from '../../blocks/Banner/config';
 import CategoryGridBlock from '../../blocks/CategoryGrid/config';
 import FeaturedProductsBlock from '../../blocks/FeaturedProducts/config';
 // import {
@@ -65,7 +66,8 @@ export const Pages: CollectionConfig = {
                 FeaturedProductsBlock,
                 CategoryGridBlock,
                 KeySellingPointsBlock,
-                TestimonialsBlock
+                TestimonialsBlock,
+                BannerBlock
             ]
         }
 

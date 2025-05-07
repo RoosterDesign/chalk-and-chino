@@ -2,6 +2,7 @@ import type { Page } from '@/payload-types'
 
 import React, { Fragment } from 'react'
 
+import BannerBlock from './Banner/Component'
 import CategoryGridBlockLoader from './CategoryGrid/Loader'
 import FeaturedProductsBlock from './FeaturedProducts/Component'
 import HeroBlock from './Hero/Component'
@@ -13,7 +14,8 @@ const blockComponents = {
     featuredProducts: FeaturedProductsBlock,
     categoryGrid: CategoryGridBlockLoader,
     keySellingPoints: KeySellingPointsBlock,
-    testimonials: TestimonialsBlock
+    testimonials: TestimonialsBlock,
+    banner: BannerBlock
 }
 export const RenderBlocks: React.FC<{
     blocks: Page['layout'][0][]
