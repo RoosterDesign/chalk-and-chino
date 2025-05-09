@@ -5,8 +5,11 @@ import React, { Fragment } from 'react'
 import BannerBlock from './Banner/Component'
 import CategoryGridBlockLoader from './CategoryGrid/Loader'
 import FeaturedProductsBlock from './FeaturedProducts/Component'
+import GalleryBlock from './Gallery/Component'
+import GalleryTextBannerBlock from './GalleryTextBanner/Component'
 import HeroBlock from './Hero/Component'
 import KeySellingPointsBlock from './KeySellingPoints/Component'
+import MastheadBlock from './Masthead/Component'
 import TestimonialsBlock from './Testimonials/Component'
 
 const blockComponents = {
@@ -15,7 +18,10 @@ const blockComponents = {
     categoryGrid: CategoryGridBlockLoader,
     keySellingPoints: KeySellingPointsBlock,
     testimonials: TestimonialsBlock,
-    banner: BannerBlock
+    banner: BannerBlock,
+    galleryTextBanner: GalleryTextBannerBlock,
+    gallery: GalleryBlock,
+    masthead: MastheadBlock
 }
 export const RenderBlocks: React.FC<{
     blocks: Page['layout'][0][]
@@ -34,12 +40,8 @@ export const RenderBlocks: React.FC<{
                         const Block = blockComponents[blockType]
                         if (Block) {
                             try {
-                                return (
-                                    <div key={index}>
-                                        {/* @ts-expect-error there may be some mismatch between the expected types here */}
-                                        <Block {...block} disableInnerContainer />
-                                    </div>
-                                )
+                                {/* @ts-expect-error there may be some mismatch between the expected types here */ }
+                                return <Block key={index} {...block} disableInnerContainer />
                             } catch (err) {
                                 console.error(`💥 Error rendering block "${blockType}" at index ${index}`, err, block);
                                 return null;

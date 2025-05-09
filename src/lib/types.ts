@@ -1,8 +1,7 @@
+import type { Media } from '@/payload-types';
+
 export type CategoryType = {
-    image?: {
-        alt: string;
-        url: string;
-    }
+    image?: Media;
     label: string;
     url: string;
 }
@@ -14,6 +13,7 @@ export type ImageExpanderType = {
     src: string;
     thumbHeight?: number;
     thumbSize?: string;
+    thumbSrc: string;
     thumbWidth?: number;
     width: number;
 }

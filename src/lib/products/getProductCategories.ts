@@ -1,14 +1,19 @@
-import type { CategoryType } from '@/lib/types';
+import type { Media, ProductCategory } from '@/payload-types'
 
 import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
-// import { cache } from 'react'
 
 export const getProductCategories = async ({
     withImages = false,
 }: {
     withImages?: boolean
-} = {}): Promise<CategoryType[]> => {
+} = {}): Promise<
+    {
+        image?: Media
+        label: string
+        url: string
+    }[]
+> => {
     const payload = await getPayload({ config: configPromise })
 
     const { docs } = await payload.find({
@@ -17,17 +22,15 @@ export const getProductCategories = async ({
         limit: 50,
         draft: false,
         pagination: false,
-        ...(withImages && { depth: 1 }),
+        ...(withImages && { depth: 2 }), // Ensures we get full media object
     })
 
-    return docs.map((category) => ({
+    return docs.map((category: ProductCategory) => ({
         label: category.name,
         url: `/products/${category.slug}`,
-        image: withImages && typeof category.image === 'object' && category.image !== null
-            ? {
-                url: category.image.url || '',
-                alt: category.image.alt || category.name,
-            }
-            : undefined
+        image:
+            withImages && typeof category.image === 'object'
+                ? (category.image as Media)
+                : undefined,
     }))
 }

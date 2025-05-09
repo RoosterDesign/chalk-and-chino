@@ -12,17 +12,30 @@ type ProductCardProps = {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     const productUrl = `/products/${getProductCategorySlug(product)}/${product.slug}`
+    const productThumbnail =
+        typeof product.heroImage === 'object' &&
+            product.heroImage?.sizes?.productThumbnail &&
+            product.heroImage?.sizes.productThumbnail?.url &&
+            typeof product.heroImage.sizes.productThumbnail.width === 'number' &&
+            typeof product.heroImage.sizes.productThumbnail.height === 'number'
+            ? product.heroImage.sizes.productThumbnail
+            : null
+
+    const altText =
+        typeof product.heroImage === 'object' && product.heroImage?.alt
+            ? product.heroImage.alt
+            : product.name || '';
 
     return (
         <Link className={styles.productCard} href={productUrl}>
             <div className={styles.image}>
                 <span className={styles.price}>£{product.price}</span>
-                {typeof product.heroImage === 'object' && product.heroImage?.url && (
+                {productThumbnail && (
                     <Image
-                        alt={product.heroImage.alt || product.name}
-                        height={500}
-                        src={product.heroImage.url}
-                        width={390}
+                        alt={altText}
+                        height={productThumbnail.height!}
+                        src={productThumbnail.url!}
+                        width={productThumbnail.width!}
                     />
                 )}
             </div>

@@ -87,7 +87,10 @@ export const Products: CollectionConfig = {
         {
             name: 'gallery',
             type: 'array',
-            label: 'Gallery Images',
+            labels: {
+                singular: 'Gallery Image',
+                plural: 'Gallery Images',
+            },
             fields: [
                 {
                     name: 'image',

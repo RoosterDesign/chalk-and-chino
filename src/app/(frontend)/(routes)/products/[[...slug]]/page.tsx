@@ -14,11 +14,6 @@ import { getImageData } from '@/lib/utils/getImageData'
 import configPromise from '@/payload.config';
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload';
-// type Props = {
-//     params: {
-//         slug?: string[]
-//     }
-// }
 
 type PageParams = {
     slug?: string;
@@ -98,7 +93,9 @@ export default async function ProductsPage({ params }: Props) {
         return (
             <>
                 <ProductDetails defaultDeliveryText={defaultDeliveryText} product={product} />
-                {product.gallery && <Gallery images={product.gallery} />}
+                {Array.isArray(product.gallery) && product.gallery.length > 0 && (
+                    <Gallery images={product.gallery} />
+                )}
                 <Testimonials />
                 <Map />
             </>

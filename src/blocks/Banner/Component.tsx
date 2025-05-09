@@ -1,7 +1,6 @@
 import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 
 import Container from '@/app/components/container/container';
-import { getImageData } from '@/lib/utils/getImageData'
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -20,8 +19,17 @@ const BannerBlock: React.FC<BannerBlockProps> = ({ image, title, body, cta_butto
                     </Link>
                 )}
             </Container>
-            {typeof image === 'object' && image?.url &&
-                <Image alt={image.alt || ''} height={1920} src={image.url} width={900} />
+            {typeof image === 'object' &&
+                image?.sizes?.banner?.url &&
+                typeof image.sizes.banner.width === 'number' &&
+                typeof image.sizes.banner.height === 'number' && (
+                    <Image
+                        alt={image.alt || ''}
+                        height={image.sizes.banner.height}
+                        src={image.sizes.banner.url}
+                        width={image.sizes.banner.width}
+                    />
+                )
             }
         </section>
     )

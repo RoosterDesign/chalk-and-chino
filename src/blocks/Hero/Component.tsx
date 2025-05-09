@@ -1,16 +1,12 @@
 import type { HeroBlock as HeroBlockProps } from '@/payload-types'
 
 import Container from '@/app/components/container/container'
+import Image from 'next/image';
 import Link from 'next/link';
 
 import styles from './styles.module.scss'
 
 const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_button }) => {
-
-    const imageUrl =
-        typeof image === 'object' && image !== null && 'url' in image
-            ? image.url
-            : undefined;
 
     return (
         <section className={styles.hero}>
@@ -27,10 +23,17 @@ const HeroBlock: React.FC<HeroBlockProps> = ({ image, title, intro, cta_button }
 
             </Container>
 
-            {imageUrl &&
-                <picture>
-                    <img alt="" className="img-full" src={imageUrl} />
-                </picture>
+            {typeof image === 'object' &&
+                image?.sizes?.hero?.url &&
+                typeof image.sizes.hero.width === 'number' &&
+                typeof image.sizes.hero.height === 'number' &&
+                <Image
+                    alt={image.alt || ''}
+                    className="img-full"
+                    height={image.sizes.hero.height}
+                    src={image.sizes.hero.url}
+                    width={image.sizes.hero.width}
+                />
             }
 
         </section>

@@ -8,6 +8,8 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import BannerBlock from '../../blocks/Banner/config';
 import CategoryGridBlock from '../../blocks/CategoryGrid/config';
 import FeaturedProductsBlock from '../../blocks/FeaturedProducts/config';
+import GalleryBlock from '../../blocks/Gallery/config';
+import GalleryTextBannerBlock from '../../blocks/GalleryTextBanner/config';
 // import {
 //     MetaDescriptionField,
 //     MetaImageField,
@@ -17,6 +19,7 @@ import FeaturedProductsBlock from '../../blocks/FeaturedProducts/config';
 // } from '@payloadcms/plugin-seo/fields'
 import HeroBlock from '../../blocks/Hero/config';
 import KeySellingPointsBlock from '../../blocks/KeySellingPoints/config';
+import MastheadBlock from '../../blocks/Masthead/config';
 import TestimonialsBlock from '../../blocks/Testimonials/config';
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 export const Pages: CollectionConfig = {
@@ -67,7 +70,10 @@ export const Pages: CollectionConfig = {
                 CategoryGridBlock,
                 KeySellingPointsBlock,
                 TestimonialsBlock,
-                BannerBlock
+                BannerBlock,
+                GalleryTextBannerBlock,
+                GalleryBlock,
+                MastheadBlock
             ]
         }
 

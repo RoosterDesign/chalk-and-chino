@@ -19,13 +19,7 @@ const CategoryGridLoader = async ({ title }: LoaderProps) => {
     const allItem = {
         label: allProducts.title || 'All Products',
         url: '/products',
-        image:
-            typeof allProducts.image === 'object' && allProducts.image?.url
-                ? {
-                    url: allProducts.image.url,
-                    alt: allProducts.image.alt || allProducts.title || 'All Products',
-                }
-                : undefined,
+        image: allProducts.image && typeof allProducts.image === 'object' ? allProducts.image : undefined,
     }
 
     const categoryItems = [allItem, ...categories]

@@ -175,6 +175,96 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    masthead?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    productHero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    productThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    categoryBanner?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    banner?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    galleryTextBanner?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    galleryThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    galleryFullThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    galleryCarouselThumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    modalPreview?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -200,6 +290,9 @@ export interface Page {
     | KeySellingPointsBlock
     | TestimonialsBlock
     | BannerBlock
+    | GalleryTextBannerBlock
+    | GalleryBlock
+    | MastheadBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -323,7 +416,7 @@ export interface TestimonialsBlock {
       url?: string | null;
     };
   };
-  testimonials: (number | Testimonial)[];
+  testimonials?: (number | Testimonial)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'testimonials';
@@ -342,7 +435,7 @@ export interface Testimonial {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "bannerBlock".
+ * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
   image: number | Media;
@@ -355,6 +448,70 @@ export interface BannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'banner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryTextBannerBlock".
+ */
+export interface GalleryTextBannerBlock {
+  reverse?: boolean | null;
+  atTop?: boolean | null;
+  image1: number | Media;
+  image2: number | Media;
+  image3: number | Media;
+  title: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  cta_button?: {
+    label?: string | null;
+    url?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'galleryTextBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock".
+ */
+export interface GalleryBlock {
+  sectionHeader: {
+    centered?: boolean | null;
+    title: string;
+    synopsis?: string | null;
+    link?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  images: (number | Media)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mastheadBlock".
+ */
+export interface MastheadBlock {
+  image: number | Media;
+  title: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'masthead';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -558,6 +715,120 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        masthead?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        productHero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        productThumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        categoryBanner?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        banner?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        galleryTextBanner?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        galleryThumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        galleryFullThumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        galleryCarouselThumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        modalPreview?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -582,6 +853,9 @@ export interface PagesSelect<T extends boolean = true> {
         keySellingPoints?: T | KeySellingPointsBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
+        galleryTextBanner?: T | GalleryTextBannerBlockSelect<T>;
+        gallery?: T | GalleryBlockSelect<T>;
+        masthead?: T | MastheadBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -665,7 +939,7 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "bannerBlock_select".
+ * via the `definition` "BannerBlock_select".
  */
 export interface BannerBlockSelect<T extends boolean = true> {
   image?: T;
@@ -677,6 +951,59 @@ export interface BannerBlockSelect<T extends boolean = true> {
         label?: T;
         url?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryTextBannerBlock_select".
+ */
+export interface GalleryTextBannerBlockSelect<T extends boolean = true> {
+  reverse?: T;
+  atTop?: T;
+  image1?: T;
+  image2?: T;
+  image3?: T;
+  title?: T;
+  body?: T;
+  cta_button?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "GalleryBlock_select".
+ */
+export interface GalleryBlockSelect<T extends boolean = true> {
+  sectionHeader?:
+    | T
+    | {
+        centered?: T;
+        title?: T;
+        synopsis?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  images?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "mastheadBlock_select".
+ */
+export interface MastheadBlockSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
   id?: T;
   blockName?: T;
 }

@@ -1,4 +1,6 @@
 'use client';
+import type { Media } from '@/payload-types'
+
 import { useModal } from '@/app/context/ModalContext';
 import ContactForm from '@/components/contact-form/contact-form';
 import Container from '@/components/container/container';
@@ -44,19 +46,29 @@ const ProductDetails: React.FC<ProductDetailsType> = ({ product, defaultDelivery
 
     const deliveryDetails = product.customPaymentDelivery ? product.customPaymentDelivery : defaultDeliveryText
 
+    let full, heroImage: Media | undefined, thumb;
+
+    if (typeof product.heroImage === 'object' && product.heroImage !== null && 'sizes' in product.heroImage) {
+        heroImage = product.heroImage;
+        thumb = heroImage.sizes?.galleryThumbnail;
+        full = heroImage.sizes?.modalPreview;
+    }
+
     return (
         <>
 
             <Container className={styles.container}>
 
-                {typeof product.heroImage === 'object' && product.heroImage?.url && (
-                    <div className={styles.leadImage}>
-                        <ImageExpander alt={product.heroImage.alt || ''}
-                            height={product.heroImage.height!}
-                            src={product.heroImage.url}
-                            thumbHeight={790}
-                            thumbWidth={940}
-                            width={product.heroImage.width!}
+                {full?.url && thumb?.url && heroImage && (
+                    <div className={styles.leadImage} >
+                        <ImageExpander
+                            alt={heroImage.alt || ''}
+                            height={full.height!}
+                            src={full.url}
+                            thumbHeight={thumb.height!}
+                            thumbSrc={thumb.url}
+                            thumbWidth={thumb.width!}
+                            width={full.width!}
                         />
                     </div>
                 )}

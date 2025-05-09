@@ -12,11 +12,12 @@ const TestimonialsBlock: Block = {
         sectionHeader,
         {
             name: 'testimonials',
+            label: 'Select Testimonials or leave blank to randomly pick 3',
             type: 'relationship',
             relationTo: 'testimonials',
             hasMany: true,
             maxRows: 3,
-            required: true
+            required: false
         },
     ]
 }

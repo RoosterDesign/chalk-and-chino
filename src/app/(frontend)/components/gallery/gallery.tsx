@@ -22,21 +22,39 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
         <section className="section-spacing">
             <Container>
                 <div className={styles.galleryGrid}>
-                    {images.map(item => {
-                        if (typeof item.image === 'object' && item.image?.url) {
+                    {images.map(image => {
 
-                            const thumbDimensions = item.thumbnailSize === 'half' ? { height: 640, width: 850 } : { height: 640, width: 1720 };
+                        if (typeof image.image === 'object' && image.image?.url) {
+
+                            const thumb = image.image.sizes?.galleryThumbnail;
+                            const thumbFullWidth = image.image.sizes?.galleryFullThumbnail;
+                            const full = image.image.sizes?.modalPreview;
+
+                            let thumbSrc
+                            let thumbHeight
+                            let thumbWidth
+
+                            if (image.thumbnailSize === 'half') {
+                                thumbSrc = thumb?.url;
+                                thumbHeight = thumb?.height;
+                                thumbWidth = thumb?.width;
+                            } else {
+                                thumbSrc = thumbFullWidth?.url;
+                                thumbHeight = thumbFullWidth?.height;
+                                thumbWidth = thumbFullWidth?.width;
+                            }
 
                             return (
                                 <ImageExpander
-                                    alt={item.image.alt || ''}
-                                    className={item.thumbnailSize === 'full' ? 'gallery-item-fw' : undefined}
-                                    height={item.image.height!}
-                                    key={item.id}
-                                    src={item.image.url}
-                                    thumbHeight={thumbDimensions.height}
-                                    thumbWidth={thumbDimensions.width}
-                                    width={item.image.width!}
+                                    alt={image.image.alt || ''}
+                                    className={image.thumbnailSize === 'full' ? 'gallery-item-fw' : undefined}
+                                    height={image.image.height!}
+                                    key={image.id}
+                                    src={image.image.url ?? thumbSrc}
+                                    thumbHeight={thumbHeight!}
+                                    thumbSrc={thumbSrc ?? image.image.url}
+                                    thumbWidth={thumbWidth!}
+                                    width={full?.width!}
                                 />
                             );
                         }

@@ -2,7 +2,7 @@ import { Block } from 'payload'
 
 const BannerBlock: Block = {
     slug: 'banner',
-    interfaceName: 'bannerBlock',
+    interfaceName: 'BannerBlock',
     fields: [
         {
             name: 'image',
