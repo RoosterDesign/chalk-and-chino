@@ -19,9 +19,9 @@ export type ImageExpanderType = {
 };
 
 export type NavItem = {
+    children?: NavItem[];
     label: string;
     url: string;
-    children?: NavItem[];
 };
 
 export type ProductSpecification = {
