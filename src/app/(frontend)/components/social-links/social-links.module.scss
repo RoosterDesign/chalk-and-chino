@@ -1,5 +1,3 @@
-
-
 .headerRight {
     display: grid;
     gap: rem(10);
@@ -9,7 +7,7 @@
 .socialLinks {
     @include basicList;
     @include horizontalList(15);
-    margin-right: rem(15);
+    margin-right: rem(25);
 
     @include breakpoint(sm) {
         @include horizontalList(20);

@@ -1,7 +1,8 @@
 /* global.css */
-@import 'normalize.css';
-@import './_mixins';
-@import './vars.scss';
+@use './_mixins.scss'as *;
+// @use 'normalize.css'as *;/
+// @use './_mixins'as *;
+@use './vars.scss'as *;
 
 html,
 body {
@@ -48,6 +49,11 @@ a {
     margin-bottom: rem(75);
 
     @include breakpoint(md) {
+        margin-top: rem(100);
+        margin-bottom: rem(100);
+    }
+
+    @include breakpoint(lg) {
         margin-top: rem(150);
         margin-bottom: rem(150);
     }

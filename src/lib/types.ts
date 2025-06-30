@@ -1,10 +1,10 @@
-import type { Media } from '@/payload-types';
+import type { Media } from "@/payload-types";
 
 export type CategoryType = {
     image?: Media;
     label: string;
     url: string;
-}
+};
 
 export type ImageExpanderType = {
     alt: string;
@@ -16,17 +16,18 @@ export type ImageExpanderType = {
     thumbSrc: string;
     thumbWidth?: number;
     width: number;
-}
+};
 
 export type NavItem = {
     label: string;
     url: string;
+    children?: NavItem[];
 };
 
 export type ProductSpecification = {
     key: string;
     value: string;
-}
+};
 
 export type ProductType = {
     category: string;
@@ -38,4 +39,4 @@ export type ProductType = {
     slug: string;
     specification: ProductSpecification[];
     synopsis: string;
-}
+};

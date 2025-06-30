@@ -1,5 +1,3 @@
-
-
 .splide {
     display: flex;
     flex-direction: column;
@@ -47,10 +45,11 @@
         height: rem(6);
         margin: 0 rem(8);
         opacity: .2;
-        width: rem(50);
+        width: rem(6);
 
         &.is-active {
             opacity: 1;
+            width: rem(30);
         }
 
     }
@@ -63,8 +62,20 @@
     margin-top: rem(40);
     order: 2;
 
+    &--inline {
+        display: none;
+
+        @include breakpoint(sm, max) {
+            display: flex;
+            justify-content: space-between;
+            margin-top: rem(-25);
+            padding-left: rem(10);
+            padding-right: rem(10);
+        }
+    }
+
     .splide__arrow {
-        @include iconButton(50, 50, 13, 16);
+        @include iconButton(50, 50, 12, 16);
         margin: 0 rem(10);
 
         &--prev {

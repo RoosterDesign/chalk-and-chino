@@ -1,10 +1,8 @@
-
-
 .productsList {
 
     .container {
         display: grid;
-        gap: rem(20);
+        gap: rem(40);
         // gap: rem(45) rem(40);
 
         @include breakpoint(sm) {

@@ -25,13 +25,18 @@
         background: var(--accent);
         border-radius: 0 0 0 var(--border-radius);
         color: var(--primary-colour);
-        font-size: rem(18);
+        font-size: rem(20);
         font-weight: var(--font-weight--bold);
         padding: rem(10) rem(15);
         position: absolute;
         right: 0;
         top: 0;
         z-index: 1;
+
+        @include breakpoint(lg) {
+            font-size: rem(18);
+        }
+
     }
 
     p {

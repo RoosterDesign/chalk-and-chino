@@ -141,9 +141,9 @@ $breakpoints: (xs: (min: rem(414),
     color: var(--button-colour);
     cursor: pointer;
     display: inline-flex;
-    height: rem(50);
+    height: rem(40);
     justify-content: center;
-    width: rem(50);
+    width: rem(40);
 
     @include breakpoint(lg) {
         height: rem($height);
@@ -158,14 +158,8 @@ $breakpoints: (xs: (min: rem(414),
 
     svg {
         fill: var(--primary-colour);
-        height: rem(22);
-        width: rem(22);
-
-        @include breakpoint(lg) {
-            height: rem($iconHeight);
-            width: rem($iconWidth);
-        }
-
+        height: rem($iconHeight);
+        width: rem($iconWidth);
     }
 
 }
@@ -173,19 +167,19 @@ $breakpoints: (xs: (min: rem(414),
 
 @mixin pattern($opacity: 0.4) {
     isolation: isolate;
-position: relative;
+    position: relative;
 
-&::after {
-    background: url('/pattern.png') 0 0 repeat;
-    bottom: 0;
-    content: '';
-    left: 0;
-    opacity: $opacity;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
-}
+    &::after {
+        background: url('/pattern.png') 0 0 repeat;
+        bottom: 0;
+        content: '';
+        left: 0;
+        opacity: $opacity;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+    }
 
 }
 

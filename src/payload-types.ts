@@ -298,9 +298,9 @@ export interface HeroBlock {
   image: number | Media;
   title: string;
   intro: string;
-  cta_button: {
-    label: string;
-    url: string;
+  cta_button?: {
+    label?: string | null;
+    url?: string | null;
   };
   id?: string | null;
   blockName?: string | null;

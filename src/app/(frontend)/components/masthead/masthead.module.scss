@@ -1,13 +1,11 @@
-
-
 .masthead {
-    height: rem(150);
+    height: rem(200);
     padding-bottom: rem(20);
     position: relative;
     z-index: 1;
 
-    @include breakpoint(lg) {
-        height: rem(200);
+    @include breakpoint(sm) {
+        height: rem(250);
     }
 
     @include breakpoint(xxl) {
