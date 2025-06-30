@@ -1,5 +1,3 @@
-
-
 .contactForm {
     display: flex;
     flex-direction: column;
@@ -13,35 +11,49 @@
         }
     }
 
-}
 
-.formFields {
-    display: grid;
-    gap: rem(25);
-    margin-bottom: rem(25);
 
-    @include breakpoint(sm) {
-        gap: rem(30);
-    }
+    .formFields {
+        display: grid;
+        gap: rem(25);
+        margin-bottom: rem(25);
 
-    @include breakpoint(lg) {
-        gap: rem(50);
-        margin-bottom: rem(40);
-    }
-
-    div:not(.contactFormCol) {
         @include breakpoint(sm) {
-            grid-column: span 2
+            gap: rem(30);
         }
+
+        @include breakpoint(lg) {
+            gap: rem(50);
+            margin-bottom: rem(40);
+        }
+
+        div:not(.contactFormCol) {
+            @include breakpoint(sm) {
+                grid-column: span 2
+            }
+        }
+
+    }
+
+    .error {
+        color: var(--negative-colour);
+        font-weight: var(--font-weight--bold);
+        margin: 0;
+        text-align: left;
     }
 
 }
 
 .thanks {
+
     text-align: center;
 
     h2 {
         margin-bottom: rem(20);
+    }
+
+    p {
+        color: var(--type-colour) !important;
     }
 
     a {

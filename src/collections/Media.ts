@@ -28,12 +28,6 @@ export const Media: CollectionConfig = {
                 fit: 'cover'
             },
             {
-                name: 'productHero',
-                width: 390,
-                height: 500,
-                fit: 'cover'
-            },
-            {
                 name: 'productThumbnail',
                 width: 390,
                 height: 500,
