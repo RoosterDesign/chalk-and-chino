@@ -1,0 +1,183 @@
+
+
+.container {
+    display: grid;
+
+    @include breakpoint(sm) {
+        gap: rem(60) rem(30);
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "img intro"
+            "tabs tabs";
+    }
+
+    @include breakpoint(md) {
+        gap: rem(40);
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr;
+        grid-template-areas:
+            "img intro"
+            "img tabs";
+    }
+
+    @include breakpoint(lg) {
+        gap: rem(50) rem(60);
+    }
+
+    @include breakpoint(xl) {
+        gap: rem(50) rem(85);
+    }
+
+}
+
+.leadImage {
+    margin-top: rem(30);
+    margin-bottom: rem(30);
+
+    @include breakpoint(sm) {
+        grid-area: img;
+        margin-top: rem(40);
+    }
+
+    @include breakpoint(lg) {
+        margin-top: rem(100);
+    }
+
+}
+
+.intro {
+    @include breakpoint(sm, max) {
+        margin-bottom: rem(50);
+    }
+
+    @include breakpoint(sm) {
+        grid-area: intro;
+        padding: rem(40) 0;
+    }
+
+    @include breakpoint(lg) {
+        padding-top: rem(100);
+    }
+}
+
+.title {
+    margin-top: rem(25);
+    margin-bottom: rem(10);
+
+    @include breakpoint(lg) {
+        margin-top: rem(30);
+        margin-bottom: rem(20);
+    }
+}
+
+.categoryLink {
+    @include textLink;
+}
+
+.price {
+    font-family: var(--heading-font);
+    font-size: rem(26);
+    margin-bottom: rem(20);
+
+    @include breakpoint(lg) {
+        font-size: rem(34);
+        margin-bottom: rem(40);
+    }
+
+}
+
+.synopsis {
+    margin-bottom: rem(30);
+}
+
+.tabs {
+    @include breakpoint(sm) {
+        grid-area: tabs;
+    }
+}
+
+.tabHeader {
+    display: grid;
+    gap: rem(20);
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    margin-bottom: rem(30);
+
+    @include breakpoint(xs) {
+        gap: rem(30);
+    }
+
+    @include breakpoint(lg) {
+        gap: rem(40);
+        margin-bottom: rem(45);
+    }
+
+}
+
+.tab {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    opacity: .8;
+
+    @include breakpoint(sm, max) {
+        font-size: rem(14);
+    }
+
+}
+
+.tabActive {
+    cursor: default;
+    font-weight: var(--font-weight--bold);
+    opacity: 1;
+    text-decoration: underline;
+    text-decoration-thickness: rem(2);
+    text-underline-offset: rem(8);
+}
+
+.bg {
+    @include breakpoint(sm, max) {
+        display: none;
+    }
+
+    @include breakpoint(sm) {
+        background: var(--secondary-colour);
+        display: block;
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        position: relative;
+        top: 0;
+        height: 100%;
+        z-index: -1;
+    }
+}
+
+.specificationTable {
+    border: rem(1) solid rgba(0, 0, 0, 0.15);
+    width: 100%;
+
+    tr {
+        background: var(--primary-colour);
+    }
+
+    tr:nth-child(odd) {
+        background: var(--secondary-colour);
+    }
+
+    td {
+        padding: rem(10) rem(15);
+
+        @include breakpoint(lg) {
+            padding: rem(15) rem(20);
+        }
+
+        &:first-child {
+            width: 25%;
+        }
+
+    }
+
+}

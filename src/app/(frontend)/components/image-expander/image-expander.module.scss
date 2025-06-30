@@ -1,0 +1,29 @@
+
+
+.img {
+    position: relative;
+
+    img {
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        display: block;
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+
+}
+
+.expandButton {
+    @include iconButton(50, 50, 22, 22);
+    opacity: .5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+}
+
+.img:hover .expandButton {
+    background: var(--button-bg--hover);
+    opacity: 1;
+}

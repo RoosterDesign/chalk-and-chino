@@ -1,0 +1,30 @@
+
+
+.productNav {
+    display: flex;
+
+    @include breakpoint(md, max) {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: rem(20);
+        padding-top: rem(20);
+    }
+
+    @include breakpoint(md) {
+        background: var(--product-nav-bg);
+        height: rem(50);
+    }
+
+    .container {
+
+        @include breakpoint(md, max) {
+            padding: 0;
+        }
+
+        @include breakpoint(md) {
+            align-items: center;
+            display: flex;
+        }
+
+    }
+
+}

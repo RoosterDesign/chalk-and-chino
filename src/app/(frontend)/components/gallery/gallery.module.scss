@@ -1,0 +1,28 @@
+.galleryGrid {
+    display: grid;
+    gap: rem(10);
+    grid-auto-rows: rem(150);
+    grid-template-columns: repeat(2, 1fr);
+
+    @include breakpoint(sm) {
+        gap: rem(20);
+        grid-auto-rows: rem(300);
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint(md) {
+        grid-auto-rows: rem(400);
+    }
+
+    @include breakpoint(lg) {
+        gap: rem(40);
+        grid-auto-rows: rem(640);
+    }
+
+    :global(.gallery-item-fw) {
+        @include breakpoint(sm) {
+            grid-column: 1 / 3;
+        }
+    }
+
+}

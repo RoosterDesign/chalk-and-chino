@@ -1,0 +1,38 @@
+import type { BannerBlock as BannerBlockProps } from '@/payload-types'
+
+import Container from '@/app/components/container/container';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import styles from './styles.module.scss';
+
+const BannerBlock: React.FC<BannerBlockProps> = ({ image, title, body, cta_button }) => {
+
+    return (
+        <section className={`${styles.banner} section-spacing`}>
+            <Container>
+                {title && <h2>{title}</h2>}
+                {body && <p>{body}</p>}
+                {cta_button?.url && (
+                    <Link className="btn" href={cta_button.url}>
+                        {cta_button.label}
+                    </Link>
+                )}
+            </Container>
+            {typeof image === 'object' &&
+                image?.sizes?.banner?.url &&
+                typeof image.sizes.banner.width === 'number' &&
+                typeof image.sizes.banner.height === 'number' && (
+                    <Image
+                        alt={image.alt || ''}
+                        height={image.sizes.banner.height}
+                        src={image.sizes.banner.url}
+                        width={image.sizes.banner.width}
+                    />
+                )
+            }
+        </section>
+    )
+}
+
+export default BannerBlock
