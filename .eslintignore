@@ -1,0 +1,10 @@
+# .eslintignore
+
+# Ignore your migrations folder
+src/migrations/
+
+# Ignore all files in the Payload admin area
+src/app/(payload)/**
+
+# Ignore any build or generated output
+.next/

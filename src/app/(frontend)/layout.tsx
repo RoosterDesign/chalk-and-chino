@@ -2,7 +2,6 @@ import Footer from "@/app/components/footer/footer";
 import Header from "@/app/components/header/header";
 import { ModalProvider } from "@/app/context/ModalContext";
 import { baskervville, libreBaskerville, sen } from "@/app/fonts";
-import "normalize.css";
 
 import "./globals.scss";
 

@@ -1,7 +1,5 @@
-/* global.css */
+@use 'node_modules/modern-normalize/modern-normalize.css'as *;
 @use './_mixins.scss'as *;
-// @use 'normalize.css'as *;/
-// @use './_mixins'as *;
 @use './vars.scss'as *;
 
 html,
@@ -163,6 +161,11 @@ p {
         margin-bottom: 0;
     }
 
+}
+
+button {
+    appearance: none;
+    -webkit-appearance: none
 }
 
 .btn {
