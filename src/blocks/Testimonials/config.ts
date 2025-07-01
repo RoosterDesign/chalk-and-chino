@@ -1,4 +1,3 @@
-import sectionHeader from "@/fields/sectionHeader";
 import { Block } from "payload";
 
 const TestimonialsBlock: Block = {
@@ -9,7 +8,6 @@ const TestimonialsBlock: Block = {
         plural: "Testimonials",
     },
     fields: [
-        sectionHeader,
         {
             name: "testimonials",
             label: "Select Testimonials or leave blank to randomly pick 3",

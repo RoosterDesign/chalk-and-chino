@@ -1,8 +1,7 @@
 "use client";
 
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
-import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import "@splidejs/react-splide/css/core";
 
 import "./carousel.scss";
@@ -51,9 +50,13 @@ const Carousel: React.FC<CarouselProps> = ({
     tabletPerPage = 2,
 }) => {
     const padding = hasPadding ? "150px " : "0";
-
     const slidesCount = React.Children.count(children);
-    const isSingleSlide = slidesCount === 1;
+
+    const canSlideMobile = slidesCount > mobilePerPage;
+    const canSlideTablet = slidesCount > tabletPerPage;
+    const canSlideDesktop = slidesCount > desktopPerPage;
+
+    console.log("slidesCount", slidesCount);
 
     return (
         <Splide
@@ -61,8 +64,8 @@ const Carousel: React.FC<CarouselProps> = ({
             options={{
                 type: infinite ? "loop" : "slide",
                 autoplay: autoPlay,
-                arrows,
-                drag: !isSingleSlide,
+                arrows: arrows && canSlideMobile,
+                drag: canSlideMobile,
                 gap: mobileGap,
                 mediaQuery: "min",
                 pagination,
@@ -70,14 +73,20 @@ const Carousel: React.FC<CarouselProps> = ({
                 perPage: mobilePerPage,
                 breakpoints: {
                     1280: {
+                        // arrows: arrows && canSlideDesktop,
                         destroy: mobileOnly,
+                        // drag: canSlideDesktop,
                     },
                     768: {
+                        arrows: arrows && canSlideTablet,
                         gap: tabletGap,
+                        drag: canSlideTablet,
                         perPage: tabletPerPage,
                     },
                     992: {
+                        arrows: arrows && canSlideDesktop,
                         gap: desktopGap,
+                        drag: canSlideDesktop,
                         padding,
                         perPage: desktopPerPage,
                     },
@@ -90,14 +99,17 @@ const Carousel: React.FC<CarouselProps> = ({
                 ))}
             </SplideTrack>
 
-            <div className="splide__arrows">
-                <button className="splide__arrow splide__arrow--prev">
-                    {arrowIcon}
-                </button>
-                <button className="splide__arrow splide__arrow--next">
-                    {arrowIcon}
-                </button>
-            </div>
+            {arrows &&
+                (canSlideMobile || canSlideTablet || canSlideDesktop) && (
+                    <div className="splide__arrows">
+                        <button className="splide__arrow splide__arrow--prev">
+                            {arrowIcon}
+                        </button>
+                        <button className="splide__arrow splide__arrow--next">
+                            {arrowIcon}
+                        </button>
+                    </div>
+                )}
         </Splide>
     );
 };

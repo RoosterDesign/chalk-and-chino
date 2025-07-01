@@ -100,6 +100,7 @@ export interface Config {
     'all-products-category': AllProductsCategory;
     'payment-delivery-details': PaymentDeliveryDetail;
     map: Map;
+    'testimonials-settings': TestimonialsSetting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
@@ -107,6 +108,7 @@ export interface Config {
     'all-products-category': AllProductsCategorySelect<false> | AllProductsCategorySelect<true>;
     'payment-delivery-details': PaymentDeliveryDetailsSelect<false> | PaymentDeliveryDetailsSelect<true>;
     map: MapSelect<false> | MapSelect<true>;
+    'testimonials-settings': TestimonialsSettingsSelect<false> | TestimonialsSettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -279,6 +281,7 @@ export interface Page {
     | GalleryTextBannerBlock
     | GalleryBlock
     | MastheadBlock
+    | MapBlock
   )[];
   updatedAt: string;
   createdAt: string;
@@ -393,15 +396,6 @@ export interface KeySellingPointsBlock {
  * via the `definition` "TestimonialsBlock".
  */
 export interface TestimonialsBlock {
-  sectionHeader: {
-    centered?: boolean | null;
-    title: string;
-    synopsis?: string | null;
-    link?: {
-      label?: string | null;
-      url?: string | null;
-    };
-  };
   testimonials?: (number | Testimonial)[] | null;
   id?: string | null;
   blockName?: string | null;
@@ -498,6 +492,15 @@ export interface MastheadBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'masthead';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MapBlock".
+ */
+export interface MapBlock {
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'map';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -822,6 +825,7 @@ export interface PagesSelect<T extends boolean = true> {
         galleryTextBanner?: T | GalleryTextBannerBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
         masthead?: T | MastheadBlockSelect<T>;
+        map?: T | MapBlockSelect<T>;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -886,19 +890,6 @@ export interface KeySellingPointsBlockSelect<T extends boolean = true> {
  * via the `definition` "TestimonialsBlock_select".
  */
 export interface TestimonialsBlockSelect<T extends boolean = true> {
-  sectionHeader?:
-    | T
-    | {
-        centered?: T;
-        title?: T;
-        synopsis?: T;
-        link?:
-          | T
-          | {
-              label?: T;
-              url?: T;
-            };
-      };
   testimonials?: T;
   id?: T;
   blockName?: T;
@@ -970,6 +961,14 @@ export interface GalleryBlockSelect<T extends boolean = true> {
 export interface MastheadBlockSelect<T extends boolean = true> {
   image?: T;
   title?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MapBlock_select".
+ */
+export interface MapBlockSelect<T extends boolean = true> {
   id?: T;
   blockName?: T;
 }
@@ -1172,6 +1171,24 @@ export interface Map {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials-settings".
+ */
+export interface TestimonialsSetting {
+  id: number;
+  sectionHeader: {
+    centered?: boolean | null;
+    title: string;
+    synopsis?: string | null;
+    link?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1243,6 +1260,28 @@ export interface MapSelect<T extends boolean = true> {
             };
       };
   embedCode?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials-settings_select".
+ */
+export interface TestimonialsSettingsSelect<T extends boolean = true> {
+  sectionHeader?:
+    | T
+    | {
+        centered?: T;
+        title?: T;
+        synopsis?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

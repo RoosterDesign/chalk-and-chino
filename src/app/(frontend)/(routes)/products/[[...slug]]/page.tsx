@@ -1,10 +1,10 @@
 import Gallery from "@/app/components/gallery/gallery";
-import Map from "@/app/components/map/map";
 import Masthead from "@/app/components/masthead/masthead";
 import NoResults from "@/app/components/no-results/no-results";
 import ProductDetails from "@/app/components/product-details/product-details";
 import ProductsList from "@/app/components/products-list/products-list";
 import CategoryGridLoader from "@/blocks/CategoryGrid/Loader";
+import Map from "@/blocks/Map/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
 import { getAllProductsCategory } from "@/lib/products/getAllProductsCategory";
 import { getProductBySlug } from "@/lib/products/getProductBySlug";

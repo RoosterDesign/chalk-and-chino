@@ -5,6 +5,10 @@
         margin-bottom: rem(40);
     }
 
+    @include breakpoint(xl) {
+        margin-bottom: rem(60);
+    }
+
     hgroup {
         align-items: center;
         display: flex;

@@ -10,6 +10,9 @@ import CategoryGridBlock from "../../blocks/CategoryGrid/config";
 import FeaturedProductsBlock from "../../blocks/FeaturedProducts/config";
 import GalleryBlock from "../../blocks/Gallery/config";
 import GalleryTextBannerBlock from "../../blocks/GalleryTextBanner/config";
+import HeroBlock from "../../blocks/Hero/config";
+import KeySellingPointsBlock from "../../blocks/KeySellingPoints/config";
+import MapBlock from "../../blocks/Map/config";
 // import {
 //     MetaDescriptionField,
 //     MetaImageField,
@@ -17,8 +20,6 @@ import GalleryTextBannerBlock from "../../blocks/GalleryTextBanner/config";
 //     OverviewField,
 //     PreviewField,
 // } from '@payloadcms/plugin-seo/fields'
-import HeroBlock from "../../blocks/Hero/config";
-import KeySellingPointsBlock from "../../blocks/KeySellingPoints/config";
 import MastheadBlock from "../../blocks/Masthead/config";
 import TestimonialsBlock from "../../blocks/Testimonials/config";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
@@ -79,6 +80,7 @@ export const Pages: CollectionConfig = {
                 GalleryTextBannerBlock,
                 GalleryBlock,
                 MastheadBlock,
+                MapBlock,
             ],
         },
     ],

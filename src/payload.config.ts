@@ -18,6 +18,7 @@ import { Footer } from "./globals/footer";
 import { Header } from "./globals/header";
 import { Map } from "./globals/map";
 import { PaymentDeliveryDetails } from "./globals/payment-delivery-details";
+import { TestimonialsSettings } from "./globals/testimonialsSettings";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -59,7 +60,14 @@ export default buildConfig({
         Products,
         Testimonials,
     ],
-    globals: [Header, Footer, AllProductsCategory, PaymentDeliveryDetails, Map],
+    globals: [
+        Header,
+        Footer,
+        AllProductsCategory,
+        PaymentDeliveryDetails,
+        Map,
+        TestimonialsSettings,
+    ],
     db: postgresAdapter({
         pool: {
             connectionString: process.env.PAYLOAD_DATABASE_URL || "",

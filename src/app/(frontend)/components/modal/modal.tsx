@@ -16,8 +16,6 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
     if (!isOpen) return null;
 
-    console.log("isImageOnly", isImageOnly);
-
     return (
         <>
             <div

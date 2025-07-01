@@ -1,6 +1,6 @@
 import ContactForm from "@/app/components/contact-form/contact-form";
 import Container from "@/app/components/container/container";
-import Map from "@/app/components/map/map";
+import Map from "@/blocks/Map/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
 
 import styles from "./styles.module.scss";
@@ -23,7 +23,7 @@ const Contact: React.FC = () => {
                 </Container>
             </section>
             <Testimonials />
-            {/* <Map /> */}
+            <Map />
         </>
     );
 };
