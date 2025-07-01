@@ -1,15 +1,15 @@
-'use client';
-import type { Media } from '@/payload-types'
+"use client";
+import type { Media } from "@/payload-types";
 
-import Container from '@/app/components/container/container';
-import ImageExpander from '@/app/components/image-expander/image-expander';
+import Container from "@/app/components/container/container";
+import ImageExpander from "@/app/components/image-expander/image-expander";
 
-import styles from './gallery.module.scss';
+import styles from "./gallery.module.scss";
 
 type GalleryImage = {
-    id?: null | string
+    id?: null | string;
     image: Media | number;
-    thumbnailSize: 'full' | 'half'
+    thumbnailSize: "full" | "half";
 };
 
 type GalleryProps = {
@@ -17,24 +17,24 @@ type GalleryProps = {
 };
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
-
     return (
         <section className="section-spacing">
             <Container>
                 <div className={styles.galleryGrid}>
-                    {images.map(image => {
-
-                        if (typeof image.image === 'object' && image.image?.url) {
-
+                    {images.map((image) => {
+                        if (
+                            typeof image.image === "object" &&
+                            image.image?.url
+                        ) {
                             const thumb = image.image.sizes?.galleryThumbnail;
-                            const thumbFullWidth = image.image.sizes?.galleryFullThumbnail;
-                            const full = image.image.sizes?.modalPreview;
+                            const thumbFullWidth =
+                                image.image.sizes?.galleryFullThumbnail;
 
-                            let thumbSrc
-                            let thumbHeight
-                            let thumbWidth
+                            let thumbSrc;
+                            let thumbHeight;
+                            let thumbWidth;
 
-                            if (image.thumbnailSize === 'half') {
+                            if (image.thumbnailSize === "half") {
                                 thumbSrc = thumb?.url;
                                 thumbHeight = thumb?.height;
                                 thumbWidth = thumb?.width;
@@ -46,15 +46,17 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
 
                             return (
                                 <ImageExpander
-                                    alt={image.image.alt || ''}
-                                    className={image.thumbnailSize === 'full' ? 'gallery-item-fw' : undefined}
-                                    height={image.image.height!}
+                                    alt={image.image.alt || ""}
+                                    className={
+                                        image.thumbnailSize === "full"
+                                            ? "gallery-item-fw"
+                                            : undefined
+                                    }
                                     key={image.id}
                                     src={image.image.url ?? thumbSrc}
                                     thumbHeight={thumbHeight!}
                                     thumbSrc={thumbSrc ?? image.image.url}
                                     thumbWidth={thumbWidth!}
-                                    width={full?.width!}
                                 />
                             );
                         }
@@ -62,7 +64,7 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                 </div>
             </Container>
         </section>
-    )
-}
+    );
+};
 
 export default Gallery;

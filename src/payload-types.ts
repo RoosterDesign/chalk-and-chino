@@ -240,14 +240,6 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    galleryCarouselThumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
     modalPreview?: {
       url?: string | null;
       width?: number | null;
@@ -312,7 +304,6 @@ export interface HeroBlock {
  */
 export interface FeaturedProductsBlock {
   sectionHeader: {
-    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -400,7 +391,6 @@ export interface KeySellingPointsBlock {
  */
 export interface TestimonialsBlock {
   sectionHeader: {
-    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -481,7 +471,6 @@ export interface GalleryTextBannerBlock {
  */
 export interface GalleryBlock {
   sectionHeader: {
-    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -790,16 +779,6 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        galleryCarouselThumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
         modalPreview?:
           | T
           | {
@@ -868,7 +847,6 @@ export interface FeaturedProductsBlockSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
-        centered?: T;
         title?: T;
         synopsis?: T;
         link?:
@@ -905,7 +883,6 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
-        centered?: T;
         title?: T;
         synopsis?: T;
         link?:
@@ -965,7 +942,6 @@ export interface GalleryBlockSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
-        centered?: T;
         title?: T;
         synopsis?: T;
         link?:
@@ -1160,10 +1136,15 @@ export interface AllProductsCategory {
  */
 export interface PaymentDeliveryDetail {
   id: number;
-  /**
-   * This text will appear on the product details page.
-   */
-  customText?: string | null;
+  sectionHeader: {
+    title: string;
+    synopsis?: string | null;
+    link?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  embedCode: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1216,7 +1197,19 @@ export interface AllProductsCategorySelect<T extends boolean = true> {
  * via the `definition` "payment-delivery-details_select".
  */
 export interface PaymentDeliveryDetailsSelect<T extends boolean = true> {
-  customText?: T;
+  sectionHeader?:
+    | T
+    | {
+        title?: T;
+        synopsis?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  embedCode?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

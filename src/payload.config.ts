@@ -13,10 +13,11 @@ import { ProductCategories } from "./collections/ProductCategories";
 import { Products } from "./collections/Products";
 import { Testimonials } from "./collections/Testimonials";
 import { Users } from "./collections/Users";
-import { AllProductsCategory } from './globals/all-products-category'
-import { Footer } from './globals/footer'
-import { Header } from './globals/header'
-import { PaymentDeliveryDetails } from './globals/payment-delivery-details'
+import { AllProductsCategory } from "./globals/all-products-category";
+import { Footer } from "./globals/footer";
+import { Header } from "./globals/header";
+import { Map } from "./globals/map";
+import { PaymentDeliveryDetails } from "./globals/payment-delivery-details";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -30,28 +31,35 @@ export default buildConfig({
         livePreview: {
             breakpoints: [
                 {
-                    label: 'Mobile',
-                    name: 'mobile',
+                    label: "Mobile",
+                    name: "mobile",
                     width: 375,
                     height: 667,
                 },
                 {
-                    label: 'Tablet',
-                    name: 'tablet',
+                    label: "Tablet",
+                    name: "tablet",
                     width: 768,
                     height: 1024,
                 },
                 {
-                    label: 'Desktop',
-                    name: 'desktop',
+                    label: "Desktop",
+                    name: "desktop",
                     width: 1440,
                     height: 900,
                 },
             ],
         },
     },
-    collections: [Users, Media, Pages, ProductCategories, Products, Testimonials],
-    globals: [Header, Footer, AllProductsCategory, PaymentDeliveryDetails],
+    collections: [
+        Users,
+        Media,
+        Pages,
+        ProductCategories,
+        Products,
+        Testimonials,
+    ],
+    globals: [Header, Footer, AllProductsCategory, PaymentDeliveryDetails, Map],
     db: postgresAdapter({
         pool: {
             connectionString: process.env.PAYLOAD_DATABASE_URL || "",

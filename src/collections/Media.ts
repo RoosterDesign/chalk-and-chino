@@ -1,80 +1,75 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from "payload";
 
 export const Media: CollectionConfig = {
-    slug: 'media',
+    slug: "media",
     access: {
         read: () => true,
     },
     fields: [
         {
-            name: 'alt',
-            type: 'text',
+            name: "alt",
+            type: "text",
             required: false,
         },
     ],
     upload: {
-        staticDir: 'media',
+        staticDir: "media",
         imageSizes: [
             {
-                name: 'hero',
+                name: "hero",
                 width: 1920,
                 height: 750,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'masthead',
+                name: "masthead",
                 width: 1920,
                 height: 300,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'productThumbnail',
+                name: "productThumbnail",
                 width: 390,
                 height: 500,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'categoryBanner',
+                name: "categoryBanner",
                 width: 992,
                 height: 325,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'banner',
+                name: "banner",
                 width: 1920,
                 height: 900,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'galleryTextBanner',
+                name: "galleryTextBanner",
                 width: 330,
                 height: 480,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'galleryThumbnail',
+                name: "galleryThumbnail",
                 width: 820,
                 height: 615,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'galleryFullThumbnail',
+                name: "galleryFullThumbnail",
                 width: 1680,
                 height: 640,
-                fit: 'cover'
+                fit: "cover",
             },
             {
-                name: 'galleryCarouselThumbnail',
-                width: 560,
-                height: 500,
-                fit: 'cover'
-            },
-            {
-                name: 'modalPreview',
-                width: 1140,
-                fit: 'inside'
+                name: "modalPreview",
+                height: 1100,
+                width: 1440,
+                fit: "cover",
             },
         ],
-        mimeTypes: ['image/*'],
+        mimeTypes: ["image/*"],
     },
-}
+};
