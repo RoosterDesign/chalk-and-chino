@@ -75,7 +75,7 @@
     }
 
     .splide__arrow {
-        @include iconButton(50, 50, 12, 16);
+        @include iconButton(50, 50, 12, 16, 12, 16);
         margin: 0 rem(10);
 
         &--prev {

@@ -1,5 +1,3 @@
-
-
 .modalMask {
     background: rgba(0, 0, 0, 0.9);
     height: 100%;
@@ -27,18 +25,18 @@
     z-index: 999;
 
     @include breakpoint(lg) {
-        // max-width: rem(1440);
         max-width: rem(1140);
     }
 
 }
 
 .modalClose {
-    @include iconButton;
+    @include iconButton($mobileIconHeight: 18, $mobileIconWidth: 18);
     border-radius: 0 0 0 var(--border-radius);
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 1;
 }
 
 .modalContent {
@@ -54,6 +52,7 @@
     }
 
     img {
+        aspect-ratio: 4 / 3;
         display: block;
         height: 100%;
         object-fit: cover;
@@ -75,6 +74,11 @@
 }
 
 .imageOnly {
+    background: none;
     overflow: hidden;
     padding: 0;
+}
+
+.imgWrapper {
+    aspect-ratio: 4 / 3;
 }

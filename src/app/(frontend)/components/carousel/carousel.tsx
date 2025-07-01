@@ -21,12 +21,12 @@ const arrowIcon = (
 
 type CarouselProps = {
     arrows?: boolean;
-    arrowsInline?: boolean;
     autoPlay?: boolean;
     children: React.ReactNode;
     desktopGap?: string;
     desktopPerPage?: number;
     hasPadding?: boolean;
+    infinite?: boolean;
     mobileGap?: string;
     mobileOnly?: boolean;
     mobilePerPage?: number;
@@ -37,6 +37,7 @@ type CarouselProps = {
 
 const Carousel: React.FC<CarouselProps> = ({
     autoPlay = false,
+    infinite = false,
     arrows = false,
     children,
     desktopGap = "30px",
@@ -48,17 +49,20 @@ const Carousel: React.FC<CarouselProps> = ({
     pagination = true,
     tabletGap = "30px",
     tabletPerPage = 2,
-    arrowsInline = true,
 }) => {
     const padding = hasPadding ? "150px " : "0";
+
+    const slidesCount = React.Children.count(children);
+    const isSingleSlide = slidesCount === 1;
 
     return (
         <Splide
             hasTrack={false}
             options={{
-                type: "loop",
+                type: infinite ? "loop" : "slide",
                 autoplay: autoPlay,
                 arrows,
+                drag: !isSingleSlide,
                 gap: mobileGap,
                 mediaQuery: "min",
                 pagination,
@@ -86,9 +90,7 @@ const Carousel: React.FC<CarouselProps> = ({
                 ))}
             </SplideTrack>
 
-            <div
-                className={`splide__arrows ${arrowsInline && "splide__arrows--inline"}`}
-            >
+            <div className="splide__arrows">
                 <button className="splide__arrow splide__arrow--prev">
                     {arrowIcon}
                 </button>

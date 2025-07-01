@@ -133,7 +133,7 @@ $breakpoints: (xs: (min: rem(414),
 
 }
 
-@mixin iconButton($height: 75, $width: 75, $iconHeight: 32, $iconWidth: 32) {
+@mixin iconButton($height: 75, $width: 75, $iconHeight: 32, $iconWidth: 32, $mobileIconHeight: 32, $mobileIconWidth: 32) {
     align-items: center;
     background: var(--button-bg);
     border-radius: var(--border-radius);
@@ -158,8 +158,14 @@ $breakpoints: (xs: (min: rem(414),
 
     svg {
         fill: var(--primary-colour);
-        height: rem($iconHeight);
-        width: rem($iconWidth);
+        height: rem($mobileIconHeight);
+        width: rem($mobileIconWidth);
+
+        @include breakpoint(lg) {
+            height: rem($iconHeight);
+            width: rem($iconWidth);
+        }
+
     }
 
 }

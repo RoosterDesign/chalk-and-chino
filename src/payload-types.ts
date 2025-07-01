@@ -99,12 +99,14 @@ export interface Config {
     footer: Footer;
     'all-products-category': AllProductsCategory;
     'payment-delivery-details': PaymentDeliveryDetail;
+    map: Map;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'all-products-category': AllProductsCategorySelect<false> | AllProductsCategorySelect<true>;
     'payment-delivery-details': PaymentDeliveryDetailsSelect<false> | PaymentDeliveryDetailsSelect<true>;
+    map: MapSelect<false> | MapSelect<true>;
   };
   locale: null;
   user: User & {
@@ -233,14 +235,6 @@ export interface Media {
       filename?: string | null;
     };
     galleryFullThumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    galleryCarouselThumbnail?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -790,16 +784,6 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        galleryCarouselThumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
         modalPreview?:
           | T
           | {
@@ -1169,6 +1153,25 @@ export interface PaymentDeliveryDetail {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "map".
+ */
+export interface Map {
+  id: number;
+  sectionHeader: {
+    centered?: boolean | null;
+    title: string;
+    synopsis?: string | null;
+    link?: {
+      label?: string | null;
+      url?: string | null;
+    };
+  };
+  embedCode: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1217,6 +1220,29 @@ export interface AllProductsCategorySelect<T extends boolean = true> {
  */
 export interface PaymentDeliveryDetailsSelect<T extends boolean = true> {
   customText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "map_select".
+ */
+export interface MapSelect<T extends boolean = true> {
+  sectionHeader?:
+    | T
+    | {
+        centered?: T;
+        title?: T;
+        synopsis?: T;
+        link?:
+          | T
+          | {
+              label?: T;
+              url?: T;
+            };
+      };
+  embedCode?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
