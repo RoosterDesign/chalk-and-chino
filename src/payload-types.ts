@@ -99,12 +99,14 @@ export interface Config {
     footer: Footer;
     'all-products-category': AllProductsCategory;
     'payment-delivery-details': PaymentDeliveryDetail;
+    map: Map;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     'all-products-category': AllProductsCategorySelect<false> | AllProductsCategorySelect<true>;
     'payment-delivery-details': PaymentDeliveryDetailsSelect<false> | PaymentDeliveryDetailsSelect<true>;
+    map: MapSelect<false> | MapSelect<true>;
   };
   locale: null;
   user: User & {
@@ -304,6 +306,7 @@ export interface HeroBlock {
  */
 export interface FeaturedProductsBlock {
   sectionHeader: {
+    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -391,6 +394,7 @@ export interface KeySellingPointsBlock {
  */
 export interface TestimonialsBlock {
   sectionHeader: {
+    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -471,6 +475,7 @@ export interface GalleryTextBannerBlock {
  */
 export interface GalleryBlock {
   sectionHeader: {
+    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -847,6 +852,7 @@ export interface FeaturedProductsBlockSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
+        centered?: T;
         title?: T;
         synopsis?: T;
         link?:
@@ -883,6 +889,7 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
+        centered?: T;
         title?: T;
         synopsis?: T;
         link?:
@@ -942,6 +949,7 @@ export interface GalleryBlockSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
+        centered?: T;
         title?: T;
         synopsis?: T;
         link?:
@@ -1136,7 +1144,21 @@ export interface AllProductsCategory {
  */
 export interface PaymentDeliveryDetail {
   id: number;
+  /**
+   * This text will appear on the product details page.
+   */
+  customText?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "map".
+ */
+export interface Map {
+  id: number;
   sectionHeader: {
+    centered?: boolean | null;
     title: string;
     synopsis?: string | null;
     link?: {
@@ -1197,9 +1219,20 @@ export interface AllProductsCategorySelect<T extends boolean = true> {
  * via the `definition` "payment-delivery-details_select".
  */
 export interface PaymentDeliveryDetailsSelect<T extends boolean = true> {
+  customText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "map_select".
+ */
+export interface MapSelect<T extends boolean = true> {
   sectionHeader?:
     | T
     | {
+        centered?: T;
         title?: T;
         synopsis?: T;
         link?:

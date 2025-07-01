@@ -4,12 +4,12 @@ const sectionHeader: Field = {
     name: "sectionHeader",
     type: "group",
     fields: [
-        // {
-        //     name: "centered",
-        //     label: "Center Text",
-        //     type: "checkbox",
-        //     defaultValue: false,
-        // },
+        {
+            name: "centered",
+            label: "Center Text",
+            type: "checkbox",
+            defaultValue: false,
+        },
         {
             name: "title",
             type: "text",
