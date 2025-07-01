@@ -1,5 +1,3 @@
-
-
 .container {
     display: grid;
 
@@ -101,7 +99,7 @@
     gap: rem(20);
     grid-auto-columns: max-content;
     grid-auto-flow: column;
-    margin-bottom: rem(30);
+    margin-bottom: rem(40);
 
     @include breakpoint(xs) {
         gap: rem(30);
@@ -109,7 +107,7 @@
 
     @include breakpoint(lg) {
         gap: rem(40);
-        margin-bottom: rem(45);
+        margin-bottom: rem(50);
     }
 
 }
@@ -117,12 +115,17 @@
 .tab {
     background: none;
     border: none;
+    color: var(--type-colour);
     cursor: pointer;
     outline: none;
     opacity: .8;
 
     @include breakpoint(sm, max) {
         font-size: rem(14);
+    }
+
+    &:hover {
+        opacity: 1;
     }
 
 }
@@ -157,21 +160,29 @@
 
 .specificationTable {
     border: rem(1) solid rgba(0, 0, 0, 0.15);
+    border-spacing: 0;
     width: 100%;
 
     tr {
         background: var(--primary-colour);
-    }
 
-    tr:nth-child(odd) {
-        background: var(--secondary-colour);
+        &>td:first-child {
+            background: var(--secondary-colour);
+            border-right: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        &:last-child td {
+            border-bottom: none;
+        }
+
     }
 
     td {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
         padding: rem(10) rem(15);
 
         @include breakpoint(lg) {
-            padding: rem(15) rem(20);
+            padding: rem(20);
         }
 
         &:first-child {

@@ -1129,6 +1129,10 @@ export interface Header {
  */
 export interface Footer {
   id: number;
+  /**
+   * This text will appear in the footer.
+   */
+  footerText: string;
   footerLinks?:
     | {
         label: string;
@@ -1184,6 +1188,7 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  footerText?: T;
   footerLinks?:
     | T
     | {

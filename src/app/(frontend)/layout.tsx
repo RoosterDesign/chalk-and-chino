@@ -5,11 +5,10 @@ import { baskervville, libreBaskerville, sen } from "@/app/fonts";
 
 import "./globals.scss";
 
+import { getFooterData } from "@/lib/footer/getFooterData";
+import { getHeaderNav } from "@/lib/nav/getHeaderNav";
 import { getProductCategories } from "@/lib/products/getProductCategories";
 import React from "react";
-
-import { getFooterNav } from "../../lib/nav/getFooterNav";
-import { getHeaderNav } from "../../lib/nav/getHeaderNav";
 
 export const metadata = {
     description: "A blank template using Payload in a Next.js app.",
@@ -20,7 +19,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     const { children } = props;
 
     const mainNavItems = await getHeaderNav();
-    const footerNavItems = await getFooterNav();
+    const { footerText, footerLinks } = await getFooterData();
     const rawProductCategories = await getProductCategories();
 
     const productCategories = [
@@ -41,7 +40,8 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                     />
                     {children}
                     <Footer
-                        footerNavItems={footerNavItems}
+                        footerNavItems={footerLinks}
+                        footerText={footerText}
                         mainNavItems={mainNavItems}
                         productCategories={productCategories}
                     />
