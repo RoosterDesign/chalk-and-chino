@@ -24,7 +24,7 @@ const CategoryGridBlock: React.FC<Props> = ({ categories, title }) => {
         <section className={`${styles.categoryGrid} section-spacing`}>
             <Container>
                 <SectionHeader title={title} />
-                <Carousel arrows arrowsInline autoPlay>
+                <Carousel arrowsInline autoPlay>
                     {categories.map((category) => (
                         <Link
                             className={styles.categoryCard}

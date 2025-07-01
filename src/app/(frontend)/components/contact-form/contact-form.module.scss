@@ -11,8 +11,6 @@
         }
     }
 
-
-
     .formFields {
         display: grid;
         gap: rem(25);
@@ -44,6 +42,40 @@
 
 }
 
+.processing {
+    align-items: center;
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    z-index: 99;
+}
+
+.spinner {
+    animation: rotation 1.5s linear infinite;
+    border: rem(3) solid var(--type-colour);
+    border-radius: 50%;
+    display: inline-block;
+    height: rem(80);
+    position: relative;
+    width: rem(80);
+
+    &::after {
+        border: rem(5) solid transparent;
+        border-bottom-color: var(--accent);
+        border-radius: 50%;
+        content: '';
+        height: rem(70);
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: rem(70);
+    }
+
+}
+
 .thanks {
 
     text-align: center;
@@ -60,4 +92,14 @@
         @include textLink;
     }
 
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

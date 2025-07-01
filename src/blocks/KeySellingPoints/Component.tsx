@@ -11,7 +11,7 @@ const KeySellingPointsBlock: React.FC<KeySellingPointsBlockProps> = ({
     return (
         <section className={styles.sellingPoints}>
             <Container>
-                <Carousel arrows autoPlay mobileGap="" tabletGap="">
+                <Carousel autoPlay mobileGap="" tabletGap="">
                     {points.map((point) => {
                         return (
                             <dl key={point.id}>
