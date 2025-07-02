@@ -48,7 +48,11 @@ const Header: React.FC<HeaderProps> = ({ mainNavItems, productCategories }) => {
                     <nav
                         className={`${styles.nav} ${isOpen ? styles.navOpen : ""}`}
                     >
-                        <NavLinks isPrimary navItems={combinedNavItems} />
+                        <NavLinks
+                            isPrimary
+                            navContext="main"
+                            navItems={combinedNavItems}
+                        />
                     </nav>
                     <SocialLinks />
                     <button
