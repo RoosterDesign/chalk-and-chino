@@ -11,6 +11,7 @@
         "payload": "payload",
         "migrate": "payload migrate",
         "migrate:create": "payload migrate:create",
+        "generate:importmap": "payload generate:importmap",
         "generate:types": "payload generate:types"
     },
     "dependencies": {
@@ -19,6 +20,7 @@
         "@payloadcms/live-preview-react": "3.36.1",
         "@payloadcms/next": "3.36.1",
         "@payloadcms/payload-cloud": "3.36.1",
+        "@payloadcms/plugin-seo": "3.36.1",
         "@payloadcms/richtext-lexical": "3.36.1",
         "@payloadcms/ui": "3.36.1",
         "@splidejs/react-splide": "^0.7.12",

@@ -1,0 +1,16 @@
+.wysiwyg {
+    margin: rem(50) auto;
+    max-width: rem(800);
+
+    @include breakpoint(lg) {
+        margin: rem(100) auto;
+    }
+
+    h1 {
+        margin-bottom: rem(20);
+    }
+
+    a {
+        @include textLink;
+    }
+}

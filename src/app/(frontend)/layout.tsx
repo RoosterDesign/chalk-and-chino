@@ -1,19 +1,20 @@
+import React from "react";
+
 import Footer from "@/app/components/footer/footer";
 import Header from "@/app/components/header/header";
 import { ModalProvider } from "@/app/context/ModalContext";
-import { baskervville, libreBaskerville, sen } from "@/app/fonts";
 
 import "./globals.scss";
 
+import { baskervville, libreBaskerville, sen } from "@/app/fonts";
 import { getFooterData } from "@/lib/footer/getFooterData";
 import { getHeaderNav } from "@/lib/nav/getHeaderNav";
 import { getProductCategories } from "@/lib/products/getProductCategories";
-import React from "react";
 
-export const metadata = {
-    description: "A blank template using Payload in a Next.js app.",
-    title: "Payload Blank Template",
-};
+// export const metadata = {
+//     description: "A blank template using Payload in a Next.js app.",
+//     title: "Payload Blank Template",
+// };
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
     const { children } = props;

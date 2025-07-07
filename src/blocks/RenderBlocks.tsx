@@ -1,9 +1,10 @@
-import type { Page } from "@/payload-types";
-
 import React, { Fragment } from "react";
+
+import type { Page } from "@/payload-types";
 
 import BannerBlock from "./Banner/Component";
 import CategoryGridBlockLoader from "./CategoryGrid/Loader";
+import ContactBlock from "./Contact/Component";
 import FeaturedProductsBlock from "./FeaturedProducts/Component";
 import GalleryBlock from "./Gallery/Component";
 import GalleryTextBannerBlock from "./GalleryTextBanner/Component";
@@ -12,6 +13,7 @@ import KeySellingPointsBlock from "./KeySellingPoints/Component";
 import MapBlock from "./Map/Component";
 import MastheadBlock from "./Masthead/Component";
 import TestimonialsBlock from "./Testimonials/Component";
+import WysiwygBlock from "./Wysiwyg/Component";
 
 const blockComponents: Record<string, React.ComponentType<any>> = {
     hero: HeroBlock,
@@ -23,6 +25,8 @@ const blockComponents: Record<string, React.ComponentType<any>> = {
     banner: BannerBlock,
     galleryTextBanner: GalleryTextBannerBlock,
     gallery: GalleryBlock,
+    wysiwyg: WysiwygBlock,
+    contact: ContactBlock,
     masthead: MastheadBlock,
 };
 export const RenderBlocks: React.FC<{

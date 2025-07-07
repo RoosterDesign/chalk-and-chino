@@ -1,6 +1,7 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
+import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
 import { buildConfig } from "payload";
@@ -76,7 +77,15 @@ export default buildConfig({
     editor: lexicalEditor(),
     plugins: [
         payloadCloudPlugin(),
-        // storage-adapter-placeholder
+        seoPlugin({
+            collections: ['pages', 'product-categories', 'products'],
+            uploadsCollection: 'media',
+            // generateTitle: ({ doc }) => `Chalk & Chino — ${doc.title}`,
+            // generateDescription: ({ doc }) => doc.plaintext,
+            // generateURL: ({ doc, collectionSlug}) => `https://example.com/${collectionSlug}/${doc?.slug}`,
+            // tabbedUI: true
+            // doc.excerpt
+        }),
     ],
     secret: process.env.PAYLOAD_SECRET || "",
     sharp,

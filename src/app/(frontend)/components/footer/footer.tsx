@@ -27,6 +27,8 @@ const Footer: React.FC<FooterProps> = ({
     const currentPath = usePathname();
     const year = new Date().getFullYear();
 
+    const isInProductsSection = currentPath.startsWith("/products");
+
     return (
         <footer className={styles.footer}>
             <Container className={styles.container}>
@@ -38,21 +40,25 @@ const Footer: React.FC<FooterProps> = ({
                 <div className={styles.footerCol}>
                     <h4>Navigation</h4>
                     <ul className={styles.footerLinks}>
-                        {mainNavItems.map((item, i) => (
-                            <li key={i}>
-                                <Link
-                                    className={
-                                        currentPath === item.url
-                                            ? styles.isActive
-                                            : ""
-                                    }
-                                    href={item.url}
-                                    title={item.label}
-                                >
-                                    {item.label}
-                                </Link>
-                            </li>
-                        ))}
+                        {mainNavItems.map((item, i) => {
+                            const isActive =
+                                item.url === "/products"
+                                    ? isInProductsSection
+                                    : currentPath === item.url;
+                            return (
+                                <li key={i}>
+                                    <Link
+                                        className={
+                                            isActive ? styles.isActive : ""
+                                        }
+                                        href={item.url}
+                                        title={item.label}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
 

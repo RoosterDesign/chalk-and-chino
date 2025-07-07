@@ -279,10 +279,20 @@ export interface Page {
     | TestimonialsBlock
     | BannerBlock
     | GalleryTextBannerBlock
+    | WysiwygBlock
+    | ContactBlock
     | GalleryBlock
     | MastheadBlock
     | MapBlock
   )[];
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -357,6 +367,14 @@ export interface Product {
    * Optional override. If left blank, the default site-wide text will be used.
    */
   customPaymentDelivery?: string | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -374,6 +392,14 @@ export interface ProductCategory {
   slug: string;
   slugLock?: boolean | null;
   image: number | Media;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -462,6 +488,42 @@ export interface GalleryTextBannerBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'galleryTextBanner';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WysiwygBlock".
+ */
+export interface WysiwygBlock {
+  title: string;
+  body: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'wysiwyg';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock".
+ */
+export interface ContactBlock {
+  heading: string;
+  introText: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contact';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -823,9 +885,18 @@ export interface PagesSelect<T extends boolean = true> {
         testimonials?: T | TestimonialsBlockSelect<T>;
         banner?: T | BannerBlockSelect<T>;
         galleryTextBanner?: T | GalleryTextBannerBlockSelect<T>;
+        wysiwyg?: T | WysiwygBlockSelect<T>;
+        contact?: T | ContactBlockSelect<T>;
         gallery?: T | GalleryBlockSelect<T>;
         masthead?: T | MastheadBlockSelect<T>;
         map?: T | MapBlockSelect<T>;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -934,6 +1005,26 @@ export interface GalleryTextBannerBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WysiwygBlock_select".
+ */
+export interface WysiwygBlockSelect<T extends boolean = true> {
+  title?: T;
+  body?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactBlock_select".
+ */
+export interface ContactBlockSelect<T extends boolean = true> {
+  heading?: T;
+  introText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "GalleryBlock_select".
  */
 export interface GalleryBlockSelect<T extends boolean = true> {
@@ -981,6 +1072,13 @@ export interface ProductCategoriesSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   image?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1012,6 +1110,13 @@ export interface ProductsSelect<T extends boolean = true> {
         id?: T;
       };
   customPaymentDelivery?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

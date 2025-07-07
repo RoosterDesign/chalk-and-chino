@@ -1,6 +1,6 @@
-// import PageTemplate, { generateMetadata } from './[slug]/page'
-import PageTemplate from './(routes)/[slug]/page'
+import PageTemplate, { generateMetadata } from "./(routes)/[slug]/page";
+// import PageTemplate from './(routes)/[slug]/page'
 
-export default PageTemplate
+export default PageTemplate;
 
-// export { generateMetadata }
+export { generateMetadata };

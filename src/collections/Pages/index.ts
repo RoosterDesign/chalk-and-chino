@@ -7,12 +7,18 @@ import { authenticated } from "../../access/authenticated";
 import { authenticatedOrPublished } from "../../access/authenticatedOrPublished";
 import BannerBlock from "../../blocks/Banner/config";
 import CategoryGridBlock from "../../blocks/CategoryGrid/config";
+import ContactBlock from "../../blocks/Contact/config";
 import FeaturedProductsBlock from "../../blocks/FeaturedProducts/config";
 import GalleryBlock from "../../blocks/Gallery/config";
 import GalleryTextBannerBlock from "../../blocks/GalleryTextBanner/config";
 import HeroBlock from "../../blocks/Hero/config";
 import KeySellingPointsBlock from "../../blocks/KeySellingPoints/config";
 import MapBlock from "../../blocks/Map/config";
+import MastheadBlock from "../../blocks/Masthead/config";
+import TestimonialsBlock from "../../blocks/Testimonials/config";
+import WysiwygBlock from "../../blocks/Wysiwyg/config";
+import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
+
 // import {
 //     MetaDescriptionField,
 //     MetaImageField,
@@ -20,9 +26,7 @@ import MapBlock from "../../blocks/Map/config";
 //     OverviewField,
 //     PreviewField,
 // } from '@payloadcms/plugin-seo/fields'
-import MastheadBlock from "../../blocks/Masthead/config";
-import TestimonialsBlock from "../../blocks/Testimonials/config";
-import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
+
 export const Pages: CollectionConfig = {
     slug: "pages",
     access: {
@@ -78,6 +82,8 @@ export const Pages: CollectionConfig = {
                 TestimonialsBlock,
                 BannerBlock,
                 GalleryTextBannerBlock,
+                WysiwygBlock,
+                ContactBlock,
                 GalleryBlock,
                 MastheadBlock,
                 MapBlock,

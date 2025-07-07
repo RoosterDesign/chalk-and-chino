@@ -56,8 +56,6 @@ const Carousel: React.FC<CarouselProps> = ({
     const canSlideTablet = slidesCount > tabletPerPage;
     const canSlideDesktop = slidesCount > desktopPerPage;
 
-    console.log("slidesCount", slidesCount);
-
     return (
         <Splide
             hasTrack={false}
