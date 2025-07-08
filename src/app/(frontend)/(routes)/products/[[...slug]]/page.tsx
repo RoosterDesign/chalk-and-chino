@@ -42,7 +42,7 @@ export async function generateMetadata({
 
     const SITE = "Chalk & Chino";
     const DEF_DESC =
-        "Chalk & Chino: bespoke furniture upcycling transforming old pieces into sustainable works of art.";
+        "Browse our full range of upcycled furniture and home décor in Hucclecote, Gloucester—from faux florals and pots to bespoke tables.";
     const FALLBACK_IMG =
         "https://www.chalkandchino.co.uk/default-share-image.jpg";
 
@@ -52,7 +52,7 @@ export async function generateMetadata({
 
     if (!slug) {
         // All Products
-        title = `All Products – ${SITE}`;
+        title = `All Products — ${SITE} (Hucclecote, Gloucester)`;
         description = DEF_DESC;
         images = [{ url: FALLBACK_IMG }];
     } else if (slug.length === 1) {
