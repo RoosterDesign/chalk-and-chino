@@ -12,12 +12,12 @@ import type {
 } from "@/payload-types";
 
 import Gallery from "@/app/components/gallery/gallery";
-import Masthead from "@/app/components/masthead/masthead";
 import NoResults from "@/app/components/no-results/no-results";
 import ProductDetails from "@/app/components/product-details/product-details";
 import ProductsList from "@/app/components/products-list/products-list";
 import CategoryGridLoader from "@/blocks/CategoryGrid/Loader";
 import Map from "@/blocks/Map/Component";
+import MastheadBlock from "@/blocks/Masthead/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
 import { getProductBySlug } from "@/lib/products/getProductBySlug";
 import { getProducts } from "@/lib/products/getProducts";
@@ -148,7 +148,7 @@ export default async function ProductsPage({ params }: PageProps) {
         return (
             <>
                 {draft && <div>— Preview Mode —</div>}
-                <Masthead
+                <MastheadBlock
                     image={getImageData(allCat?.image, allCat?.name)}
                     title="All Products"
                 />
@@ -166,7 +166,7 @@ export default async function ProductsPage({ params }: PageProps) {
         return (
             <>
                 {draft && <div>— Preview Mode —</div>}
-                <Masthead
+                <MastheadBlock
                     image={getImageData(category.image, category.name)}
                     title={category.name}
                 />

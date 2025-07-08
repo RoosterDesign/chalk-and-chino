@@ -1,32 +1,34 @@
-import type { MastheadBlock as MastheadBlockProps } from '@/payload-types'
+import Image from "next/image";
 
-import Container from '@/app/components/container/container';
-import Image from 'next/image';
+import type { MastheadBlock as MastheadBlockProps } from "@/payload-types";
 
-import styles from './styles.module.scss';
+import Container from "@/app/components/container/container";
+
+import styles from "./styles.module.scss";
 
 const MastheadBlock: React.FC<MastheadBlockProps> = ({ title, image }) => {
     return (
-        <section className={`${styles.masthead}`}>
+        <section
+            className={`${styles.masthead} ${typeof image === "object" ? styles.mastheadWithImg : ""}`}
+        >
             <Container className={styles.container}>
                 <h1>{title}</h1>
             </Container>
 
-            {typeof image === 'object' &&
+            {typeof image === "object" &&
                 image?.sizes?.masthead?.url &&
-                typeof image.sizes.masthead.width === 'number' &&
-                typeof image.sizes.masthead.height === 'number' &&
-                <Image
-                    alt={image.alt || ''}
-                    className="img-full"
-                    height={image.sizes.masthead.height}
-                    src={image.sizes.masthead.url}
-                    width={image.sizes.masthead.width}
-                />
-            }
-
+                typeof image.sizes.masthead.width === "number" &&
+                typeof image.sizes.masthead.height === "number" && (
+                    <Image
+                        alt={image.alt || ""}
+                        className="img-full"
+                        height={image.sizes.masthead.height}
+                        src={image.sizes.masthead.url}
+                        width={image.sizes.masthead.width}
+                    />
+                )}
         </section>
-    )
-}
+    );
+};
 
-export default MastheadBlock
+export default MastheadBlock;
