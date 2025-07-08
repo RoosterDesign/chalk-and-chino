@@ -1,4 +1,3 @@
-import type { Product } from '@/payload-types'
 import type {
     CollectionAfterChangeHook,
     CollectionAfterDeleteHook,
@@ -6,9 +5,10 @@ import type {
 
 import { revalidatePath, revalidateTag } from 'next/cache'
 
+import type { Product } from '@/payload-types'
+
 export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
     doc,
-    req,
 }) => {
     const productSlug = doc.slug
 
@@ -23,6 +23,9 @@ export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
         revalidatePath(path)
         revalidateTag(`category-${doc.category.slug}`)
     }
+
+    revalidatePath('/');
+    revalidateTag('homepage');
 
     return doc
 }
@@ -44,6 +47,9 @@ export const revalidateProductDelete: CollectionAfterDeleteHook<Product> = async
         revalidatePath(path)
         revalidateTag(`category-${doc.category.slug}`)
     }
+
+    revalidatePath('/');
+    revalidateTag('homepage');
 
     return doc
 }
