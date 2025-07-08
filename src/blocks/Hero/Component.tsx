@@ -1,8 +1,9 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import type { HeroBlock as HeroBlockProps } from "@/payload-types";
 
 import Container from "@/app/components/container/container";
-import Image from "next/image";
-import Link from "next/link";
 
 import styles from "./styles.module.scss";
 

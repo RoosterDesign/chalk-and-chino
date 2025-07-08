@@ -25,7 +25,7 @@ const socialLinks: SocialLinks[] = [
         alt: "Email Me",
         image: "/envelope.svg",
         title: "Email Me",
-        url: "mailto:lar1970@hotmail.co.uk",
+        url: "mailto:chalkandchino@gmail.com",
     },
 ];
 

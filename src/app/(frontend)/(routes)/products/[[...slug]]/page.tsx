@@ -1,4 +1,3 @@
-// app/(frontend)/(routes)/products/[[...slug]]/page.tsx
 import type { Metadata } from "next";
 
 import { draftMode } from "next/headers";
@@ -149,8 +148,9 @@ export default async function ProductsPage({ params }: PageProps) {
             <>
                 {draft && <div>— Preview Mode —</div>}
                 <MastheadBlock
-                    image={getImageData(allCat?.image, allCat?.name)}
-                    title="All Products"
+                    blockType="masthead"
+                    image={allCat?.image}
+                    title={allCat?.name || "All Products"}
                 />
                 <ProductsList products={allProducts} />
                 <CategoryGridLoader />
@@ -167,7 +167,8 @@ export default async function ProductsPage({ params }: PageProps) {
             <>
                 {draft && <div>— Preview Mode —</div>}
                 <MastheadBlock
-                    image={getImageData(category.image, category.name)}
+                    blockType="masthead"
+                    image={category.image}
                     title={category.name}
                 />
                 {products.length ? (
