@@ -1,5 +1,6 @@
-import sectionHeader from '@/fields/sectionHeader'
 import { Block } from 'payload'
+
+import sectionHeader from '@/fields/sectionHeader'
 
 const GalleryBlock: Block = {
     slug: 'gallery',

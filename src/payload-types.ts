@@ -302,7 +302,7 @@ export interface Page {
  * via the `definition` "HeroBlock".
  */
 export interface HeroBlock {
-  image: number | Media;
+  image?: (number | null) | Media;
   title: string;
   intro: string;
   cta_button?: {
@@ -391,7 +391,7 @@ export interface ProductCategory {
    */
   slug: string;
   slugLock?: boolean | null;
-  image: number | Media;
+  image?: (number | null) | Media;
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -444,7 +444,7 @@ export interface Testimonial {
  * via the `definition` "BannerBlock".
  */
 export interface BannerBlock {
-  image: number | Media;
+  image?: (number | null) | Media;
   title: string;
   body: string;
   cta_button?: {
@@ -549,7 +549,7 @@ export interface GalleryBlock {
  * via the `definition` "mastheadBlock".
  */
 export interface MastheadBlock {
-  image: number | Media;
+  image?: (number | null) | Media;
   title: string;
   id?: string | null;
   blockName?: string | null;

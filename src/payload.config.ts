@@ -3,6 +3,7 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { seoPlugin } from '@payloadcms/plugin-seo';
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { s3Storage } from '@payloadcms/storage-s3';
 import path from "path";
 import { buildConfig } from "payload";
 import sharp from "sharp";
@@ -79,13 +80,22 @@ export default buildConfig({
         payloadCloudPlugin(),
         seoPlugin({
             collections: ['pages', 'product-categories', 'products'],
-            uploadsCollection: 'media',
-            // generateTitle: ({ doc }) => `Chalk & Chino — ${doc.title}`,
-            // generateDescription: ({ doc }) => doc.plaintext,
-            // generateURL: ({ doc, collectionSlug}) => `https://example.com/${collectionSlug}/${doc?.slug}`,
-            // tabbedUI: true
-            // doc.excerpt
+            uploadsCollection: 'media'
         }),
+        s3Storage({
+            collections: {
+                media: true
+            },
+            bucket: process.env.S3_BUCKET || '',
+            config: {
+                credentials: {
+                    accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+                    secretAccessKey: process.env.S3_SECRET || ''
+                },
+                region: 'auto',
+                endpoint: process.env.S3_ENDPOINT || ''
+            }
+        })
     ],
     secret: process.env.PAYLOAD_SECRET || "",
     sharp,

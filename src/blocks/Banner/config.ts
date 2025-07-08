@@ -9,7 +9,7 @@ const BannerBlock: Block = {
             label: 'Background Image',
             type: 'upload',
             relationTo: 'media',
-            required: true,
+            required: false,
         },
         {
             name: 'title',

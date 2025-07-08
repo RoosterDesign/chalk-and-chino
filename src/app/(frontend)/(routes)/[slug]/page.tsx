@@ -13,13 +13,13 @@ import configPromise from "@/payload.config";
 type PageParams = { slug?: string };
 type Props = { params: Promise<PageParams> };
 
-// Force dynamic so draftMode() works
-export const dynamic = "force-dynamic";
+// Serve via ISR rather than always SSR
+export const dynamic = "auto";
+// Re-generate this page at most once every 5 minutes (300 seconds)
+export const revalidate = 300;
 
-// Helper for media uploads
 type Media = RequiredDataFromCollectionSlug<"media">;
 
-// Hard-coded fallbacks
 const SITE_NAME = "Chalk & Chino";
 const DEFAULT_DESCRIPTION =
     "Chalk & Chino: bespoke furniture upcycling transforming old pieces into sustainable works of art.";
@@ -35,14 +35,14 @@ export async function generateMetadata({
     const page = await getPageBySlug(slug);
     if (!page) return {};
 
-    // Title: meta → name → generic, then append brand
+    // Build title
     const baseTitle = page.meta?.title ?? page.name ?? SITE_NAME;
     const title = `${baseTitle} – ${SITE_NAME}`;
 
-    // Description: meta → generic
+    // Build description
     const description = page.meta?.description ?? DEFAULT_DESCRIPTION;
 
-    // OG Image: meta.image if populated, else fallback
+    // Build OG image
     const rawImage = page.meta?.image;
     const img =
         rawImage && typeof rawImage !== "number"
@@ -83,10 +83,7 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
     const { slug = "homepage" } = await params;
-
-    // Next 15: draftMode() returns a Promise<DraftMode>
-    const dm = await draftMode();
-    const draft = dm.isEnabled;
+    const { isEnabled: draft } = await draftMode();
 
     const page = await getPageBySlug(slug);
     if (!page) notFound();

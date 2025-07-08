@@ -1,9 +1,10 @@
 "use client";
 
-import SectionHeader from "@/app/components/section-header/section-header";
-import { Product, ProductCategory } from "@/payload-types";
 import Link from "next/link";
 import { useState } from "react";
+
+import SectionHeader from "@/app/components/section-header/section-header";
+import { Product, ProductCategory } from "@/payload-types";
 
 import styles from "./contact-form.module.scss";
 import FormInput from "./form-input/form-input";
