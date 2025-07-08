@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@aws-sdk/client-s3':
+        specifier: ^3.842.0
+        version: 3.842.0
       '@next/bundle-analyzer':
         specifier: ^15.3.2
         version: 15.3.5

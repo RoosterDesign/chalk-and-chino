@@ -15,6 +15,7 @@
         "generate:types": "payload generate:types"
     },
     "dependencies": {
+        "@aws-sdk/client-s3": "^3.842.0",
         "@next/bundle-analyzer": "^15.3.2",
         "@payloadcms/db-postgres": "3.36.1",
         "@payloadcms/live-preview-react": "3.36.1",
