@@ -24,9 +24,6 @@ export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
         revalidateTag(`category-${doc.category.slug}`)
     }
 
-    revalidatePath('/');
-    revalidateTag('homepage');
-
     return doc
 }
 
@@ -47,9 +44,6 @@ export const revalidateProductDelete: CollectionAfterDeleteHook<Product> = async
         revalidatePath(path)
         revalidateTag(`category-${doc.category.slug}`)
     }
-
-    revalidatePath('/');
-    revalidateTag('homepage');
 
     return doc
 }
