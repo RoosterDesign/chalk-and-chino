@@ -80,7 +80,11 @@ export default buildConfig({
         payloadCloudPlugin(),
         seoPlugin({
             collections: ['pages', 'product-categories', 'products'],
-            uploadsCollection: 'media'
+            uploadsCollection: 'media',
+            generateTitle:   ({ doc }) => doc.title,
+            generateDescription: ({ doc }) => doc.excerpt,
+            generateImage:    () => '/og-default.png',
+            fields: ({ defaultFields }) => defaultFields.filter(field => !('name' in field && field.name === 'image') ),
         }),
         s3Storage({
             collections: {

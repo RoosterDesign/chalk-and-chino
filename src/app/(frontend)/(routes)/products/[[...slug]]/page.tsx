@@ -1,3 +1,4 @@
+// app/[...slug]/page.tsx
 import type { Metadata } from "next";
 
 import { draftMode } from "next/headers";
@@ -6,7 +7,6 @@ import { getPayload } from "payload";
 
 import type {
     ProductCategory as CategoryType,
-    Media,
     Product as ProductType,
 } from "@/payload-types";
 
@@ -21,7 +21,6 @@ import Testimonials from "@/blocks/Testimonials/Component";
 import { getProductBySlug } from "@/lib/products/getProductBySlug";
 import { getProducts } from "@/lib/products/getProducts";
 import { getProductsByCategory } from "@/lib/products/getProductsByCategory";
-import { getImageData } from "@/lib/utils/getImageData";
 import configPromise from "@/payload.config";
 
 type PageParams = { slug?: string[] };
@@ -29,11 +28,11 @@ interface PageProps {
     params: Promise<PageParams>;
 }
 
-// ── ISR CONFIG ──
+// ISR config
 export const dynamic = "auto";
 export const revalidate = 60;
 
-// ── SEO METADATA ──
+// SEO metadata (only title & description)
 export async function generateMetadata({
     params,
 }: PageProps): Promise<Metadata> {
@@ -42,18 +41,14 @@ export async function generateMetadata({
     const SITE = "Chalk & Chino";
     const DEF_DESC =
         "Browse our full range of upcycled furniture and home décor in Hucclecote, Gloucester—from faux florals and pots to bespoke tables.";
-    const FALLBACK_IMG =
-        "https://www.chalkandchino.co.uk/default-share-image.jpg";
 
     let title: string;
     let description: string;
-    let images: { height?: number; url: string; width?: number }[];
 
     if (!slug) {
         // All Products
         title = `All Products — ${SITE} (Hucclecote, Gloucester)`;
         description = DEF_DESC;
-        images = [{ url: FALLBACK_IMG }];
     } else if (slug.length === 1) {
         // Category
         const { category } = await getProductsByCategory(slug[0]);
@@ -61,19 +56,6 @@ export async function generateMetadata({
 
         title = `${category.name} – ${SITE}`;
         description = category.meta?.description ?? DEF_DESC;
-
-        const rawImg = category.meta?.image ?? category.image;
-        if (typeof rawImg !== "number" && rawImg?.url) {
-            images = [
-                {
-                    url: rawImg.url,
-                    width: rawImg.width ?? undefined,
-                    height: rawImg.height ?? undefined,
-                },
-            ];
-        } else {
-            images = [{ url: FALLBACK_IMG }];
-        }
     } else {
         // Product Detail
         const product = await getProductBySlug(slug[1]);
@@ -81,29 +63,16 @@ export async function generateMetadata({
 
         title = `${product.meta?.title ?? product.name} – ${SITE}`;
         description = product.meta?.description ?? DEF_DESC;
-
-        const rawImg = product.meta?.image;
-        if (typeof rawImg !== "number" && rawImg?.url) {
-            images = [
-                {
-                    url: rawImg.url,
-                    width: rawImg.width ?? undefined,
-                    height: rawImg.height ?? undefined,
-                },
-            ];
-        } else {
-            images = [{ url: FALLBACK_IMG }];
-        }
     }
 
     return {
         title,
         description,
-        openGraph: { title, description, images },
+        // no openGraph.images here—global default image applies
     };
 }
 
-// ── PRE-GENERATE PATHS ──
+// Pre-generate paths
 export async function generateStaticParams() {
     const payload = await getPayload({ config: configPromise });
 
@@ -122,13 +91,11 @@ export async function generateStaticParams() {
     return [
         { slug: [] },
         ...categories.map((c) => ({ slug: [c.slug] })),
-        ...products.map((p) => ({
-            slug: [String(p.category), p.slug],
-        })),
+        ...products.map((p) => ({ slug: [String(p.category), p.slug] })),
     ];
 }
 
-// ── PAGE COMPONENT ──
+// Page component
 export default async function ProductsPage({ params }: PageProps) {
     const { slug } = await params;
     const { isEnabled: draft } = await draftMode();
@@ -144,6 +111,7 @@ export default async function ProductsPage({ params }: PageProps) {
     if (!slug) {
         const allProducts = await getProducts();
         const { category: allCat } = await getProductsByCategory("all");
+
         return (
             <>
                 {draft && <div>— Preview Mode —</div>}
@@ -163,6 +131,7 @@ export default async function ProductsPage({ params }: PageProps) {
     if (slug.length === 1) {
         const { category, products } = await getProductsByCategory(slug[0]);
         if (!category) return <NoResults content="Category not found" />;
+
         return (
             <>
                 {draft && <div>— Preview Mode —</div>}

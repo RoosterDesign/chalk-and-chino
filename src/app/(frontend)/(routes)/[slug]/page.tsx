@@ -23,8 +23,6 @@ type Media = RequiredDataFromCollectionSlug<"media">;
 const SITE_NAME = "Chalk & Chino";
 const DEFAULT_DESCRIPTION =
     "Chalk & Chino: bespoke furniture upcycling transforming old pieces into sustainable works of art.";
-const FALLBACK_OG_IMAGE =
-    "https://www.chalkandchino.co.uk/default-share-image.jpg";
 
 export async function generateMetadata({
     params,
@@ -43,27 +41,9 @@ export async function generateMetadata({
     const description = page.meta?.description ?? DEFAULT_DESCRIPTION;
 
     // Build OG image
-    const rawImage = page.meta?.image;
-    const img =
-        rawImage && typeof rawImage !== "number"
-            ? (rawImage as Media)
-            : undefined;
-
-    const images = img?.url
-        ? [
-              {
-                  url: img.url,
-                  width: typeof img.width === "number" ? img.width : undefined,
-                  height:
-                      typeof img.height === "number" ? img.height : undefined,
-              },
-          ]
-        : [{ url: FALLBACK_OG_IMAGE }];
-
     return {
         title,
         description,
-        openGraph: { title, description, images },
     };
 }
 
