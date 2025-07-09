@@ -1,5 +1,3 @@
-// utilities/generatePreviewPath.ts
-
 import type { CollectionSlug } from 'payload'
 
 type Args = {
