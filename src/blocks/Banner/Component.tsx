@@ -13,6 +13,7 @@ const BannerBlock: React.FC<BannerBlockProps> = ({
     body,
     cta_button,
 }) => {
+    console.log("banner", cta_button);
     return (
         <section className={`${styles.banner} section-spacing`}>
             <Container>
