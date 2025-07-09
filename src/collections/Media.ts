@@ -18,7 +18,7 @@ export const Media: CollectionConfig = {
 
     formatOptions: {
       format:  'webp',
-      options: { quality: 80 },
+      options: { quality: 90 },
     },
     imageSizes: [
       {
@@ -28,7 +28,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 80 },
+          options: { quality: 90 },
         },
       },
       {
@@ -38,7 +38,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 80 },
+          options: { quality: 90 },
         },
       },
       {
@@ -48,7 +48,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 80 },
+          options: { quality: 90 },
         },
       },
       {
@@ -58,7 +58,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 80 },
+          options: { quality: 90 },
         },
       },
       {
@@ -68,7 +68,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 80 },
+          options: { quality: 90 },
         },
       },
       {
@@ -78,7 +78,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 80 },
+          options: { quality: 90 },
         },
       },
     ],

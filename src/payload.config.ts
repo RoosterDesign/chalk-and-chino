@@ -81,8 +81,8 @@ export default buildConfig({
         seoPlugin({
             collections: ['pages', 'product-categories', 'products'],
             uploadsCollection: 'media',
-            generateTitle:   ({ doc }) => doc.title,
-            generateDescription: ({ doc }) => doc.excerpt,
+            // generateTitle:   ({ doc }) => doc.title,
+            // generateDescription: ({ doc }) => doc.excerpt,
             generateImage:    () => '/og-default.png',
             fields: ({ defaultFields }) => defaultFields.filter(field => !('name' in field && field.name === 'image') ),
         }),

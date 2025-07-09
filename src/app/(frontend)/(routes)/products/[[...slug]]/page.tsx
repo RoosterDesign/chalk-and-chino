@@ -2,13 +2,7 @@
 import type { Metadata } from "next";
 
 import { draftMode } from "next/headers";
-import { notFound } from "next/navigation";
 import { getPayload } from "payload";
-
-import type {
-    ProductCategory as CategoryType,
-    Product as ProductType,
-} from "@/payload-types";
 
 import Gallery from "@/app/components/gallery/gallery";
 import NoResults from "@/app/components/no-results/no-results";
@@ -61,14 +55,22 @@ export async function generateMetadata({
         const product = await getProductBySlug(slug[1]);
         if (!product) return {};
 
-        title = `${product.meta?.title ?? product.name} – ${SITE}`;
-        description = product.meta?.description ?? DEF_DESC;
+        const rawTitle = product.meta?.title?.trim() ?? "";
+        const baseTitle = rawTitle.length > 0 ? rawTitle : product.name;
+        title = `${baseTitle} – ${SITE}`;
+
+        // Description: fall back first to summary, then to DEF_DESC
+        const rawDesc = product.meta?.description?.trim() ?? "";
+        const baseDesc =
+            rawDesc.length > 0
+                ? rawDesc
+                : (product.summary?.trim() ?? DEF_DESC);
+        description = baseDesc;
     }
 
     return {
         title,
         description,
-        // no openGraph.images here—global default image applies
     };
 }
 

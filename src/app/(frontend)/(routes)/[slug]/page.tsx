@@ -16,7 +16,7 @@ type Props = { params: Promise<PageParams> };
 // Serve via ISR rather than always SSR
 export const dynamic = "auto";
 // Re-generate this page at most once every 5 minutes (300 seconds)
-export const revalidate = 300;
+export const revalidate = 60;
 
 type Media = RequiredDataFromCollectionSlug<"media">;
 
