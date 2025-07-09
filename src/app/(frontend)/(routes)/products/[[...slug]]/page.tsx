@@ -105,7 +105,7 @@ export default async function ProductsPage({ params }: PageProps) {
     const globalData = await payload.findGlobal({
         slug: "payment-delivery-details",
     });
-    const defaultDeliveryText = globalData.customText;
+    const defaultDeliveryText = globalData.customText || "";
 
     // 1) All Products
     if (!slug) {

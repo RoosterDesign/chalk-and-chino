@@ -13,6 +13,7 @@ const GalleryBlock: React.FC<GalleryBlockProps> = ({
     sectionHeader,
     images,
 }) => {
+    if (images.length === 0) return null;
     return (
         <section className={`${styles.galleryCarousel} section-spacing`}>
             <Container>
@@ -28,7 +29,7 @@ const GalleryBlock: React.FC<GalleryBlockProps> = ({
                 >
                     {images?.map((image) => {
                         if (typeof image === "object" && image.url) {
-                            const thumb = image.sizes?.galleryThumbnail;
+                            const thumb = image.sizes?.thumbnail;
                             const full = image.sizes?.modalPreview;
 
                             return (

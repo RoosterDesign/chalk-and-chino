@@ -1,4 +1,8 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+
 import type { Media } from "@/payload-types";
 
 import { useModal } from "@/app/context/ModalContext";
@@ -7,23 +11,21 @@ import Container from "@/components/container/container";
 import ImageExpander from "@/components/image-expander/image-expander";
 import TruncatedText from "@/components/truncated-text/truncated-text";
 import { Product } from "@/payload-types";
-import Link from "next/link";
-import { useState } from "react";
 
 import styles from "./product-details.module.scss";
 
-type ProductDetailsType = {
-    defaultDeliveryText: any;
+type ProductDetailsProps = {
+    defaultDeliveryText: string;
     product: Product;
 };
 
 type Tab = { id: string; label: string };
 
-const ProductDetails: React.FC<ProductDetailsType> = ({
+const ProductDetails: React.FC<ProductDetailsProps> = ({
     product,
     defaultDeliveryText,
 }) => {
-    // Define available tabs dynamically
+    // Tabs setup
     const availableTabs: (null | Tab)[] = [
         product.description
             ? { id: "description", label: "Description" }
@@ -33,31 +35,32 @@ const ProductDetails: React.FC<ProductDetailsType> = ({
             : null,
         { id: "payment-delivery", label: "Payment & Delivery" },
     ];
+    const tabs: Tab[] = availableTabs.filter((t): t is Tab => t !== null);
+    const [activeTab, setActiveTab] = useState(tabs[0]?.id ?? "");
 
-    // Remove null values
-    const tabs: Tab[] = availableTabs.filter((tab): tab is Tab => tab !== null);
-
-    const defaultTab = tabs.length > 0 ? tabs[0].id : "";
-    const [activeTab, setActiveTab] = useState(defaultTab);
-
+    // Modal
     const { openModal } = useModal();
-
     const handleOpenModal = () => {
         openModal(
             <ContactForm
                 hasHeader
                 product={product}
                 subtitle="You are enquiring about"
-                title={`${product.name} - £${product.price}`}
+                title={`${product.name} – £${product.price}`}
             />
         );
     };
 
-    const deliveryDetails = product.customPaymentDelivery
-        ? product.customPaymentDelivery
-        : defaultDeliveryText;
+    // Delivery text
+    const deliveryDetails =
+        product.customPaymentDelivery ?? defaultDeliveryText;
 
-    let full, heroImage: Media | undefined, thumb;
+    // Image sizing with fallback defaults
+    let heroImage: Media | undefined;
+    let thumbUrl = "";
+    let thumbW = 0;
+    let thumbH = 0;
+    let fullUrl = "";
 
     if (
         typeof product.heroImage === "object" &&
@@ -65,100 +68,111 @@ const ProductDetails: React.FC<ProductDetailsType> = ({
         "sizes" in product.heroImage
     ) {
         heroImage = product.heroImage;
-        thumb = heroImage.sizes?.galleryThumbnail;
-        full = heroImage.sizes?.modalPreview;
+
+        const galleryThumb = heroImage.sizes?.thumbnail;
+        const modalPrev = heroImage.sizes?.modalPreview;
+
+        // Always end up with a string and numbers
+        thumbUrl = galleryThumb?.url ?? heroImage.url ?? "";
+        thumbW = galleryThumb?.width ?? heroImage.width ?? 0;
+        thumbH = galleryThumb?.height ?? heroImage.height ?? 0;
+        fullUrl = modalPrev?.url ?? heroImage.url ?? "";
     }
 
     return (
-        <>
-            <Container className={styles.container}>
-                {full?.url && thumb?.url && heroImage && (
-                    <div className={styles.leadImage}>
-                        <ImageExpander
-                            alt={heroImage.alt || ""}
-                            src={full.url}
-                            thumbHeight={thumb.height!}
-                            thumbSrc={thumb.url}
-                            thumbWidth={thumb.width!}
-                        />
-                    </div>
+        <Container className={styles.container}>
+            <div className={styles.leadImage}>
+                {heroImage &&
+                fullUrl &&
+                thumbUrl &&
+                thumbW > 0 &&
+                thumbH > 0 ? (
+                    <ImageExpander
+                        alt={heroImage.alt ?? ""}
+                        src={fullUrl}
+                        thumbHeight={thumbH}
+                        thumbSrc={thumbUrl}
+                        thumbWidth={thumbW}
+                    />
+                ) : (
+                    <Image
+                        alt=""
+                        height={615}
+                        src="/no-thumbnail.png"
+                        width={820}
+                    />
                 )}
+            </div>
 
-                <div className={styles.intro}>
-                    {typeof product.category === "object" && (
-                        <Link
-                            className={styles.categoryLink}
-                            href={`/products/${product.category.slug}`}
-                            title={product.category.name}
-                        >
-                            {product.category.name}
-                        </Link>
-                    )}
-
-                    <h1 className={styles.title}>{product.name}</h1>
-                    <p className={styles.price}>&pound;{product.price}</p>
-
-                    <div className={styles.synopsis}>{product.summary}</div>
-
-                    <button
-                        className="btn"
-                        onClick={handleOpenModal}
-                        title="Enquire about this item"
+            <div className={styles.intro}>
+                {typeof product.category === "object" && (
+                    <Link
+                        className={styles.categoryLink}
+                        href={`/products/${product.category.slug}`}
+                        title={product.category.name}
                     >
-                        Enquire about this item
-                    </button>
-                </div>
-
-                {tabs.length > 0 && (
-                    <div className={styles.tabs}>
-                        <div className={styles.tabHeader}>
-                            {tabs.map((tab) => (
-                                <button
-                                    className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ""}`}
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                >
-                                    {tab.label}
-                                </button>
-                            ))}
-                        </div>
-
-                        <div className={styles.tabContent}>
-                            {activeTab === "description" &&
-                                product.description && (
-                                    <TruncatedText text={product.description} />
-                                )}
-                            {activeTab === "specification" &&
-                                product.specifications && (
-                                    <table
-                                        className={styles.specificationTable}
-                                    >
-                                        <tbody>
-                                            {product.specifications.map(
-                                                (spec, index) => (
-                                                    <tr key={index}>
-                                                        <td>
-                                                            <strong>
-                                                                {spec.label}
-                                                            </strong>
-                                                        </td>
-                                                        <td>{spec.value}</td>
-                                                    </tr>
-                                                )
-                                            )}
-                                        </tbody>
-                                    </table>
-                                )}
-                            {activeTab === "payment-delivery" && (
-                                <p>{deliveryDetails}</p>
-                            )}
-                        </div>
-                    </div>
+                        {product.category.name}
+                    </Link>
                 )}
+                <h1 className={styles.title}>{product.name}</h1>
+                <p className={styles.price}>£{product.price}</p>
+                <div className={styles.synopsis}>{product.summary}</div>
+                <button
+                    className="btn"
+                    onClick={handleOpenModal}
+                    title="Enquire about this item"
+                >
+                    Enquire about this item
+                </button>
+            </div>
 
-                <div className={styles.bg}></div>
-            </Container>
-        </>
+            {tabs.length > 0 && (
+                <div className={styles.tabs}>
+                    <div className={styles.tabHeader}>
+                        {tabs.map((tab) => (
+                            <button
+                                className={`${styles.tab} ${
+                                    activeTab === tab.id ? styles.tabActive : ""
+                                }`}
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                            >
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
+                    <div className={styles.tabContent}>
+                        {activeTab === "description" && product.description && (
+                            <TruncatedText text={product.description} />
+                        )}
+                        {activeTab === "specification" &&
+                            product.specifications && (
+                                <table className={styles.specificationTable}>
+                                    <tbody>
+                                        {product.specifications.map(
+                                            (spec, i) => (
+                                                <tr key={i}>
+                                                    <td>
+                                                        <strong>
+                                                            {spec.label}
+                                                        </strong>
+                                                    </td>
+                                                    <td>{spec.value}</td>
+                                                </tr>
+                                            )
+                                        )}
+                                    </tbody>
+                                </table>
+                            )}
+                        {activeTab === "payment-delivery" && (
+                            <p>{deliveryDetails}</p>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            <div className={styles.bg}></div>
+        </Container>
     );
 };
 

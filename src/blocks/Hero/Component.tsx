@@ -31,15 +31,15 @@ const HeroBlock: React.FC<HeroBlockProps> = ({
             </Container>
 
             {typeof image === "object" &&
-                image?.sizes?.hero?.url &&
-                typeof image.sizes.hero.width === "number" &&
-                typeof image.sizes.hero.height === "number" && (
+                image?.sizes?.landscape?.url &&
+                typeof image.sizes.landscape.width === "number" &&
+                typeof image.sizes.landscape.height === "number" && (
                     <Image
                         alt={image.alt || ""}
                         className="img-full"
-                        height={image.sizes.hero.height}
-                        src={image.sizes.hero.url}
-                        width={image.sizes.hero.width}
+                        height={image.sizes.landscape.height}
+                        src={image.sizes.landscape.url}
+                        width={image.sizes.landscape.width}
                     />
                 )}
         </section>

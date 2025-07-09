@@ -35,44 +35,38 @@ const GalleryTextBannerBlock: React.FC<GalleryTextBannerBlockProps> = ({
 
                 <div className={styles.gallery}>
                     {typeof image1 === "object" &&
-                        image1?.sizes?.galleryTextBanner?.url &&
-                        typeof image1.sizes.galleryTextBanner.width ===
-                            "number" &&
-                        typeof image1.sizes.galleryTextBanner.height ===
-                            "number" && (
+                        image1?.sizes?.portrait?.url &&
+                        typeof image1.sizes.portrait.width === "number" &&
+                        typeof image1.sizes.portrait.height === "number" && (
                             <Image
                                 alt={image1.alt || ""}
-                                height={image1.sizes.galleryTextBanner.height}
-                                src={image1.sizes.galleryTextBanner.url}
-                                width={image1.sizes.galleryTextBanner.width}
+                                height={image1.sizes.portrait.height}
+                                src={image1.sizes.portrait.url}
+                                width={image1.sizes.portrait.width}
                             />
                         )}
 
                     {typeof image2 === "object" &&
-                        image2?.sizes?.galleryTextBanner?.url &&
-                        typeof image2.sizes.galleryTextBanner.width ===
-                            "number" &&
-                        typeof image2.sizes.galleryTextBanner.height ===
-                            "number" && (
+                        image2?.sizes?.portrait?.url &&
+                        typeof image2.sizes.portrait.width === "number" &&
+                        typeof image2.sizes.portrait.height === "number" && (
                             <Image
                                 alt={image2.alt || ""}
-                                height={image2.sizes.galleryTextBanner.height}
-                                src={image2.sizes.galleryTextBanner.url}
-                                width={image2.sizes.galleryTextBanner.width}
+                                height={image2.sizes.portrait.height}
+                                src={image2.sizes.portrait.url}
+                                width={image2.sizes.portrait.width}
                             />
                         )}
 
                     {typeof image3 === "object" &&
-                        image3?.sizes?.galleryTextBanner?.url &&
-                        typeof image3.sizes.galleryTextBanner.width ===
-                            "number" &&
-                        typeof image3.sizes.galleryTextBanner.height ===
-                            "number" && (
+                        image3?.sizes?.portrait?.url &&
+                        typeof image3.sizes.portrait.width === "number" &&
+                        typeof image3.sizes.portrait.height === "number" && (
                             <Image
                                 alt={image3.alt || ""}
-                                height={image3.sizes.galleryTextBanner.height}
-                                src={image3.sizes.galleryTextBanner.url}
-                                width={image3.sizes.galleryTextBanner.width}
+                                height={image3.sizes.portrait.height}
+                                src={image3.sizes.portrait.url}
+                                width={image3.sizes.portrait.width}
                             />
                         )}
                 </div>

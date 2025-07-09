@@ -1,7 +1,14 @@
-'use client';
+"use client";
 
-import Modal from '@/app/components/modal/modal';
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
+
+import Modal from "@/app/components/modal/modal";
 
 // Define the shape of the modal context using `type`
 type ModalContextType = {
@@ -13,7 +20,9 @@ type ModalContextType = {
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 // Provider component
-export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const ModalProvider: React.FC<{ children: ReactNode }> = ({
+    children,
+}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState<null | ReactNode>(null);
     const [isClient, setIsClient] = useState(false);
@@ -26,12 +35,12 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     useEffect(() => {
         const html = document.documentElement;
         if (isModalOpen) {
-            html.classList.add('no-scroll');
+            html.classList.add("no-scroll");
         } else {
-            html.classList.remove('no-scroll');
+            html.classList.remove("no-scroll");
         }
         return () => {
-            html.classList.remove('no-scroll');
+            html.classList.remove("no-scroll");
         };
     }, [isModalOpen]);
 
@@ -52,7 +61,11 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return (
         <ModalContext.Provider value={{ closeModal, openModal }}>
             {children}
-            <Modal isImageOnly={isImageOnly} isOpen={isModalOpen} onClose={closeModal}>
+            <Modal
+                isImageOnly={isImageOnly}
+                isOpen={isModalOpen}
+                onClose={closeModal}
+            >
                 {modalContent}
             </Modal>
         </ModalContext.Provider>
@@ -63,7 +76,7 @@ export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) =
 export const useModal = () => {
     const context = useContext(ModalContext);
     if (!context) {
-        throw new Error('useModal must be used within a ModalProvider');
+        throw new Error("useModal must be used within a ModalProvider");
     }
     return context;
 };

@@ -180,14 +180,6 @@ export interface Media {
   focalX?: number | null;
   focalY?: number | null;
   sizes?: {
-    hero?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
     masthead?: {
       url?: string | null;
       width?: number | null;
@@ -196,7 +188,15 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    productThumbnail?: {
+    portrait?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    landscape?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -212,31 +212,7 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    banner?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    galleryTextBanner?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    galleryThumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    galleryFullThumbnail?: {
+    thumbnail?: {
       url?: string | null;
       width?: number | null;
       height?: number | null;
@@ -757,16 +733,6 @@ export interface MediaSelect<T extends boolean = true> {
   sizes?:
     | T
     | {
-        hero?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
         masthead?:
           | T
           | {
@@ -777,7 +743,17 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        productThumbnail?:
+        portrait?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        landscape?:
           | T
           | {
               url?: T;
@@ -797,37 +773,7 @@ export interface MediaSelect<T extends boolean = true> {
               filesize?: T;
               filename?: T;
             };
-        banner?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        galleryTextBanner?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        galleryThumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        galleryFullThumbnail?:
+        thumbnail?:
           | T
           | {
               url?: T;

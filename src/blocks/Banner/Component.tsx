@@ -1,13 +1,18 @@
-import type { BannerBlock as BannerBlockProps } from '@/payload-types'
+import Image from "next/image";
+import Link from "next/link";
 
-import Container from '@/app/components/container/container';
-import Image from 'next/image';
-import Link from 'next/link';
+import type { BannerBlock as BannerBlockProps } from "@/payload-types";
 
-import styles from './styles.module.scss';
+import Container from "@/app/components/container/container";
 
-const BannerBlock: React.FC<BannerBlockProps> = ({ image, title, body, cta_button }) => {
+import styles from "./styles.module.scss";
 
+const BannerBlock: React.FC<BannerBlockProps> = ({
+    image,
+    title,
+    body,
+    cta_button,
+}) => {
     return (
         <section className={`${styles.banner} section-spacing`}>
             <Container>
@@ -19,20 +24,19 @@ const BannerBlock: React.FC<BannerBlockProps> = ({ image, title, body, cta_butto
                     </Link>
                 )}
             </Container>
-            {typeof image === 'object' &&
+            {typeof image === "object" &&
                 image?.sizes?.banner?.url &&
-                typeof image.sizes.banner.width === 'number' &&
-                typeof image.sizes.banner.height === 'number' && (
+                typeof image.sizes.landscape.width === "number" &&
+                typeof image.sizes.landscape.height === "number" && (
                     <Image
-                        alt={image.alt || ''}
-                        height={image.sizes.banner.height}
+                        alt={image.alt || ""}
+                        height={image.sizes.landscape.height}
                         src={image.sizes.banner.url}
-                        width={image.sizes.banner.width}
+                        width={image.sizes.landscape.width}
                     />
-                )
-            }
+                )}
         </section>
-    )
-}
+    );
+};
 
-export default BannerBlock
+export default BannerBlock;

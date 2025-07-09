@@ -16,22 +16,11 @@ export const Media: CollectionConfig = {
   upload: {
     staticDir: 'media',
 
-
     formatOptions: {
       format:  'webp',
       options: { quality: 80 },
     },
     imageSizes: [
-      {
-        name: 'hero',
-        width: 1920,
-        height: 750,
-        fit: 'cover',
-        formatOptions: {
-          format: 'webp',
-          options: { quality: 75 },
-        },
-      },
       {
         name: 'masthead',
         width: 1920,
@@ -39,67 +28,47 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 75 },
+          options: { quality: 80 },
         },
       },
       {
-        name: 'productThumbnail',
-        width: 390,
+        name: 'portrait',
+        width: 400,
         height: 500,
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 75 },
+          options: { quality: 80 },
         },
       },
       {
-        name: 'categoryBanner',
-        width: 992,
-        height: 325,
-        fit: 'cover',
-        formatOptions: {
-          format: 'webp',
-          options: { quality: 75 },
-        },
-      },
-      {
-        name: 'banner',
+        name: 'landscape',
         width: 1920,
         height: 900,
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 75 },
+          options: { quality: 80 },
         },
       },
       {
-        name: 'galleryTextBanner',
-        width: 330,
-        height: 480,
+        name: 'categoryBanner',
+        width: 990,
+        height: 325,
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 75 },
+          options: { quality: 80 },
         },
       },
       {
-        name: 'galleryThumbnail',
+        name: 'thumbnail',
         width: 820,
         height: 615,
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 75 },
-        },
-      },
-      {
-        name: 'galleryFullThumbnail',
-        width: 1680,
-        height: 640,
-        fit: 'cover',
-        formatOptions: {
-          format: 'webp',
-          options: { quality: 75 },
+          options: { quality: 80 },
         },
       },
       {
@@ -109,7 +78,7 @@ export const Media: CollectionConfig = {
         fit: 'cover',
         formatOptions: {
           format: 'webp',
-          options: { quality: 75 },
+          options: { quality: 80 },
         },
       },
     ],

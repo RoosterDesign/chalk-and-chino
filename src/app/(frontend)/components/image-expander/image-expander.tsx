@@ -1,6 +1,7 @@
+import Image from "next/image";
+
 import { useModal } from "@/app/context/ModalContext";
 import { ImageExpanderType } from "@/lib/types";
-import Image from "next/image";
 
 import styles from "./image-expander.module.scss";
 
@@ -15,7 +16,10 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
     const { openModal } = useModal();
 
     const handleOpenModal = () => {
-        openModal(<Image alt={alt} fill src={src} />, true);
+        openModal(
+            <Image alt={alt} height={1600} src={src} width={1600} />,
+            true
+        );
     };
 
     return (
