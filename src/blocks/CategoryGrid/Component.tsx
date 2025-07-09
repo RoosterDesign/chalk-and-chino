@@ -1,12 +1,13 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+
 import type { Media } from "@/payload-types";
 
 import Carousel from "@/components/carousel/carousel";
 import Container from "@/components/container/container";
 import SectionHeader from "@/components/section-header/section-header";
-import Image from "next/image";
-import Link from "next/link";
 
 import styles from "./styles.module.scss";
 

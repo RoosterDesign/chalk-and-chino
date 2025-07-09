@@ -25,13 +25,13 @@ const BannerBlock: React.FC<BannerBlockProps> = ({
                 )}
             </Container>
             {typeof image === "object" &&
-                image?.sizes?.banner?.url &&
+                image?.sizes?.landscape?.url &&
                 typeof image.sizes.landscape.width === "number" &&
                 typeof image.sizes.landscape.height === "number" && (
                     <Image
                         alt={image.alt || ""}
                         height={image.sizes.landscape.height}
-                        src={image.sizes.banner.url}
+                        src={image.sizes.landscape.url}
                         width={image.sizes.landscape.width}
                     />
                 )}
