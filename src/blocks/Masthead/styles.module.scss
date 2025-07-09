@@ -9,9 +9,13 @@
         height: rem(250);
     }
 
-    @include breakpoint(xxl) {
+    @include breakpoint(xl) {
         height: rem(300);
         padding-bottom: rem(30);
+    }
+
+    @include breakpoint(xxl) {
+        height: rem(400);
     }
 
 

@@ -1,5 +1,6 @@
-import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
+
+import configPromise from '@/payload.config'
 
 export const getProductBySlug = async (slug: string, { draft = false } = {}) => {
     const payload = await getPayload({ config: configPromise })

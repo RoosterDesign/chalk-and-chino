@@ -26,12 +26,10 @@ interface PageProps {
 export const dynamic = "auto";
 export const revalidate = 60;
 
-// SEO metadata (only title & description)
 export async function generateMetadata({
     params,
 }: PageProps): Promise<Metadata> {
     const { slug } = await params;
-
     const SITE = "Chalk & Chino";
     const DEF_DESC =
         "Browse our full range of upcycled furniture and home décor in Hucclecote, Gloucester—from faux florals and pots to bespoke tables.";
@@ -40,41 +38,31 @@ export async function generateMetadata({
     let description: string;
 
     if (!slug) {
-        // All Products
-        title = `All Products — ${SITE} (Hucclecote, Gloucester)`;
+        title = `All Products — ${SITE}`;
         description = DEF_DESC;
     } else if (slug.length === 1) {
-        // Category
         const { category } = await getProductsByCategory(slug[0]);
         if (!category) return {};
-
-        title = `${category.name} – ${SITE}`;
-        description = category.meta?.description ?? DEF_DESC;
+        title = `${category.name} — ${SITE}`;
+        description = category.meta?.description?.trim() ?? DEF_DESC;
     } else {
-        // Product Detail
         const product = await getProductBySlug(slug[1]);
         if (!product) return {};
 
         const rawTitle = product.meta?.title?.trim() ?? "";
         const baseTitle = rawTitle.length > 0 ? rawTitle : product.name;
-        title = `${baseTitle} – ${SITE}`;
+        title = `${baseTitle} — ${SITE}`;
 
-        // Description: fall back first to summary, then to DEF_DESC
         const rawDesc = product.meta?.description?.trim() ?? "";
-        const baseDesc =
+        description =
             rawDesc.length > 0
                 ? rawDesc
                 : (product.summary?.trim() ?? DEF_DESC);
-        description = baseDesc;
     }
 
-    return {
-        title,
-        description,
-    };
+    return { title, description };
 }
 
-// Pre-generate paths
 export async function generateStaticParams() {
     const payload = await getPayload({ config: configPromise });
 
@@ -83,7 +71,6 @@ export async function generateStaticParams() {
         pagination: false,
         select: { slug: true },
     });
-
     const { docs: products } = await payload.find({
         collection: "products",
         pagination: false,
@@ -97,39 +84,58 @@ export async function generateStaticParams() {
     ];
 }
 
-// Page component
 export default async function ProductsPage({ params }: PageProps) {
     const { slug } = await params;
     const { isEnabled: draft } = await draftMode();
 
-    // Global payment & delivery text
     const payload = await getPayload({ config: configPromise });
-    const globalData = await payload.findGlobal({
+
+    // Load all categories + the All Products global in parallel
+    const [allProductsGlobal] = await Promise.all([
+        payload.findGlobal({
+            slug: "all-products-category",
+            depth: 1, // populate its `image` relation
+        }),
+    ]);
+
+    // Extract title & image with fallbacks
+    const allTitle =
+        typeof allProductsGlobal?.title === "string" &&
+        allProductsGlobal.title.trim()
+            ? allProductsGlobal.title
+            : "All Products";
+
+    const allImage =
+        allProductsGlobal?.image && typeof allProductsGlobal.image === "object"
+            ? allProductsGlobal.image
+            : undefined;
+
+    // Payment & delivery global
+    const deliveryGlobal = await payload.findGlobal({
         slug: "payment-delivery-details",
     });
-    const defaultDeliveryText = globalData.customText || "";
+    const defaultDeliveryText = deliveryGlobal?.customText ?? "";
 
     // 1) All Products
     if (!slug) {
         const allProducts = await getProducts();
-        const { category: allCat } = await getProductsByCategory("all");
 
         return (
             <>
                 {draft && <div>— Preview Mode —</div>}
                 <MastheadBlock
                     blockType="masthead"
-                    image={allCat?.image}
-                    title={allCat?.name || "All Products"}
+                    image={allImage}
+                    title={allTitle}
                 />
                 <ProductsList products={allProducts} />
-                <CategoryGridLoader />
+                <CategoryGridLoader title="Browse by Category" />
                 <Testimonials />
             </>
         );
     }
 
-    // 2) Category
+    // 2) Category page
     if (slug.length === 1) {
         const { category, products } = await getProductsByCategory(slug[0]);
         if (!category) return <NoResults content="Category not found" />;
@@ -147,13 +153,13 @@ export default async function ProductsPage({ params }: PageProps) {
                 ) : (
                     <NoResults content={`No products in ${category.name}`} />
                 )}
-                <CategoryGridLoader />
+                <CategoryGridLoader title="Browse by Category" />
                 <Testimonials />
             </>
         );
     }
 
-    // 3) Product Detail
+    // 3) Product detail page
     const product = await getProductBySlug(slug[1]);
     if (!product) return <NoResults content="Product not found" />;
     if (typeof product.category !== "object")
@@ -169,6 +175,7 @@ export default async function ProductsPage({ params }: PageProps) {
             {product.gallery && product.gallery.length > 0 && (
                 <Gallery images={product.gallery} />
             )}
+            <CategoryGridLoader title="Browse by Category" />
             <Testimonials />
             <Map />
         </>

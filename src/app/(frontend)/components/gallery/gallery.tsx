@@ -17,7 +17,6 @@ type GalleryProps = {
 };
 
 const Gallery: React.FC<GalleryProps> = ({ images }) => {
-    console.log("images", images);
     if (images.length === 0) return null;
     return (
         <section className="section-spacing">

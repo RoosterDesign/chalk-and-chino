@@ -1,5 +1,6 @@
-import configPromise from '@/payload.config'
 import { getPayload } from 'payload'
+
+import configPromise from '@/payload.config'
 // import { cache } from 'react'
 
 export const getProductsByCategory = async (categorySlug: string) => {
@@ -11,7 +12,7 @@ export const getProductsByCategory = async (categorySlug: string) => {
         where: {
             slug: { equals: categorySlug },
         },
-        depth: 0,
+        depth: 1,
         limit: 1,
     })
 

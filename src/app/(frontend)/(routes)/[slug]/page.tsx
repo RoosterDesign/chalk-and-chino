@@ -1,4 +1,3 @@
-// app/[...slug]/page.tsx
 import type { Metadata } from "next";
 
 import { draftMode } from "next/headers";
