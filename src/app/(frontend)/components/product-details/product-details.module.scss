@@ -84,6 +84,19 @@
 
 }
 
+.sold {
+    background: var(--accent);
+    color: var(--white);
+    display: inline-block;
+    font-size: rem(18);
+    margin-top: rem(5);
+    padding: rem(5) rem(10);
+
+    @include breakpoint(lg) {
+        font-size: rem(24);
+    }
+}
+
 .synopsis {
     margin-bottom: rem(30);
 }

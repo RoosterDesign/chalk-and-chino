@@ -115,15 +115,23 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                     </Link>
                 )}
                 <h1 className={styles.title}>{product.name}</h1>
-                <p className={styles.price}>£{product.price}</p>
+                <p className={styles.price}>
+                    {product._status === "published" ? (
+                        `£${product.price}`
+                    ) : (
+                        <span className={styles.sold}>SOLD</span>
+                    )}
+                </p>
                 <div className={styles.synopsis}>{product.summary}</div>
-                <button
-                    className="btn"
-                    onClick={handleOpenModal}
-                    title="Enquire about this item"
-                >
-                    Enquire about this item
-                </button>
+                {product._status === "published" && (
+                    <button
+                        className="btn"
+                        onClick={handleOpenModal}
+                        title="Enquire about this item"
+                    >
+                        Enquire about this item
+                    </button>
+                )}
             </div>
 
             {tabs.length > 0 && (

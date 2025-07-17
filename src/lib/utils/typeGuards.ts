@@ -7,3 +7,11 @@ export const isFullProduct = (item: unknown): item is Product => {
 export const isFullTestimonial = (item: unknown): item is Testimonial => {
     return typeof item === 'object' && item !== null && 'id' in item && 'quote' in item;
 };
+
+export const isPublishedProduct = (item: unknown): item is Product => {
+  return (
+    isFullProduct(item) &&
+    '_status' in item &&
+    item._status === 'published'
+  );
+};
