@@ -1,10 +1,45 @@
-// app/api/contact/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+
+export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
+
+        if (body.website) return NextResponse.json({ ok: true });
+
+        const delta = Date.now() - Number(body.renderedAt || 0);
+        if (delta < 2000) {
+            return NextResponse.json({ error: 'Too fast' }, { status: 400 });
+        }
+
+        const token: string | undefined = body.turnstileToken;
+        if (!token) {
+            return NextResponse.json({ error: "CAPTCHA missing" }, { status: 400 });
+        }
+
+        if (!process.env.TURNSTILE_SECRET_KEY) {
+            console.error("TURNSTILE_SECRET_KEY not set");
+            return NextResponse.json({ error: "Server mis-config" }, { status: 500 });
+        }
+
+        const params = new URLSearchParams({
+            secret: process.env.TURNSTILE_SECRET_KEY,
+            response: token,
+        });
+
+        const verifyRes = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", { method: "POST", body: params } );
+
+        if (!verifyRes.ok) {
+            return NextResponse.json({ error: "CAPTCHA upstream error" }, { status: 502 } );
+        }
+
+        const { success } = await verifyRes.json();
+        if (!success) {
+            return NextResponse.json({ error: "CAPTCHA failed" }, { status: 400 });
+        }
+
         const {
             name,
             phone,
@@ -25,6 +60,7 @@ export async function POST(req: NextRequest) {
         const transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST,
             port: Number(process.env.EMAIL_PORT),
+            secure: false,
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASS,

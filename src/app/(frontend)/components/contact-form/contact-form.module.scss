@@ -11,6 +11,10 @@
         }
     }
 
+    .hidden {
+        display: none;
+    }
+
     .formFields {
         display: grid;
         gap: rem(25);

@@ -1,13 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import Script from "next/script";
+import { useEffect, useState } from "react";
 
 import SectionHeader from "@/app/components/section-header/section-header";
-import { Product, ProductCategory } from "@/payload-types";
+import { Product } from "@/payload-types";
 
 import styles from "./contact-form.module.scss";
 import FormInput from "./form-input/form-input";
+
+const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!;
+if (!siteKey) {
+    console.error("Turnstile site key is missing");
+}
+
+declare global {
+    interface Window {
+        onTurnstileDone: (token: string) => void;
+    }
+}
 
 type ContactFormProps = {
     hasHeader?: boolean;
@@ -29,6 +41,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
         phone: "",
         email: "",
         enquiry: "",
+        renderedAt: Date.now().toString(),
+        turnstileToken: "",
+        website: "",
     });
 
     const [errors, setErrors] = useState({
@@ -40,6 +55,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
     const [submitted, setSubmitted] = useState<boolean>(false);
     const [processing, setProcessing] = useState<boolean>(false);
     const [submitError, setSubmitError] = useState<string>("");
+
+    useEffect(() => {
+        window.onTurnstileDone = (token: string) =>
+            setFormData((prev) => ({ ...prev, turnstileToken: token }));
+    }, []);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -80,6 +100,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
         if (!validate()) return;
 
+        if (!formData.turnstileToken) {
+            setSubmitError("Please complete the CAPTCHA.");
+            return;
+        }
+
         setProcessing(true);
 
         const categorySlug =
@@ -101,7 +126,15 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
             if (response.ok) {
                 setSubmitted(true);
-                setFormData({ name: "", phone: "", email: "", enquiry: "" });
+                setFormData({
+                    name: "",
+                    phone: "",
+                    email: "",
+                    enquiry: "",
+                    renderedAt: Date.now().toString(),
+                    turnstileToken: "",
+                    website: "",
+                });
                 setProcessing(false);
             } else {
                 const data = await response.json();
@@ -115,6 +148,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
     return (
         <>
+            <Script
+                async
+                defer
+                src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+            />
             {submitted ? (
                 <div className={styles.thanks}>
                     <h2>Thank you for your enquiry.</h2>
@@ -148,6 +186,14 @@ const ContactForm: React.FC<ContactFormProps> = ({
                         className={styles.contactForm}
                         onSubmit={handleSubmit}
                     >
+                        <input
+                            autoComplete="off"
+                            className={styles.hidden}
+                            name="website"
+                            tabIndex={-1}
+                            type="text"
+                        />
+
                         {processing && (
                             <div className={styles.processing}>
                                 <span className={styles.spinner}></span>
@@ -202,6 +248,13 @@ const ContactForm: React.FC<ContactFormProps> = ({
                                 <p className={styles.error}>{submitError}</p>
                             )}
                         </div>
+
+                        <div
+                            className="cf-turnstile"
+                            data-callback="onTurnstileDone"
+                            data-sitekey={siteKey}
+                        />
+
                         <button className="btn" type="submit">
                             Send your enquiry
                         </button>
