@@ -249,15 +249,17 @@ const ContactForm: React.FC<ContactFormProps> = ({
                             )}
                         </div>
 
-                        <div
-                            className="cf-turnstile"
-                            data-callback="onTurnstileDone"
-                            data-sitekey={siteKey}
-                        />
+                        <div className={styles.formActions}>
+                            <button className="btn" type="submit">
+                                Send your enquiry
+                            </button>
 
-                        <button className="btn" type="submit">
-                            Send your enquiry
-                        </button>
+                            <div
+                                className="cf-turnstile"
+                                data-callback="onTurnstileDone"
+                                data-sitekey={siteKey}
+                            />
+                        </div>
                     </form>
                 </>
             )}

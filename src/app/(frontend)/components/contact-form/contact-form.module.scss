@@ -3,9 +3,6 @@
     flex-direction: column;
 
     :global(.btn) {
-        margin-left: auto;
-        margin-right: auto;
-
         @include breakpoint(sm, max) {
             width: 100%;
         }
@@ -42,6 +39,33 @@
         font-weight: var(--font-weight--bold);
         margin: 0;
         text-align: left;
+    }
+
+}
+
+.formActions {
+    align-items: stretch;
+    justify-content: space-between;
+    display: flex;
+
+    @include breakpoint(sm, max) {
+        gap: rem(20);
+        flex-direction: column;
+    }
+
+    :global(.cf-turnstile) {
+        display: flex;
+        justify-content: center;
+
+        > div {
+            display: flex;
+
+            @include breakpoint(sm, max) {
+                margin-top: rem(20);
+            }
+
+        }
+
     }
 
 }
