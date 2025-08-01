@@ -6,6 +6,14 @@ import "@splidejs/react-splide/css/core";
 
 import "./carousel.scss";
 
+function fixSlideRoles(splide: any) {
+    splide.Components.Elements.slides.forEach((slide: HTMLElement) => {
+        if (slide.getAttribute("role") === "group") {
+            slide.removeAttribute("role");
+        }
+    });
+}
+
 const arrowIcon = (
     <svg fill="none" height="13" width="16" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -59,6 +67,8 @@ const Carousel: React.FC<CarouselProps> = ({
     return (
         <Splide
             hasTrack={false}
+            onMounted={fixSlideRoles}
+            onUpdated={fixSlideRoles}
             options={{
                 type: infinite ? "loop" : "slide",
                 autoplay: autoPlay,
@@ -93,9 +103,7 @@ const Carousel: React.FC<CarouselProps> = ({
         >
             <SplideTrack>
                 {React.Children.map(children, (child, index) => (
-                    <SplideSlide key={index} tag="div">
-                        {child}
-                    </SplideSlide>
+                    <SplideSlide key={index}>{child}</SplideSlide>
                 ))}
             </SplideTrack>
 
