@@ -39,7 +39,7 @@ const Footer: React.FC<FooterProps> = ({
                 </div>
 
                 <div className={styles.footerCol}>
-                    <h4>Navigation</h4>
+                    <h3>Navigation</h3>
                     <ul className={styles.footerLinks}>
                         {mainNavItems.map((item, i) => {
                             const isActive =
@@ -64,7 +64,7 @@ const Footer: React.FC<FooterProps> = ({
                 </div>
 
                 <div className={styles.footerCol}>
-                    <h4>Product Categories</h4>
+                    <h3>Product Categories</h3>
                     <ul className={styles.footerLinks}>
                         {productCategories.map((item, i) => (
                             <li key={i}>
@@ -85,7 +85,7 @@ const Footer: React.FC<FooterProps> = ({
                 </div>
 
                 <div className={styles.footerCol}>
-                    <h4>Follow Chalk & Chino</h4>
+                    <h3>Follow Chalk & Chino</h3>
                     <SocialLinks />
                 </div>
 

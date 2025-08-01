@@ -1,3 +1,4 @@
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import React from "react";
 
 import Footer from "@/app/components/footer/footer";
@@ -93,6 +94,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                         productCategories={productCategories}
                     />
                 </ModalProvider>
+                <SpeedInsights />
             </body>
         </html>
     );

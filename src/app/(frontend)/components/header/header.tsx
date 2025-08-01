@@ -1,5 +1,8 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+
 import Container from "@/app/components/container/container";
 import Logo from "@/app/components/logo/logo";
 import NavLinks from "@/app/components/nav-links/nav-links";
@@ -7,8 +10,6 @@ import ProductsNav from "@/app/components/products-nav/products-nav";
 import SocialLinks from "@/app/components/social-links/social-links";
 import { useIsMobile } from "@/lib/hooks";
 import { NavItem } from "@/lib/types";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 import styles from "./header.module.scss";
 
@@ -56,6 +57,7 @@ const Header: React.FC<HeaderProps> = ({ mainNavItems, productCategories }) => {
                     </nav>
                     <SocialLinks />
                     <button
+                        aria-label={isOpen ? "Close menu" : "Open menu"}
                         className={`${styles.burgerMenu} ${isOpen ? styles.burgerMenuOpen : ""}`}
                         onClick={toggleBurgerMenu}
                     >

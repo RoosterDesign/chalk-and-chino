@@ -1,8 +1,9 @@
+import { getPayload } from "payload";
+
 import Container from "@/app/components/container/container";
 import SectionHeader from "@/app/components/section-header/section-header";
 import { mapSectionHeader } from "@/lib/mappers/mapSectionHeader";
 import configPromise from "@/payload.config";
-import { getPayload } from "payload";
 
 import styles from "./styles.module.scss";
 
@@ -21,7 +22,9 @@ export default async function MapBlock() {
                 <iframe
                     allowFullScreen
                     height="400"
+                    loading="lazy"
                     src={mapGlobal.embedCode}
+                    title="Map showing Chalk & Chino's location"
                     width="100%"
                 />
             </div>

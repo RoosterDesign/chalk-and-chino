@@ -93,7 +93,9 @@ const Carousel: React.FC<CarouselProps> = ({
         >
             <SplideTrack>
                 {React.Children.map(children, (child, index) => (
-                    <SplideSlide key={index}>{child}</SplideSlide>
+                    <SplideSlide key={index} tag="div">
+                        {child}
+                    </SplideSlide>
                 ))}
             </SplideTrack>
 

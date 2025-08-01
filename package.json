@@ -13,7 +13,8 @@
         "migrate:create": "payload migrate:create",
         "generate:importmap": "payload generate:importmap",
         "generate:types": "payload generate:types",
-        "regen-media": "ts-node-esm scripts/regenerateMedia.ts"
+        "regen-media": "ts-node-esm scripts/regenerateMedia.ts",
+        "postbuild": "next-sitemap --config next-sitemap.config.cjs"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.842.0",
@@ -27,10 +28,12 @@
         "@payloadcms/storage-s3": "3.36.1",
         "@payloadcms/ui": "3.36.1",
         "@splidejs/react-splide": "^0.7.12",
+        "@vercel/speed-insights": "^1.2.0",
         "graphql": "^16.8.1",
         "lucide-react": "^0.488.0",
         "modern-normalize": "^3.0.1",
         "next": "15.2.2",
+        "next-sitemap": "^4.2.3",
         "nodemailer": "^7.0.3",
         "payload": "3.36.1",
         "react": "19.0.0",

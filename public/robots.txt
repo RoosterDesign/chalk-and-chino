@@ -1,2 +1,9 @@
+# *
 User-agent: *
-Disallow: /
+Allow: /
+
+# Host
+Host: https://www.chalkandchino.co.uk
+
+# Sitemaps
+Sitemap: https://www.chalkandchino.co.uk/sitemap.xml
