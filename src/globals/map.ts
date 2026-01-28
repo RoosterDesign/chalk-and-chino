@@ -1,4 +1,10 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
+import { revalidateTag } from "next/cache";
+
+const revalidateMap: GlobalAfterChangeHook = ({ doc }) => {
+    revalidateTag("global-map");
+    return doc;
+};
 
 import sectionHeader from "@/fields/sectionHeader";
 
@@ -14,6 +20,9 @@ export const Map: GlobalConfig = {
             required: true,
         },
     ],
+    hooks: {
+        afterChange: [revalidateMap],
+    },
 };
 
 export default Map;

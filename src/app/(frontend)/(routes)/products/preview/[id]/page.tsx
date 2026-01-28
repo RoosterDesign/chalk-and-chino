@@ -1,12 +1,14 @@
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { getPayload } from "payload";
 
 import ProductDetails from "@/app/components/product-details/product-details";
+
+// Preview pages should always be dynamic - never cache
+export const dynamic = "force-dynamic";
 import { LivePreviewListener } from "@/app/LivePreviewListener";
 import Testimonials from "@/blocks/Testimonials/Component";
+import { getPaymentDeliveryDetails } from "@/lib/globals/getPaymentDeliveryDetails";
 import { getProductById } from "@/lib/products/getProductById";
-import configPromise from "@/payload.config";
 
 type PageParams = {
     id: string;
@@ -27,10 +29,7 @@ export default async function ProductPreviewPage({ params }: Props) {
 
     if (!product) return notFound();
 
-    const payload = await getPayload({ config: configPromise });
-    const global = await payload.findGlobal({
-        slug: "payment-delivery-details",
-    });
+    const global = await getPaymentDeliveryDetails();
 
     return (
         <>

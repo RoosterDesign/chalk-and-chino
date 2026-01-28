@@ -1,4 +1,15 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig } from 'payload'
+import { revalidateTag } from 'next/cache'
+
+const revalidateTestimonials: CollectionAfterChangeHook = ({ doc }) => {
+    revalidateTag('testimonials')
+    return doc
+}
+
+const revalidateTestimonialsDelete: CollectionAfterDeleteHook = ({ doc }) => {
+    revalidateTag('testimonials')
+    return doc
+}
 
 import { anyone } from '@/access/anyone'
 import { authenticated } from '@/access/authenticated'
@@ -53,5 +64,9 @@ export const Testimonials: CollectionConfig = {
             type: 'textarea',
             required: true
         }
-    ]
+    ],
+    hooks: {
+        afterChange: [revalidateTestimonials],
+        afterDelete: [revalidateTestimonialsDelete],
+    }
 }

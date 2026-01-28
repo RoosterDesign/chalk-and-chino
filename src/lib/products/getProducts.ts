@@ -1,23 +1,31 @@
-import configPromise from '@/payload.config'
-import { getPayload } from 'payload'
-// import { cache } from 'react'
+import { unstable_cache } from 'next/cache'
 
-export const getProducts = async () => {
-    const payload = await getPayload({ config: configPromise });
+import { getPayloadClient } from '@/lib/payloadClient'
 
-    const { docs } = await payload.find({
-        collection: 'products',
-        where: {
-            _status: {
-                equals: 'published',
-            }
-        },
-        depth: 1,
-        limit: 100,
-        pagination: false,
-        draft: false
-    })
+const getCachedProducts = unstable_cache(
+    async () => {
+        const payload = await getPayloadClient();
 
-    return docs
+        const { docs } = await payload.find({
+            collection: 'products',
+            where: {
+                _status: {
+                    equals: 'published',
+                },
+            },
+            depth: 1,
+            limit: 100,
+            pagination: false,
+            draft: false,
+        });
 
-}
+        return docs;
+    },
+    ['all-products'],
+    {
+        revalidate: false,
+        tags: ['products'],
+    },
+);
+
+export const getProducts = async () => getCachedProducts();

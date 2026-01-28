@@ -1,7 +1,5 @@
-import { getPayload } from "payload";
-
 import { getProductCategories } from "@/lib/products/getProductCategories";
-import configPromise from "@/payload.config";
+import { getAllProductsCategory } from "@/lib/products/getAllProductsCategory";
 
 import CategoryGridBlock from "./Component";
 
@@ -10,11 +8,9 @@ type LoaderProps = {
 };
 
 const CategoryGridLoader = async ({ title }: LoaderProps) => {
-    const payload = await getPayload({ config: configPromise });
-
     const [categories, allProducts] = await Promise.all([
         getProductCategories({ withImages: true }),
-        payload.findGlobal({ slug: "all-products-category", depth: 1 }),
+        getAllProductsCategory(),
     ]);
 
     const allItem = {

@@ -1,4 +1,10 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
+import { revalidateTag } from "next/cache";
+
+const revalidateFooter: GlobalAfterChangeHook = ({ doc }) => {
+    revalidateTag("global-footer");
+    return doc;
+};
 
 export const Footer: GlobalConfig = {
     slug: "footer",
@@ -36,4 +42,7 @@ export const Footer: GlobalConfig = {
             ],
         },
     ],
+    hooks: {
+        afterChange: [revalidateFooter],
+    },
 };

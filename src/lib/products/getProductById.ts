@@ -1,5 +1,4 @@
-import configPromise from '@/payload.config'
-import { getPayload } from 'payload'
+import { getPayloadClient } from '@/lib/payloadClient'
 
 type Options = {
     draft?: boolean
@@ -9,7 +8,7 @@ export const getProductById = async (
     id: string,
     options: Options = {}
 ) => {
-    const payload = await getPayload({ config: configPromise })
+    const payload = await getPayloadClient()
 
     const { draft = true } = options
 

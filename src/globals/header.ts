@@ -1,5 +1,11 @@
 // globals/header.ts
-import type { GlobalConfig } from 'payload'
+import type { GlobalAfterChangeHook, GlobalConfig } from 'payload'
+import { revalidateTag } from 'next/cache'
+
+const revalidateHeader: GlobalAfterChangeHook = ({ doc }) => {
+    revalidateTag('global-header')
+    return doc
+}
 
 export const Header: GlobalConfig = {
     slug: 'header',
@@ -28,4 +34,7 @@ export const Header: GlobalConfig = {
             ],
         },
     ],
+    hooks: {
+        afterChange: [revalidateHeader],
+    },
 }

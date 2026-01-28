@@ -1,4 +1,10 @@
-import type { GlobalConfig } from 'payload'
+import type { GlobalAfterChangeHook, GlobalConfig } from 'payload'
+import { revalidateTag } from 'next/cache'
+
+const revalidateAllProductsCategory: GlobalAfterChangeHook = ({ doc }) => {
+    revalidateTag('all-products-category')
+    return doc
+}
 
 export const AllProductsCategory: GlobalConfig = {
     slug: 'all-products-category',
@@ -21,4 +27,7 @@ export const AllProductsCategory: GlobalConfig = {
             required: false,
         },
     ],
+    hooks: {
+        afterChange: [revalidateAllProductsCategory],
+    },
 }

@@ -2,7 +2,6 @@
 import type { Metadata } from "next";
 
 import { draftMode } from "next/headers";
-import { getPayload } from "payload";
 
 import Gallery from "@/app/components/gallery/gallery";
 import NoResults from "@/app/components/no-results/no-results";
@@ -12,10 +11,12 @@ import CategoryGridLoader from "@/blocks/CategoryGrid/Loader";
 import Map from "@/blocks/Map/Component";
 import MastheadBlock from "@/blocks/Masthead/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
+import { getPaymentDeliveryDetails } from "@/lib/globals/getPaymentDeliveryDetails";
+import { getPayloadClient } from "@/lib/payloadClient";
 import { getProductBySlug } from "@/lib/products/getProductBySlug";
 import { getProducts } from "@/lib/products/getProducts";
 import { getProductsByCategory } from "@/lib/products/getProductsByCategory";
-import configPromise from "@/payload.config";
+import { getAllProductsCategory } from "@/lib/products/getAllProductsCategory";
 
 type PageParams = { slug?: string[] };
 interface PageProps {
@@ -24,7 +25,8 @@ interface PageProps {
 
 // ISR config
 export const dynamic = "auto";
-export const revalidate = 60;
+// Only re-render when Payload hooks call revalidatePath(...) for relevant /products routes
+export const revalidate = false;
 
 export async function generateMetadata({
     params,
@@ -64,7 +66,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-    const payload = await getPayload({ config: configPromise });
+    const payload = await getPayloadClient();
 
     const { docs: categories } = await payload.find({
         collection: "product-categories",
@@ -74,13 +76,21 @@ export async function generateStaticParams() {
     const { docs: products } = await payload.find({
         collection: "products",
         pagination: false,
+        depth: 1,
         select: { slug: true, category: true },
     });
 
     return [
         { slug: [] },
         ...categories.map((c) => ({ slug: [c.slug] })),
-        ...products.map((p) => ({ slug: [String(p.category), p.slug] })),
+        ...products
+            .filter((p) => typeof p.category === "object" && p.category?.slug)
+            .map((p) => ({
+                slug: [
+                    (p.category as { slug: string }).slug,
+                    p.slug,
+                ],
+            })),
     ];
 }
 
@@ -88,15 +98,8 @@ export default async function ProductsPage({ params }: PageProps) {
     const { slug } = await params;
     const { isEnabled: draft } = await draftMode();
 
-    const payload = await getPayload({ config: configPromise });
-
     // Load all categories + the All Products global in parallel
-    const [allProductsGlobal] = await Promise.all([
-        payload.findGlobal({
-            slug: "all-products-category",
-            depth: 1, // populate its `image` relation
-        }),
-    ]);
+    const [allProductsGlobal] = await Promise.all([getAllProductsCategory()]);
 
     // Extract title & image with fallbacks
     const allTitle =
@@ -111,9 +114,7 @@ export default async function ProductsPage({ params }: PageProps) {
             : undefined;
 
     // Payment & delivery global
-    const deliveryGlobal = await payload.findGlobal({
-        slug: "payment-delivery-details",
-    });
+    const deliveryGlobal = await getPaymentDeliveryDetails();
     const defaultDeliveryText = deliveryGlobal?.customText ?? "";
 
     // 1) All Products

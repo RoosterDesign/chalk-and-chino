@@ -12,6 +12,9 @@ export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
 }) => {
     const productSlug = doc.slug
 
+    // Product listings
+    revalidatePath('/products')
+
     if (typeof productSlug === 'string' && productSlug.trim() !== '') {
         const productPath = `/products/${productSlug}`
         revalidatePath(productPath)
@@ -32,6 +35,9 @@ export const revalidateProductDelete: CollectionAfterDeleteHook<Product> = async
     req,
 }) => {
     const productSlug = doc.slug
+
+    // Product listings
+    revalidatePath('/products')
 
     if (typeof productSlug === 'string' && productSlug.trim() !== '') {
         const productPath = `/products/${productSlug}`

@@ -1,43 +1,52 @@
-import { getPayload } from 'payload'
+import { unstable_cache } from 'next/cache'
 
-import configPromise from '@/payload.config'
-// import { cache } from 'react'
+import { getPayloadClient } from '@/lib/payloadClient'
 
-export const getProductsByCategory = async (categorySlug: string) => {
-    const payload = await getPayload({ config: configPromise })
+const getCachedProductsByCategory = unstable_cache(
+    async (categorySlug: string) => {
+        const payload = await getPayloadClient();
 
-    // Get the category by its slug
-    const categoryRes = await payload.find({
-        collection: 'product-categories',
-        where: {
-            slug: { equals: categorySlug },
-        },
-        depth: 1,
-        limit: 1,
-    })
-
-    const category = categoryRes.docs?.[0]
-    if (!category) return { category: null, products: [] }
-
-    // Fetch products that belong to this category
-    const productRes = await payload.find({
-        collection: 'products',
-        where: {
-            category: {
-                equals: category.id,
+        // Get the category by its slug
+        const categoryRes = await payload.find({
+            collection: 'product-categories',
+            where: {
+                slug: { equals: categorySlug },
             },
-            _status: {
-                equals: 'published',
-            },
-        },
-        depth: 1,
-        limit: 100,
-        pagination: false,
-        draft: false,
-    })
+            depth: 1,
+            limit: 1,
+        });
 
-    return {
-        category,
-        products: productRes.docs,
-    }
-}
+        const category = categoryRes.docs?.[0];
+        if (!category) return { category: null, products: [] };
+
+        // Fetch products that belong to this category
+        const productRes = await payload.find({
+            collection: 'products',
+            where: {
+                category: {
+                    equals: category.id,
+                },
+                _status: {
+                    equals: 'published',
+                },
+            },
+            depth: 1,
+            limit: 100,
+            pagination: false,
+            draft: false,
+        });
+
+        return {
+            category,
+            products: productRes.docs,
+        };
+    },
+    ['products-by-category'],
+    {
+        revalidate: false,
+        tags: ['products', 'categories'],
+    },
+);
+
+export const getProductsByCategory = async (categorySlug: string) =>
+    getCachedProductsByCategory(categorySlug);

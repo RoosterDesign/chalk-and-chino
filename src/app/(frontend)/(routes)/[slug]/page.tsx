@@ -2,20 +2,20 @@ import type { Metadata } from "next";
 
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
-import { getPayload, type RequiredDataFromCollectionSlug } from "payload";
+import type { RequiredDataFromCollectionSlug } from "payload";
 
 import { LivePreviewListener } from "@/app/LivePreviewListener";
 import { RenderBlocks } from "@/blocks/RenderBlocks";
+import { getPayloadClient } from "@/lib/payloadClient";
 import { getPageBySlug } from "@/lib/pages/getPageBySlug";
-import configPromise from "@/payload.config";
 
 type PageParams = { slug?: string };
 type Props = { params: Promise<PageParams> };
 
 // Serve via ISR rather than always SSR
 export const dynamic = "auto";
-// Re-generate this page at most once every 5 minutes (300 seconds)
-export const revalidate = 60;
+// Only re-render when Payload hooks call revalidatePath(...) for this route
+export const revalidate = false;
 
 type Media = RequiredDataFromCollectionSlug<"media">;
 
@@ -47,7 +47,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-    const payload = await getPayload({ config: configPromise });
+    const payload = await getPayloadClient();
     const { docs } = await payload.find({
         collection: "pages",
         draft: true,

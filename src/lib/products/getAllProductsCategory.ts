@@ -1,9 +1,17 @@
-import { getPayload } from 'payload'
+import { unstable_cache } from 'next/cache'
 
-import config from '@/payload.config'
+import { getPayloadClient } from '@/lib/payloadClient'
 
-export const getAllProductsCategory = async () => {
-    const payload = await getPayload({ config })
-    const allProductsCategory = await payload.findGlobal({ slug: 'all-products-category' })
-    return allProductsCategory;
-}
+const getCachedAllProductsCategory = unstable_cache(
+    async () => {
+        const payload = await getPayloadClient();
+        return payload.findGlobal({ slug: 'all-products-category', depth: 1 });
+    },
+    ['all-products-category'],
+    {
+        revalidate: false,
+        tags: ['all-products-category'],
+    },
+);
+
+export const getAllProductsCategory = async () => getCachedAllProductsCategory();

@@ -72,7 +72,10 @@ export default buildConfig({
     ],
     db: postgresAdapter({
         pool: {
-            connectionString: process.env.PAYLOAD_DATABASE_URL || "",
+            connectionString:
+                process.env.DATABASE_ENV === 'local'
+                    ? process.env.LOCAL_DATABASE_URL || ""
+                    : process.env.NEON_DATABASE_URL || process.env.PAYLOAD_DATABASE_URL || "",
         },
     }),
     editor: lexicalEditor(),

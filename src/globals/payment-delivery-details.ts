@@ -1,4 +1,10 @@
-import type { GlobalConfig } from "payload";
+import type { GlobalAfterChangeHook, GlobalConfig } from "payload";
+import { revalidateTag } from "next/cache";
+
+const revalidatePaymentDelivery: GlobalAfterChangeHook = ({ doc }) => {
+    revalidateTag("global-payment-delivery");
+    return doc;
+};
 
 export const PaymentDeliveryDetails: GlobalConfig = {
     slug: "payment-delivery-details",
@@ -15,6 +21,9 @@ export const PaymentDeliveryDetails: GlobalConfig = {
             },
         },
     ],
+    hooks: {
+        afterChange: [revalidatePaymentDelivery],
+    },
 };
 
 export default PaymentDeliveryDetails;

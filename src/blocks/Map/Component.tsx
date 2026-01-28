@@ -1,15 +1,26 @@
-import { getPayload } from "payload";
+import { unstable_cache } from "next/cache";
 
 import Container from "@/app/components/container/container";
 import SectionHeader from "@/app/components/section-header/section-header";
 import { mapSectionHeader } from "@/lib/mappers/mapSectionHeader";
-import configPromise from "@/payload.config";
+import { getPayloadClient } from "@/lib/payloadClient";
 
 import styles from "./styles.module.scss";
 
+const getCachedMap = unstable_cache(
+    async () => {
+        const payload = await getPayloadClient();
+        return payload.findGlobal({ slug: "map" });
+    },
+    ["map-global"],
+    {
+        revalidate: false,
+        tags: ["global-map"],
+    },
+);
+
 export default async function MapBlock() {
-    const payload = await getPayload({ config: configPromise });
-    const mapGlobal = await payload.findGlobal({ slug: "map" });
+    const mapGlobal = await getCachedMap();
 
     if (!mapGlobal.embedCode) return null;
 
