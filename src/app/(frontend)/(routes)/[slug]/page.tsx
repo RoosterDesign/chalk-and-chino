@@ -47,6 +47,11 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
+    // Skip DB calls in maintenance mode
+    if (process.env.MAINTENANCE_MODE === "true") {
+        return [];
+    }
+
     const payload = await getPayloadClient();
     const { docs } = await payload.find({
         collection: "pages",

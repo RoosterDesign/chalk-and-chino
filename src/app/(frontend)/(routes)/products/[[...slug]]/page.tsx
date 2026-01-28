@@ -13,10 +13,10 @@ import MastheadBlock from "@/blocks/Masthead/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
 import { getPaymentDeliveryDetails } from "@/lib/globals/getPaymentDeliveryDetails";
 import { getPayloadClient } from "@/lib/payloadClient";
+import { getAllProductsCategory } from "@/lib/products/getAllProductsCategory";
 import { getProductBySlug } from "@/lib/products/getProductBySlug";
 import { getProducts } from "@/lib/products/getProducts";
 import { getProductsByCategory } from "@/lib/products/getProductsByCategory";
-import { getAllProductsCategory } from "@/lib/products/getAllProductsCategory";
 
 type PageParams = { slug?: string[] };
 interface PageProps {
@@ -66,6 +66,11 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
+    // Skip DB calls in maintenance mode
+    if (process.env.MAINTENANCE_MODE === "true") {
+        return [];
+    }
+
     const payload = await getPayloadClient();
 
     const { docs: categories } = await payload.find({

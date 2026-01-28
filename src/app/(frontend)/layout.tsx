@@ -11,6 +11,9 @@ import { baskervville, libreBaskerville, sen } from "@/app/fonts";
 import { getFooterData } from "@/lib/footer/getFooterData";
 import { getHeaderNav } from "@/lib/nav/getHeaderNav";
 import { getProductCategories } from "@/lib/products/getProductCategories";
+import MaintenancePage from "./maintenance";
+
+const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
 
 export const metadata = {
     openGraph: {
@@ -65,6 +68,17 @@ export const metadata = {
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
     const { children } = props;
+
+    // Show maintenance page and skip DB calls when in maintenance mode
+    if (isMaintenanceMode) {
+        return (
+            <html lang="en">
+                <body>
+                    <MaintenancePage />
+                </body>
+            </html>
+        );
+    }
 
     const mainNavItems = await getHeaderNav();
     const { footerText, footerLinks } = await getFooterData();
