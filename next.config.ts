@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 import { withPayload } from "@payloadcms/next/withPayload";
 import path from "path";
 
+const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
+
 const nextConfig: NextConfig = {
     api: {
     bodyParser: {
@@ -25,7 +27,7 @@ const nextConfig: NextConfig = {
     sassOptions: {
         includePaths: [path.resolve(__dirname, "src")],
         additionalData: `@use "@/app/(frontend)/_mixins.scss" as *;`,
-        silenceDeprecations: ["legacy-js-api", "mixed-decls"],
+        silenceDeprecations: ["legacy-js-api", "mixed-decls", "import"],
     },
     async rewrites() {
         return [
@@ -56,4 +58,5 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default withPayload(nextConfig);
+// Skip Payload initialization in maintenance mode to avoid DB connection
+export default isMaintenanceMode ? nextConfig : withPayload(nextConfig);
