@@ -26,6 +26,11 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+    upload: {
+        limits: {
+            fileSize: 10 * 1024 * 1024, // 10MB
+        },
+    },
     admin: {
         importMap: {
             baseDir: path.resolve(dirname),

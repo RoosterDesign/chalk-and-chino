@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(pnpm build:*)",
+      "Bash(cmd /c \"rmdir /s /q .next\")"
     ]
   }
 }

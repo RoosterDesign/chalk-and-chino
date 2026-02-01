@@ -13,7 +13,9 @@ const FeaturedProductsBlock: Block = {
             relationTo: 'products',
             hasMany: true,
             maxRows: 4,
-            required: true
+            admin: {
+                description: 'Select up to 4 products. Empty slots are filled with the latest products.',
+            },
         },
     ]
 }

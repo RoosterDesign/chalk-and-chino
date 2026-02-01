@@ -1,8 +1,6 @@
 // app/[...slug]/page.tsx
 import type { Metadata } from "next";
 
-import { draftMode } from "next/headers";
-
 import Gallery from "@/app/components/gallery/gallery";
 import NoResults from "@/app/components/no-results/no-results";
 import ProductDetails from "@/app/components/product-details/product-details";
@@ -101,7 +99,6 @@ export async function generateStaticParams() {
 
 export default async function ProductsPage({ params }: PageProps) {
     const { slug } = await params;
-    const { isEnabled: draft } = await draftMode();
 
     // Load all categories + the All Products global in parallel
     const [allProductsGlobal] = await Promise.all([getAllProductsCategory()]);
@@ -128,7 +125,6 @@ export default async function ProductsPage({ params }: PageProps) {
 
         return (
             <>
-                {draft && <div>— Preview Mode —</div>}
                 <MastheadBlock
                     blockType="masthead"
                     image={allImage}
@@ -148,7 +144,6 @@ export default async function ProductsPage({ params }: PageProps) {
 
         return (
             <>
-                {draft && <div>— Preview Mode —</div>}
                 <MastheadBlock
                     blockType="masthead"
                     image={category.image}
@@ -173,7 +168,6 @@ export default async function ProductsPage({ params }: PageProps) {
 
     return (
         <>
-            {draft && <div>— Preview Mode —</div>}
             <ProductDetails
                 defaultDeliveryText={defaultDeliveryText}
                 product={product}

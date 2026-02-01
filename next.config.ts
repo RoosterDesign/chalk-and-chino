@@ -6,11 +6,6 @@ import path from "path";
 const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
 
 const nextConfig: NextConfig = {
-    api: {
-    bodyParser: {
-      sizeLimit: '10mb',
-    },
-  },
     eslint: {
         // Allow builds to succeed even if ESLint errors occur
         ignoreDuringBuilds: true,

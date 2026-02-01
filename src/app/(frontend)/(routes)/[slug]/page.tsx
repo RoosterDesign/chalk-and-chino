@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 
-import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 import type { RequiredDataFromCollectionSlug } from "payload";
 
-import { LivePreviewListener } from "@/app/LivePreviewListener";
 import { RenderBlocks } from "@/blocks/RenderBlocks";
 import { getPayloadClient } from "@/lib/payloadClient";
 import { getPageBySlug } from "@/lib/pages/getPageBySlug";
@@ -67,15 +65,9 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: Props) {
     const { slug = "homepage" } = await params;
-    const { isEnabled: draft } = await draftMode();
 
     const page = await getPageBySlug(slug);
     if (!page) notFound();
 
-    return (
-        <>
-            {draft && <LivePreviewListener />}
-            <RenderBlocks blocks={page.layout} />
-        </>
-    );
+    return <RenderBlocks blocks={page.layout} />;
 }

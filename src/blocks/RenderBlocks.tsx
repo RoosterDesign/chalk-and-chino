@@ -5,7 +5,7 @@ import type { Page } from "@/payload-types";
 import BannerBlock from "./Banner/Component";
 import CategoryGridBlockLoader from "./CategoryGrid/Loader";
 import ContactBlock from "./Contact/Component";
-import FeaturedProductsBlock from "./FeaturedProducts/Component";
+import FeaturedProductsLoader from "./FeaturedProducts/Loader";
 import GalleryBlock from "./Gallery/Component";
 import GalleryTextBannerBlock from "./GalleryTextBanner/Component";
 import HeroBlock from "./Hero/Component";
@@ -17,7 +17,7 @@ import WysiwygBlock from "./Wysiwyg/Component";
 
 const blockComponents: Record<string, React.ComponentType<any>> = {
     hero: HeroBlock,
-    featuredProducts: FeaturedProductsBlock,
+    featuredProducts: FeaturedProductsLoader,
     categoryGrid: CategoryGridBlockLoader,
     keySellingPoints: KeySellingPointsBlock,
     testimonials: TestimonialsBlock,

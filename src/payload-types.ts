@@ -299,7 +299,10 @@ export interface FeaturedProductsBlock {
       url?: string | null;
     };
   };
-  products: (number | Product)[];
+  /**
+   * Leave empty to automatically show the 3 latest products
+   */
+  products?: (number | Product)[] | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'featuredProducts';
