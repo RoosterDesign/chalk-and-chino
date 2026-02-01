@@ -4,7 +4,14 @@
       "Bash(cat:*)",
       "Bash(pnpm build:*)",
       "Bash(cmd /c \"rmdir /s /q .next\")",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(dir:*)",
+      "Bash(npx sharp-cli:*)",
+      "Bash(cmp:*)",
+      "Bash(for f in next.svg globe.svg file.svg window.svg vercel.svg)",
+      "Bash(do echo -n \"$f: \")",
+      "Bash(done)",
+      "Bash(node -e:*)"
     ]
   }
 }

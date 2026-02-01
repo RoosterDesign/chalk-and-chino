@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                         alt=""
                         height={500}
                         sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        src="/no-thumbnail-list.png"
+                        src="/no-thumbnail-list.webp"
                         width={400}
                     />
                 )}

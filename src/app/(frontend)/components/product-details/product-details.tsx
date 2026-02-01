@@ -106,7 +106,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                         height={615}
                         loading="eager"
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        src="/no-thumbnail.png"
+                        src="/no-thumbnail.webp"
                         width={820}
                     />
                 )}
