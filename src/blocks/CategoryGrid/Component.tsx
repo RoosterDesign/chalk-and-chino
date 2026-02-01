@@ -52,6 +52,7 @@ const CategoryGridBlock: React.FC<Props> = ({ categories, title }) => {
                                                 ?.categoryBanner?.url ??
                                             category.image?.url
                                         }
+                                        unoptimized
                                         width={
                                             category.image?.sizes
                                                 ?.categoryBanner?.width ?? 710

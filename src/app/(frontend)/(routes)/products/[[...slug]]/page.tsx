@@ -1,5 +1,6 @@
 // app/[...slug]/page.tsx
 import type { Metadata } from "next";
+import type { Media } from "@/payload-types";
 
 import Gallery from "@/app/components/gallery/gallery";
 import NoResults from "@/app/components/no-results/no-results";
@@ -167,8 +168,29 @@ export default async function ProductsPage({ params }: PageProps) {
     if (typeof product.category !== "object")
         return <NoResults content="Category mismatch" />;
 
+    // Extract hero image URL for preloading (before client hydration)
+    let heroImagePreloadUrl: string | null = null;
+    if (
+        typeof product.heroImage === "object" &&
+        product.heroImage !== null &&
+        "sizes" in product.heroImage
+    ) {
+        const heroImage = product.heroImage as Media;
+        const thumbnail = heroImage.sizes?.thumbnail;
+        heroImagePreloadUrl = thumbnail?.url ?? heroImage.url ?? null;
+    }
+
     return (
         <>
+            {/* Preload hero image so browser fetches it before React hydration */}
+            {heroImagePreloadUrl && (
+                <link
+                    as="image"
+                    fetchPriority="high"
+                    href={heroImagePreloadUrl}
+                    rel="preload"
+                />
+            )}
             <ProductDetails
                 defaultDeliveryText={defaultDeliveryText}
                 product={product}

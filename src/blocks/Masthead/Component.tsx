@@ -55,6 +55,7 @@ const MastheadBlock: React.FC<MastheadBlockProps> = ({ title, image }) => {
                     height={height}
                     priority
                     src={srcUrl}
+                    unoptimized
                     width={width}
                 />
             )}

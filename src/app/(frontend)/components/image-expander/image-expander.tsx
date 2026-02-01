@@ -20,8 +20,8 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
             <Image
                 alt={alt}
                 height={1600}
-                sizes="100vw"
                 src={src}
+                unoptimized
                 width={1600}
             />,
             true
@@ -35,8 +35,8 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
                 height={thumbHeight}
                 onClick={handleOpenModal}
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
                 src={thumbSrc}
+                unoptimized
                 width={thumbWidth}
             />
             <span className={styles.expandButton}>

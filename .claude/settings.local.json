@@ -11,7 +11,8 @@
       "Bash(for f in next.svg globe.svg file.svg window.svg vercel.svg)",
       "Bash(do echo -n \"$f: \")",
       "Bash(done)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

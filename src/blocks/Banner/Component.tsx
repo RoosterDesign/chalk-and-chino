@@ -33,6 +33,7 @@ const BannerBlock: React.FC<BannerBlockProps> = ({
                         alt={image.alt || ""}
                         height={image.sizes.landscape.height}
                         src={image.sizes.landscape.url}
+                        unoptimized
                         width={image.sizes.landscape.width}
                     />
                 )}

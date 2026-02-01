@@ -40,8 +40,8 @@ const HeroBlock: React.FC<HeroBlockProps> = ({
                         fetchPriority="high"
                         height={image.sizes.landscape.height}
                         priority
-                        sizes="100vw"
                         src={image.sizes.landscape.url}
+                        unoptimized
                         width={image.sizes.landscape.width}
                     />
                 )}

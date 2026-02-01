@@ -42,6 +42,7 @@ const GalleryTextBannerBlock: React.FC<GalleryTextBannerBlockProps> = ({
                                 alt={image1.alt || ""}
                                 height={image1.sizes.portrait.height}
                                 src={image1.sizes.portrait.url}
+                                unoptimized
                                 width={image1.sizes.portrait.width}
                             />
                         )}
@@ -54,6 +55,7 @@ const GalleryTextBannerBlock: React.FC<GalleryTextBannerBlockProps> = ({
                                 alt={image2.alt || ""}
                                 height={image2.sizes.portrait.height}
                                 src={image2.sizes.portrait.url}
+                                unoptimized
                                 width={image2.sizes.portrait.width}
                             />
                         )}
@@ -66,6 +68,7 @@ const GalleryTextBannerBlock: React.FC<GalleryTextBannerBlockProps> = ({
                                 alt={image3.alt || ""}
                                 height={image3.sizes.portrait.height}
                                 src={image3.sizes.portrait.url}
+                                unoptimized
                                 width={image3.sizes.portrait.width}
                             />
                         )}

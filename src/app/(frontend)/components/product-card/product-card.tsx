@@ -34,8 +34,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     <Image
                         alt={altText}
                         height={productThumbnail.height!}
-                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         src={productThumbnail.url!}
+                        unoptimized
                         width={productThumbnail.width!}
                     />
                 ) : (
