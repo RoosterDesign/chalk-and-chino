@@ -82,6 +82,8 @@ export default buildConfig({
                     ? process.env.LOCAL_DATABASE_URL || ""
                     : process.env.NEON_DATABASE_URL || process.env.PAYLOAD_DATABASE_URL || "",
         },
+        // Disable automatic schema push when using restored database
+        push: false,
     }),
     editor: lexicalEditor(),
     plugins: [

@@ -17,7 +17,13 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
 
     const handleOpenModal = () => {
         openModal(
-            <Image alt={alt} height={1600} src={src} width={1600} />,
+            <Image
+                alt={alt}
+                height={1600}
+                sizes="100vw"
+                src={src}
+                width={1600}
+            />,
             true
         );
     };
@@ -27,7 +33,9 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
             <Image
                 alt={alt}
                 height={thumbHeight}
+                loading="eager"
                 onClick={handleOpenModal}
+                sizes="(max-width: 768px) 100vw, 50vw"
                 src={thumbSrc}
                 width={thumbWidth}
             />

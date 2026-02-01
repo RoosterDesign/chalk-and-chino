@@ -53,6 +53,7 @@ const Footer: React.FC<FooterProps> = ({
                                             isActive ? styles.isActive : ""
                                         }
                                         href={item.url}
+                                        prefetch={true}
                                         title={item.label}
                                     >
                                         {item.label}
@@ -75,6 +76,7 @@ const Footer: React.FC<FooterProps> = ({
                                             : ""
                                     }
                                     href={item.url}
+                                    prefetch={true}
                                     title={item.label}
                                 >
                                     {item.label}

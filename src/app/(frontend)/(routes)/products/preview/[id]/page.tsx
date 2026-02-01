@@ -25,11 +25,13 @@ export default async function ProductPreviewPage({ params }: Props) {
 
     if (!id) return notFound();
 
-    const product = await getProductById(id, { draft });
+    // Fetch product and global data in parallel
+    const [product, global] = await Promise.all([
+        getProductById(id, { draft }),
+        getPaymentDeliveryDetails(),
+    ]);
 
     if (!product) return notFound();
-
-    const global = await getPaymentDeliveryDetails();
 
     return (
         <>

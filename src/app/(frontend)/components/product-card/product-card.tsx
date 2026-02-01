@@ -27,13 +27,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             : product.name || "";
 
     return (
-        <Link className={styles.productCard} href={productUrl}>
+        <Link className={styles.productCard} href={productUrl} prefetch={true}>
             <div className={styles.image}>
                 <span className={styles.price}>£{product.price}</span>
                 {productThumbnail ? (
                     <Image
                         alt={altText}
                         height={productThumbnail.height!}
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         src={productThumbnail.url!}
                         width={productThumbnail.width!}
                     />
@@ -41,6 +42,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     <Image
                         alt=""
                         height={500}
+                        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                         src="/no-thumbnail-list.png"
                         width={400}
                     />

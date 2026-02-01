@@ -1,8 +1,9 @@
 "use client";
 
-import { NavItem } from "@/lib/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+import { NavItem } from "@/lib/types";
 
 import styles from "./nav-links.module.scss";
 
@@ -49,6 +50,7 @@ const NavLinks: React.FC<NavLinksProps> = ({
                         <Link
                             className={isActive ? styles.isActive : ""}
                             href={item.url}
+                            prefetch={true}
                             title={item.label}
                         >
                             {item.label}
@@ -67,6 +69,7 @@ const NavLinks: React.FC<NavLinksProps> = ({
                                                     : ""
                                             }
                                             href={child.url}
+                                            prefetch={true}
                                         >
                                             {child.label}
                                         </Link>

@@ -1,4 +1,5 @@
 "use client";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -6,8 +7,13 @@ import { useState } from "react";
 import type { Media } from "@/payload-types";
 
 import { useModal } from "@/app/context/ModalContext";
-import ContactForm from "@/components/contact-form/contact-form";
 import Container from "@/components/container/container";
+
+// Dynamically import ContactForm - only loads when modal opens
+const ContactForm = dynamic(
+    () => import("@/components/contact-form/contact-form"),
+    { ssr: false }
+);
 import ImageExpander from "@/components/image-expander/image-expander";
 import TruncatedText from "@/components/truncated-text/truncated-text";
 import { Product } from "@/payload-types";
@@ -98,6 +104,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                     <Image
                         alt=""
                         height={615}
+                        loading="eager"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         src="/no-thumbnail.png"
                         width={820}
                     />
@@ -109,6 +117,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                     <Link
                         className={styles.categoryLink}
                         href={`/products/${product.category.slug}`}
+                        prefetch={true}
                         title={product.category.name}
                     >
                         {product.category.name}

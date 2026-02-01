@@ -100,8 +100,11 @@ export async function generateStaticParams() {
 export default async function ProductsPage({ params }: PageProps) {
     const { slug } = await params;
 
-    // Load all categories + the All Products global in parallel
-    const [allProductsGlobal] = await Promise.all([getAllProductsCategory()]);
+    // Load globals in parallel
+    const [allProductsGlobal, deliveryGlobal] = await Promise.all([
+        getAllProductsCategory(),
+        getPaymentDeliveryDetails(),
+    ]);
 
     // Extract title & image with fallbacks
     const allTitle =
@@ -115,8 +118,6 @@ export default async function ProductsPage({ params }: PageProps) {
             ? allProductsGlobal.image
             : undefined;
 
-    // Payment & delivery global
-    const deliveryGlobal = await getPaymentDeliveryDetails();
     const defaultDeliveryText = deliveryGlobal?.customText ?? "";
 
     // 1) All Products

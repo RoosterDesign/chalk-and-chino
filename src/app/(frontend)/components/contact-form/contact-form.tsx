@@ -149,9 +149,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
     return (
         <>
             <Script
-                async
-                defer
                 src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+                strategy="lazyOnload"
             />
             {submitted ? (
                 <div className={styles.thanks}>

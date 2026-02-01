@@ -300,7 +300,7 @@ export interface FeaturedProductsBlock {
     };
   };
   /**
-   * Leave empty to automatically show the 3 latest products
+   * Select up to 4 products. Empty slots are filled with the latest products.
    */
   products?: (number | Product)[] | null;
   id?: string | null;
