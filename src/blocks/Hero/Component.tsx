@@ -37,7 +37,10 @@ const HeroBlock: React.FC<HeroBlockProps> = ({
                     <Image
                         alt={image.alt || ""}
                         className="img-full"
+                        fetchPriority="high"
                         height={image.sizes.landscape.height}
+                        priority
+                        sizes="100vw"
                         src={image.sizes.landscape.url}
                         width={image.sizes.landscape.width}
                     />

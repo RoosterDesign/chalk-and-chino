@@ -27,7 +27,7 @@ export const Media: CollectionConfig = {
         height: 300,
         fit: 'cover',
         formatOptions: {
-          format: 'webp',
+          format: 'avif',
           options: { quality: 90 },
         },
       },
@@ -37,7 +37,7 @@ export const Media: CollectionConfig = {
         height: 500,
         fit: 'cover',
         formatOptions: {
-          format: 'webp',
+          format: 'avif',
           options: { quality: 90 },
         },
       },
@@ -47,7 +47,7 @@ export const Media: CollectionConfig = {
         height: 900,
         fit: 'cover',
         formatOptions: {
-          format: 'webp',
+          format: 'avif',
           options: { quality: 90 },
         },
       },
@@ -57,7 +57,7 @@ export const Media: CollectionConfig = {
         height: 325,
         fit: 'cover',
         formatOptions: {
-          format: 'webp',
+          format: 'avif',
           options: { quality: 90 },
         },
       },
@@ -67,7 +67,7 @@ export const Media: CollectionConfig = {
         height: 615,
         fit: 'cover',
         formatOptions: {
-          format: 'webp',
+          format: 'avif',
           options: { quality: 90 },
         },
       },
@@ -77,7 +77,7 @@ export const Media: CollectionConfig = {
         height: 1100,
         fit: 'cover',
         formatOptions: {
-          format: 'webp',
+          format: 'avif',
           options: { quality: 90 },
         },
       },

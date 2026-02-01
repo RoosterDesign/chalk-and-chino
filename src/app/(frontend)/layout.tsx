@@ -100,7 +100,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
                         mainNavItems={mainNavItems}
                         productCategories={productCategories}
                     />
-                    {children}
+                    <main id="main-content">{children}</main>
                     <Footer
                         footerNavItems={footerLinks}
                         footerText={footerText}

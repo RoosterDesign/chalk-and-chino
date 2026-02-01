@@ -11,9 +11,23 @@ const nextConfig: NextConfig = {
         ignoreDuringBuilds: true,
     },
     images: {
+        // Prefer AVIF, fallback to WebP for older browsers
+        formats: ['image/avif', 'image/webp'],
         remotePatterns: [
             {
                 hostname: "picsum.photos",
+                pathname: "**",
+                protocol: "https",
+            },
+            {
+                // Cloudflare R2 storage
+                hostname: "*.r2.cloudflarestorage.com",
+                pathname: "**",
+                protocol: "https",
+            },
+            {
+                // If using a custom domain for R2
+                hostname: "*.chalkandchino.com",
                 pathname: "**",
                 protocol: "https",
             },
@@ -29,6 +43,30 @@ const nextConfig: NextConfig = {
             {
                 source: "/products/all",
                 destination: "/products",
+            },
+        ];
+    },
+    async headers() {
+        return [
+            {
+                // Cache static assets for 1 year
+                source: "/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif|woff|woff2)",
+                headers: [
+                    {
+                        key: "Cache-Control",
+                        value: "public, max-age=31536000, immutable",
+                    },
+                ],
+            },
+            {
+                // Cache Next.js static files
+                source: "/_next/static/:path*",
+                headers: [
+                    {
+                        key: "Cache-Control",
+                        value: "public, max-age=31536000, immutable",
+                    },
+                ],
             },
         ];
     },

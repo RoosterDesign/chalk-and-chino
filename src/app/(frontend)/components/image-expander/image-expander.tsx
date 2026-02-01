@@ -33,8 +33,8 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
             <Image
                 alt={alt}
                 height={thumbHeight}
-                loading="eager"
                 onClick={handleOpenModal}
+                priority
                 sizes="(max-width: 768px) 100vw, 50vw"
                 src={thumbSrc}
                 width={thumbWidth}
