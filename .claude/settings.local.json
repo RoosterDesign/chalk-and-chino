@@ -19,7 +19,8 @@
       "Bash(findstr:*)",
       "Bash($env:DATABASE_ENV=\"neon\")",
       "Bash(del scriptscheckSchema.ts scriptsmigrateImageUrls.ts)",
-      "Bash(pnpm remove:*)"
+      "Bash(pnpm remove:*)",
+      "Bash(curl:*)"
     ]
   }
 }
