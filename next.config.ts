@@ -31,6 +31,12 @@ const nextConfig: NextConfig = {
                 pathname: "**",
                 protocol: "https",
             },
+            {
+                // Cloudflare R2 custom domain for cached images
+                hostname: "img.chalkandchino.co.uk",
+                pathname: "**",
+                protocol: "https",
+            },
         ],
     },
     sassOptions: {

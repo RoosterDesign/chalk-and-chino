@@ -12,7 +12,14 @@
       "Bash(do echo -n \"$f: \")",
       "Bash(done)",
       "Bash(node -e:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm migrate:image-urls:*)",
+      "Bash(pnpm tsx:*)",
+      "Bash(findstr:*)",
+      "Bash($env:DATABASE_ENV=\"neon\")",
+      "Bash(del scriptscheckSchema.ts scriptsmigrateImageUrls.ts)",
+      "Bash(pnpm remove:*)"
     ]
   }
 }
