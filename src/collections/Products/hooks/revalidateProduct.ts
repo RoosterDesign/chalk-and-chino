@@ -10,21 +10,25 @@ import type { Product } from '@/payload-types'
 export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
     doc,
 }) => {
-    const productSlug = doc.slug
+    try {
+        const productSlug = doc.slug
 
-    // Product listings
-    revalidatePath('/products')
+        // Product listings
+        revalidatePath('/products')
 
-    if (typeof productSlug === 'string' && productSlug.trim() !== '') {
-        const productPath = `/products/${productSlug}`
-        revalidatePath(productPath)
-        revalidateTag('products')
-    }
+        if (typeof productSlug === 'string' && productSlug.trim() !== '') {
+            const productPath = `/products/${productSlug}`
+            revalidatePath(productPath)
+            revalidateTag('products')
+        }
 
-    if (typeof doc.category === 'object' && doc.category?.slug) {
-        const path = `/products/${doc.category.slug}`
-        revalidatePath(path)
-        revalidateTag(`category-${doc.category.slug}`)
+        if (typeof doc.category === 'object' && doc.category?.slug) {
+            const path = `/products/${doc.category.slug}`
+            revalidatePath(path)
+            revalidateTag(`category-${doc.category.slug}`)
+        }
+    } catch {
+        // revalidation can fail if called during render (e.g. autosave during admin page load)
     }
 
     return doc
@@ -32,23 +36,26 @@ export const revalidateProduct: CollectionAfterChangeHook<Product> = async ({
 
 export const revalidateProductDelete: CollectionAfterDeleteHook<Product> = async ({
     doc,
-    req,
 }) => {
-    const productSlug = doc.slug
+    try {
+        const productSlug = doc.slug
 
-    // Product listings
-    revalidatePath('/products')
+        // Product listings
+        revalidatePath('/products')
 
-    if (typeof productSlug === 'string' && productSlug.trim() !== '') {
-        const productPath = `/products/${productSlug}`
-        revalidatePath(productPath)
-        revalidateTag('products')
-    }
+        if (typeof productSlug === 'string' && productSlug.trim() !== '') {
+            const productPath = `/products/${productSlug}`
+            revalidatePath(productPath)
+            revalidateTag('products')
+        }
 
-    if (typeof doc.category === 'object' && doc.category?.slug) {
-        const path = `/products/${doc.category.slug}`
-        revalidatePath(path)
-        revalidateTag(`category-${doc.category.slug}`)
+        if (typeof doc.category === 'object' && doc.category?.slug) {
+            const path = `/products/${doc.category.slug}`
+            revalidatePath(path)
+            revalidateTag(`category-${doc.category.slug}`)
+        }
+    } catch {
+        // revalidation can fail if called during render
     }
 
     return doc

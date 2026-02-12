@@ -3,17 +3,25 @@ import type { CollectionAfterChangeHook, CollectionAfterDeleteHook } from 'paylo
 import { revalidatePath, revalidateTag } from 'next/cache'
 
 export const revalidateCategory: CollectionAfterChangeHook = async ({ doc }) => {
-    const path = `/products/${doc.slug}`
-    revalidatePath('/products')
-    revalidatePath(path)
-    revalidateTag('categories') // if you tag category nav or category queries
+    try {
+        const path = `/products/${doc.slug}`
+        revalidatePath('/products')
+        revalidatePath(path)
+        revalidateTag('categories')
+    } catch {
+        // revalidation can fail if called during render (e.g. autosave during admin page load)
+    }
     return doc
 }
 
 export const revalidateCategoryDelete: CollectionAfterDeleteHook = async ({ doc }) => {
-    const path = `/products/${doc.slug}`
-    revalidatePath('/products')
-    revalidatePath(path)
-    revalidateTag('categories')
+    try {
+        const path = `/products/${doc.slug}`
+        revalidatePath('/products')
+        revalidatePath(path)
+        revalidateTag('categories')
+    } catch {
+        // revalidation can fail if called during render
+    }
     return doc
 }

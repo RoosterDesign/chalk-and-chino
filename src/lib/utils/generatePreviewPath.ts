@@ -15,7 +15,7 @@ export const generatePreviewPath = ({ collection, data }: Args): string => {
     if (collection === 'products') {
         const id = data?.id
         if (!id) {
-            throw new Error('Missing ID for preview path')
+            return ''
         }
         path = `/products/preview/${id}`
     }

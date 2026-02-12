@@ -10,25 +10,29 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
     req: { payload, context },
 }) => {
     if (!context.disableRevalidate) {
-        if (doc._status === 'published') {
-            const path = doc.slug === 'homepage' ? '/' : `/${doc.slug}`
+        try {
+            if (doc._status === 'published') {
+                const path = doc.slug === 'homepage' ? '/' : `/${doc.slug}`
 
-            payload.logger.info(`Revalidating page at path: ${path}`)
+                payload.logger.info(`Revalidating page at path: ${path}`)
 
-            revalidatePath(path)
-            revalidateTag('pages-sitemap')
-            revalidateTag('pages')
-        }
+                revalidatePath(path)
+                revalidateTag('pages-sitemap')
+                revalidateTag('pages')
+            }
 
-        // If the page was previously published, we need to revalidate the old path
-        if (previousDoc?._status === 'published' && doc._status !== 'published') {
-            const oldPath = previousDoc.slug === 'homepage' ? '/' : `/${previousDoc.slug}`
+            // If the page was previously published, we need to revalidate the old path
+            if (previousDoc?._status === 'published' && doc._status !== 'published') {
+                const oldPath = previousDoc.slug === 'homepage' ? '/' : `/${previousDoc.slug}`
 
-            payload.logger.info(`Revalidating old page at path: ${oldPath}`)
+                payload.logger.info(`Revalidating old page at path: ${oldPath}`)
 
-            revalidatePath(oldPath)
-            revalidateTag('pages-sitemap')
-            revalidateTag('pages')
+                revalidatePath(oldPath)
+                revalidateTag('pages-sitemap')
+                revalidateTag('pages')
+            }
+        } catch {
+            // revalidation can fail if called during render (e.g. autosave during admin page load)
         }
     }
     return doc
@@ -36,9 +40,13 @@ export const revalidatePage: CollectionAfterChangeHook<Page> = ({
 
 export const revalidateDelete: CollectionAfterDeleteHook<Page> = ({ doc, req: { context } }) => {
     if (!context.disableRevalidate) {
-        const path = doc?.slug === 'homepage' ? '/' : `/${doc?.slug}`
-        revalidatePath(path)
-        revalidateTag('pages-sitemap')
+        try {
+            const path = doc?.slug === 'homepage' ? '/' : `/${doc?.slug}`
+            revalidatePath(path)
+            revalidateTag('pages-sitemap')
+        } catch {
+            // revalidation can fail if called during render
+        }
     }
 
     return doc
