@@ -1,6 +1,7 @@
 import { draftMode } from "next/headers";
 import { notFound } from "next/navigation";
 
+import Gallery from "@/app/components/gallery/gallery";
 import ProductDetails from "@/app/components/product-details/product-details";
 
 // Preview pages should always be dynamic - never cache
@@ -40,6 +41,9 @@ export default async function ProductPreviewPage({ params }: Props) {
                 defaultDeliveryText={global?.customText || ""}
                 product={product}
             />
+            {product.gallery && product.gallery.length > 0 && (
+                <Gallery images={product.gallery} />
+            )}
             <Testimonials />
         </>
     );
