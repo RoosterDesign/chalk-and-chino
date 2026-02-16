@@ -100,6 +100,7 @@ export default buildConfig({
             collections: {
                 media: {
                     generateFileURL: ({ filename }) => {
+                        if (!filename) return '';
                         // Files are stored with chalk-and-chino/ prefix in R2
                         return `https://img.chalkandchino.co.uk/chalk-and-chino/${filename}`;
                     },
