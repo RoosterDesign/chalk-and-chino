@@ -46,10 +46,10 @@ export const Pages: CollectionConfig = {
             url: ({ data }) =>
                 generatePreviewPath({ collection: "pages", data }),
         },
-        preview: ({ data }) =>
+        preview: (doc) =>
             generatePreviewPath({
                 collection: "pages",
-                data: data as { id?: string; slug?: string },
+                data: doc as { id?: string; slug?: string },
             }),
     },
     fields: [

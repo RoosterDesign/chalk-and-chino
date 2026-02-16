@@ -15,9 +15,9 @@ export const Products: CollectionConfig = {
         livePreview: {
             url: ({ data }) => generatePreviewPath({ collection: 'products', data }),
         },
-        preview: ({ data }) => generatePreviewPath({
+        preview: (doc) => generatePreviewPath({
             collection: 'products',
-            data: data as { id?: string; slug?: string },
+            data: doc as { id?: string; slug?: string },
         }),
     },
 
