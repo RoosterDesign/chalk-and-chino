@@ -99,8 +99,8 @@ export default buildConfig({
         s3Storage({
             collections: {
                 media: {
-                    generateFileURL: ({ filename }) => {
-                        if (!filename) return '';
+                    generateFileURL: ({ filename }: { filename: string }) => {
+                        if (!filename) return null!;
                         // Files are stored with chalk-and-chino/ prefix in R2
                         return `https://img.chalkandchino.co.uk/chalk-and-chino/${filename}`;
                     },

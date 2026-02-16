@@ -31,15 +31,17 @@ const GalleryBlock: React.FC<GalleryBlockProps> = ({
                         if (typeof image === "object" && image.url) {
                             const thumb = image.sizes?.thumbnail;
                             const full = image.sizes?.modalPreview;
+                            const thumbSrc = thumb?.url ?? image.url;
+                            const fullSrc = full?.url ?? image.url;
 
                             return (
                                 <ImageExpander
                                     alt={image.alt || ""}
                                     key={image.id}
-                                    src={full?.url ?? image.url}
-                                    thumbHeight={thumb?.height!}
-                                    thumbSrc={thumb?.url ?? image.url}
-                                    thumbWidth={thumb?.width!}
+                                    src={fullSrc}
+                                    thumbHeight={thumb?.height ?? image.height ?? 615}
+                                    thumbSrc={thumbSrc}
+                                    thumbWidth={thumb?.width ?? image.width ?? 820}
                                 />
                             );
                         }

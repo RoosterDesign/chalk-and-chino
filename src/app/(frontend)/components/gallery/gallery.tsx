@@ -30,19 +30,24 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                             const thumb = image.image.sizes?.thumbnail;
                             const thumbFullWidth = image.image.sizes?.landscape;
 
-                            let thumbSrc;
-                            let thumbHeight;
-                            let thumbWidth;
+                            let thumbSrc: string | undefined;
+                            let thumbHeight: number;
+                            let thumbWidth: number;
 
                             if (image.thumbnailSize === "half") {
-                                thumbSrc = thumb?.url;
-                                thumbHeight = thumb?.height;
-                                thumbWidth = thumb?.width;
+                                thumbSrc = thumb?.url ?? undefined;
+                                thumbHeight = thumb?.height ?? image.image.height ?? 615;
+                                thumbWidth = thumb?.width ?? image.image.width ?? 820;
                             } else {
-                                thumbSrc = thumbFullWidth?.url;
-                                thumbHeight = thumbFullWidth?.height;
-                                thumbWidth = thumbFullWidth?.width;
+                                thumbSrc = thumbFullWidth?.url ?? undefined;
+                                thumbHeight = thumbFullWidth?.height ?? image.image.height ?? 900;
+                                thumbWidth = thumbFullWidth?.width ?? image.image.width ?? 1920;
                             }
+
+                            const resolvedThumbSrc = thumbSrc ?? image.image.url;
+                            const fullSrc = image.image.url ?? thumbSrc;
+
+                            if (!resolvedThumbSrc || !fullSrc) return null;
 
                             return (
                                 <ImageExpander
@@ -53,10 +58,10 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                                             : undefined
                                     }
                                     key={image.id}
-                                    src={image.image.url ?? thumbSrc}
-                                    thumbHeight={thumbHeight!}
-                                    thumbSrc={thumbSrc ?? image.image.url}
-                                    thumbWidth={thumbWidth!}
+                                    src={fullSrc}
+                                    thumbHeight={thumbHeight}
+                                    thumbSrc={resolvedThumbSrc}
+                                    thumbWidth={thumbWidth}
                                 />
                             );
                         }
