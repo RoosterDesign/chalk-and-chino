@@ -61,17 +61,23 @@ export const Media: CollectionConfig = {
         formatOptions: webp,
       },
       {
+        // Bounding box, not a crop: 'inside' keeps the uploaded aspect ratio,
+        // so portrait heroes stay portrait. Grid consumers (product cards,
+        // gallery cells) crop to their own box in CSS.
         name: 'thumbnail',
         width: 820,
-        height: 615,
-        fit: 'cover',
+        height: 820,
+        fit: 'inside',
+        withoutEnlargement: true,
         formatOptions: webp,
       },
       {
+        // Full-size lightbox image - must never be cropped.
         name: 'modalPreview',
         width: 1440,
-        height: 1100,
-        fit: 'cover',
+        height: 1440,
+        fit: 'inside',
+        withoutEnlargement: true,
         formatOptions: webp,
       },
     ],
