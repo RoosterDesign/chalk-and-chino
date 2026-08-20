@@ -65,25 +65,44 @@
 
 }
 
-.imageOnly {
+.modal.imageOnly {
     background: none;
+    border-radius: 0;
+    height: auto;
+    max-height: none;
+    max-width: none;
+    overflow: visible;
+    width: auto;
 
-    > div {
-        overflow: hidden;
-        position: relative;
+    &::after {
+        content: none;
+    }
+
+    @include breakpoint(lg) {
+        max-width: none;
+    }
+
+    .modalContent {
+        overflow: visible;
         padding: 0;
     }
 
-    img {
-        // aspect-ratio: 4 / 3;
-        display: block;
-        height: auto;
-        // object-fit: cover;
-        max-width: 100%;
+    .imgWrapper {
+        display: flex;
+        line-height: 0;
+        overflow: visible;
+        padding: 0;
+        position: relative;
     }
 
-}
+    img {
+        border-radius: var(--border-radius);
+        display: block;
+        height: auto;
+        max-height: 90vh;
+        max-width: 90vw;
+        object-fit: contain;
+        width: auto;
+    }
 
-.imgWrapper {
-    // aspect-ratio: 4 / 3;
 }

@@ -67,6 +67,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
     let thumbW = 0;
     let thumbH = 0;
     let fullUrl = "";
+    let fullW = 0;
+    let fullH = 0;
 
     if (
         typeof product.heroImage === "object" &&
@@ -83,6 +85,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
         thumbW = galleryThumb?.width ?? heroImage.width ?? 0;
         thumbH = galleryThumb?.height ?? heroImage.height ?? 0;
         fullUrl = modalPrev?.url ?? heroImage.url ?? "";
+        fullW = modalPrev?.width ?? heroImage.width ?? 0;
+        fullH = modalPrev?.height ?? heroImage.height ?? 0;
     }
 
     return (
@@ -95,10 +99,12 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
                 thumbH > 0 ? (
                     <ImageExpander
                         alt={heroImage.alt ?? ""}
+                        height={fullH}
                         src={fullUrl}
                         thumbHeight={thumbH}
                         thumbSrc={thumbUrl}
                         thumbWidth={thumbW}
+                        width={fullW}
                     />
                 ) : (
                     <Image

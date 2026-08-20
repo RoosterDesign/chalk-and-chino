@@ -8,10 +8,12 @@ import styles from "./image-expander.module.scss";
 const ImageExpander: React.FC<ImageExpanderType> = ({
     alt,
     className,
+    height,
     src,
     thumbSrc,
     thumbHeight,
     thumbWidth,
+    width,
 }) => {
     const { openModal } = useModal();
 
@@ -19,10 +21,10 @@ const ImageExpander: React.FC<ImageExpanderType> = ({
         openModal(
             <Image
                 alt={alt}
-                height={1600}
+                height={height || 1600}
                 src={src}
                 unoptimized
-                width={1600}
+                width={width || 1600}
             />,
             true
         );

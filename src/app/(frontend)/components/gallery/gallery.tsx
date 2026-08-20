@@ -57,11 +57,13 @@ const Gallery: React.FC<GalleryProps> = ({ images }) => {
                                             ? "gallery-item-fw"
                                             : undefined
                                     }
+                                    height={image.image.height ?? 0}
                                     key={image.id}
                                     src={fullSrc}
                                     thumbHeight={thumbHeight}
                                     thumbSrc={resolvedThumbSrc}
                                     thumbWidth={thumbWidth}
+                                    width={image.image.width ?? 0}
                                 />
                             );
                         }

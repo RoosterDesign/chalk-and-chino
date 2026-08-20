@@ -37,11 +37,13 @@ const GalleryBlock: React.FC<GalleryBlockProps> = ({
                             return (
                                 <ImageExpander
                                     alt={image.alt || ""}
+                                    height={full?.height ?? image.height ?? 0}
                                     key={image.id}
                                     src={fullSrc}
                                     thumbHeight={thumb?.height ?? image.height ?? 615}
                                     thumbSrc={thumbSrc}
                                     thumbWidth={thumb?.width ?? image.width ?? 820}
+                                    width={full?.width ?? image.width ?? 0}
                                 />
                             );
                         }
