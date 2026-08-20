@@ -12,6 +12,10 @@ import {
     REST_PUT,
 } from '@payloadcms/next/routes'
 
+// Hobby caps at 300s (also the Fluid-compute default). Image uploads fan out
+// into several sharp encodes plus R2 uploads.
+export const maxDuration = 300
+
 export const GET = REST_GET(config)
 export const POST = REST_POST(config)
 export const DELETE = REST_DELETE(config)

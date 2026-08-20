@@ -28,7 +28,9 @@ const dirname = path.dirname(filename);
 export default buildConfig({
     upload: {
         limits: {
-            fileSize: 10 * 1024 * 1024, // 10MB
+            // Vercel rejects request bodies over 4.5MB at the edge before the
+            // function runs, so anything above that is unreachable anyway.
+            fileSize: 4 * 1024 * 1024, // 4MB
         },
     },
     admin: {
