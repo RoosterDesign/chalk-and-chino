@@ -51,9 +51,14 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
     const [activeIndex, setActiveIndex] = useState(0);
     const activeImage = images[activeIndex] ?? heroImage;
     const active = resolveSizes(activeImage);
+    const hasRail = images.length > 1;
 
     return (
-        <div className={styles.gallery}>
+        <div
+            className={`${styles.gallery} ${
+                hasRail ? "" : styles.galleryNoRail
+            }`}
+        >
             <div className={styles.main}>
                 <ImageExpander
                     alt={activeImage.alt ?? ""}
@@ -66,7 +71,7 @@ const ProductGallery: React.FC<ProductGalleryProps> = ({
                 />
             </div>
 
-            {images.length > 1 && (
+            {hasRail && (
                 <div className={styles.rail}>
                     {images.map((image, index) => {
                         const { railHeight, railSrc, railWidth } =

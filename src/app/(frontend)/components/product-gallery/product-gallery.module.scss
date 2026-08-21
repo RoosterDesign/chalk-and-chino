@@ -8,21 +8,26 @@
         "main"
         "rail";
 
-    // Neither of these widths is in the shared breakpoint map, so both stay
-    // local to this component.
-    @media (min-width: rem(1200)) {
-        gap: rem(15);
-        grid-template-areas: "rail main";
-        grid-template-columns: rem(138) 1fr;
-    }
-
     @include breakpoint(lg) {
         gap: rem(20);
     }
 
-    // Only past 1600 is there room for larger thumbnails in those two columns.
+    // Only past 1600 is there width to give the rail without the main image
+    // feeling it. 1600 is not in the shared breakpoint map, so it stays local.
     @media (min-width: rem(1600)) {
+        grid-template-areas: "rail main";
         grid-template-columns: rem(178) 1fr;
+    }
+
+}
+
+// With a single image the rail is not rendered, so the track it would sit in
+// must go too - otherwise the image is pushed off an empty column.
+.gallery.galleryNoRail {
+
+    @media (min-width: rem(1600)) {
+        grid-template-areas: "main";
+        grid-template-columns: 1fr;
     }
 
 }
@@ -40,7 +45,7 @@
     gap: rem(10);
     grid-area: rail;
 
-    @media (min-width: rem(1200)) {
+    @media (min-width: rem(1600)) {
         align-content: start;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -62,7 +67,7 @@
     transition: opacity .2s ease-in-out;
     width: rem(64);
 
-    @media (min-width: rem(1200)) {
+    @media (min-width: rem(1600)) {
         width: 100%;
     }
 
