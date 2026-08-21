@@ -32,18 +32,16 @@
 
 .rail {
     display: flex;
+    // Thumbnails wrap beneath the main image on mobile, so every one is
+    // reachable without a sideways swipe.
+    flex-wrap: wrap;
     gap: rem(10);
     grid-area: rail;
-    // Thumbnails scroll sideways on mobile rather than wrapping under the image.
-    overflow-x: auto;
-    padding-bottom: rem(5);
 
     @include breakpoint(sm) {
         align-content: start;
         display: grid;
         grid-template-columns: 1fr;
-        overflow-x: visible;
-        padding-bottom: 0;
     }
 
     @media (min-width: rem(1600)) {
