@@ -1,22 +1,18 @@
 .gallery {
     display: grid;
     gap: rem(10);
-    // Main image first on mobile, thumbnails below it.
+    // Thumbnails sit under the main image until there is room for two columns
+    // of them beside it. A single column down the left costs the main image
+    // width without earning it back.
     grid-template-areas:
         "main"
         "rail";
 
-    // Side rail only once there is width to spare for it. 1025 rather than
-    // 1024 so a landscape tablet keeps the stacked layout.
-    @media (min-width: rem(1025)) {
+    // Neither of these widths is in the shared breakpoint map, so both stay
+    // local to this component.
+    @media (min-width: rem(1200)) {
         gap: rem(15);
         grid-template-areas: "rail main";
-        grid-template-columns: rem(64) 1fr;
-    }
-
-    // Two columns of thumbnails from 1200, so laptops get them too. Neither
-    // width is in the shared breakpoint map, so both stay local.
-    @media (min-width: rem(1200)) {
         grid-template-columns: rem(138) 1fr;
     }
 
@@ -38,19 +34,15 @@
 
 .rail {
     display: flex;
-    // Thumbnails wrap beneath the main image on mobile, so every one is
-    // reachable without a sideways swipe.
+    // Thumbnails wrap beneath the main image rather than scrolling sideways,
+    // so every one is reachable without a swipe.
     flex-wrap: wrap;
     gap: rem(10);
     grid-area: rail;
 
-    @media (min-width: rem(1025)) {
+    @media (min-width: rem(1200)) {
         align-content: start;
         display: grid;
-        grid-template-columns: 1fr;
-    }
-
-    @media (min-width: rem(1200)) {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -70,7 +62,7 @@
     transition: opacity .2s ease-in-out;
     width: rem(64);
 
-    @media (min-width: rem(1025)) {
+    @media (min-width: rem(1200)) {
         width: 100%;
     }
 
