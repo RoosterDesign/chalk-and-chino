@@ -70,6 +70,6 @@
 // Was (min-height: 1200px) and (max-height: 1050px), which can never match.
 @media (min-width: rem(1280)) and (max-height: rem(1000)) {
     :root {
-        --header-height: 120px;
+        --header-height: 130px;
     }
 }
