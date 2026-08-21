@@ -1,5 +1,6 @@
 .container {
     display: grid;
+    padding-bottom: rem(40);
 
     @include breakpoint(sm) {
         gap: rem(60) rem(30);
@@ -7,6 +8,7 @@
         grid-template-areas:
             "img intro"
             "tabs tabs";
+            padding-bottom: rem(80);
     }
 
     @include breakpoint(md) {
@@ -24,6 +26,20 @@
 
     @include breakpoint(xl) {
         gap: rem(50) rem(85);
+    }
+
+    // Laptop-shaped viewports: wide, but too shallow for an even split - a 4:5
+    // hero in half of a 1720 container runs past the fold. Cap the image track
+    // and give what is left to the copy. Keyed on height because that is the
+    // constraint; the same width on a tall monitor has room to spare.
+    @media (min-width: rem(1280)) and (max-height: rem(1000)) {
+        grid-template-columns: minmax(0, rem(500)) 1fr;
+    }
+
+    // The thumbnail rail takes a second column at 1600, so widen the track to
+    // match - otherwise the rail eats the width the main image just gained.
+    @media (min-width: rem(1600)) and (max-height: rem(1000)) {
+        grid-template-columns: minmax(0, rem(600)) 1fr;
     }
 
 }
