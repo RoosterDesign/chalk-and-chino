@@ -9,11 +9,17 @@
     @include breakpoint(sm) {
         gap: rem(15);
         grid-template-areas: "rail main";
-        grid-template-columns: rem(138) 1fr;
+        grid-template-columns: rem(64) 1fr;
     }
 
     @include breakpoint(lg) {
         gap: rem(20);
+        grid-template-columns: rem(84) 1fr;
+    }
+
+    // 1600 is not in the shared breakpoint map, so it stays local: only past
+    // this width is there room to spend on a second column of thumbnails.
+    @media (min-width: rem(1600)) {
         grid-template-columns: rem(178) 1fr;
     }
 
@@ -33,13 +39,15 @@
     padding-bottom: rem(5);
 
     @include breakpoint(sm) {
-        // Two columns of thumbnails, so the rail stays short and the main
-        // image gives up more width.
         align-content: start;
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         overflow-x: visible;
         padding-bottom: 0;
+    }
+
+    @media (min-width: rem(1600)) {
+        grid-template-columns: repeat(2, 1fr);
     }
 
 }
