@@ -7,7 +7,7 @@
     @include breakpoint(sm) {
         gap: rem(20);
         grid-auto-rows: rem(300);
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     @include breakpoint(md) {

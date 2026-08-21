@@ -1,12 +1,15 @@
 // app/[...slug]/page.tsx
 import type { Metadata } from "next";
+
+import ReactDOM from "react-dom";
+
 import type { Media } from "@/payload-types";
 
-import Gallery from "@/app/components/gallery/gallery";
 import NoResults from "@/app/components/no-results/no-results";
 import ProductDetails from "@/app/components/product-details/product-details";
 import ProductsList from "@/app/components/products-list/products-list";
 import CategoryGridLoader from "@/blocks/CategoryGrid/Loader";
+import RelatedProductsLoader from "@/blocks/FeaturedProducts/RelatedProductsLoader";
 import Map from "@/blocks/Map/Component";
 import MastheadBlock from "@/blocks/Masthead/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
@@ -169,7 +172,7 @@ export default async function ProductsPage({ params }: PageProps) {
         return <NoResults content="Category mismatch" />;
 
     // Extract hero image URL for preloading (before client hydration)
-    let heroImagePreloadUrl: string | null = null;
+    let heroImagePreloadUrl: null | string = null;
     if (
         typeof product.heroImage === "object" &&
         product.heroImage !== null &&
@@ -180,24 +183,25 @@ export default async function ProductsPage({ params }: PageProps) {
         heroImagePreloadUrl = thumbnail?.url ?? heroImage.url ?? null;
     }
 
+    // Preload the hero image before hydration. This has to go through
+    // ReactDOM.preload rather than a <link> element: React hoists such an
+    // element into <head>, and the app router's scroll-to-top walks the first
+    // rendered node's siblings, runs out of them inside <head>, and silently
+    // gives up - leaving the previous page's scroll position.
+    if (heroImagePreloadUrl) {
+        ReactDOM.preload(heroImagePreloadUrl, {
+            as: "image",
+            fetchPriority: "high",
+        });
+    }
+
     return (
         <>
-            {/* Preload hero image so browser fetches it before React hydration */}
-            {heroImagePreloadUrl && (
-                <link
-                    as="image"
-                    fetchPriority="high"
-                    href={heroImagePreloadUrl}
-                    rel="preload"
-                />
-            )}
             <ProductDetails
                 defaultDeliveryText={defaultDeliveryText}
                 product={product}
             />
-            {product.gallery && product.gallery.length > 0 && (
-                <Gallery images={product.gallery} />
-            )}
+            <RelatedProductsLoader excludeProductId={product.id} />
             <CategoryGridLoader title="Browse by Category" />
             <Testimonials />
             <Map />

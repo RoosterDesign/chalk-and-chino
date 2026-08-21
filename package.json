@@ -13,7 +13,7 @@
     "migrate:create": "payload migrate:create",
     "generate:importmap": "payload generate:importmap",
     "generate:types": "payload generate:types",
-    "regen-media": "ts-node-esm scripts/regenerateMedia.ts",
+    "regen-media": "tsx scripts/regenerateMedia.ts",
     "postbuild": "next-sitemap --config next-sitemap.config.cjs"
   },
   "dependencies": {

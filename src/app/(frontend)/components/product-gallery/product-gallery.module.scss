@@ -1,0 +1,91 @@
+.gallery {
+    display: grid;
+    gap: rem(10);
+    // Thumbnails sit under the main image until there is room for two columns
+    // of them beside it. A single column down the left costs the main image
+    // width without earning it back.
+    grid-template-areas:
+        "main"
+        "rail";
+
+    @include breakpoint(lg) {
+        gap: rem(20);
+    }
+
+    // Only past 1600 is there width to give the rail without the main image
+    // feeling it. 1600 is not in the shared breakpoint map, so it stays local.
+    @media (min-width: rem(1600)) {
+        grid-template-areas: "rail main";
+        grid-template-columns: rem(178) 1fr;
+    }
+
+}
+
+// With a single image the rail is not rendered, so the track it would sit in
+// must go too - otherwise the image is pushed off an empty column.
+.gallery.galleryNoRail {
+
+    @media (min-width: rem(1600)) {
+        grid-template-areas: "main";
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.main {
+    grid-area: main;
+    min-width: 0;
+}
+
+.rail {
+    display: flex;
+    // Thumbnails wrap beneath the main image rather than scrolling sideways,
+    // so every one is reachable without a swipe.
+    flex-wrap: wrap;
+    gap: rem(10);
+    grid-area: rail;
+
+    @media (min-width: rem(1600)) {
+        align-content: start;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+.thumb {
+    background: none;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: block;
+    flex: 0 0 auto;
+    line-height: 0;
+    opacity: .55;
+    overflow: hidden;
+    padding: 0;
+    transition: opacity .2s ease-in-out;
+    width: rem(64);
+
+    @media (min-width: rem(1600)) {
+        width: 100%;
+    }
+
+    img {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+
+    &:hover,
+    &:focus-visible {
+        opacity: 1;
+    }
+
+}
+
+.thumbActive {
+    opacity: 1;
+    outline: rem(2) solid var(--accent);
+    outline-offset: rem(-2);
+}

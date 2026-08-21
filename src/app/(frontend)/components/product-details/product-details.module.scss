@@ -1,12 +1,19 @@
+// This layout goes two-column earlier than the shared sm breakpoint (768), so
+// smaller tablets get the image beside the copy rather than stacked above it.
+$two-col-min: rem(600);
+$two-col-max: rem(599.98);
+
 .container {
     display: grid;
+    padding-bottom: rem(40);
 
-    @include breakpoint(sm) {
+    @media (min-width: $two-col-min) {
         gap: rem(60) rem(30);
         grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "img intro"
             "tabs tabs";
+            padding-bottom: rem(80);
     }
 
     @include breakpoint(md) {
@@ -26,13 +33,27 @@
         gap: rem(50) rem(85);
     }
 
+    // Laptop-shaped viewports: wide, but too shallow for an even split - a 4:5
+    // hero in half of a 1720 container runs past the fold. Cap the image track
+    // and give what is left to the copy. Keyed on height because that is the
+    // constraint; the same width on a tall monitor has room to spare.
+    @media (min-width: rem(1280)) and (max-height: rem(1000)) {
+        grid-template-columns: minmax(0, rem(560)) 1fr;
+    }
+
+    // The thumbnail rail takes a second column at 1600, so widen the track to
+    // match - otherwise the rail eats the width the main image just gained.
+    @media (min-width: rem(1600)) and (max-height: rem(1000)) {
+        grid-template-columns: minmax(0, rem(660)) 1fr;
+    }
+
 }
 
 .leadImage {
     margin-top: rem(30);
     margin-bottom: rem(30);
 
-    @include breakpoint(sm) {
+    @media (min-width: $two-col-min) {
         grid-area: img;
         margin-top: rem(40);
     }
@@ -41,20 +62,30 @@
         margin-top: rem(100);
     }
 
+    // Laptops only: claw back some of the space above the fold.
+    @media (min-width: rem(1280)) and (max-height: rem(1000)) {
+        margin-top: rem(50);
+    }
+
 }
 
 .intro {
-    @include breakpoint(sm, max) {
+    @media (max-width: $two-col-max) {
         margin-bottom: rem(50);
     }
 
-    @include breakpoint(sm) {
+    @media (min-width: $two-col-min) {
         grid-area: intro;
         padding: rem(40) 0;
     }
 
     @include breakpoint(lg) {
         padding-top: rem(100);
+    }
+
+    // Laptops only: matches the hero's reduced top margin.
+    @media (min-width: rem(1280)) and (max-height: rem(1000)) {
+        padding-top: rem(50);
     }
 }
 
@@ -102,7 +133,7 @@
 }
 
 .tabs {
-    @include breakpoint(sm) {
+    @media (min-width: $two-col-min) {
         grid-area: tabs;
     }
 }
@@ -153,11 +184,11 @@
 }
 
 .bg {
-    @include breakpoint(sm, max) {
+    @media (max-width: $two-col-max) {
         display: none;
     }
 
-    @include breakpoint(sm) {
+    @media (min-width: $two-col-min) {
         background: var(--secondary-colour);
         display: block;
         grid-column: 1 / 3;
