@@ -24,6 +24,13 @@ export const Media: CollectionConfig = {
     staticDir: 'media',
     disableLocalStorage: true,
 
+    // The crop tool overwrites the original file with the cropped version,
+    // which would destroy the full-size image the product modal shows.
+    // Focal point achieves the same framing non-destructively: it crops each
+    // size to its own ratio around the chosen point, leaving the master intact.
+    crop: false,
+    focalPoint: true,
+
     // Cap the master image so full-resolution originals aren't re-encoded as-is
     resizeOptions: {
       width: 2400,
@@ -61,13 +68,14 @@ export const Media: CollectionConfig = {
         formatOptions: webp,
       },
       {
-        // Bounding box, not a crop: 'inside' keeps the uploaded aspect ratio,
-        // so portrait heroes stay portrait. Grid consumers (product cards,
-        // gallery cells) crop to their own box in CSS.
+        // Product hero: a fixed 4:5 portrait frame, matching how most stock is
+        // photographed. 'cover' crops to that ratio around the focal point set
+        // in the admin, so the editor chooses what survives on a landscape shot.
+        // 880 wide keeps the full-width gallery item no softer than before.
         name: 'thumbnail',
-        width: 820,
-        height: 820,
-        fit: 'inside',
+        width: 880,
+        height: 1100,
+        fit: 'cover',
         withoutEnlargement: true,
         formatOptions: webp,
       },
