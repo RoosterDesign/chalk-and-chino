@@ -4,3 +4,11 @@
     border: none;
     cursor: pointer;
 }
+
+.list {
+    // Site-wide ul styles do the rest; this just matches how paragraphs sit
+    // flush at the end of the block.
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
