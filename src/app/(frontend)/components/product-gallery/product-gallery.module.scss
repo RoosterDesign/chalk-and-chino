@@ -9,12 +9,12 @@
     @include breakpoint(sm) {
         gap: rem(15);
         grid-template-areas: "rail main";
-        grid-template-columns: rem(64) 1fr;
+        grid-template-columns: rem(138) 1fr;
     }
 
     @include breakpoint(lg) {
         gap: rem(20);
-        grid-template-columns: rem(84) 1fr;
+        grid-template-columns: rem(178) 1fr;
     }
 
 }
@@ -33,7 +33,11 @@
     padding-bottom: rem(5);
 
     @include breakpoint(sm) {
-        flex-direction: column;
+        // Two columns of thumbnails, so the rail stays short and the main
+        // image gives up more width.
+        align-content: start;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         overflow-x: visible;
         padding-bottom: 0;
     }
