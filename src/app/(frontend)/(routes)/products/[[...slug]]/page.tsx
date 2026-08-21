@@ -7,6 +7,7 @@ import NoResults from "@/app/components/no-results/no-results";
 import ProductDetails from "@/app/components/product-details/product-details";
 import ProductsList from "@/app/components/products-list/products-list";
 import CategoryGridLoader from "@/blocks/CategoryGrid/Loader";
+import RelatedProductsLoader from "@/blocks/FeaturedProducts/RelatedProductsLoader";
 import Map from "@/blocks/Map/Component";
 import MastheadBlock from "@/blocks/Masthead/Component";
 import Testimonials from "@/blocks/Testimonials/Component";
@@ -195,6 +196,7 @@ export default async function ProductsPage({ params }: PageProps) {
                 defaultDeliveryText={defaultDeliveryText}
                 product={product}
             />
+            <RelatedProductsLoader excludeProductId={product.id} />
             <CategoryGridLoader title="Browse by Category" />
             <Testimonials />
             <Map />
