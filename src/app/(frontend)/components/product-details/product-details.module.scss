@@ -3,7 +3,7 @@
 
     @include breakpoint(sm) {
         gap: rem(60) rem(30);
-        grid-template-columns: 5fr 7fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-areas:
             "img intro"
             "tabs tabs";
@@ -11,7 +11,7 @@
 
     @include breakpoint(md) {
         gap: rem(40);
-        grid-template-columns: 5fr 7fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: auto 1fr;
         grid-template-areas:
             "img intro"
@@ -19,11 +19,7 @@
     }
 
     @include breakpoint(lg) {
-        // The container jumps to 1720 at lg, so an even split would push the
-        // 4:5 hero past 700px tall on a laptop. Cap the image column instead
-        // and give the remainder to the copy.
         gap: rem(50) rem(60);
-        grid-template-columns: minmax(0, rem(480)) 1fr;
     }
 
     @include breakpoint(xl) {

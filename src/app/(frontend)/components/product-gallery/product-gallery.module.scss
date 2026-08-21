@@ -1,0 +1,78 @@
+.gallery {
+    display: grid;
+    gap: rem(10);
+    // Main image first on mobile, thumbnails below it.
+    grid-template-areas:
+        "main"
+        "rail";
+
+    @include breakpoint(sm) {
+        gap: rem(15);
+        grid-template-areas: "rail main";
+        grid-template-columns: rem(64) 1fr;
+    }
+
+    @include breakpoint(lg) {
+        gap: rem(20);
+        grid-template-columns: rem(84) 1fr;
+    }
+
+}
+
+.main {
+    grid-area: main;
+    min-width: 0;
+}
+
+.rail {
+    display: flex;
+    gap: rem(10);
+    grid-area: rail;
+    // Thumbnails scroll sideways on mobile rather than wrapping under the image.
+    overflow-x: auto;
+    padding-bottom: rem(5);
+
+    @include breakpoint(sm) {
+        flex-direction: column;
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+
+}
+
+.thumb {
+    background: none;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: block;
+    flex: 0 0 auto;
+    line-height: 0;
+    opacity: .55;
+    overflow: hidden;
+    padding: 0;
+    transition: opacity .2s ease-in-out;
+    width: rem(64);
+
+    @include breakpoint(sm) {
+        width: 100%;
+    }
+
+    img {
+        display: block;
+        height: auto;
+        width: 100%;
+    }
+
+    &:hover,
+    &:focus-visible {
+        opacity: 1;
+    }
+
+}
+
+.thumbActive {
+    opacity: 1;
+    outline: rem(2) solid var(--accent);
+    outline-offset: rem(-2);
+}

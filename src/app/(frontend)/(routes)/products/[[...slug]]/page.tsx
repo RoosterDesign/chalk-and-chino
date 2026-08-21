@@ -1,8 +1,8 @@
 // app/[...slug]/page.tsx
 import type { Metadata } from "next";
+
 import type { Media } from "@/payload-types";
 
-import Gallery from "@/app/components/gallery/gallery";
 import NoResults from "@/app/components/no-results/no-results";
 import ProductDetails from "@/app/components/product-details/product-details";
 import ProductsList from "@/app/components/products-list/products-list";
@@ -169,7 +169,7 @@ export default async function ProductsPage({ params }: PageProps) {
         return <NoResults content="Category mismatch" />;
 
     // Extract hero image URL for preloading (before client hydration)
-    let heroImagePreloadUrl: string | null = null;
+    let heroImagePreloadUrl: null | string = null;
     if (
         typeof product.heroImage === "object" &&
         product.heroImage !== null &&
@@ -195,9 +195,6 @@ export default async function ProductsPage({ params }: PageProps) {
                 defaultDeliveryText={defaultDeliveryText}
                 product={product}
             />
-            {product.gallery && product.gallery.length > 0 && (
-                <Gallery images={product.gallery} />
-            )}
             <CategoryGridLoader title="Browse by Category" />
             <Testimonials />
             <Map />
