@@ -47,6 +47,17 @@ $two-col-max: rem(599.98);
         grid-template-columns: minmax(0, rem(660)) 1fr;
     }
 
+    ul {
+        margin: rem(-14) 0 rem(24) 0;
+        padding-left: rem(20);
+
+        @include breakpoint(md) {
+            margin-top: rem(-20);
+            margin-bottom: rem(30);
+        }
+
+    }
+
 }
 
 .leadImage {
