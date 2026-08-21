@@ -322,6 +322,9 @@ export interface Product {
   category: number | ProductCategory;
   price: number;
   summary?: string | null;
+  /**
+   * Start a line with * to turn it into a bullet point.
+   */
   description?: string | null;
   specifications?:
     | {

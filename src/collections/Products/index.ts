@@ -53,6 +53,7 @@ export const Products: CollectionConfig = {
             name: 'description',
             type: 'textarea',
             admin: {
+                description: 'Start a line with * to turn it into a bullet point.',
                 rows: 6,
             },
         },
