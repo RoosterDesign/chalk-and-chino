@@ -71,12 +71,17 @@ export const Media: CollectionConfig = {
         // Product hero: a fixed 4:5 portrait frame, matching how most stock is
         // photographed. 'cover' crops to that ratio around the focal point set
         // in the admin, so the editor chooses what survives on a landscape shot.
-        // 880 wide keeps the full-width gallery item no softer than before.
+        //
+        // withoutEnlargement must stay false. Set true, Payload skips the crop
+        // entirely for any master smaller than the box in either axis, and the
+        // derivative keeps the source ratio instead of this one.
+        // 720x900 is the 4:5 crop of the most common master here (720x960), so
+        // the bulk of the library is framed without being upscaled.
         name: 'thumbnail',
-        width: 880,
-        height: 1100,
+        width: 720,
+        height: 900,
         fit: 'cover',
-        withoutEnlargement: true,
+        withoutEnlargement: false,
         formatOptions: webp,
       },
       {
