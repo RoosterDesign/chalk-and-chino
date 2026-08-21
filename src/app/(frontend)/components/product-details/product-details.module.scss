@@ -45,16 +45,16 @@
 }
 
 .leadImage {
-    margin-top: rem(30);
+    margin-top: rem(20);
     margin-bottom: rem(30);
 
     @include breakpoint(sm) {
         grid-area: img;
-        margin-top: rem(40);
+        margin-top: rem(25);
     }
 
     @include breakpoint(lg) {
-        margin-top: rem(100);
+        margin-top: rem(50);
     }
 
 }
@@ -66,11 +66,11 @@
 
     @include breakpoint(sm) {
         grid-area: intro;
-        padding: rem(40) 0;
+        padding: rem(25) 0 rem(40);
     }
 
     @include breakpoint(lg) {
-        padding-top: rem(100);
+        padding-top: rem(50);
     }
 }
 

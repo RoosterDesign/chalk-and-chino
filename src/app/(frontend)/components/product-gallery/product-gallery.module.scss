@@ -12,13 +12,17 @@
         grid-template-columns: rem(64) 1fr;
     }
 
-    @include breakpoint(lg) {
-        gap: rem(20);
-        grid-template-columns: rem(84) 1fr;
+    // Two columns of thumbnails from 1200, so laptops get them too. Neither
+    // width is in the shared breakpoint map, so both stay local.
+    @media (min-width: rem(1200)) {
+        grid-template-columns: rem(138) 1fr;
     }
 
-    // 1600 is not in the shared breakpoint map, so it stays local: only past
-    // this width is there room to spend on a second column of thumbnails.
+    @include breakpoint(lg) {
+        gap: rem(20);
+    }
+
+    // Only past 1600 is there room for larger thumbnails in those two columns.
     @media (min-width: rem(1600)) {
         grid-template-columns: rem(178) 1fr;
     }
@@ -44,7 +48,7 @@
         grid-template-columns: 1fr;
     }
 
-    @media (min-width: rem(1600)) {
+    @media (min-width: rem(1200)) {
         grid-template-columns: repeat(2, 1fr);
     }
 
