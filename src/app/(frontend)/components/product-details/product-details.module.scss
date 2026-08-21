@@ -45,15 +45,20 @@
 }
 
 .leadImage {
-    margin-top: rem(20);
+    margin-top: rem(30);
     margin-bottom: rem(30);
 
     @include breakpoint(sm) {
         grid-area: img;
-        margin-top: rem(25);
+        margin-top: rem(40);
     }
 
     @include breakpoint(lg) {
+        margin-top: rem(100);
+    }
+
+    // Laptops only: claw back some of the space above the fold.
+    @media (min-width: rem(1280)) and (max-height: rem(1000)) {
         margin-top: rem(50);
     }
 
@@ -66,10 +71,15 @@
 
     @include breakpoint(sm) {
         grid-area: intro;
-        padding: rem(25) 0 rem(40);
+        padding: rem(40) 0;
     }
 
     @include breakpoint(lg) {
+        padding-top: rem(100);
+    }
+
+    // Laptops only: matches the hero's reduced top margin.
+    @media (min-width: rem(1280)) and (max-height: rem(1000)) {
         padding-top: rem(50);
     }
 }
