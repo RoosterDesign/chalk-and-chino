@@ -1,79 +1,115 @@
 // scripts/regenerateMedia.ts
-import "dotenv/config"
-import payload from "payload"
-import fetch from "node-fetch"      // or undici
-import configPromise from "../src/payload.config"
+//
+// Re-uploads every media doc so Payload regenerates its image sizes against
+// the current Media config. Run after changing `imageSizes` in
+// src/collections/Media.ts - existing docs keep their old derivatives until
+// they are rebuilt.
+//
+// Note: files are written to whichever S3/R2 bucket S3_BUCKET points at, which
+// is shared with production unless you override it.
+import "dotenv/config";
+import { getPayload } from "payload";
 
-// Helper to turn a ReadableStream into a Buffer
-async function streamToBuffer(stream: NodeJS.ReadableStream): Promise<Buffer> {
-  const chunks: Buffer[] = []
-  for await (const chunk of stream) {
-    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk)
-  }
-  return Buffer.concat(chunks)
-}
+import config from "../src/payload.config";
 
-async function regenerate() {
-  const { PAYLOAD_SECRET, PAYLOAD_DATABASE_URL } = process.env
-  if (!PAYLOAD_SECRET || !PAYLOAD_DATABASE_URL) {
-    console.error("✖ Please set PAYLOAD_SECRET and PAYLOAD_DATABASE_URL in .env")
-    process.exit(1)
-  }
+// The bucket is shared with the live site, so keep the pressure modest.
+const CONCURRENCY = 4;
+const PAGE_SIZE = 50;
 
-  const config = await configPromise
+const redact = (url = "") => url.replace(/\/\/[^@]+@/, "//<redacted>@");
 
-  // Initialize Payload with your local TS config
-  await payload.init({
-    secret:      PAYLOAD_SECRET,
-    databaseURL: PAYLOAD_DATABASE_URL,
-    local:       true,
-    config,
-  })
+const regenerate = async () => {
+    const payload = await getPayload({ config });
 
-  // Fetch all media entries
-  const { docs } = await payload.find({
-    collection: "media",
-    depth:      0,
-    limit:      500,
-  })
+    console.log(
+        `Database : ${redact(
+            process.env.DATABASE_ENV === "local"
+                ? process.env.LOCAL_DATABASE_URL
+                : process.env.NEON_DATABASE_URL
+        )}`
+    );
+    console.log(`Bucket   : ${process.env.S3_BUCKET}\n`);
 
-  await Promise.all(
-    docs.map(async (doc) => {
-      if (!doc.url) {
-        console.warn(`⚠️  Skipping ${doc.filename}: no public URL`)
-        return
-      }
-      try {
-        // Download via HTTP
-        const res = await fetch(doc.url)
-        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`)
-        const buffer = await streamToBuffer(res.body as any)
+    const failures: string[] = [];
+    let regenerated = 0;
+    let page = 1;
+    let totalPages = 1;
 
-        // Re-upload buffer to regenerate all imageSizes
-        await payload.update({
-          collection: "media",
-          id:         doc.id,
-          data:       doc, // preserve alt, etc.
-          file: {
-            buffer,
-            filename: doc.filename,
-            mimetype: doc.mimeType || undefined,
-          },
-          overwriteExistingFiles: true,
-        })
+    do {
+        const result = await payload.find({
+            collection: "media",
+            depth: 0,
+            limit: PAGE_SIZE,
+            page,
+            sort: "id",
+        });
 
-        console.log(`✅ Regenerated ${doc.filename}`)
-      } catch (err) {
-        console.error(`❌ Failed to regenerate ${doc.filename}`, err)
-      }
-    })
-  )
+        totalPages = result.totalPages;
 
-  console.log("🎉 All done!")
-  process.exit(0)
-}
+        for (let i = 0; i < result.docs.length; i += CONCURRENCY) {
+            const batch = result.docs.slice(i, i + CONCURRENCY);
 
-regenerate().catch((err) => {
-  console.error("Unexpected error:", err)
-  process.exit(1)
-})
+            await Promise.all(
+                batch.map(async (doc) => {
+                    if (!doc.url || !doc.filename) {
+                        failures.push(`${doc.id}: missing url or filename`);
+                        return;
+                    }
+
+                    try {
+                        const response = await fetch(doc.url);
+                        if (!response.ok) {
+                            throw new Error(`fetch returned ${response.status}`);
+                        }
+                        const data = Buffer.from(await response.arrayBuffer());
+
+                        await payload.update({
+                            collection: "media",
+                            data: { alt: doc.alt },
+                            file: {
+                                data,
+                                mimetype: doc.mimeType ?? "image/webp",
+                                name: doc.filename,
+                                size: data.byteLength,
+                            },
+                            id: doc.id,
+                            overwriteExistingFiles: true,
+                            // The focal point has to travel via req.query. Sending it in
+                            // `data` unchanged makes Payload return undefined upload edits,
+                            // which throws once a file is attached.
+                            req: {
+                                query: {
+                                    uploadEdits: {
+                                        focalPoint: {
+                                            x: doc.focalX ?? 50,
+                                            y: doc.focalY ?? 50,
+                                        },
+                                    },
+                                },
+                            },
+                        });
+
+                        regenerated += 1;
+                        console.log(`  ok      ${doc.filename}`);
+                    } catch (error) {
+                        const message = (error as Error).message;
+                        failures.push(`${doc.filename}: ${message}`);
+                        console.error(`  FAILED  ${doc.filename}: ${message}`);
+                    }
+                })
+            );
+        }
+
+        page += 1;
+    } while (page <= totalPages);
+
+    console.log(`\nRegenerated ${regenerated}, failed ${failures.length}`);
+    failures.forEach((failure) => console.error(` - ${failure}`));
+
+    process.exit(failures.length > 0 ? 1 : 0);
+};
+
+regenerate().catch((error) => {
+    console.error("Unexpected error:", error);
+    process.exit(1);
+});
